@@ -1,55 +1,52 @@
-# 素材来源与许可
+# 美术资产说明 · 原创声明
 
-本项目使用的外部素材均来自 OpenGameArt，按原许可使用；已做尺寸压缩与少量裁切，未改变原始画风与署名信息。游戏内其余图标、怪物、UI 边框、纹样均为项目内 SVG/CSS 自绘。
+本项目《九州问道 · 云海仙途》的**全部视觉资产均为本轮原创生成**，未使用《神武》《梦幻西游》《剑来》或任何其他商业游戏的角色形象、立绘、UI 素材，也未下载任何盗版素材包。
 
-## 1. Ancient Chinese Character Pack 1（角色立绘）
+## 1. 资产生成方式
 
-- 作者：nessava
-- 许可：CC0 1.0（公共领域贡献）
-- 来源：https://opengameart.org/content/ancient-chinese-character-pack-1
-- 使用位置：`assets/chars/*.png`，用于玩家四门派形象、创角立绘、NPC 与头像
-- 修改：等比例缩放至高度 420px，保留透明通道
+所有位图均通过环境内置的 AI 文生图能力（GenerateImage，SDXL 类模型）以自拟提示词逐张生成，再经本地压缩（等比缩放 + JPEG 质量 72–74）后入库。提示词只描述题材、构图、光线与风格语言（国风 2D 卡通风、厚涂线稿、云海仙城等），不引用任何具体作品名称或角色。
 
-## 2. 2D RPG 环境素材 · Asian Autumn（场景装饰）
+生成目录：`assets/art/`
 
-- 作者：Jana Ochse / 2D-Retroperspectives（www.2d-retroperspectives.org）
-- 许可：Creative Commons Attribution 4.0（CC BY 4.0；素材包内 LICENSE.TXT 注明 4.0，OpenGameArt 页面标注 CC-BY 3.0）
-- 来源：https://opengameart.org/content/asian-autumn-environment
-- 使用位置：
-  - `assets/scene/tree.png`（红枫树）
-  - `assets/scene/lantern.png`（石灯笼）
-  - `assets/scene/tile_stone1.png`（石板地面纹理）
-  - `assets/scene/mountain2.png`（远山剪影，雪山场景）
-- 修改：等比例缩放、调整透明度与叠色，用于可滚动场景背景
+### 场景插画（8 张，竖构图 1680×2240 生成，缩至宽 1100）
 
-## 3. Chinese Roof（主城屋顶纹理）
+| 文件 | 场景 | 内容 |
+| --- | --- | --- |
+| `scene_city.jpg` | 云中仙城 | 云海浮城、飞檐楼阁、白玉山门、红桥 |
+| `scene_bamboo.jpg` | 青竹幽径 | 竹林古道、苔石阶、竹亭、溪瀑 |
+| `scene_peach.jpg` | 桃源仙谷 | 千年桃树、落英、梯田溪流、远山 |
+| `scene_snow.jpg` | 寒霜绝顶 | 冰崖雪松、雪覆石庙、冰阶 |
+| `scene_desert.jpg` | 黄沙古塞 | 红岩台地、废弃关城、驼队旗幡 |
+| `scene_sea.jpg` | 碧海渔村 | 海崖吊脚村、巨浪、海月、渔灯 |
+| `scene_ruins.jpg` | 古刹秘境 | 洞窟古寺、断佛残柱、灵纹水镜 |
+| `scene_demon.jpg` | 魔渊火山 | 熔岩裂谷、黑石尖塔、封印祭坛 |
 
-- 作者：mkwong98
-- 许可：CC0 1.0
-- 来源：https://opengameart.org/content/chinese-roof
-- 使用位置：`assets/scene/roof.png`（原计划用于屋顶贴图，当前版本屋顶改为程序化渐变，文件保留备用）
+### 门派立绘（4 张，9:16 全身像，缩至宽 900）
 
-## 4. 5x Special Effects 2D（战斗命中特效）
+| 文件 | 门派 | 设定 |
+| --- | --- | --- |
+| `char_jian.jpg` | 剑宗 | 白衣青纹剑修，玉冠长剑 |
+| `char_yin.jpg` | 天音 | 绿白裙乐医，玉笛 |
+| `char_fa.jpg` | 玄法 | 紫金雷法，晶体法杖 |
+| `char_shou.jpg` | 兽王 | 赤褐兽纹装，长枪与灵虎 |
 
-- 作者：rubberduck
-- 许可：CC0 1.0
-- 来源：https://opengameart.org/content/5x-special-effects-2d
-- 使用位置：
-  - `assets/fx/hit.png`（命中火花，战斗命中时叠加）
-  - `assets/fx/glow.png`（光晕，备用）
-- 修改：仅保留所需单帧，未改色
+### 妖兽形象（7 张，方形，缩至宽 760）
 
-## 5. 项目内自绘内容
+`mob_wolf`（狼妖）、`mob_ghost`（鬼将）、`mob_snake`（蛇妖）、`mob_stone`（岩魔）、`mob_plant`（藤木妖）、`mob_fire`（熔岩魔）、`mob_fox`（九尾狐）、`mob_sea`（鲛人）——共 8 个基础形象。
 
-以下内容未使用第三方素材，均为本仓库内联 SVG/CSS/Canvas 绘制：
+游戏内 14 种妖兽/妖王由上述 8 个基础形象通过 CSS 色相/饱和度变体派生（如赤焰狼、雪原狼、桃源花妖、魔渊鬼王），不额外引用外部素材。
 
-- 全部 UI：卷轴边框、云纹角饰、按钮、图标（`ICONS` 字典）、血条/法力条、技能盘、任务卡
-- 21 种妖兽立绘（`monArt()` 参数化 SVG：灵体/兽形/蛇形/虫形/石灵/幽魂/鱼形/魔形）
-- 场景地貌：竹林、幽谷、雪山松林、枫叶、海岸浪花、房屋、石狮、古井、码头等
-- 所有特效动画（飘字、暴击、技能横幅、命中顿帧、场景淡入淡出）
+## 2. UI 与特效
 
-## 许可声明
+以下内容全部为本文件内联的 SVG / CSS / Canvas 手写实现，无第三方素材：
 
-- CC0 素材可商用、无需署名；本项目仍主动署名，便于溯源。
-- CC BY 4.0 素材（Asian Autumn）在再分发时保留作者署名与许可链接；如二次修改，请继续保留本文件。
-- 未使用任何来源不明、需破解或禁止商用的游戏拆包素材。
+- 鎏金卷轴面板、云纹角饰、金色描边、按钮与图标（`ICONS` 字典）
+- 血条/法力条/经验条、技能盘、状态图标、伤害飘字、暴击横幅、技能名横幅
+- 浮尘/萤火粒子（Canvas）、雾气视差层、场景 Ken Burns 推移
+- 全部排版、字阶、动效
+
+## 3. 版权与使用
+
+- 上述生成图仅用于本项目演示，可随仓库一同分发。
+- 项目**未**包含任何需授权、需破解或来源不明的第三方素材；`assets/chars`、`assets/scene`、`assets/fx` 为早期版本使用的 CC0/CC BY 素材，本版本页面已不再引用，保留仅为历史留档。
+- 如后续替换为其他素材，请在本文件补充来源、作者、许可证与链接。
