@@ -320,6 +320,170 @@ button{font-family:inherit;color:inherit;border:none;background:none;cursor:poin
   #overlay.center .sheet{max-height:92%}
   .hero-head{padding:10px}
 }
+
+/* ===================== 手感层：按压反馈 / 字阶 / 过渡 ===================== */
+button,[data-act]{transition:transform .08s ease,filter .12s ease,opacity .12s ease;touch-action:manipulation;-webkit-user-select:none}
+button:active,[data-act]:active{transform:scale(.955);filter:brightness(1.16)}
+button:disabled,[aria-disabled="true"]{opacity:.32;filter:grayscale(.75);transform:none!important}
+.btn{min-height:50px;border-radius:14px;font-size:15px}
+.btn.sm{min-height:44px;font-size:13px;border-radius:11px}
+.btn.wide{width:100%}
+.tile{min-height:74px;border-radius:16px}
+.tile .t-name{font-size:15px}
+.tile .t-desc{font-size:12px;line-height:1.45}
+.row{padding:12px 13px;border-radius:14px}
+.row .r-name{font-size:14.5px}
+.row .r-desc{font-size:13px;line-height:1.5}
+.sec-title{font-size:16px;margin:18px 0 10px}
+.tb-name{font-size:15px}
+.tb-lv{font-size:11px;padding:1px 7px}
+.tb-sect{font-size:11px}
+.tb-badge{padding:0}
+.bar{height:10px;border-radius:6px}
+.bar>span{font-size:9px;line-height:10px}
+.tab{font-size:11px;min-height:56px}
+.tab i{font-size:22px}
+.scene .st-name{font-size:28px}
+.scene .st-sub{font-size:11.5px}
+.hero-info p{font-size:12px}
+.hero-info h2{font-size:21px}
+.equip-row{font-size:12.5px;padding:11px 12px}
+.skill-chip{font-size:12px;padding:7px 11px}
+.empty{font-size:13px;line-height:1.9}
+.sheet h3{font-size:20px}
+.sheet .sub{font-size:11px}
+.sect-card{padding:12px}
+.sect-card .sc-name{font-size:16px}
+.sect-card .sc-desc{font-size:11.5px;line-height:1.5}
+.stat{font-size:12.5px;padding:10px 12px}
+.stat b{font-size:13.5px}
+.equip-row .eq-name{font-size:13px}
+
+/* 页面切换 / 场景淡入 */
+#screen.fade-in{animation:screenIn .2s ease}
+@keyframes screenIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.scene{animation:sceneIn .3s ease}
+@keyframes sceneIn{from{opacity:.15}to{opacity:1}}
+#overlay{animation:fadeIn .12s ease}
+.sheet{animation:sheetUp .16s cubic-bezier(.2,.9,.3,1)}
+#overlay.center .sheet{animation:pop .16s ease}
+
+/* 页面小标题栏 */
+.pagebar{display:flex;align-items:center;gap:8px;padding:2px 0 10px}
+.pagebar .ptitle{font-family:"Songti SC","STSong",serif;font-size:20px;letter-spacing:4px;color:#f4e7ca}
+.pagebar .pmuted{margin-left:auto;font-size:12px;color:#8fa093}
+.pagebar .back{min-height:44px;min-width:52px;font-size:13px}
+
+/* 主城场景热点 */
+.town-scene{height:252px}
+.hotspot{position:absolute;bottom:16px;width:68px;height:68px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  background:radial-gradient(circle at 38% 28%,rgba(255,255,255,.22),rgba(10,20,18,.88) 72%);
+  border:1px solid rgba(240,212,154,.55);box-shadow:0 8px 20px rgba(0,0,0,.55),inset 0 0 12px rgba(0,0,0,.5);
+  font-size:26px;line-height:1}
+.hotspot b{font-size:11px;font-weight:600;color:#f6ead0;text-shadow:0 1px 3px #000;margin-top:1px;letter-spacing:.5px}
+.hotspot .dotp{position:absolute;top:0;right:0;width:11px;height:11px;border-radius:50%;background:#e2564f;box-shadow:0 0 9px #e2564f;animation:pulse 1.6s infinite}
+.hotspot:active{transform:scale(.9)}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.35);opacity:.6}}
+.hotspot-label{position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:10px;color:rgba(246,234,208,.75);letter-spacing:1px}
+
+/* 战斗手感 */
+.unit .u-hp>i{transition:width .38s cubic-bezier(.2,.8,.25,1)}
+.unit.ally.act{transform:translateY(-16px) scale(1.1)}
+.unit.enemy.act{transform:translateY(14px) scale(1.1)}
+.unit.hit .u-av{animation:hitFlash .2s ease}
+@keyframes hitFlash{0%{filter:brightness(2.4) saturate(.3)}100%{filter:none}}
+.unit{animation:unitIn .32s cubic-bezier(.2,.9,.3,1) backwards}
+.enemy-area .unit:nth-child(2){animation-delay:.06s}
+.enemy-area .unit:nth-child(3){animation-delay:.12s}
+.ally-area .unit:nth-child(2){animation-delay:.14s}
+@keyframes unitIn{from{opacity:0;transform:translateY(18px) scale(.82)}to{opacity:1;transform:none}}
+.slash{position:absolute;left:50%;top:50%;width:64px;height:3px;margin:-1px 0 0 -32px;border-radius:2px;pointer-events:none;z-index:9;
+  background:linear-gradient(90deg,transparent,#fff6dc,transparent);box-shadow:0 0 10px rgba(255,214,150,.9);
+  animation:slashAnim .26s ease-out forwards}
+@keyframes slashAnim{0%{opacity:0;transform:rotate(-32deg) scaleX(.2)}35%{opacity:1}100%{opacity:0;transform:rotate(-32deg) scaleX(1.15)}}
+.floater{font-size:22px}
+.floater.crit{font-size:30px;color:#ffcf7a;text-shadow:0 0 20px rgba(255,170,70,.95),0 3px 8px #000}
+.floater.heal{font-size:21px}
+.unit .u-num{font-size:8.5px;color:#8fa093}
+.combo{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;left:0;transform:none;
+  background:linear-gradient(90deg,transparent,rgba(8,16,14,.88),transparent);padding:10px 0}
+.combo b{font-family:"Songti SC","STSong",serif;font-weight:400;font-size:27px;letter-spacing:7px;color:#ffe4ae;text-shadow:0 0 24px rgba(255,190,90,.85),0 3px 10px #000}
+.combo small{font-size:10px;letter-spacing:3px;color:#0f1a18;background:linear-gradient(180deg,#f0d49a,#c9a25e);padding:2px 7px;border-radius:6px;font-weight:700}
+@keyframes comboIn{0%{opacity:0;transform:scale(1.12)}18%{opacity:1;transform:scale(1)}75%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+.b-intro{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:11;
+  background:radial-gradient(circle,rgba(6,12,14,.55),transparent 62%);animation:introFade 1s ease forwards}
+.b-intro span{font-family:"Songti SC","STSong",serif;font-size:34px;letter-spacing:12px;color:#f6e3b6;text-shadow:0 0 30px rgba(240,196,120,.7),0 4px 14px #000;transform:translateX(6px)}
+@keyframes introFade{0%{opacity:0}18%{opacity:1}70%{opacity:1}100%{opacity:0}}
+.result .rttl{animation:winIn .38s cubic-bezier(.2,.9,.3,1)}
+@keyframes winIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+#battle .b-round .auto{min-height:44px;min-width:56px;padding:0 10px}
+#battle .b-round .auto + .auto{margin-left:0}
+#battle .b-round{gap:6px;flex-wrap:nowrap;font-size:11px}
+#battle .b-round .speed{font-variant-numeric:tabular-nums}
+
+/* 创角名字卡片 */
+.name-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.name-chip{min-height:46px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.045);
+  color:#e8dcc2;font-size:14px;letter-spacing:1px}
+.name-chip.sel{border-color:rgba(240,212,154,.85);background:rgba(217,176,106,.16);color:#fff3d8;box-shadow:0 0 16px rgba(217,176,106,.18)}
+
+/* ===================== 大世界 ===================== */
+#screen.world-screen{padding:0;overflow:hidden;position:relative}
+#screen:not(.world-screen){padding-bottom:calc(80px + env(safe-area-inset-bottom))}
+.world{position:absolute;inset:0;overflow:hidden;background:#0a1210;touch-action:none}
+.world-art{position:absolute;left:0;top:0;will-change:transform}
+.world-art>svg{display:block}
+.w-entity{position:absolute;transform:translate(-50%,-70%);border:0;background:none;padding:0;display:flex;flex-direction:column;align-items:center;gap:2px;z-index:4}
+.w-entity:active{transform:translate(-50%,-70%) scale(.94)!important;filter:brightness(1.18)}
+.w-entity .av{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:27px;
+  background:radial-gradient(circle at 36% 26%,rgba(255,255,255,.22),rgba(12,22,19,.9) 70%);
+  border:1px solid rgba(240,212,154,.55);box-shadow:0 8px 18px rgba(0,0,0,.6);position:relative}
+.w-entity .nm{font-size:11px;line-height:1.4;color:#f3e6c9;background:rgba(7,14,12,.75);padding:1px 7px;border-radius:9px;white-space:nowrap;border:1px solid rgba(240,212,154,.18)}
+.w-npc .ring{position:absolute;inset:-9px;border-radius:50%;border:1px solid rgba(240,212,154,.35);animation:ringPulse 2.6s infinite}
+@keyframes ringPulse{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.09);opacity:.15}}
+.w-mon .av{border-color:rgba(226,110,90,.55);background:radial-gradient(circle at 36% 26%,rgba(255,180,150,.2),rgba(28,12,10,.92) 70%);animation:monBob 2.2s ease-in-out infinite}
+.w-mon .nm{color:#f0c0b2;border-color:rgba(226,110,90,.3)}
+@keyframes monBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.w-chest .av{width:46px;height:46px;font-size:24px;border-color:rgba(240,212,154,.7);animation:chestGlow 2.4s ease-in-out infinite}
+@keyframes chestGlow{0%,100%{box-shadow:0 0 0 rgba(240,190,90,0)}50%{box-shadow:0 0 22px rgba(240,190,90,.55)}}
+.w-portal .av{width:76px;height:76px;font-size:34px;border-color:rgba(120,220,200,.6);background:radial-gradient(circle,rgba(70,190,170,.35),rgba(6,16,14,.9) 72%);animation:portalSpin 6s linear infinite}
+@keyframes portalSpin{0%{box-shadow:0 0 18px rgba(90,220,190,.35)}50%{box-shadow:0 0 34px rgba(90,220,200,.7)}100%{box-shadow:0 0 18px rgba(90,220,190,.35)}}
+.w-portal .nm{color:#bfeee2;border-color:rgba(120,220,200,.35)}
+
+.hero-lock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:7;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:3px}
+.hero-lock .h-shadow{position:absolute;bottom:20px;width:52px;height:12px;border-radius:50%;background:rgba(0,0,0,.5);filter:blur(4px)}
+.hero-lock .h-av{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-size:31px;
+  background:radial-gradient(circle at 36% 26%,#4c6a5c,#16241f 72%);border:2px solid rgba(240,212,154,.75);
+  box-shadow:0 0 0 4px rgba(240,212,154,.12),0 10px 24px rgba(0,0,0,.6);position:relative;transition:transform .12s}
+.hero-lock .h-nm{font-size:11px;color:#f6ead0;background:rgba(7,14,12,.8);padding:1px 8px;border-radius:9px;border:1px solid rgba(240,212,154,.25)}
+.hero-lock.walk .h-av{animation:heroBob .4s ease-in-out infinite alternate}
+@keyframes heroBob{from{transform:translateY(0)}to{transform:translateY(-4px)}}
+
+.joy{position:absolute;left:14px;bottom:calc(80px + env(safe-area-inset-bottom));width:124px;height:124px;border-radius:50%;z-index:22;touch-action:none;
+  background:radial-gradient(circle,rgba(255,255,255,.09),rgba(0,0,0,.4) 74%);border:1px solid rgba(240,212,154,.35);box-shadow:inset 0 0 24px rgba(0,0,0,.5)}
+.joy .knob{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 34% 28%,#f7e6bb,#b98f4f 74%);box-shadow:0 5px 14px rgba(0,0,0,.65);transition:transform .07s}
+.joy .joy-hint{position:absolute;left:0;right:0;bottom:-17px;text-align:center;font-size:10px;color:#8fa093;letter-spacing:1px}
+@media (max-width:360px){.joy{width:108px;height:108px;left:12px}.joy .knob{width:48px;height:48px;margin:-24px 0 0 -24px}}
+
+.world-top{position:absolute;left:10px;right:10px;top:8px;z-index:16;display:flex;gap:8px;align-items:flex-start;pointer-events:none}
+.world-top>*{pointer-events:auto}
+.w-scene{display:flex;flex-direction:column;gap:1px;padding:6px 11px;border-radius:12px;background:rgba(8,15,13,.7);border:1px solid rgba(240,212,154,.24);backdrop-filter:blur(4px)}
+.w-scene b{font-size:13px;color:#f4e7ca;letter-spacing:1px}
+.w-scene span{font-size:10px;color:#8fa093}
+.w-quest{flex:1;display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:12px;background:rgba(8,15,13,.7);border:1px solid rgba(240,212,154,.18);min-width:0}
+.w-quest .qt{flex:1;min-width:0}
+.w-quest .qt b{display:block;font-size:12px;color:#e8d6ae;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w-quest .qt span{display:block;font-size:10px;color:#8fa093;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.w-quest button{min-height:44px;min-width:52px;border-radius:10px;font-size:12px;padding:0 10px;background:linear-gradient(180deg,#e3c07c,#b98f4f);color:#1a1410;font-weight:700;border:0}
+
+.w-act{position:absolute;right:14px;bottom:calc(88px + env(safe-area-inset-bottom));z-index:23;min-height:50px;padding:0 18px;border-radius:25px;
+  background:linear-gradient(180deg,#3c6353,#1a2c25);border:1px solid rgba(240,212,154,.55);color:#f6ead0;font-size:13px;
+  box-shadow:0 10px 24px rgba(0,0,0,.55);animation:actIn .16s ease}
+@keyframes actIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.w-fade{position:absolute;inset:0;background:#050a09;opacity:0;pointer-events:none;z-index:40;transition:opacity .22s ease}
+.w-fade.on{opacity:1}
+
 </style>
 </head>
 <body>
@@ -502,6 +666,401 @@ const MAPS = {
     drops: ['hp2', 'mp2', 'net']
   }
 };
+
+/* ===================== 大世界 ===================== */
+function rng(seed) { let s = seed % 2147483647; if (s <= 0) s += 2147483646; return () => (s = s * 16807 % 2147483647) / 2147483647; }
+
+const SCENES = {
+  town: {
+    id: 'town', name: '云阳城', sub: '市井繁华 · 人间烟火', art: 'town', w: 1240, h: 1500,
+    spawn: { x: 620, y: 910 },
+    npcs: [
+      { name: '门派师傅', icon: '📖', x: 500, y: 850, act: 'master' },
+      { name: '百宝阁掌柜', icon: '🏮', x: 740, y: 850, act: 'shop' },
+      { name: '兽栏管事', icon: '🐾', x: 760, y: 1110, act: 'pets' },
+      { name: '客栈小二', icon: '🛖', x: 600, y: 1110, act: 'rest' },
+      { name: '任务榜', icon: '📜', x: 700, y: 1010, act: 'quest' }
+    ],
+    portals: [{ x: 620, y: 150, to: '__map', label: '山门 · 前往秘境' }],
+    monsters: [],
+    chests: [{ id: 'town_c1', x: 230, y: 780, reward: { gold: 80 } }]
+  },
+  zhulin: {
+    id: 'zhulin', name: '竹林小径', sub: '翠影婆娑 · 妖气初现', art: 'bamboo', w: 1400, h: 1720,
+    spawn: { x: 700, y: 1440 },
+    npcs: [],
+    portals: [{ x: 700, y: 1640, to: 'town', label: '回云阳城' }],
+    monsters: [
+      { sp: 'zhuyiao', x: 470, y: 1200, lv: 3 },
+      { sp: 'qingshe', x: 980, y: 1120, lv: 4 },
+      { sp: 'shanlang', x: 760, y: 900, lv: 5 },
+      { sp: 'zhuyiao', x: 1080, y: 1320, lv: 3 }
+    ],
+    chests: [
+      { id: 'zl_c1', x: 280, y: 1230, reward: { gold: 80 } },
+      { id: 'zl_c2', x: 1160, y: 760, reward: { items: { hp2: 2 } } }
+    ]
+  },
+  yougu: {
+    id: 'yougu', name: '幽谷密林', sub: '雾锁深林 · 花妖夜行', art: 'valley', w: 1440, h: 1760,
+    spawn: { x: 720, y: 1480 },
+    npcs: [],
+    portals: [{ x: 720, y: 1680, to: 'town', label: '回云阳城' }],
+    monsters: [
+      { sp: 'huayao', x: 460, y: 1250, lv: 7 },
+      { sp: 'dufeng', x: 1000, y: 1170, lv: 8 },
+      { sp: 'shiling', x: 760, y: 950, lv: 9 },
+      { sp: 'huayao', x: 1120, y: 1370, lv: 7 }
+    ],
+    chests: [
+      { id: 'yg_c1', x: 300, y: 1290, reward: { gold: 140 } },
+      { id: 'yg_c2', x: 1180, y: 800, reward: { items: { mp2: 2 } } }
+    ]
+  },
+  xueshan: {
+    id: 'xueshan', name: '雪山寒岭', sub: '千山飞雪 · 冰魄封魂', art: 'snow', w: 1480, h: 1800,
+    spawn: { x: 740, y: 1520 },
+    npcs: [],
+    portals: [{ x: 740, y: 1720, to: 'town', label: '回云阳城' }],
+    monsters: [
+      { sp: 'xuelang', x: 480, y: 1280, lv: 13 },
+      { sp: 'bingpo', x: 1020, y: 1200, lv: 14 },
+      { sp: 'baiyuan', x: 780, y: 980, lv: 15 },
+      { sp: 'xuelang', x: 1140, y: 1400, lv: 13 }
+    ],
+    chests: [
+      { id: 'xs_c1', x: 320, y: 1330, reward: { gold: 220 } },
+      { id: 'xs_c2', x: 1200, y: 840, reward: { items: { hp2: 3 } } }
+    ]
+  }
+};
+
+let W = null;
+let lastWorldScene = 'town';
+let worldGuard = false;
+
+function worldArt(sc) {
+  const r = rng(sc.w + sc.h * 3 + sc.id.length * 97);
+  const pal = {
+    town: ['#263d32', '#0c1512', '#c9b98e'],
+    bamboo: ['#1d3a2a', '#07110e', '#9fc4a0'],
+    valley: ['#283438', '#0a1113', '#9fb3ac'],
+    snow: ['#2c3d4a', '#091018', '#cfe3ee']
+  }[sc.art] || ['#263d32', '#0c1512', '#c9b98e'];
+  let deco = '';
+  for (let i = 0; i < 42; i++) {
+    const x = 50 + r() * (sc.w - 100), y = 80 + r() * (sc.h - 140);
+    if (Math.hypot(x - sc.spawn.x, y - sc.spawn.y) < 110) continue;
+    if (sc.art === 'town') {
+      if (r() > .5) deco += `<circle cx="${x}" cy="${y}" r="${7 + r() * 9}" fill="#172a21" opacity=".85"/>`;
+      else deco += `<rect x="${x}" y="${y - 14}" width="5" height="16" rx="2.5" fill="#413525" opacity=".8"/><circle cx="${x + 2}" cy="${y - 20}" r="8" fill="#3a5839" opacity=".85"/>`;
+    } else if (sc.art === 'snow') {
+      deco += `<path d="M${x} ${y} l-11 24 h22 z" fill="#5e7480" opacity=".5"/><rect x="${x - 1.5}" y="${y + 20}" width="3" height="8" fill="#4a626c" opacity=".6"/>`;
+    } else {
+      deco += `<g opacity=".7"><rect x="${x}" y="${y - 48}" width="5" height="66" rx="2" fill="#2d4f38"/><path d="M${x + 2} ${y - 38} q-24 -10 -32 -26 q24 4 32 14" stroke="#427056" stroke-width="4" fill="none"/><path d="M${x + 3} ${y - 24} q26 -8 34 -24 q-22 2 -34 12" stroke="#427056" stroke-width="4" fill="none"/></g>`;
+    }
+  }
+  let houses = '';
+  if (sc.art === 'town') {
+    houses = sc.npcs.map(n => `<g opacity=".95">
+      <rect x="${n.x - 78}" y="${n.y - 34}" width="156" height="78" rx="8" fill="#2a231a"/>
+      <path d="M${n.x - 96} ${n.y - 34} L${n.x} ${n.y - 88} L${n.x + 96} ${n.y - 34} Z" fill="#6d3a2c"/>
+      <rect x="${n.x - 16}" y="${n.y + 4}" width="32" height="40" rx="3" fill="#171310"/>
+      <rect x="${n.x - 62}" y="${n.y - 14}" width="26" height="22" rx="2" fill="#e8c47a" opacity=".35"/>
+      <rect x="${n.x + 36}" y="${n.y - 14}" width="26" height="22" rx="2" fill="#e8c47a" opacity=".35"/>
+    </g>`).join('');
+  }
+  const cx = Math.round(sc.w / 2);
+  const pathD = sc.art === 'town'
+    ? `M${cx} 170 L${cx} ${sc.h - 100} M240 ${sc.spawn.y} L${sc.w - 240} ${sc.spawn.y}`
+    : `M${cx} ${sc.h - 90} Q${cx + 90} ${sc.h * .55} ${cx - 50} 220`;
+  let lanterns = '';
+  if (sc.art === 'town') {
+    for (let y = 300; y < sc.h - 160; y += 150) {
+      lanterns += `<circle cx="${cx - 40}" cy="${y}" r="6" fill="#e8b96a" opacity=".55"/><circle cx="${cx - 40}" cy="${y}" r="16" fill="#e8b96a" opacity=".1"/>
+        <circle cx="${cx + 40}" cy="${y + 70}" r="6" fill="#e8b96a" opacity=".55"/><circle cx="${cx + 40}" cy="${y + 70}" r="16" fill="#e8b96a" opacity=".1"/>`;
+    }
+  }
+  return `<svg width="${sc.w}" height="${sc.h}" viewBox="0 0 ${sc.w} ${sc.h}" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="wbg-${sc.id}" cx="50%" cy="42%" r="72%">
+        <stop offset="0" stop-color="${pal[0]}"/><stop offset="1" stop-color="${pal[1]}"/>
+      </radialGradient>
+      <radialGradient id="wvig-${sc.id}" cx="50%" cy="50%" r="62%">
+        <stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/>
+      </radialGradient>
+      <pattern id="wdot-${sc.id}" width="46" height="46" patternUnits="userSpaceOnUse">
+        <circle cx="7" cy="7" r="1.3" fill="#fff" opacity=".05"/><circle cx="30" cy="28" r="1" fill="#000" opacity=".14"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wbg-${sc.id})"/>
+    <rect width="100%" height="100%" fill="url(#wdot-${sc.id})"/>
+    <path d="${pathD}" stroke="${pal[2]}" stroke-width="92" fill="none" opacity=".07" stroke-linecap="round"/>
+    <path d="${pathD}" stroke="${pal[2]}" stroke-width="24" fill="none" opacity=".1" stroke-linecap="round"/>
+    ${houses}${lanterns}${deco}
+    <rect width="100%" height="100%" fill="url(#wvig-${sc.id})"/>
+  </svg>`;
+}
+
+function worldEntities(sc) {
+  const npcs = sc.npcs.map((n, i) => `<button class="w-entity w-npc" style="left:${n.x}px;top:${n.y}px" data-act="worldNpc" data-arg="${i}">
+    <span class="av">${n.icon}<i class="ring"></i></span><span class="nm">${n.name}</span></button>`).join('');
+  const mons = (sc.monsters || []).map((m, i) => `<button class="w-entity w-mon" style="left:${m.x}px;top:${m.y}px" data-act="worldMon" data-arg="${i}">
+    <span class="av">${SPECIES[m.sp].icon}</span><span class="nm">${SPECIES[m.sp].name} · Lv.${m.lv}</span></button>`).join('');
+  const chests = (sc.chests || []).filter(c => !(S.player.chests || []).includes(c.id)).map(c => `<button class="w-entity w-chest" style="left:${c.x}px;top:${c.y}px" data-act="worldChest" data-arg="${c.id}">
+    <span class="av">🎁</span><span class="nm">宝箱</span></button>`).join('');
+  const portals = sc.portals.map((p, i) => `<button class="w-entity w-portal" style="left:${p.x}px;top:${p.y}px" data-act="worldPortal" data-arg="${i}">
+    <span class="av">🌀</span><span class="nm">${p.label}</span></button>`).join('');
+  return npcs + mons + chests + portals;
+}
+
+function ensureWorldPos(sc) {
+  if (!S.player.worldScene || S.player.worldScene !== sc.id || S.player.px == null) {
+    S.player.worldScene = sc.id; S.player.px = sc.spawn.x; S.player.py = sc.spawn.y;
+  }
+  S.player.scene = sc.id;
+}
+
+function enterWorld(scene) {
+  if (B) return;
+  const sc = SCENES[scene] || SCENES.town;
+  S.tab = 'world';
+  ensureWorldPos(sc);
+  if (sc.id !== 'town') S.player.map = sc.id;
+  closeSheet();
+  save();
+  render();
+}
+
+function renderWorld() {
+  const sc = SCENES[S.player.scene] || SCENES.town;
+  ensureWorldPos(sc);
+  const mi = mainQuestInfo();
+  document.getElementById('screen').innerHTML = `<div class="world" id="world">
+    <div class="world-art" id="worldArt">${worldArt(sc)}${worldEntities(sc)}</div>
+    <div class="w-fade" id="wFade"></div>
+    <div class="hero-lock" id="heroLock">
+      <span class="h-shadow"></span><span class="h-av">${SECTS[S.player.sect].icon}</span><span class="h-nm">${S.player.name}</span>
+    </div>
+    <div class="world-top">
+      <div class="w-scene"><b>${sc.name}</b><span>${sc.sub}</span></div>
+      <div class="w-quest"><div class="qt"><b>${mi ? mi.q.name : '江湖已定'}</b><span>${mi ? mi.q.desc : '主线已完成，可继续历练'}</span></div>${mi ? '<button data-act="walkQuest">前往</button>' : ''}</div>
+    </div>
+    <button class="joy" id="joy"><span class="knob"></span><span class="joy-hint">拖动行走</span></button>
+  </div>`;
+  bindWorld();
+}
+
+function bindWorld() {
+  const world = document.getElementById('world');
+  const sc = SCENES[S.player.scene] || SCENES.town;
+  const px = S.player.px == null ? sc.spawn.x : S.player.px;
+  const py = S.player.py == null ? sc.spawn.y : S.player.py;
+  W = { sc, x: px, y: py, joy: { active: false, dx: 0, dy: 0 }, target: null, pending: null,
+    last: performance.now(), moving: false, near: null, nearSince: 0, raf: 0,
+    lastBattle: Date.now(), lastSave: Date.now(), suppressN: new Set(), suppressM: new Set() };
+  if (worldGuard) {
+    sc.npcs.forEach((n, i) => { if (Math.hypot(n.x - px, n.y - py) < 150) W.suppressN.add(i); });
+    (sc.monsters || []).forEach((m, i) => { if (Math.hypot(m.x - px, m.y - py) < 140) W.suppressM.add(i); });
+    worldGuard = false;
+  }
+  updateCamera();
+  world.addEventListener('click', e => {
+    if (!W) return;
+    if (e.target.closest('.w-entity') || e.target.closest('.joy') || e.target.closest('.world-top')) return;
+    const r = document.getElementById('screen').getBoundingClientRect();
+    W.target = { x: W.x + (e.clientX - r.left - r.width / 2), y: W.y + (e.clientY - r.top - r.height / 2) };
+    W.pending = null;
+  });
+  const joy = document.getElementById('joy');
+  let pid = null;
+  const drag = e => {
+    const r = joy.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    let dx = e.clientX - cx, dy = e.clientY - cy;
+    const max = r.width / 2 - 22, d = Math.hypot(dx, dy);
+    if (d > max) { dx = dx / d * max; dy = dy / d * max; }
+    const knob = joy.querySelector('.knob');
+    if (knob) knob.style.transform = `translate(${dx}px, ${dy}px)`;
+    W.joy.dx = dx / max; W.joy.dy = dy / max; W.joy.active = Math.hypot(dx, dy) > 7;
+    if (W.joy.active) W.target = null;
+    e.preventDefault();
+  };
+  joy.addEventListener('pointerdown', e => { pid = e.pointerId; try { joy.setPointerCapture(pid); } catch (err) { } drag(e); });
+  joy.addEventListener('pointermove', e => { if (pid === e.pointerId) drag(e); });
+  const end = e => {
+    if (pid !== e.pointerId) return;
+    pid = null; W.joy.active = false; W.joy.dx = W.joy.dy = 0;
+    const knob = joy.querySelector('.knob'); if (knob) knob.style.transform = 'translate(0,0)';
+  };
+  joy.addEventListener('pointerup', end); joy.addEventListener('pointercancel', end);
+  cancelAnimationFrame(W.raf);
+  W.raf = requestAnimationFrame(worldLoop);
+}
+
+function updateCamera() {
+  if (!W) return;
+  const el = document.getElementById('worldArt'), screenEl = document.getElementById('screen');
+  if (!el || !screenEl) return;
+  const r = screenEl.getBoundingClientRect();
+  el.style.transform = `translate3d(${Math.round(r.width / 2 - W.x)}px, ${Math.round(r.height / 2 - W.y)}px, 0)`;
+}
+
+function worldLoop(t) {
+  if (!W || S.tab !== 'world') return;
+  const dt = Math.min((t - W.last) / 1000, .05); W.last = t;
+  if (B) { W.raf = requestAnimationFrame(worldLoop); return; }
+  const ov = document.getElementById('overlay');
+  if (ov && !ov.classList.contains('hidden')) { W.raf = requestAnimationFrame(worldLoop); return; }
+  let dx = 0, dy = 0;
+  if (W.joy.active) { dx = W.joy.dx; dy = W.joy.dy; }
+  else if (W.target) {
+    const tx = W.target.x - W.x, ty = W.target.y - W.y, d = Math.hypot(tx, ty);
+    if (d < 12) { W.target = null; onWorldArrive(); }
+    else { dx = tx / d; dy = ty / d; }
+  }
+  if (dx || dy) {
+    const len = Math.hypot(dx, dy) || 1;
+    W.x += dx / len * 240 * dt; W.y += dy / len * 240 * dt; W.moving = true;
+    S.player.px = W.x; S.player.py = W.y;
+  } else W.moving = false;
+  W.x = clamp(W.x, 60, W.sc.w - 60); W.y = clamp(W.y, 90, W.sc.h - 60);
+  updateCamera();
+  const hero = document.getElementById('heroLock');
+  if (hero) {
+    hero.classList.toggle('walk', W.moving);
+    const av = hero.querySelector('.h-av');
+    if (av) av.style.transform = dx < -.1 ? 'scaleX(-1)' : (dx > .1 ? 'scaleX(1)' : av.style.transform);
+  }
+  checkWorldNear(t);
+  if (!W) return;
+  if (Date.now() - W.lastSave > 1500) { W.lastSave = Date.now(); save(); }
+  W.raf = requestAnimationFrame(worldLoop);
+}
+
+function onWorldArrive() {
+  const p = W && W.pending; if (!p) return;
+  W.pending = null;
+  if (p.type === 'npc') openWorldNpc(p.idx);
+  else if (p.type === 'monster') { if (W) W.suppressM.add(p.idx); beginWorldBattle(); }
+  else if (p.type === 'portal') switchScene(SCENES[S.player.scene].portals[p.idx].to, p.quest);
+  else if (p.type === 'chest') claimChest(p.id);
+}
+
+function checkWorldNear(t) {
+  if (!W) return;
+  const sc = W.sc;
+  let near = null, bd = 1e9;
+  sc.npcs.forEach((n, i) => {
+    const d = Math.hypot(n.x - W.x, n.y - W.y);
+    if (d > 165) W.suppressN.delete(i);
+    if (d < 115 && d < bd) { bd = d; near = { type: 'npc', idx: i, label: '交谈 · ' + n.name }; }
+  });
+  sc.portals.forEach((p, i) => { const d = Math.hypot(p.x - W.x, p.y - W.y); if (d < 100 && d < bd) { bd = d; near = { type: 'portal', idx: i, label: '前往 · ' + p.label.replace('山门 · ', '') }; } });
+  (sc.chests || []).forEach(c => { if ((S.player.chests || []).includes(c.id)) return; const d = Math.hypot(c.x - W.x, c.y - W.y); if (d < 75 && d < bd) { bd = d; near = { type: 'chest', id: c.id, label: '开启宝箱' }; } });
+  (sc.monsters || []).forEach((m, i) => {
+    const d = Math.hypot(m.x - W.x, m.y - W.y);
+    if (d > 165) W.suppressM.delete(i);
+    if (d < 100 && d < bd) { bd = d; near = { type: 'monster', idx: i, label: '挑战 · ' + SPECIES[m.sp].name }; }
+  });
+  if (near && near.type === 'monster' && bd < 40 && !W.suppressM.has(near.idx) && Date.now() - W.lastBattle > 2500) { W.suppressM.add(near.idx); beginWorldBattle(); return; }
+  if (near && near.type === 'chest' && bd < 42) { claimChest(near.id); return; }
+  if (!near) { W.near = null; W.nearSince = 0; showWorldAct(null); return; }
+  if (!W.near || W.near.label !== near.label) { W.near = near; W.nearSince = t; }
+  showWorldAct(near);
+  if (!W.moving && near.type === 'npc' && !W.suppressN.has(near.idx) && t - W.nearSince > 700) {
+    W.nearSince = t + 1e6; W.suppressN.add(near.idx); openWorldNpc(near.idx);
+  }
+}
+
+function showWorldAct(near) {
+  const world = document.getElementById('world');
+  if (!world) return;
+  let btn = document.getElementById('wAct');
+  if (!near) { if (btn) btn.remove(); return; }
+  if (!btn) { btn = document.createElement('button'); btn.id = 'wAct'; btn.className = 'w-act'; btn.dataset.act = 'worldAct'; world.appendChild(btn); }
+  if (btn.textContent !== near.label) btn.textContent = near.label;
+}
+
+function openWorldNpc(i) {
+  const n = SCENES[S.player.scene].npcs[i];
+  if (!n) return;
+  if (W) W.suppressN.add(i);
+  if (n.act === 'shop') return go('shop');
+  if (n.act === 'pets') return go('pets');
+  if (n.act === 'quest') return go('quest');
+  if (n.act === 'master') return ACT.master();
+  if (n.act === 'rest') return ACT.rest();
+}
+
+function beginWorldBattle() {
+  if (B) return;
+  worldGuard = true;
+  lastWorldScene = S.player.scene;
+  if (W) { W.target = null; W.pending = null; cancelAnimationFrame(W.raf); }
+  startBattle('wild');
+}
+
+function switchScene(to, quest) {
+  if (!W) return;
+  const fade = document.getElementById('wFade');
+  if (fade) fade.classList.add('on');
+  setTimeout(() => {
+    if (to === '__map') to = S.player.map || 'zhulin';
+    const sc = SCENES[to] || SCENES.town;
+    S.player.scene = to; S.player.worldScene = to;
+    S.player.px = sc.spawn.x; S.player.py = sc.spawn.y;
+    if (to !== 'town') S.player.map = to;
+    save();
+    W = null;
+    render();
+    if (quest) setTimeout(walkQuest, 420);
+  }, 220);
+}
+
+function claimChest(id) {
+  if (!W) return;
+  const sc = SCENES[S.player.scene];
+  const c = (sc.chests || []).find(x => x.id === id);
+  if (!c) return;
+  S.player.chests = S.player.chests || [];
+  if (S.player.chests.includes(id)) return;
+  S.player.chests.push(id);
+  save();
+  const btn = [...document.querySelectorAll('.w-chest')].find(el => el.dataset.arg === id);
+  if (btn) { btn.style.transition = 'transform .2s, opacity .2s'; btn.style.transform = 'translate(-50%,-70%) scale(.2)'; btn.style.opacity = '0'; setTimeout(() => btn.remove(), 220); }
+  W.near = null; showWorldAct(null);
+  grant(c.reward);
+}
+
+function walkQuest() {
+  if (!W) return;
+  const mi = mainQuestInfo();
+  if (!mi) return toast('主线已完成，去秘境自由历练吧');
+  const key = mi.q.key;
+  const sc = SCENES[S.player.scene];
+  const matches = m => key === '__capture' ? SPECIES[m.sp].pet : m.sp === key;
+  const idx = (sc.monsters || []).findIndex(matches);
+  if (idx >= 0) {
+    const m = sc.monsters[idx];
+    W.target = { x: m.x, y: m.y + 20 };
+    W.pending = { type: 'monster', idx };
+    return toast('前往目标 · ' + SPECIES[m.sp].name);
+  }
+  if (S.player.scene !== 'town') {
+    const pi = Math.max(sc.portals.findIndex(p => p.to === 'town'), 0);
+    const p = sc.portals[pi];
+    W.target = { x: p.x, y: p.y };
+    W.pending = { type: 'portal', idx: pi, quest: true };
+    return toast('目标不在此地，先经传送阵回城');
+  }
+  const dest = Object.keys(SCENES).find(id => id !== 'town' && (SCENES[id].monsters || []).some(matches));
+  if (!dest) return toast('当前没有可追踪的目标', 'bad');
+  S.player.map = dest;
+  const p = sc.portals[0];
+  W.target = { x: p.x, y: p.y };
+  W.pending = { type: 'portal', idx: 0, quest: true };
+  toast('前往 ' + MAPS[dest].name);
+}
 
 /* ===================== 任务 ===================== */
 const MAIN_QUESTS = [
@@ -799,7 +1358,7 @@ function renderTop() {
   const need = expNeed(p.level);
   const expPct = p.level >= 20 ? 100 : clamp(p.exp / need * 100, 0, 100);
   document.getElementById('topbar').innerHTML = `
-    <div class="tb-badge">${sct.icon}</div>
+    <button class="tb-badge" data-act="go" data-arg="hero" aria-label="角色详情">${sct.icon}</button>
     <div class="tb-main">
       <div class="tb-row">
         <span class="tb-name">${p.name || '无名少侠'}</span>
@@ -815,7 +1374,7 @@ function renderTop() {
 
 function renderTabbar() {
   const tabs = [
-    ['town', '🏯', '城镇'], ['wild', '⛰️', '秘境'], ['hero', '🧿', '角色'], ['bag', '🎒', '行囊'], ['quest', '📜', '任务']
+    ['bag', '🎒', '背包'], ['pets', '🐾', '宠物'], ['quest', '📜', '任务'], ['shop', '🏪', '商店'], ['settings', '⚙️', '设置']
   ];
   const dot = hasClaimable();
   document.getElementById('tabbar').innerHTML = tabs.map(([k, ic, nm]) => `
@@ -825,10 +1384,18 @@ function renderTabbar() {
 }
 
 function go(tab) {
+  if (tab === 'town') return enterWorld('town');
+  if (tab === 'wild') return enterWorld(S.player.map || 'zhulin');
+  if (tab === 'world') return enterWorld(S.player.scene || 'town');
+  if (W) { cancelAnimationFrame(W.raf); W = null; }
+  worldGuard = true;
   S.tab = tab; save();
   const sc = document.getElementById('screen');
   sc.scrollTop = 0;
   render();
+  sc.classList.remove('fade-in');
+  void sc.offsetWidth;
+  sc.classList.add('fade-in');
 }
 
 /* ===================== 主城 ===================== */
@@ -854,39 +1421,31 @@ function screenTown() {
   const p = S.player, sct = SECTS[p.sect], mi = mainQuestInfo();
   const pet = activePet();
   return `
-    <div class="scene">${sceneArt('town')}
+    <div class="scene town-scene">${sceneArt('town')}
       <div class="veil"></div>
-      <div class="st-tag">安全区</div>
+      <div class="st-tag">云阳城 · 安全区</div>
       <div class="scene-txt"><div class="st-name">云阳城</div><div class="st-sub">市井繁华 · 人间烟火</div></div>
-    </div>
-    <div class="sec-title">城中去处</div>
-    <div class="grid2">
-      <button class="tile" data-act="rest"><span class="t-ico">🛖</span><span class="t-body">
-        <span class="t-name">悦来客栈</span><span class="t-desc">歇脚疗伤，气血法力全满</span></span></button>
-      <button class="tile" data-act="shop"><span class="t-ico">🏮</span><span class="t-body">
-        <span class="t-name">百宝阁</span><span class="t-desc">丹药 · 兵器 · 灵符</span></span></button>
-      <button class="tile" data-act="pets"><span class="t-ico">🐾</span><span class="t-body">
-        <span class="t-name">召唤兽栏</span><span class="t-desc">${S.pets.length ? `已有 ${S.pets.length} 只灵兽` : '尚无灵兽，快去捕捉'}</span></span></button>
-      <button class="tile" data-act="master"><span class="t-ico">📖</span><span class="t-body">
-        <span class="t-name">门派师傅</span><span class="t-desc">${sct.name} · 修习法术</span></span></button>
+      <button class="hotspot" style="left:4%" data-act="rest" aria-label="悦来客栈"><span>🛖</span><b>客栈</b></button>
+      <button class="hotspot" style="left:27%" data-act="go" data-arg="shop" aria-label="百宝阁"><span>🏮</span><b>百宝阁</b></button>
+      <button class="hotspot" style="left:50%" data-act="master" aria-label="门派师傅"><span>📖</span><b>师傅</b></button>
+      <button class="hotspot" style="left:73%" data-act="go" data-arg="wild" aria-label="山门秘境"><span>⛰️</span><b>山门</b>${mi && mi.done ? '<i class="dotp"></i>' : ''}</button>
     </div>
     <div class="sec-title">当前要务<small>${mi ? '第 ' + (p.questIdx + 1) + ' / ' + MAIN_QUESTS.length + ' 章' : '全部完成'}</small></div>
-    ${mi ? `<div class="row">
+    ${mi ? `<div class="row" data-act="go" data-arg="quest">
       <div class="r-ico">📜</div>
       <div class="r-main"><div class="r-name">${mi.q.name}${mi.done ? '<span class="tag on">可领取</span>' : ''}</div>
       <div class="r-desc">${mi.q.desc}</div>
       <div class="pbar"><i style="width:${mi.cur / mi.q.need * 100}%"></i></div></div>
-      <div class="r-right" style="font-size:10px;color:#8fa093">${mi.cur}/${mi.q.need}</div>
+      <div class="r-right" style="font-size:11px;color:#8fa093">${mi.cur}/${mi.q.need}</div>
     </div>` : `<div class="row"><div class="r-ico">🏆</div><div class="r-main"><div class="r-name">江湖已定</div><div class="r-desc">主线已全部完成，可继续挑战日常与首领。</div></div></div>`}
-    <div class="sec-title">远行</div>
-    <button class="btn gold wide" data-act="go" data-arg="wild" style="margin-bottom:9px">⛰️ 前往秘境历练</button>
+    <div class="sec-title">随行</div>
     <div class="row">
       <div class="r-ico">🐾</div>
-      <div class="r-main"><div class="r-name">出战召唤兽</div>
-      <div class="r-desc">${pet ? `${pet.name} · Lv.${pet.level} · ${SPECIES[pet.sp].skill.name}` : '未设置出战召唤兽，战斗中将独自迎敌'}</div></div>
-      <div class="r-right"><button class="btn sm" data-act="pets">${pet ? '查看' : '设置'}</button></div>
+      <div class="r-main"><div class="r-name">${pet ? pet.name : '未携召唤兽'}</div>
+      <div class="r-desc">${pet ? `Lv.${pet.level} · ${SPECIES[pet.sp].skill.name} · 气血 ${pet.hp}/${petMaxHp(pet)}` : '独自迎敌，前往宠物页设置出战灵兽'}</div></div>
+      <div class="r-right"><button class="btn sm" data-act="go" data-arg="pets">${pet ? '更换' : '设置'}</button></div>
     </div>
-    <button class="btn ghost wide" data-act="tips" style="margin-top:9px">📖 玩法说明</button>`;
+    <button class="btn gold wide" data-act="go" data-arg="wild" style="margin-top:12px">⛰️ 前往秘境历练</button>`;
 }
 
 /* ===================== 秘境 ===================== */
@@ -896,6 +1455,10 @@ function screenWild() {
   const unlocked = p.level >= map.unlock;
   const bossUnlock = p.level >= map.bossLv - 2;
   return `
+    <div class="pagebar">
+      <button class="btn sm ghost back" data-act="go" data-arg="town">← 回城</button>
+      <span class="pmuted">秘境历练</span>
+    </div>
     <div class="scene">${sceneArt(map.art)}
       <div class="veil"></div>
       <div class="st-tag">推荐 Lv.${map.lv}</div>
@@ -941,6 +1504,10 @@ function screenHero() {
       : `<span class="eq-name" style="color:#6f7d75">— 未装备 —</span>`;
   };
   return `
+    <div class="pagebar">
+      <button class="btn sm ghost back" data-act="go" data-arg="town">← 回城</button>
+      <span class="ptitle">角色</span>
+    </div>
     <div class="hero-head">
       <div class="hero-av">${sct.icon}</div>
       <div class="hero-info">
@@ -992,7 +1559,8 @@ function screenBag() {
     </div>`;
   };
   return `
-    <div class="sec-title">丹药 · 道具<small>${potions.length} 种</small></div>
+    <div class="pagebar"><span class="ptitle">背包</span><button class="btn sm ghost" data-act="go" data-arg="world" style="margin-left:auto">🌍 回世界</button></div>
+    <div class="sec-title" style="margin-top:6px">丹药 · 道具<small>${potions.length} 种</small></div>
     ${potions.length ? potions.map(row).join('') : '<div class="empty">行囊空空，去百宝阁看看？</div>'}
     <div class="sec-title">装备<small>${equips.length} 件</small></div>
     ${equips.length ? equips.map(row).join('') : '<div class="empty">暂无多余装备</div>'}
@@ -1022,7 +1590,8 @@ function screenQuest() {
   }).join('');
 
   return `
-    <div class="sec-title">主线 · 江湖行<small>第 ${Math.min(p.questIdx + 1, MAIN_QUESTS.length)} 章</small></div>
+    <div class="pagebar"><span class="ptitle">任务</span><button class="btn sm ghost" data-act="go" data-arg="world" style="margin-left:auto">🌍 回世界</button></div>
+    <div class="sec-title" style="margin-top:6px">主线 · 江湖行<small>第 ${Math.min(p.questIdx + 1, MAIN_QUESTS.length)} 章</small></div>
     ${mainList || '<div class="empty">主线已全部完成</div>'}
     <div class="sec-title">日常 · 每日历练<small>每日 0 点重置</small></div>
     ${DAILIES.map(d => {
@@ -1043,6 +1612,69 @@ function screenQuest() {
     <div class="empty" style="font-size:10px">提示：击败妖兽、捕捉召唤兽都会累计日常进度</div>`;
 }
 
+/* ===================== 召唤兽 ===================== */
+function screenPets() {
+  const list = S.pets;
+  return `
+    <div class="pagebar"><span class="ptitle">召唤兽</span><span class="pmuted">${list.length} 只 · 仅一只出战</span><button class="btn sm ghost" data-act="go" data-arg="world">🌍 回世界</button></div>
+    ${list.length ? list.map(pet => {
+      const sp = SPECIES[pet.sp], ps = petStats(pet), on = S.activePet === pet.uid;
+      return `<div class="row" style="${on ? 'border-color:rgba(240,212,154,.6)' : ''}">
+        <div class="r-ico" style="font-size:26px">${sp.icon}</div>
+        <div class="r-main">
+          <div class="r-name">${pet.name} <span style="font-size:11px;color:#8fa093">Lv.${pet.level}</span> ${on ? '<span class="tag on">出战中</span>' : ''}</div>
+          <div class="r-desc">气血 ${ps.hp} · 攻击 ${ps.atk} · 灵力 ${ps.mag}</div>
+          <div class="r-desc" style="color:#c9a25e">灵技 · ${sp.skill.name}</div>
+          <div class="pbar"><i style="width:${clamp(pet.hp / ps.hp * 100, 0, 100)}%"></i></div>
+        </div>
+        <div class="r-right" style="display:flex;flex-direction:column;gap:6px">
+          ${on ? '' : `<button class="btn sm" data-act="setPet" data-arg="${pet.uid}">出战</button>`}
+          <button class="btn sm ghost" data-act="releasePet" data-arg="${pet.uid}">放生</button>
+        </div>
+      </div>`;
+    }).join('') : `<div class="empty">尚未收服召唤兽<br>在秘境中把妖兽打至残血，再用「捕捉」</div>`}
+    <button class="btn gold wide" data-act="go" data-arg="wild" style="margin-top:12px">⛰️ 去秘境捕捉</button>`;
+}
+
+/* ===================== 商店 ===================== */
+function screenShop() {
+  const p = S.player;
+  const list = Object.keys(ITEMS).filter(id => ITEMS[id].type !== 'equip').map(id => shopRow(id));
+  const eqs = Object.keys(ITEMS).filter(id => ITEMS[id].type === 'equip').map(id => shopRow(id));
+  return `
+    <div class="pagebar"><span class="ptitle">百宝阁</span><span class="pmuted">🪙 ${fmt(p.gold)}</span><button class="btn sm ghost" data-act="go" data-arg="world">🌍 回世界</button></div>
+    <div class="sec-title" style="margin-top:0">丹药 · 道具</div>
+    ${list.join('')}
+    <div class="sec-title">兵器 · 灵符</div>
+    ${eqs.join('')}
+    <div class="empty" style="font-size:11px">银两可通过主线、日常与战斗获得</div>`;
+}
+
+/* ===================== 设置 ===================== */
+function screenSettings() {
+  const p = S.player, sct = SECTS[p.sect], st = playerStats();
+  return `
+    <div class="pagebar"><span class="ptitle">设置</span><button class="btn sm ghost" data-act="go" data-arg="world" style="margin-left:auto">🌍 回世界</button></div>
+    <div class="row" data-act="go" data-arg="hero">
+      <div class="r-ico" style="font-size:24px">${sct.icon}</div>
+      <div class="r-main"><div class="r-name">${p.name} · ${sct.name}</div>
+      <div class="r-desc">Lv.${p.level} · 气血 ${Math.round(p.hp)}/${st.hp} · 战力 ${st.hp + st.atk * 6 + st.mag * 5 + st.def * 5 + st.spd * 3}</div></div>
+      <div class="r-right"><span class="tag on">角色详情</span></div>
+    </div>
+    <div class="sec-title">游戏</div>
+    <button class="btn ghost wide" data-act="tips">📖 玩法说明</button>
+    <div class="row" style="margin-top:12px">
+      <div class="r-ico">🔇</div>
+      <div class="r-main"><div class="r-name">音效</div><div class="r-desc">静音设计，不自动播放音频</div></div>
+    </div>
+    <div class="row" style="margin-top:9px">
+      <div class="r-ico">💾</div>
+      <div class="r-main"><div class="r-name">存档</div><div class="r-desc">自动保存在本机浏览器，清理数据会丢失</div></div>
+    </div>
+    <button class="btn wide" data-act="resetGame" style="margin-top:14px;color:#e8a49a;border-color:rgba(226,86,79,.35)">重置游戏</button>
+    <div class="empty" style="font-size:10px;padding-top:16px">幻唐仙缘 · 单文件手游版 · v1.1</div>`;
+}
+
 /* ===================== 路由 ===================== */
 function render() {
   if (!S || !S.created) return;
@@ -1051,11 +1683,15 @@ function render() {
   renderTabbar();
   const sc = document.getElementById('screen');
   const cur = sc.scrollTop;
-  if (S.tab === 'town') sc.innerHTML = screenTown();
-  else if (S.tab === 'wild') sc.innerHTML = screenWild();
+  const isWorld = S.tab === 'world';
+  sc.classList.toggle('world-screen', isWorld);
+  if (isWorld) renderWorld();
   else if (S.tab === 'hero') sc.innerHTML = screenHero();
   else if (S.tab === 'bag') sc.innerHTML = screenBag();
   else if (S.tab === 'quest') sc.innerHTML = screenQuest();
+  else if (S.tab === 'pets') sc.innerHTML = screenPets();
+  else if (S.tab === 'shop') sc.innerHTML = screenShop();
+  else if (S.tab === 'settings') sc.innerHTML = screenSettings();
   sc.scrollTop = cur;
 }
 
@@ -1097,6 +1733,53 @@ const ACT = {
     S.player.map = id; save(); render();
   },
 
+  worldNpc: i => {
+    if (!W) return;
+    const n = SCENES[S.player.scene].npcs[i];
+    if (!n) return;
+    if (Math.hypot(n.x - W.x, n.y - W.y) > 110) {
+      W.target = { x: n.x, y: n.y + 45 }; W.pending = { type: 'npc', idx: i };
+    } else openWorldNpc(i);
+  },
+
+  worldMon: i => {
+    if (!W) return;
+    const m = SCENES[S.player.scene].monsters[i];
+    if (!m) return;
+    if (Math.hypot(m.x - W.x, m.y - W.y) > 100) {
+      W.target = { x: m.x, y: m.y + 30 }; W.pending = { type: 'monster', idx: i };
+    } else { W.suppressM.add(i); beginWorldBattle(); }
+  },
+
+  worldChest: id => {
+    if (!W) return;
+    const c = (SCENES[S.player.scene].chests || []).find(x => x.id === id);
+    if (!c) return;
+    if (Math.hypot(c.x - W.x, c.y - W.y) > 70) {
+      W.target = { x: c.x, y: c.y + 16 }; W.pending = { type: 'chest', id };
+    } else claimChest(id);
+  },
+
+  worldPortal: i => {
+    if (!W) return;
+    const sc = SCENES[S.player.scene], p = sc.portals[i];
+    if (!p) return;
+    if (Math.hypot(p.x - W.x, p.y - W.y) > 90) {
+      W.target = { x: p.x, y: p.y + 30 }; W.pending = { type: 'portal', idx: i };
+    } else switchScene(p.to);
+  },
+
+  worldAct: () => {
+    if (!W || !W.near) return;
+    const n = W.near;
+    if (n.type === 'npc') openWorldNpc(n.idx);
+    else if (n.type === 'monster') { W.suppressM.add(n.idx); beginWorldBattle(); }
+    else if (n.type === 'chest') claimChest(n.id);
+    else if (n.type === 'portal') { const p = SCENES[S.player.scene].portals[n.idx]; if (p) switchScene(p.to); }
+  },
+
+  walkQuest: () => walkQuest(),
+
   beastInfo: id => {
     const sp = SPECIES[id];
     openSheet(`
@@ -1111,19 +1794,7 @@ const ACT = {
       <div class="sheet-actions"><button class="btn" data-act="closeSheet">知道了</button></div>`, true);
   },
 
-  shop: () => {
-    const p = S.player;
-    const list = Object.keys(ITEMS).filter(id => ITEMS[id].type !== 'equip').map(id => shopRow(id));
-    const eqs = Object.keys(ITEMS).filter(id => ITEMS[id].type === 'equip').map(id => shopRow(id));
-    openSheet(`
-      <h3>百宝阁</h3>
-      <div class="sub">童叟无欺 · 现有 🪙${fmt(p.gold)}</div>
-      <div class="sec-title" style="margin-top:0">丹药 · 道具</div>
-      ${list.join('')}
-      <div class="sec-title">兵器 · 灵符</div>
-      ${eqs.join('')}
-      <div class="sheet-actions"><button class="btn ghost" data-act="closeSheet">离开</button></div>`);
-  },
+  shop: () => go('shop'),
 
   buy: id => {
     const it = ITEMS[id], p = S.player;
@@ -1132,8 +1803,7 @@ const ACT = {
     p.gold -= it.price;
     addItem(id, 1);
     toast(`购得 ${it.name}`, 'good');
-    ACT.shop();
-    renderTop();
+    render();
   },
 
   useItem: id => {
@@ -1172,36 +1842,10 @@ const ACT = {
     save(); render(); toast('已卸下装备');
   },
 
-  pets: () => {
-    const p = S.player;
-    if (!S.pets.length) {
-      return openSheet(`<h3>召唤兽栏</h3><div class="sub">空空如也</div>
-        <div style="font-size:11px;line-height:1.8;color:#a9b8ae;padding:6px 4px 10px">
-          在秘境战斗中，将妖兽气血削弱后使用「捕捉」指令，便可将其收为召唤兽。<br>
-          捕捉时可使用捆仙索提高成功率，但每次捕捉都会消耗一个回合。
-        </div>
-        <div class="sheet-actions"><button class="btn" data-act="closeSheet">知道了</button></div>`, true);
-    }
-    openSheet(`
-      <h3>召唤兽栏</h3>
-      <div class="sub">已收服 ${S.pets.length} 只 · 同时仅一只出战</div>
-      ${S.pets.map(pet => {
-        const sp = SPECIES[pet.sp], ps = petStats(pet), on = S.activePet === pet.uid;
-        return `<div class="row" style="${on ? 'border-color:rgba(240,212,154,.6)' : ''}">
-          <div class="r-ico">${sp.icon}</div>
-          <div class="r-main"><div class="r-name">${pet.name} <span style="font-size:10px;color:#8fa093">Lv.${pet.level}</span> ${on ? '<span class="tag on">出战</span>' : ''}</div>
-          <div class="r-desc">气血 ${ps.hp} · 攻击 ${ps.atk} · 灵力 ${ps.mag} · ${sp.skill.name}</div>
-          <div class="pbar"><i style="width:${pet.hp / ps.hp * 100}%"></i></div></div>
-          <div class="r-right" style="display:flex;flex-direction:column;gap:5px">
-            ${on ? '' : `<button class="btn sm" data-act="setPet" data-arg="${pet.uid}">出战</button>`}
-            <button class="btn sm ghost" data-act="releasePet" data-arg="${pet.uid}">放生</button>
-          </div></div>`;
-      }).join('')}
-      <div class="sheet-actions"><button class="btn ghost" data-act="closeSheet">关闭</button></div>`);
-  },
+  pets: () => go('pets'),
 
   setPet: uid => {
-    S.activePet = uid; save(); ACT.pets(); render();
+    S.activePet = uid; save(); render();
     toast('召唤兽已出战', 'good');
   },
 
@@ -1211,7 +1855,7 @@ const ACT = {
     confirmBox('放生召唤兽', `确定放生「${pet.name}」吗？此操作不可撤销。`, '放生', () => {
       S.pets = S.pets.filter(x => x.uid !== uid);
       if (S.activePet === uid) S.activePet = S.pets[0] ? S.pets[0].uid : null;
-      save(); ACT.pets(); render();
+      save(); render();
       toast('已放生');
     });
   },
@@ -1279,10 +1923,21 @@ const ACT = {
     if (info) info.innerHTML = sectDetail(SECTS[id]);
   },
 
+  pickName: name => {
+    createName = name;
+    const box = document.getElementById('nameChips');
+    if (box) box.innerHTML = nameChipsHTML();
+  },
+
+  rollNames: () => {
+    rollNames();
+    const box = document.getElementById('nameChips');
+    if (box) box.innerHTML = nameChipsHTML();
+  },
+
   createChar: () => {
-    const input = document.getElementById('nameInput');
-    let name = (input && input.value || '').trim().slice(0, 8);
-    if (!name) name = pick(['云清和', '沈墨白', '苏轻寒', '顾长风', '叶知秋']);
+    let name = (createName || '').trim().slice(0, 8);
+    if (!name) name = pick(NAME_POOL);
     S = defaultState();
     S.created = true;
     S.player.name = name;
@@ -1329,15 +1984,28 @@ function shopRow(id) {
 
 /* ===================== 创角 ===================== */
 let createSel = 'tiance';
+let createName = '';
+let createNames = [];
+const NAME_POOL = ['云清和', '沈墨白', '苏轻寒', '顾长风', '叶知秋', '白小楼', '谢听雨', '陆离', '江晚吟', '宋别鹤'];
+function rollNames() {
+  createNames = NAME_POOL.slice().sort(() => Math.random() - 0.5).slice(0, 4);
+  if (!createNames.includes(createName)) createName = createNames[0];
+}
+function nameChipsHTML() {
+  return createNames.map(n => `<button class="name-chip ${n === createName ? 'sel' : ''}" data-act="pickName" data-arg="${n}">${n}</button>`).join('')
+    + '<button class="name-chip" data-act="rollNames">↻ 换一批</button>';
+}
 function openCreate() {
   document.getElementById('topbar').classList.add('hidden');
   document.getElementById('tabbar').classList.add('hidden');
   document.getElementById('screen').innerHTML = '';
   createSel = 'tiance';
+  rollNames();
   openSheet(`
     <h3>幻唐仙缘</h3>
     <div class="sub">择一门派 · 入这江湖</div>
-    <div style="margin-bottom:12px"><input id="nameInput" class="input" maxlength="8" placeholder="取个道号（可留空）"></div>
+    <div class="sec-title" style="margin-top:0">道号</div>
+    <div class="name-chips" id="nameChips">${nameChipsHTML()}</div>
     ${Object.keys(SECTS).map(id => {
       const s = SECTS[id];
       return `<button class="sect-card ${id === createSel ? 'sel' : ''}" data-act="pickSect" data-arg="${id}">
@@ -1425,7 +2093,7 @@ function startBattle(mode) {
   }
   B = {
     mode, mapId: map.id, allies, player: pu, pet: petUnit, enemies, round: 1,
-    sel: enemies[0].uid, busy: false, ended: false, auto: autoOn, result: false
+    sel: enemies[0].uid, busy: false, ended: false, auto: autoOn, result: false, speed: 1, skip: false
   };
   renderBattle();
   blog(`遭遇 ${enemies.map(e => e.name).join('、')}！`);
@@ -1451,10 +2119,12 @@ function renderBattle() {
         <ellipse cx="200" cy="620" rx="230" ry="70" fill="#050c0a" opacity=".55"/>
       </svg>
     </div>
+    <div class="b-intro"><span>${B.mode === 'boss' ? '首领来袭' : '遭遇妖兽'}</span></div>
     <div class="b-round">
       <span>第 <b id="bRound">1</b> 回合</span>
-      <span style="color:#6f8176">${B.mode === 'boss' ? '首领战' : '野外遭遇'}</span>
       <button class="auto ${B.auto ? 'on' : ''}" data-act="toggleAuto">自动 ${B.auto ? '◉' : '○'}</button>
+      <button class="auto speed" data-act="cycleSpeed">${B.speed}x</button>
+      <button class="auto" data-act="skipBattle">跳过</button>
     </div>
     <div class="b-log" id="bLog"></div>
     <div class="enemy-area" id="enemyArea">${B.enemies.map(u => unitHTML(u)).join('')}</div>
@@ -1521,11 +2191,17 @@ function damageOf(actor, target, mult, magic) {
   return Math.max(1, Math.round(base));
 }
 
+function bwait(ms) {
+  if (!B) return sleep(ms);
+  if (B.skip) return sleep(6);
+  return sleep(ms / (B.speed || 1));
+}
+
 async function pulse(uid) {
   const n = document.querySelector(`#battle .unit[data-uid="${uid}"]`);
   if (!n) return;
   n.classList.add('act');
-  await sleep(180);
+  await bwait(130);
   n.classList.remove('act');
 }
 
@@ -1536,11 +2212,25 @@ function applyDamage(u, dmg, crit) {
   if (node) {
     node.classList.add('hit');
     setTimeout(() => node.classList.remove('hit'), 320);
+    const av = node.querySelector('.u-av');
+    if (av && B && !B.skip) {
+      const s = document.createElement('div');
+      s.className = 'slash';
+      av.appendChild(s);
+      setTimeout(() => s.remove(), 300);
+    }
     const f = document.createElement('div');
     f.className = 'floater' + (crit ? ' crit' : '');
     f.textContent = (crit ? '暴击 ' : '-') + dmg;
+    const stack = (u._fx = (u._fx || 0) + 1) % 3;
+    f.style.left = (50 + (stack - 1) * 13) + '%';
+    f.style.animationDelay = (stack * 30) + 'ms';
     node.appendChild(f);
-    setTimeout(() => f.remove(), 1000);
+    setTimeout(() => f.remove(), 1100);
+  }
+  if (B && !B.skip) {
+    const stop = performance.now() + 80;
+    while (performance.now() < stop) { /* 命中顿帧 */ }
   }
   if (u.hp <= 0 && !u.dead) { u.dead = true; blog(`${u.name} 力竭倒下`); }
 }
@@ -1565,7 +2255,7 @@ function showCombo(text) {
   if (!el) return;
   const d = document.createElement('div');
   d.className = 'combo';
-  d.textContent = text;
+  d.innerHTML = `<small>绝技</small><b>${text}</b>`;
   el.appendChild(d);
   setTimeout(() => d.remove(), 1000);
 }
@@ -1650,12 +2340,12 @@ async function playerAction(act) {
   if (B.pet && B.pet.hp > 0) order.push({ u: B.pet, act: petAI(B.pet) });
   aliveEnemies().forEach(e => order.push({ u: e, act: enemyAI(e) }));
   order.sort((a, b) => (b.u.spd - a.u.spd) + (Math.random() - 0.5) * 2);
-  await sleep(120);
+  await sleep(B.skip ? 0 : 45);
   for (const it of order) {
     if (!B || B.ended) break;
     if (it.u.hp <= 0) continue;
     await executeAction(it.u, it.act);
-    await sleep(200);
+    await bwait(210);
     if (checkEnd()) break;
   }
   if (!B || B.ended) return;
@@ -1665,7 +2355,7 @@ async function playerAction(act) {
   B.round++;
   B.busy = false;
   paintBattle();
-  if (B.auto) { await sleep(420); autoAction(); }
+  if (B.auto) { await bwait(380); autoAction(); }
   else showCmd();
 }
 
@@ -1851,7 +2541,7 @@ async function executeAction(actor, act) {
     if (Math.random() < 0.7) {
       B.ended = true;
       blog('你且战且退，成功脱离战斗');
-      setTimeout(() => { endBattle(); go('town'); toast('已脱离战斗'); }, 500);
+      setTimeout(() => { endBattle(); go(lastWorldScene || 'town'); toast('已脱离战斗'); }, 500);
     } else {
       blog('逃跑失败，被妖兽拦住了去路');
     }
@@ -2016,8 +2706,23 @@ Object.assign(ACT, {
     toast(B.auto ? '已开启自动战斗' : '已关闭自动战斗');
     if (B.auto && !B.busy && !B.ended) autoAction();
   },
+  cycleSpeed: () => {
+    if (!B) return;
+    B.speed = B.speed === 1 ? 2 : B.speed === 2 ? 3 : 1;
+    const btn = document.querySelector('#battle .speed');
+    if (btn) btn.textContent = B.speed + 'x';
+    toast('战斗速度 ' + B.speed + 'x');
+  },
+  skipBattle: () => {
+    if (!B || B.ended) return;
+    B.skip = true; B.speed = 3; B.auto = true; autoOn = true;
+    const btn = document.querySelector('#battle .speed');
+    if (btn) btn.textContent = '3x';
+    toast('已跳过战斗动画');
+    if (!B.busy) autoAction();
+  },
   battleAgain: () => { const m = B ? B.mode : 'normal'; endBattle(); startBattle(m); },
-  battleTown: () => { endBattle(); go('town'); }
+  battleTown: () => { endBattle(); go(lastWorldScene || 'town'); }
 });
 
 /* 初始位置 + 兜底（防止战斗面板在没有 B 时残留） */
