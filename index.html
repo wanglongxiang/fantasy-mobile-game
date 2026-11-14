@@ -271,9 +271,9 @@ button{font-family:inherit;color:inherit;border:none;background:none;cursor:poin
 .rw{display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:9px;background:rgba(217,176,106,.1);border:1px solid rgba(217,176,106,.28);font-size:11px;color:#f0d9a8}
 
 /* toast */
-#toasts{position:absolute;left:0;right:0;top:34%;z-index:60;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
-.toast{padding:8px 16px;border-radius:20px;background:rgba(8,16,18,.92);border:1px solid rgba(217,176,106,.4);font-size:12px;color:#f0e3c6;
-  box-shadow:0 6px 24px rgba(0,0,0,.6);animation:toastIn .25s ease,toastOut .3s ease 1.5s forwards;max-width:86%;text-align:center}
+#toasts{position:absolute;left:0;right:0;top:24%;z-index:60;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+.toast{padding:9px 17px;border-radius:20px;background:rgba(8,16,18,.94);border:1px solid rgba(230,195,132,.45);font-size:12.5px;color:#f0e3c6;
+  box-shadow:0 8px 26px rgba(0,0,0,.65);animation:toastIn .2s ease;max-width:86%;text-align:center;transition:opacity .18s,transform .18s}
 .toast.bad{border-color:rgba(210,110,100,.55);color:#ffc9bd}
 .toast.good{border-color:rgba(120,210,150,.45);color:#c6f0cf}
 @keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -484,6 +484,616 @@ button:disabled,[aria-disabled="true"]{opacity:.32;filter:grayscale(.75);transfo
 .w-fade{position:absolute;inset:0;background:#050a09;opacity:0;pointer-events:none;z-index:40;transition:opacity .22s ease}
 .w-fade.on{opacity:1}
 
+/* ==========================================================
+   V2 · 仙侠国风 2D 卡通视觉系统
+   ========================================================== */
+:root{
+  --gold:#e6c384;--gold-2:#f8e7bb;--gold-dk:#9a7639;
+  --jade:#2c4a41;--jade-dk:#0f1d1a;--jade-2:#1a2f29;
+  --paper:#f0e6cf;--paper-2:#d8c9a8;--ink:#1a2622;
+  --text:#ece1c8;--text-dim:#a9b6a6;--text-mute:#7f8f83;
+  --hp:#cf4b52;--hp-2:#ff8a7e;--mp:#4b93d8;--exp:#ecc264;
+  --card:linear-gradient(165deg,rgba(38,60,52,.88),rgba(14,27,24,.94));
+  --card-line:rgba(230,195,132,.24);
+  --r-s:10px;--r-m:14px;--r-l:18px;
+  --paper-tex:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  --cloud:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg fill='none' stroke='%23e6c384' stroke-width='1.4' stroke-linecap='round' opacity='.55'%3E%3Cpath d='M4 15c0-4 5-6 8-3 2-4 8-4 9 1 4-1 6 2 5 5'/%3E%3Cpath d='M7 22c5-3 11-2 15 1'/%3E%3Cpath d='M40 29c0 4-5 6-8 3-2 4-8 4-9-1-4 1-6-2-5-5'/%3E%3C/g%3E%3C/svg%3E");
+}
+body{
+  background:
+    radial-gradient(90% 60% at 50% 0%,#1d3530,#080f0d 72%),
+    radial-gradient(70% 40% at 50% 100%,rgba(120,92,44,.22),transparent 70%);
+  color:var(--text);
+}
+#app{
+  background:
+    radial-gradient(120% 55% at 50% -10%,rgba(84,124,108,.42),transparent 62%),
+    radial-gradient(90% 40% at 50% 108%,rgba(126,98,52,.28),transparent 66%),
+    linear-gradient(180deg,#0c1714 0%,#101e1a 38%,#0b1512 100%);
+}
+#app::before{
+  opacity:.5;background-image:var(--paper-tex);background-size:140px 140px;mask-image:none;
+  mix-blend-mode:overlay;
+}
+#app::after{box-shadow:inset 0 0 80px rgba(0,0,0,.72),inset 0 0 0 1px rgba(230,195,132,.06)}
+
+/* ---------- 顶栏 ---------- */
+#topbar{
+  padding:calc(7px + env(safe-area-inset-top)) 12px 8px;gap:10px;
+  background:
+    linear-gradient(180deg,rgba(9,19,16,.96),rgba(11,24,20,.82) 66%,rgba(11,24,20,.35));
+  border-bottom:1px solid rgba(230,195,132,.18);
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+}
+#topbar::after{
+  content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(230,195,132,.55),transparent);
+}
+.tb-badge{
+  width:48px;height:48px;border-radius:14px;overflow:hidden;position:relative;
+  background:radial-gradient(circle at 50% 20%,#39594d,#101d1a 75%);
+  border:2px solid rgba(230,195,132,.7);
+  box-shadow:0 0 0 3px rgba(12,24,20,.9),0 0 18px rgba(230,195,132,.22),inset 0 0 10px rgba(0,0,0,.5);
+}
+.tb-badge img{width:100%;height:100%;object-fit:cover;object-position:50% 8%;transform:scale(1.5);transform-origin:50% 18%}
+.tb-badge .tb-cap{
+  position:absolute;right:-2px;bottom:-2px;min-width:18px;height:16px;padding:0 3px;border-radius:8px;
+  display:grid;place-items:center;font-size:10px;font-weight:700;color:#20180a;
+  background:linear-gradient(180deg,#f6e2af,#c9a25e);border:1px solid #f8e7bb;
+}
+.tb-main{flex:1;min-width:0}
+.tb-row{gap:6px;margin-bottom:5px}
+.tb-name{font-size:15px;letter-spacing:1px;color:#f7ecd6;text-shadow:0 1px 3px rgba(0,0,0,.7);max-width:104px}
+.tb-lv{
+  font-family:"Songti SC","STSong",serif;font-size:11px;letter-spacing:.5px;padding:1px 7px;border-radius:6px;
+  color:#241a08;background:linear-gradient(180deg,#f8e7bb,#c9a25e);border:1px solid rgba(255,245,215,.7);
+  box-shadow:0 1px 4px rgba(0,0,0,.4);
+}
+.tb-sect{font-size:10.5px;color:#c3d2bd;background:rgba(255,255,255,.05);border:1px solid rgba(230,195,132,.28);padding:1px 7px;border-radius:6px}
+.bar{height:11px;border-radius:7px;background:rgba(4,10,8,.8);border:1px solid rgba(0,0,0,.65);box-shadow:inset 0 1px 3px rgba(0,0,0,.8)}
+.bar>i{position:relative;border-radius:6px}
+.bar>i::after{
+  content:"";position:absolute;inset:0;border-radius:6px;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 24%,rgba(0,0,0,.32) 24% 25%),
+    linear-gradient(180deg,rgba(255,255,255,.42),transparent 52%,rgba(0,0,0,.18));
+}
+.bar>span{font-size:9px;line-height:11px;letter-spacing:.4px;color:#fff8e6;text-shadow:0 1px 2px rgba(0,0,0,.9)}
+.bar.hp{height:12px}.bar.hp>i{background:linear-gradient(90deg,#8d2b33,#dc5a5c 62%,#ff9a86)}
+.bar.mp{height:9px}.bar.mp>i{background:linear-gradient(90deg,#27517d,#4f96db 70%,#8ed0ff)}
+.bar.mp>span{font-size:8px;line-height:9px}
+.bar+.bar{margin-top:3px}
+.tb-gold{
+  flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px;
+  font-size:12.5px;font-weight:600;color:var(--gold-2);line-height:1.15;letter-spacing:.4px;
+}
+.tb-gold b{display:flex;align-items:center;gap:3px;font-weight:600}
+.tb-gold small{font-size:9px;color:#93a396;font-weight:400}
+#expbar{height:3px;background:rgba(0,0,0,.5)}
+#expbar>i{background:linear-gradient(90deg,#8d6b2c,#f8e7bb);box-shadow:0 0 8px rgba(248,231,187,.55)}
+
+/* ---------- 底栏 ---------- */
+#tabbar{
+  padding:5px 8px calc(7px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(10,20,17,.72),rgba(8,16,14,.985) 45%);
+  border-top:1px solid rgba(230,195,132,.22);
+  box-shadow:0 -8px 26px rgba(0,0,0,.45);
+}
+.tab{
+  min-height:56px;font-size:11px;letter-spacing:1px;color:#8b9c8e;border-radius:13px;gap:3px;
+}
+.tab i{font-size:0;display:grid;place-items:center;filter:none}
+.tab svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.tab.on{color:#f8e7bb;background:radial-gradient(circle at 50% 120%,rgba(230,195,132,.22),transparent 70%)}
+.tab.on svg{filter:drop-shadow(0 0 7px rgba(248,231,187,.6))}
+.tab.on::after{bottom:3px;width:22px;height:2px;background:linear-gradient(90deg,transparent,#f8e7bb,transparent);box-shadow:0 0 8px rgba(248,231,187,.8)}
+.tab .dot{top:8px;right:calc(50% - 18px)}
+.tab:active{background:rgba(230,195,132,.08)}
+
+/* ---------- 通用标题 / 文本 ---------- */
+.sec-title{font-size:15px;letter-spacing:2px;color:#f0dfb6;margin:18px 0 10px;gap:9px}
+.sec-title::before{width:3px;height:15px;border-radius:2px;background:linear-gradient(180deg,#f8e7bb,#9a7639);box-shadow:0 0 8px rgba(230,195,132,.5)}
+.sec-title small{font-size:11px;color:#8b9c8e}
+.pagebar{padding:4px 0 12px;gap:9px}
+.pagebar .ptitle{font-size:22px;letter-spacing:5px;color:#f7ecd6;text-shadow:0 2px 8px rgba(0,0,0,.55)}
+.pagebar .pmuted{font-size:12px;color:#9aab9c}
+.empty{font-size:13px;line-height:1.9;color:#8b9c8e;padding:24px 10px}
+
+/* ---------- 卡片 / 列表 ---------- */
+.row{
+  padding:12px;border-radius:var(--r-m);margin-bottom:9px;
+  background:linear-gradient(160deg,rgba(40,62,54,.9),rgba(15,28,24,.95));
+  border:1px solid var(--card-line);
+  box-shadow:0 6px 16px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.05);
+  position:relative;overflow:hidden;
+}
+.row::after{content:"";position:absolute;inset:0;background-image:var(--paper-tex);opacity:.16;pointer-events:none;mix-blend-mode:overlay}
+.row:active{transform:scale(.985);filter:brightness(1.06)}
+.row .r-ico{
+  width:44px;height:44px;border-radius:12px;font-size:23px;
+  background:radial-gradient(circle at 38% 26%,rgba(255,255,255,.18),rgba(8,18,15,.7) 72%);
+  border:1px solid rgba(230,195,132,.32);
+  box-shadow:inset 0 0 10px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.4);
+}
+.row .r-name{font-size:14.5px;color:#f3e8cf;letter-spacing:.4px;gap:7px}
+.row .r-desc{font-size:12.5px;color:#a2b1a3;line-height:1.5;margin-top:3px}
+.row .r-right{flex:none}
+.tag{font-size:10px;padding:2px 7px;border-radius:6px;border:1px solid rgba(230,195,132,.4);color:#e6c384;letter-spacing:.4px}
+.tag.on{background:rgba(230,195,132,.18);color:#f8e7bb;border-color:rgba(248,231,187,.6)}
+.tag.off{color:#7f8f83;border-color:rgba(255,255,255,.12)}
+.pbar{height:7px;border-radius:4px;background:rgba(3,9,7,.75);margin-top:7px;border:1px solid rgba(0,0,0,.5)}
+.pbar>i{background:linear-gradient(90deg,#8d6b2c,#f0d49a);box-shadow:0 0 8px rgba(240,212,154,.4);border-radius:4px}
+.grid2{gap:10px}
+.tile{
+  min-height:76px;padding:12px 11px;border-radius:var(--r-m);
+  background:linear-gradient(160deg,rgba(42,66,56,.82),rgba(13,26,22,.92));
+  border:1px solid var(--card-line);
+  box-shadow:0 6px 16px rgba(0,0,0,.26),inset 0 1px 0 rgba(255,255,255,.05);
+  gap:10px;overflow:hidden;
+}
+.tile .t-ico{
+  width:40px;height:40px;border-radius:11px;font-size:22px;
+  background:radial-gradient(circle at 36% 26%,rgba(240,212,154,.26),rgba(8,17,14,.72) 74%);
+  border:1px solid rgba(230,195,132,.3);
+}
+.tile .t-name{font-size:15px;color:#f4e9d1}
+.tile .t-desc{font-size:12px;color:#9dae9f}
+.tile:active{box-shadow:0 0 20px rgba(230,195,132,.3)}
+
+/* ---------- 按钮 ---------- */
+.btn{
+  min-height:50px;border-radius:13px;font-size:15px;letter-spacing:1.5px;
+  background:linear-gradient(180deg,rgba(62,92,80,.96),rgba(21,38,33,.98));
+  border:1px solid rgba(230,195,132,.45);
+  box-shadow:0 5px 16px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.14);
+  color:#f4e9d1;position:relative;overflow:hidden;
+}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 46%);opacity:.5;pointer-events:none}
+.btn.gold{
+  background:linear-gradient(180deg,#f4dda6,#cfa764 46%,#a67c3f);color:#2a1f0a;
+  border-color:#fbeecb;text-shadow:0 1px 0 rgba(255,255,255,.45);
+  box-shadow:0 6px 18px rgba(0,0,0,.42),0 0 18px rgba(230,195,132,.22),inset 0 1px 0 rgba(255,255,255,.6);
+}
+.btn.ghost{background:rgba(255,255,255,.045);border-color:rgba(230,195,132,.24);color:#c6d2c4}
+.btn.sm{min-height:44px;font-size:13px;border-radius:11px;letter-spacing:.6px}
+.btn.danger{background:linear-gradient(180deg,rgba(126,54,52,.9),rgba(58,22,22,.96));border-color:rgba(210,110,100,.5)}
+.btn:disabled{opacity:.38}
+
+/* ---------- 场景卡（秘境） ---------- */
+.scene{height:180px;border-radius:var(--r-l);border:1px solid rgba(230,195,132,.34);box-shadow:0 14px 30px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.05)}
+.scene .veil{background:linear-gradient(180deg,transparent 38%,rgba(5,12,10,.9))}
+.scene .st-name{font-size:27px;letter-spacing:6px;text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 30px rgba(230,195,132,.2)}
+.scene .st-sub{font-size:12px;color:#d6c39a;letter-spacing:2px}
+.scene .st-tag{top:12px;right:12px;font-size:11px;padding:4px 10px;border-radius:20px;background:rgba(6,14,11,.66);border:1px solid rgba(230,195,132,.4);color:#f8e7bb;backdrop-filter:blur(3px)}
+.town-scene{height:262px}
+.hotspot{
+  width:64px;height:64px;border-radius:16px;
+  background:linear-gradient(170deg,rgba(52,78,66,.95),rgba(9,19,16,.95));
+  border:1px solid rgba(230,195,132,.55);
+  box-shadow:0 8px 18px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.18);
+  font-size:24px;line-height:1;
+}
+.hotspot b{font-size:11px;color:#f8e7bb;margin-top:2px}
+.hotspot:active{transform:translateY(2px) scale(.94)}
+.hotspot-label{font-size:10px;color:rgba(246,235,210,.8)}
+
+/* ---------- 弹层：卷轴 ---------- */
+#overlay{background:rgba(3,8,6,.78);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.sheet{
+  border-radius:20px 20px 0 0;border:1px solid rgba(230,195,132,.4);border-bottom:none;
+  background:
+    linear-gradient(180deg,rgba(44,66,56,.97),rgba(12,24,20,.99) 62%),
+    var(--paper-tex);
+  background-blend-mode:normal,overlay;
+  box-shadow:0 -18px 60px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.05);
+  padding:22px 16px calc(20px + env(safe-area-inset-bottom));
+  position:relative;
+}
+.sheet::before{
+  content:"";position:absolute;left:14px;right:14px;top:7px;height:5px;border-radius:3px;
+  background:linear-gradient(90deg,transparent,#a67c3f,#f8e7bb,#a67c3f,transparent);
+  opacity:.75;box-shadow:0 0 10px rgba(230,195,132,.4);
+}
+.sheet::after{
+  content:"";position:absolute;inset:14px 10px 10px;border-radius:14px;pointer-events:none;
+  background-image:var(--cloud),var(--cloud),var(--cloud),var(--cloud);
+  background-repeat:no-repeat;
+  background-position:left top,right top,left bottom,right bottom;
+  background-size:40px 40px;opacity:.5;
+}
+#overlay.center{padding:18px}
+#overlay.center .sheet{
+  border-radius:var(--r-l);border-bottom:1px solid rgba(230,195,132,.4);
+  max-width:352px;max-height:88%;overflow-y:auto;overscroll-behavior:contain;
+}
+.gender-inline{margin-left:auto;display:flex;gap:6px}
+.name-chip.gender{min-height:32px;padding:0 11px;font-size:12px;border-radius:9px}
+.sect-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.sect-card.compact{padding:8px;flex-direction:column;align-items:center;gap:3px;text-align:center;margin:0}
+.sect-card.compact .sc-ico{width:34px;height:34px;font-size:18px}
+.sect-card.compact .sc-name{font-size:14px;letter-spacing:2px}
+.sect-card.compact .sc-motto{font-size:9.5px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.sheet h3{font-size:21px;letter-spacing:4px;color:#f8e7bb;margin-bottom:5px;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.sheet .sub{font-size:11.5px;color:#a3b3a4;letter-spacing:1.5px;margin-bottom:14px}
+.sheet .sheet-actions{margin-top:16px;gap:10px}
+.sheet .sheet-actions .btn{flex:1}
+.sheet .sheet-actions.sticky{
+  position:sticky;bottom:-12px;z-index:3;margin:12px -4px -6px;padding:12px 4px 8px;
+  background:linear-gradient(180deg,rgba(14,26,22,0),rgba(12,24,20,.97) 42%);
+}
+.sheet .close-x{position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:50%;color:#c9d6c8;font-size:17px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
+#overlay.center .sheet::-webkit-scrollbar{width:0}
+@keyframes sheetUp{from{transform:translateY(102%)}to{transform:translateY(0)}}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+#overlay{animation:fadeIn .14s ease}
+#overlay .sheet{animation:sheetUp .18s cubic-bezier(.2,.9,.3,1)}
+#overlay.center .sheet{animation:pop .16s cubic-bezier(.2,.9,.3,1)}
+
+/* ---------- 创角 ---------- */
+.sect-card{
+  padding:12px;border-radius:var(--r-m);margin-bottom:9px;gap:12px;
+  background:linear-gradient(160deg,rgba(40,62,54,.9),rgba(14,26,22,.96));
+  border:1px solid rgba(230,195,132,.2);
+}
+.sect-card.sel{border-color:rgba(248,231,187,.9);background:linear-gradient(160deg,rgba(66,96,80,.95),rgba(18,32,27,.98));box-shadow:0 0 20px rgba(230,195,132,.2),inset 0 0 0 1px rgba(248,231,187,.25)}
+.sect-card .sc-ico{width:46px;height:46px;border-radius:50%;font-size:24px;background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.22),rgba(0,0,0,.42));border:1px solid rgba(230,195,132,.4)}
+.sect-card .sc-name{font-size:15px;letter-spacing:3px;color:#f7ecd6}
+.sect-card .sc-motto{font-size:10.5px;color:#d3ba85;letter-spacing:1px;margin:2px 0 4px}
+.sect-card .sc-desc{font-size:12px;color:#a2b1a3;line-height:1.55}
+.name-chips{gap:8px;margin-bottom:8px}
+.name-chip{min-height:40px;padding:0 13px;border-radius:10px;border:1px solid rgba(230,195,132,.22);background:rgba(255,255,255,.045);color:#e8dcc2;font-size:13.5px}
+.name-chip.sel{border-color:rgba(248,231,187,.9);background:rgba(230,195,132,.16);color:#fff5dc;box-shadow:0 0 14px rgba(230,195,132,.2)}
+.input{min-height:48px;border-radius:11px;font-size:16px;border:1px solid rgba(230,195,132,.35)}
+
+/* ---------- 角色页 ---------- */
+.hero-head{padding:16px;border-radius:var(--r-l);border:1px solid rgba(230,195,132,.3);background:linear-gradient(150deg,rgba(52,80,66,.7),rgba(12,24,20,.94));gap:14px;overflow:hidden}
+.hero-head::after{width:170px;height:170px;right:-40px;top:-60px;background:radial-gradient(circle,rgba(240,212,154,.18),transparent 62%)}
+.hero-av{width:82px;height:96px;border-radius:14px;overflow:hidden;border:2px solid rgba(230,195,132,.7);background:radial-gradient(circle at 50% 26%,#3a5c4c,#0e1c18 76%);box-shadow:0 0 22px rgba(230,195,132,.2),inset 0 0 14px rgba(0,0,0,.5)}
+.hero-av img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(1.25);transform-origin:50% 20%}
+.hero-info h2{font-size:22px;letter-spacing:3px}
+.hero-info p{font-size:12px;color:#a9b8ab;margin-top:4px}
+.stat-grid{gap:8px}
+.stat{padding:10px 12px;border-radius:11px;background:rgba(255,255,255,.045);border:1px solid rgba(230,195,132,.16);font-size:12.5px;color:#9faea2}
+.stat b{font-size:14px;color:#f3e8cf;font-variant-numeric:tabular-nums}
+.equip-row{padding:11px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid rgba(230,195,132,.16);font-size:12.5px;color:#9dae9f;margin-bottom:8px}
+.equip-row .eq-name{font-size:13.5px;color:#eee2c8}
+.skill-chip{padding:7px 11px;border-radius:9px;font-size:12.5px;border:1px solid rgba(230,195,132,.28);background:rgba(230,195,132,.1);color:#f0dfb6;gap:6px}
+
+/* ---------- 世界 ---------- */
+#screen.world-screen{padding:0}
+.world{background:#0d1a16}
+.w-entity{
+  transform:translate(-50%,-88%);gap:3px;z-index:5;
+  filter:drop-shadow(0 6px 6px rgba(0,0,0,.45));
+}
+.w-entity .spr{height:88px;width:auto;display:block;image-rendering:auto;pointer-events:none}
+.w-entity .spr.mon{height:74px}
+.w-entity .spr.chest{height:52px}
+.w-entity .nm{
+  font-size:11px;padding:2px 9px;border-radius:10px;
+  background:linear-gradient(180deg,rgba(12,24,20,.92),rgba(8,16,13,.9));
+  border:1px solid rgba(230,195,132,.36);color:#f4e9d1;letter-spacing:.5px;
+  box-shadow:0 3px 8px rgba(0,0,0,.5);white-space:nowrap;
+}
+.w-npc .nm{color:#f8e7bb}
+.w-mon .nm{color:#f3c2b4;border-color:rgba(220,110,90,.45)}
+.w-entity .mark{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;
+  color:#241a08;background:linear-gradient(180deg,#f8e7bb,#c9a25e);border:1px solid #fff3d4;
+  box-shadow:0 2px 8px rgba(0,0,0,.5);animation:markBob 1.8s ease-in-out infinite;
+}
+@keyframes markBob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}
+.w-mon .mark{background:linear-gradient(180deg,#f0a08c,#c25a4a);color:#fff3e2;border-color:#ffd9cf}
+.w-npc .spr{animation:npcBreath 3.4s ease-in-out infinite}
+@keyframes npcBreath{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.w-entity:active{transform:translate(-50%,-88%) scale(.95)!important}
+.hero-lock{transform:translate(-50%,-62%);gap:3px;z-index:8}
+.hero-lock .h-shadow{width:64px;height:15px;bottom:14px;background:rgba(0,0,0,.55);filter:blur(5px)}
+.hero-lock .h-spr{height:104px;width:auto;filter:drop-shadow(0 8px 7px rgba(0,0,0,.55));transition:transform .12s}
+.hero-lock .h-nm{font-size:11px;padding:2px 9px;border-radius:9px;background:rgba(8,16,13,.86);border:1px solid rgba(230,195,132,.4);color:#f8e7bb;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.hero-lock.walk .h-spr{animation:heroBob .42s ease-in-out infinite alternate}
+@keyframes heroBob{from{transform:translateY(0) rotate(-1.5deg)}to{transform:translateY(-6px) rotate(1.5deg)}}
+.joy{
+  left:16px;bottom:calc(12px + env(safe-area-inset-bottom));width:128px;height:128px;z-index:22;
+  background:
+    radial-gradient(circle at 50% 50%,rgba(230,195,132,.12),rgba(4,12,9,.42) 62%,rgba(4,10,8,.2) 70%),
+    radial-gradient(circle,rgba(255,255,255,.06),rgba(0,0,0,.28) 76%);
+  border:1.5px solid rgba(230,195,132,.45);
+  box-shadow:inset 0 0 26px rgba(0,0,0,.55),0 6px 18px rgba(0,0,0,.4);
+}
+.joy::before{
+  content:"";position:absolute;inset:9px;border-radius:50%;
+  border:1px dashed rgba(230,195,132,.28);
+}
+.joy .knob{
+  width:58px;height:58px;margin:-29px 0 0 -29px;
+  background:radial-gradient(circle at 36% 26%,#fff6da,#e0be80 46%,#9a7639 100%);
+  border:1.5px solid #fff3d4;
+  box-shadow:0 6px 16px rgba(0,0,0,.6),inset 0 2px 4px rgba(255,255,255,.7);
+}
+.joy .joy-hint{bottom:5px;font-size:9px;color:rgba(240,225,195,.5);letter-spacing:2px}
+.world-top{left:10px;right:10px;top:8px;gap:7px;flex-direction:column;align-items:stretch}
+.world-top-row{display:flex;gap:7px;align-items:flex-start}
+.w-scene{
+  padding:7px 12px;border-radius:12px;gap:1px;
+  background:linear-gradient(180deg,rgba(14,28,23,.9),rgba(8,17,14,.82));
+  border:1px solid rgba(230,195,132,.34);backdrop-filter:blur(6px);
+  box-shadow:0 5px 14px rgba(0,0,0,.4);
+}
+.w-scene b{font-family:"Songti SC",serif;font-size:15px;letter-spacing:2px;color:#f8e7bb}
+.w-scene span{font-size:10px;color:#9fb0a1;letter-spacing:1px}
+.w-quest{
+  flex:1;padding:7px 9px;border-radius:12px;gap:8px;
+  background:linear-gradient(180deg,rgba(14,28,23,.9),rgba(8,17,14,.82));
+  border:1px solid rgba(230,195,132,.26);backdrop-filter:blur(6px);
+  box-shadow:0 5px 14px rgba(0,0,0,.4);min-width:0;
+}
+.w-quest .qt b{font-size:12.5px;color:#f2e3bd}
+.w-quest .qt span{font-size:10.5px;color:#97a899;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:168px}
+.w-quest .qt{min-width:0}
+.w-quest button{
+  min-height:44px;min-width:56px;border-radius:10px;font-size:12.5px;
+  background:linear-gradient(180deg,#f4dda6,#cfa764);color:#241a08;font-weight:700;
+  border:1px solid #fbeecb;box-shadow:0 3px 10px rgba(0,0,0,.35);
+}
+.w-act{
+  right:16px;bottom:calc(154px + env(safe-area-inset-bottom));min-height:52px;padding:0 20px;border-radius:26px;
+  border:1px solid rgba(248,231,187,.7);
+  background:linear-gradient(180deg,rgba(72,104,84,.98),rgba(24,42,34,.98));
+  box-shadow:0 8px 24px rgba(0,0,0,.55),0 0 18px rgba(230,195,132,.25);
+  font-size:14px;color:#f8e7bb;letter-spacing:.5px;
+}
+.w-tip{
+  position:absolute;right:14px;bottom:calc(96px + env(safe-area-inset-bottom));z-index:21;
+  font-size:10.5px;color:rgba(240,230,208,.66);letter-spacing:1px;text-align:right;pointer-events:none;
+  text-shadow:0 1px 3px #000;
+}
+
+/* ---------- 战斗 ---------- */
+#battle{background:linear-gradient(180deg,#0a1714,#16261f 58%,#0a1310);animation:fadeIn .2s ease}
+#battle .b-art{opacity:1}
+#battle .after{position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 34% at 50% 48%,rgba(255,236,190,.08),transparent 70%)}
+#battle .b-round{
+  padding:calc(7px + env(safe-area-inset-top)) 12px 4px;font-size:11px;color:#b9c6b6;gap:7px;
+}
+#battle .b-round .rlabel{display:flex;align-items:center;gap:5px;font-size:11.5px;color:#d8c7a0}
+#battle .b-round b{color:#f8e7bb;font-family:"Songti SC",serif;font-size:15px}
+#battle .b-round .auto{
+  min-height:40px;min-width:auto;padding:0 11px;border-radius:12px;font-size:11px;
+  border:1px solid rgba(230,195,132,.3);background:rgba(255,255,255,.05);color:#c3d1c2;
+}
+#battle .b-round .auto.on{background:linear-gradient(180deg,#f4dda6,#cfa764);color:#241a08;font-weight:700;border-color:#fbeecb}
+#battle .b-log{
+  height:26px;padding:0 14px;font-size:11.5px;color:#cbd7c8;letter-spacing:.3px;
+  display:flex;align-items:center;
+}
+#battle .b-log span{color:#f8e7bb}
+.enemy-area{flex:1;min-height:0;align-items:flex-end;padding:0 8px 6px;gap:2px}
+.unit{
+  width:104px;gap:4px;padding:5px 2px;border-radius:14px;
+}
+.unit .u-art{
+  width:100%;height:96px;display:grid;place-items:end center;position:relative;
+}
+.unit .u-art img{height:96px;width:auto;max-width:104px;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(0,0,0,.5));transition:transform .15s}
+.unit.enemy .u-art img{height:84px}
+.unit .u-shadow{position:absolute;bottom:-2px;width:66px;height:14px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.62),rgba(0,0,0,0) 72%);filter:blur(2px)}
+.unit .u-art .spr{width:116px;height:106px}
+.unit.enemy .u-art .spr{width:108px;height:98px}
+.unit .u-art img{height:104px}
+.unit .u-art .spr svg{width:100%;height:100%}
+.row .r-ico svg{width:100%;height:100%;display:block}
+.unit .u-name{
+  padding:2px 9px;border-radius:9px;font-size:10.5px;color:#f2e4c4;gap:4px;max-width:100px;
+  background:rgba(6,14,11,.78);border:1px solid rgba(230,195,132,.3);box-shadow:0 2px 7px rgba(0,0,0,.45);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.unit .u-name em{font-size:9px;color:#e8c88a;font-style:normal;letter-spacing:.2px}
+.unit .u-hp{
+  width:96px;height:11px;border-radius:6px;background:rgba(3,8,6,.86);
+  border:1px solid rgba(230,195,132,.34);
+  box-shadow:0 0 0 1px rgba(0,0,0,.65),inset 0 1px 3px #000;overflow:hidden;position:relative;
+}
+.unit .u-hp>i{height:100%;background:linear-gradient(180deg,#e8695f,#c03a43 55%,#8d2b33);border-radius:5px;transition:width .3s}
+.unit .u-hp.ally>i{background:linear-gradient(180deg,#7bdda0,#3f9c63 60%,#276b45)}
+.unit .u-hp::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0) 46%);
+}
+.unit .u-hp::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+  background:repeating-linear-gradient(90deg,transparent 0 calc(20% - 1.5px),rgba(0,0,0,.55) calc(20% - 1.5px) 20%);
+}
+.unit .u-num{font-size:9.5px;color:#cfdccf;letter-spacing:.2px;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px #000}
+.unit .u-stat{display:flex;gap:3px;min-height:15px}
+.unit .st-ico{
+  width:15px;height:15px;border-radius:4px;display:grid;place-items:center;font-size:9px;
+  border:1px solid rgba(255,255,255,.18);background:rgba(0,0,0,.4);
+}
+.st-ico.poison{background:rgba(86,150,74,.42);border-color:#8fd07a}
+.st-ico.burn{background:rgba(180,84,40,.45);border-color:#ffa268}
+.st-ico.stun{background:rgba(190,168,60,.42);border-color:#ffe07a}
+.st-ico.shield{background:rgba(70,120,180,.45);border-color:#9cd0ff}
+.unit.sel{background:radial-gradient(circle at 50% 60%,rgba(230,195,132,.16),transparent 70%);box-shadow:none}
+.unit.sel::before{content:"▼";top:-4px;color:#f8e7bb;text-shadow:0 0 10px rgba(248,231,187,.9)}
+.unit.sel .u-art img{filter:drop-shadow(0 0 10px rgba(248,231,187,.65)) drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+.unit.act .u-art img{transform:translateY(-8px) scale(1.08)}
+.unit.hit .u-art img{animation:hitFlash .22s ease}
+@keyframes hitFlash{0%{filter:brightness(2.6) saturate(.2) drop-shadow(0 0 14px #fff)}100%{filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}}
+.unit.hit .u-art::after{
+  content:"";position:absolute;left:50%;top:40%;width:88px;height:88px;pointer-events:none;z-index:3;
+  transform:translate(-50%,-50%);background:url("assets/fx/hit.png") center/contain no-repeat;
+  mix-blend-mode:screen;animation:fxBurst .3s ease-out both;
+}
+@keyframes fxBurst{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(0deg)}
+  30%{opacity:1;transform:translate(-50%,-50%) scale(1.05) rotate(8deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.5) rotate(24deg)}
+}
+.unit.dead{opacity:.22;filter:grayscale(1)}
+.unit.dead .u-art img{transform:translateY(6px) rotate(8deg)}
+.vs-line{padding:2px 0 4px;font-size:9px;letter-spacing:5px;color:#7f9187}
+.vs-line::before,.vs-line::after{width:44px;background:linear-gradient(90deg,transparent,rgba(230,195,132,.3),transparent)}
+.ally-area{gap:26px;padding:0 8px 4px}
+.cmd-wrap{
+  padding:8px 12px calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(8,16,14,.1),rgba(6,13,11,.94) 34%);
+  border-top:1px solid rgba(230,195,132,.18);
+  box-shadow:0 -10px 30px rgba(0,0,0,.35);
+}
+.cmd-grid{grid-template-columns:repeat(3,1fr);gap:9px}
+.cmd{
+  min-height:62px;border-radius:16px;font-size:12.5px;gap:3px;letter-spacing:.6px;
+  background:linear-gradient(170deg,rgba(54,84,70,.95),rgba(16,30,25,.98));
+  border:1px solid rgba(230,195,132,.32);
+  box-shadow:0 5px 14px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.09);
+}
+.cmd i{font-size:0;display:grid;place-items:center}
+.cmd svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.cmd small{font-size:9.5px;color:#93a596}
+.cmd.run{color:#e2c0b8;border-color:rgba(200,120,110,.35)}
+.cmd:active{filter:brightness(1.2)}
+.turn-wait{display:flex;align-items:center;justify-content:center;gap:9px;height:52px;color:#c9b98e;font-size:12.5px;letter-spacing:3px}
+.turn-wait i{width:7px;height:7px;border-radius:50%;background:#f0d49a;box-shadow:0 0 10px rgba(240,212,154,.8);animation:waitPulse .9s ease-in-out infinite}
+@keyframes waitPulse{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.cmd-wrap{position:relative}
+.panel{
+  position:absolute;left:12px;right:12px;bottom:calc(100% + 8px);max-height:216px;gap:8px;z-index:9;
+  padding:10px;border-radius:16px;border:1px solid rgba(230,195,132,.35);
+  background:linear-gradient(170deg,rgba(30,48,40,.985),rgba(9,19,16,.99));
+  box-shadow:0 12px 34px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);
+  animation:pop .14s ease;
+}
+.opt{
+  min-height:52px;padding:8px 10px;border-radius:12px;font-size:12.5px;
+  background:linear-gradient(160deg,rgba(48,74,62,.92),rgba(16,30,25,.96));
+  border:1px solid rgba(230,195,132,.28);color:#ece0c8;
+}
+.opt .oi{font-size:0;display:grid;place-items:center}
+.opt .oi svg{width:20px;height:20px;stroke:#f8e7bb;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.opt .ocost{color:#8fc3e8}
+.opt .ocost.mp{color:#9ec9ec}
+.opt.back{min-height:44px;background:rgba(255,255,255,.05);color:#a9b8aa;border-color:rgba(255,255,255,.14)}
+.floater{
+  top:30px;z-index:6;
+  font-family:"Songti SC",serif;font-size:24px;font-weight:700;color:#fff1cc;
+  -webkit-text-stroke:.7px rgba(40,14,6,.85);
+  text-shadow:0 2px 6px #000,0 0 16px rgba(255,150,80,.75);
+}
+.floater.crit{font-size:34px;color:#ffcf7a;text-shadow:0 3px 8px #000,0 0 26px rgba(255,160,60,1)}
+.floater.heal{color:#9df0b4;text-shadow:0 2px 6px #000,0 0 16px rgba(90,240,150,.7)}
+.combo{
+  top:34%;padding:12px 0;background:linear-gradient(90deg,transparent,rgba(10,20,16,.92) 18%,rgba(10,20,16,.92) 82%,transparent);
+}
+.combo b{font-size:30px;letter-spacing:9px;color:#ffe9bd;text-shadow:0 0 26px rgba(255,190,90,.9),0 3px 12px #000}
+.combo small{background:linear-gradient(180deg,#f8e7bb,#c9a25e);color:#231a08;font-size:10px;letter-spacing:2px}
+.b-intro{background:radial-gradient(circle,rgba(6,13,11,.62),transparent 64%)}
+.b-intro span{font-size:36px;letter-spacing:14px;color:#f8e7bb;text-shadow:0 0 34px rgba(240,196,120,.8),0 4px 16px #000}
+.result .rttl{font-size:33px;letter-spacing:9px;color:#f8e7bb;text-shadow:0 0 26px rgba(240,196,120,.6)}
+.result .rsub{font-size:11.5px;color:#9aab9c;letter-spacing:2px}
+.rw{padding:7px 11px;border-radius:10px;font-size:12px;border:1px solid rgba(230,195,132,.32);background:rgba(230,195,132,.1);color:#f4e4c0}
+.reward-grid{gap:9px;margin:16px 0 4px}
+
+/* 状态提示小字 */
+.hintline{font-size:11px;color:#8b9c8e;line-height:1.6}
+.qname{font-size:10px;padding:0 4px;border-radius:4px;border:1px solid currentColor;opacity:.95}
+.r-right svg,.pmuted svg,.empty svg,.hintline svg,.tb-sect svg{fill:none;stroke:currentColor;stroke-width:1.8;width:16px;height:16px;vertical-align:-3px;stroke-linecap:round;stroke-linejoin:round}
+.row .r-ico svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.btn svg,.hotspot svg,.equip-row svg,.tb-gold svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-4px}
+.btn svg{margin-right:2px}
+.tb-gold svg{width:15px;height:15px;margin-right:2px;vertical-align:-3px;color:#f0d49a}
+.hotspot svg{width:26px;height:26px;stroke:#f8e7bb}
+.equip-row svg{width:16px;height:16px;color:#e6c384}
+
+/* 世界实体素材 */
+.spr{display:block;line-height:0}
+.w-entity .spr{width:82px;height:82px}
+.w-entity .spr.mon{width:86px;height:86px}
+.w-entity .spr.obj{width:58px;height:58px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(170deg,rgba(52,78,66,.95),rgba(9,19,16,.95));border:1px solid rgba(230,195,132,.5);box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.w-entity .spr.obj svg{width:30px;height:30px}
+.w-entity .spr.chest svg,.w-entity .spr.portal svg{width:100%;height:100%;stroke:#f8e7bb;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.w-entity .spr.chest{width:44px;height:44px;padding:5px;border-radius:12px;background:rgba(12,26,20,.55);border:1px solid rgba(230,195,132,.35);box-shadow:0 0 18px rgba(240,190,90,.25)}
+.w-entity .spr.portal{width:62px;height:62px;padding:6px;border-radius:50%;background:radial-gradient(circle,rgba(90,200,180,.28),rgba(6,16,14,.7) 72%);border:1px solid rgba(120,220,200,.55);box-shadow:0 0 24px rgba(90,220,200,.35);animation:portalSpin 4s ease-in-out infinite}
+.w-entity .spr svg.mon-svg{width:100%;height:100%}
+.mon-svg{display:block}
+
+/* 角色朝向 */
+.hero-lock .h-spr{transform:scaleX(var(--flip,1))}
+@keyframes heroBob{from{transform:scaleX(var(--flip,1)) translateY(0)}to{transform:scaleX(var(--flip,1)) translateY(-6px)}}
+
+/* 创角立绘 */
+.create-stage{display:flex;align-items:flex-end;gap:14px;padding:8px 12px;border-radius:14px;
+  background:radial-gradient(80% 90% at 30% 100%,rgba(90,132,108,.35),rgba(10,22,18,.5) 70%);border:1px solid rgba(230,195,132,.25);
+  box-shadow:inset 0 0 26px rgba(0,0,0,.35);margin-bottom:6px;min-height:112px;overflow:hidden}
+.create-stage img{width:96px;height:106px;object-fit:contain;object-position:bottom;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.create-info{flex:1;min-width:0;padding-bottom:10px}
+.create-info b{display:block;font-family:"Songti SC",serif;font-size:20px;letter-spacing:3px;color:#f8e7bb}
+.create-info span{display:block;margin-top:4px;font-size:11.5px;color:#b9c8b8;letter-spacing:1px}
+
+/* 对话 */
+.talk{display:flex;gap:12px;align-items:flex-start}
+.talk-portrait{width:92px;flex:none;position:relative}
+.talk-portrait img{width:92px;height:128px;object-fit:contain;object-position:bottom;
+  border-radius:12px;border:1px solid rgba(230,195,132,.35);
+  background:radial-gradient(70% 80% at 50% 90%,rgba(96,140,110,.35),rgba(9,20,16,.5) 70%);padding:4px}
+.talk-lv{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);font-size:9px;letter-spacing:1px;
+  padding:1px 7px;border-radius:8px;background:rgba(9,20,16,.9);border:1px solid rgba(230,195,132,.35);color:#d8c39a;white-space:nowrap}
+.talk-body{flex:1;min-width:0}
+.talk-name{font-family:"Songti SC",serif;font-size:16px;letter-spacing:3px;color:#f8e7bb;margin-bottom:7px}
+.talk-text{font-size:14.5px;line-height:1.8;color:#e9dcc0;min-height:82px;text-indent:1.5em}
+.talk-dots{display:flex;gap:5px;margin:10px 0 2px}
+.talk-dots i{width:6px;height:6px;border-radius:50%;background:rgba(230,195,132,.22)}
+.talk-dots i.on{background:#f0d49a;box-shadow:0 0 8px rgba(240,212,154,.7)}
+
+/* 活跃度 */
+.act-card{padding:12px;border-radius:14px;margin-bottom:10px;
+  background:linear-gradient(160deg,rgba(52,78,64,.75),rgba(13,26,22,.94));border:1px solid rgba(230,195,132,.28)}
+.act-head{display:flex;align-items:baseline;gap:6px;margin-bottom:7px}
+.act-head b{font-family:"Songti SC",serif;font-size:15px;letter-spacing:2px;color:#f8e7bb}
+.act-head span{font-size:11px;color:#8fa093}
+.act-chests{display:flex;gap:9px;margin-top:11px}
+.act-chest{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:58px;padding:6px 0;
+  border-radius:11px;border:1px solid rgba(230,195,132,.22);background:rgba(255,255,255,.04);color:#8fa093}
+.act-chest span{width:26px;height:26px;display:grid;place-items:center}
+.act-chest svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.7}
+.act-chest b{font-size:10.5px;letter-spacing:.5px}
+.act-chest.ok{border-color:rgba(248,231,187,.65);color:#f8e7bb;background:rgba(230,195,132,.14);box-shadow:0 0 14px rgba(230,195,132,.2)}
+.act-chest.done{color:#7f8f83;opacity:.6}
+.act-chest:disabled{opacity:.55}
+
+/* 窄屏 / 矮屏适配 */
+@media (max-width:360px){
+  .w-entity .spr{height:76px}.w-entity .spr.mon{height:64px}
+  .hero-lock .h-spr{height:90px}
+  .unit{width:86px}.unit .u-art{height:84px}.unit .u-art img{height:84px}.unit.enemy .u-art img{height:74px}
+  .unit .u-hp{width:70px}
+  .cmd{min-height:58px;font-size:12px}
+  .tab{font-size:10px}.tab svg{width:21px;height:21px}
+  .tb-badge{width:44px;height:44px}
+  .joy{width:112px;height:112px}
+}
+@media (max-height:700px){
+  .create-stage{display:none}
+  .sheet h3{font-size:19px}
+  .sheet .sub{display:none}
+  .sec-title{margin:10px 0 6px}
+  .sheet{padding-top:18px;max-height:92%!important}
+  #overlay.center .sheet{max-height:92%}
+  .sect-card.compact .sc-motto{display:none}
+  .sect-card.compact{padding:6px}
+  .sect-card.compact .sc-ico{width:28px;height:28px;font-size:15px}
+  .name-chip{min-height:36px}
+  .sheet .sheet-actions .btn{min-height:46px}
+}
+@media (orientation:landscape) and (max-height:560px){
+  #app{max-width:560px}
+  .world-top{flex-direction:column}
+  .cmd{min-height:52px}
+  .unit .u-art{height:74px}.unit .u-art img{height:74px}.unit.enemy .u-art img{height:66px}
+  .scene{height:130px}
+}
+
 </style>
 </head>
 <body>
@@ -507,6 +1117,120 @@ const STAT_KEYS = ['hp', 'mp', 'atk', 'def', 'mag', 'mdef', 'spd'];
 const STAT_NAMES = { hp: '气血', mp: '法力', atk: '攻击', def: '防御', mag: '灵力', mdef: '法防', spd: '速度' };
 const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
 
+/* ===================== 视觉素材 / 图标 ===================== */
+const SPRITE_OF = { tiance: 'tang', longgong: 'han', putuo: 'qing', wanshou: 'yuan' };
+const charSprite = (sect, gender) => `assets/chars/${SPRITE_OF[sect] || 'han'}_${gender === 'f' ? 'f' : 'm'}.png`;
+const playerSprite = () => charSprite(S.player.sect, S.player.gender);
+const npcSprite = n => n.sprite ? `assets/chars/${n.sprite}.png` : charSprite('tiance', 'm');
+
+const ICON_PATHS = {
+  bag: '<path d="M6 9h12l1.4 10.2a1.6 1.6 0 0 1-1.6 1.8H6.2a1.6 1.6 0 0 1-1.6-1.8Z"/><path d="M9 9V6.8A3 3 0 0 1 12 4a3 3 0 0 1 3 2.8V9"/><path d="M9.4 13.2h5.2"/>',
+  paw: '<circle cx="7" cy="10" r="1.7"/><circle cx="12" cy="7.6" r="1.7"/><circle cx="17" cy="10" r="1.7"/><path d="M12 12.2c2.4 0 4.2 1.5 4.2 3.4 0 1.6-1.4 2.5-2.8 2.3-.7-.1-1.1-.3-1.4-.3s-.7.2-1.4.3c-1.4.2-2.8-.7-2.8-2.3 0-1.9 1.8-3.4 4.2-3.4Z"/>',
+  scroll: '<path d="M7 4h10v13.5a2.5 2.5 0 0 1-2.5 2.5H7Z"/><path d="M7 4a2.5 2.5 0 0 0-2.5 2.5V19a2 2 0 0 0 2 2"/><path d="M10 8.4h4M10 11.6h4M10 14.8h2.6"/>',
+  shop: '<path d="M4 10.4 6 5h12l2 5.4"/><path d="M4.6 10.4h14.8V19a1 1 0 0 1-1 1H5.6a1 1 0 0 1-1-1Z"/><path d="M9.4 20v-4.6h5.2V20"/>',
+  gear: '<circle cx="12" cy="12" r="3.1"/><path d="M12 3.6v2.2M12 18.2v2.2M4.8 12H7M17 12h2.2M6.9 6.9 8.5 8.5M15.5 15.5l1.6 1.6M17.1 6.9l-1.6 1.6M8.5 15.5 6.9 17.1"/>',
+  sword: '<path d="M18.6 4.2 9.2 13.6l1.2 1.2L19.8 5.4a1 1 0 0 0-1.2-1.2Z"/><path d="M7.4 12.6 4 16l4 4 3.4-3.4"/><path d="M5.8 14.2 9.8 18.2"/>',
+  spark: '<path d="M12 3.2 13.6 9l5.8 1.6-5.8 1.6L12 18l-1.6-5.8L4.6 10.6 10.4 9Z"/><path d="M18.4 16.4l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7Z"/>',
+  potion: '<path d="M10 3.6h4"/><path d="M10.6 3.6v4.2L7 14.4a3.4 3.4 0 0 0 2.9 5.2h4.2a3.4 3.4 0 0 0 2.9-5.2l-3.6-6.6V3.6"/><path d="M8.6 14.2h6.8"/>',
+  net: '<circle cx="12" cy="12" r="7.4"/><path d="M12 4.6v14.8M4.6 12h14.8M7 7l10 10M17 7 7 17"/>',
+  shield: '<path d="M12 3.4 19 6v5.4c0 4.4-2.8 7.6-7 9.2-4.2-1.6-7-4.8-7-9.2V6Z"/><path d="M9.2 12.2l2 2 3.6-4"/>',
+  run: '<path d="M14.6 5.4a1.8 1.8 0 1 0 0-.1Z"/><path d="M13 9.2 9.6 12l2.2 3.2-1.4 4.4"/><path d="M13 9.2l3.2 2.4 2.6-.8"/><path d="M11.8 15.2 8 18.6"/><path d="M13.6 8.4 9 7.2"/>',
+  coin: '<circle cx="12" cy="12" r="7.6"/><path d="M9.4 9.4h5.2v5.2H9.4Z"/>',
+  map: '<path d="M3.6 6.4 9 4.4l6 2 5.4-2v13.2l-5.4 2-6-2-5.4 2Z"/><path d="M9 4.4v13.2M15 6.4v13.2"/>',
+  chest: '<path d="M4 10.4h16V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/><path d="M4 10.4a8 8 0 0 1 16 0"/><path d="M10.4 10.4h3.2v3.2h-3.2Z"/>',
+  portal: '<circle cx="12" cy="12" r="8"/><path d="M12 4.6c2.6 2 4 4.6 4 7.4s-1.4 5.4-4 7.4c-2.6-2-4-4.6-4-7.4s1.4-5.4 4-7.4Z"/>',
+  heart: '<path d="M12 19.4c-4.6-3-7.4-5.6-7.4-9A4 4 0 0 1 12 7.8a4 4 0 0 1 7.4 2.6c0 3.4-2.8 6-7.4 9Z"/>',
+  star: '<path d="m12 4 2.4 4.8 5.2.8-3.8 3.7.9 5.2-4.7-2.5-4.7 2.5.9-5.2L4.4 9.6l5.2-.8Z"/>',
+  clock: '<circle cx="12" cy="12" r="8"/><path d="M12 7.6V12l3 1.8"/>',
+  arrow: '<path d="M5 12h13M13 7l5 5-5 5"/>'
+};
+const icon = (name, extra = '') => `<svg ${extra} viewBox="0 0 24 24" aria-hidden="true">${ICON_PATHS[name] || ''}</svg>`;
+
+/* 品质 */
+const QUALITY = {
+  white: { name: '凡品', c: '#cfd6cb', bg: 'rgba(207,214,203,.12)' },
+  green: { name: '灵品', c: '#8ee0a4', bg: 'rgba(110,220,140,.13)' },
+  blue: { name: '玄品', c: '#7fc4ff', bg: 'rgba(90,160,255,.14)' },
+  purple: { name: '仙品', c: '#d7a6ff', bg: 'rgba(180,110,255,.16)' }
+};
+const qOf = id => QUALITY[(ITEMS[id] && ITEMS[id].q) || 'white'];
+function itemIcon(id) {
+  const it = ITEMS[id] || {};
+  if (it.type === 'book') return 'scroll';
+  if (it.type === 'potion') return it.exp ? 'star' : 'potion';
+  if (it.slot === 'weapon') return 'sword';
+  if (it.slot === 'armor') return 'shield';
+  if (it.slot === 'trinket') return 'spark';
+  return 'bag';
+}
+function qStyle(id) { const q = qOf(id); return `style="border-color:${q.c}55;box-shadow:inset 0 0 0 1px ${q.c}22,0 6px 16px rgba(0,0,0,.28)"`; }
+function qName(id) { const q = qOf(id); return `<span class="qname" style="color:${q.c}">${q.name}</span>`; }
+
+/* ===================== 妖兽立绘（统一粗描边卡通） ===================== */
+function monArt(spId, cls = '') {
+  const sp = SPECIES[spId] || {};
+  const a = sp.art || { k: 'beast', c1: '#8a9a6a', c2: '#5c6a44' };
+  const c1 = a.c1, c2 = a.c2, c3 = a.c3 || '#f6e6c4', ink = '#20180f', eye = '#1b140e';
+  const eyes = (x, y, r = 3.2) => `<g><ellipse cx="${x - 8}" cy="${y}" rx="${r}" ry="${r + .8}" fill="${eye}"/><ellipse cx="${x + 8}" cy="${y}" rx="${r}" ry="${r + .8}" fill="${eye}"/>
+    <circle cx="${x - 9}" cy="${y - 1.2}" r="1.1" fill="#fff" opacity=".9"/><circle cx="${x + 7}" cy="${y - 1.2}" r="1.1" fill="#fff" opacity=".9"/></g>`;
+  let body = '';
+  if (a.k === 'spirit') {
+    body = `<path d="M50 18c15 0 24 12 24 26 0 10-4 18-9 24-3 4-3 8 0 12 3 5 1 10-4 10-4 0-6-3-8-6-2 4-5 6-8 6-3 0-5-2-5-5 0-2 1-4 3-7-3-1-5-4-5-8 0-3 2-6 4-8-4-5-6-11-6-18 0-14 9-26 24-26Z" fill="${c1}" stroke="${ink}" stroke-width="3.2" stroke-linejoin="round"/>
+      <path d="M50 24c8 0 14 6 15 15-6-4-12-3-15 2-3-5-9-6-15-2 1-9 7-15 15-15Z" fill="${c3}" opacity=".85"/>
+      ${eyes(50, 46)}<path d="M46 58q4 4 8 0" stroke="${ink}" stroke-width="2.6" fill="none" stroke-linecap="round"/>`;
+  } else if (a.k === 'snake') {
+    body = `<path d="M22 78c-6-12 2-22 14-22h20c8 0 12-5 10-11-2-7-11-8-16-4" stroke="${c1}" stroke-width="17" fill="none" stroke-linecap="round"/>
+      <path d="M22 78c-6-12 2-22 14-22h20c8 0 12-5 10-11-2-7-11-8-16-4" stroke="${c2}" stroke-width="7" fill="none" stroke-linecap="round" opacity=".6"/>
+      <ellipse cx="60" cy="34" rx="17" ry="13" fill="${c1}" stroke="${ink}" stroke-width="3"/>
+      <path d="M45 30h-8l4 5Z" fill="${c2}" stroke="${ink}" stroke-width="2"/>
+      ${eyes(62, 31, 2.4)}<path d="M64 41q5 3 9 0" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M70 42l2 6-5-2Z" fill="#f2f0e4" stroke="${ink}" stroke-width="1.4"/>`;
+  } else if (a.k === 'bug') {
+    body = `<ellipse cx="50" cy="58" rx="20" ry="23" fill="${c1}" stroke="${ink}" stroke-width="3.2"/>
+      <path d="M50 36c-8 10-8 34 0 44 8-10 8-34 0-44Z" fill="${c2}" opacity=".55"/>
+      <ellipse cx="30" cy="50" rx="13" ry="18" fill="#e9f2df" stroke="${ink}" stroke-width="2.6" opacity=".85" transform="rotate(-22 30 50)"/>
+      <ellipse cx="70" cy="50" rx="13" ry="18" fill="#e9f2df" stroke="${ink}" stroke-width="2.6" opacity=".85" transform="rotate(22 70 50)"/>
+      <path d="M40 38l-8-12M60 38l8-12" stroke="${ink}" stroke-width="2.6" stroke-linecap="round"/>
+      <circle cx="31" cy="25" r="2.6" fill="${c3}" stroke="${ink}" stroke-width="1.6"/><circle cx="69" cy="25" r="2.6" fill="${c3}" stroke="${ink}" stroke-width="1.6"/>
+      ${eyes(50, 52, 3)}<path d="M50 60v14" stroke="${ink}" stroke-width="2.2"/>`;
+  } else if (a.k === 'stone') {
+    body = `<path d="M28 82V52l8-20 14-8 16 8 8 20v30Z" fill="${c1}" stroke="${ink}" stroke-width="3.4" stroke-linejoin="round"/>
+      <path d="M36 50l10-12 8 6-6 12Z" fill="${c2}" opacity=".7"/>
+      <path d="M58 40l10 6-2 10-10-4Z" fill="${c2}" opacity=".5"/>
+      <path d="M28 82h44" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+      ${eyes(50, 52, 2.8)}
+      <path d="M42 64h16" stroke="${ink}" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M74 30l8-6M78 44l8 2" stroke="${c3}" stroke-width="2.4" stroke-linecap="round" opacity=".8"/>`;
+  } else if (a.k === 'ghost') {
+    body = `<path d="M50 22c12 0 21 10 21 24v30c0 4-4 6-7 3l-5-5-5 6c-2 3-6 3-8 0l-5-6-5 5c-3 3-7 1-7-3V46c0-14 9-24 21-24Z" fill="${c1}" stroke="${ink}" stroke-width="3.2" stroke-linejoin="round" opacity=".94"/>
+      ${eyes(50, 44, 3.2)}<path d="M44 58q6 6 12 0" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      <path d="M34 30q-4-8 4-10M66 30q4-8-4-10" stroke="${c2}" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".8"/>`;
+  } else if (a.k === 'fish') {
+    body = `<path d="M26 54c10-16 34-20 48-8 6 5 9 10 9 12s-3 7-9 12c-14 12-38 8-48-8-2-3-2-5 0-8Z" fill="${c1}" stroke="${ink}" stroke-width="3.2" stroke-linejoin="round"/>
+      <path d="M83 58l10-10v20Z" fill="${c2}" stroke="${ink}" stroke-width="2.8" stroke-linejoin="round"/>
+      <path d="M44 42l8-14 8 14Z" fill="${c2}" stroke="${ink}" stroke-width="2.6" stroke-linejoin="round"/>
+      ${eyes(36, 52, 3)}
+      <path d="M30 62q7 4 13 0" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+  } else if (a.k === 'demon') {
+    body = `<path d="M50 24c14 0 24 10 24 23 0 8-3 14-8 18v13c0 3-3 5-6 4l-10-4-10 4c-3 1-6-1-6-4V65c-5-4-8-10-8-18 0-13 10-23 24-23Z" fill="${c1}" stroke="${ink}" stroke-width="3.4" stroke-linejoin="round"/>
+      <path d="M30 28 18 12l2 20M70 28l12-16-2 20" fill="${c2}" stroke="${ink}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M34 58q16 10 32 0" stroke="${ink}" stroke-width="2.6" fill="none"/>
+      ${eyes(50, 44, 3.4)}
+      <path d="M22 72l-6 10M78 72l6 10" stroke="${ink}" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="50" cy="34" r="4" fill="${c3}" opacity=".7"/>`;
+  } else {
+    body = `<ellipse cx="48" cy="62" rx="25" ry="18" fill="${c1}" stroke="${ink}" stroke-width="3.2"/>
+      <circle cx="68" cy="44" r="16" fill="${c1}" stroke="${ink}" stroke-width="3.2"/>
+      <path d="M56 34 52 22l12 6M80 34l6-12 4 14" fill="${c2}" stroke="${ink}" stroke-width="2.8" stroke-linejoin="round"/>
+      <path d="M73 52h10l-5 6Z" fill="${c3}" stroke="${ink}" stroke-width="2" stroke-linejoin="round"/>
+      ${eyes(68, 42, 2.7)}
+      <path d="M24 58q-10-8-6-16 3 8 12 8" fill="${c2}" stroke="${ink}" stroke-width="2.6" stroke-linejoin="round"/>
+      <path d="M36 80v10M56 80v10M44 56q-8 8-4 14" stroke="${ink}" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  }
+  return `<svg class="mon-svg ${cls}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="90" rx="27" ry="6" fill="rgba(0,0,0,.32)"/>${body}</svg>`;
+}
+
 /* ===================== 门派 ===================== */
 const SECTS = {
   tiance: {
@@ -514,28 +1238,28 @@ const SECTS = {
     desc: '物理输出门派。气血厚重，攻击凌厉，一杆长枪可横扫千军。',
     base: { hp: 78, mp: 24, atk: 15, def: 11, mag: 5, mdef: 6, spd: 11 },
     grow: { hp: 17, mp: 4.5, atk: 5.6, def: 4.2, mag: 1.1, mdef: 2.4, spd: 2.1 },
-    skills: ['pojun', 'hengsao']
+    skills: ['pojun', 'hengsao', 'duanhun', 'tiebi']
   },
   longgong: {
     name: '龙宫', icon: '🐉', tone: '#4a86c8', motto: '沧海龙吟 · 法术无双',
     desc: '法术输出门派。体质稍弱，灵力澎湃，群体法术伤害极高。',
     base: { hp: 62, mp: 42, atk: 9, def: 8, mag: 16, mdef: 9, spd: 11 },
     grow: { hp: 12, mp: 8.5, atk: 2.6, def: 2.9, mag: 6.2, mdef: 3.8, spd: 2.2 },
-    skills: ['longteng', 'longjuan']
+    skills: ['longteng', 'longjuan', 'bingfeng', 'longlin']
   },
   putuo: {
     name: '普陀山', icon: '🪷', tone: '#7fb98a', motto: '慈航普度 · 甘露回春',
     desc: '治疗辅助门派。攻守均衡，可为自己与召唤兽疗伤续命。',
     base: { hp: 70, mp: 38, atk: 10, def: 10, mag: 12, mdef: 9, spd: 12 },
     grow: { hp: 14.5, mp: 7.2, atk: 3.2, def: 3.7, mag: 4.6, mdef: 3.6, spd: 2.4 },
-    skills: ['yangliu', 'puti']
+    skills: ['yangliu', 'puti', 'fanyin', 'lianhua']
   },
   wanshou: {
     name: '万兽山庄', icon: '🐾', tone: '#c99a4e', motto: '万兽听令 · 与兽同袍',
     desc: '召唤兽门派。自身灵巧，最善御兽，能大幅强化出战召唤兽。',
     base: { hp: 72, mp: 30, atk: 12, def: 10, mag: 9, mdef: 7, spd: 14 },
     grow: { hp: 15, mp: 5.6, atk: 4.4, def: 3.5, mag: 3.2, mdef: 3.0, spd: 2.9 },
-    skills: ['shouwang', 'wanshou']
+    skills: ['shouwang', 'wanshou', 'duya', 'huling']
   }
 };
 
@@ -547,7 +1271,16 @@ const SPELLS = {
   yangliu: { name: '杨柳甘露', icon: '🌿', mp: 15, type: 'heal', target: 'self', mult: 1.6, desc: '以甘露疗伤，恢复自身气血' },
   puti: { name: '菩提心佑', icon: '🍃', mp: 30, type: 'healall', mult: 1.1, desc: '佛光笼罩，治疗自己与召唤兽' },
   shouwang: { name: '兽王令', icon: '🐺', mp: 14, type: 'buffpet', desc: '号令万兽，召唤兽攻击提升 60%，持续 3 回合' },
-  wanshou: { name: '万兽奔腾', icon: '🐅', mp: 28, type: 'combo', mult: 1.5, desc: '与召唤兽合击单体，双方各造成一次伤害' }
+  wanshou: { name: '万兽奔腾', icon: '🐅', mp: 28, type: 'combo', mult: 1.5, desc: '与召唤兽合击单体，双方各造成一次伤害' },
+  /* 二转技能 */
+  duanhun: { name: '断魂枪', icon: '💥', mp: 22, type: 'phys', target: 'one', mult: 1.55, status: { t: 'stun', turns: 1, chance: .3 }, desc: '一枪断魂，30% 概率使目标眩晕 1 回合' },
+  tiebi: { name: '铁壁金身', icon: '🛡️', mp: 18, type: 'shield', mult: 1.6, desc: '真气护体，获得可吸收大量伤害的护盾，持续 3 回合' },
+  bingfeng: { name: '冰封千里', icon: '❄️', mp: 24, type: 'magic', target: 'one', mult: 1.35, status: { t: 'stun', turns: 1, chance: .35 }, desc: '寒冰封脉，35% 概率冻结目标 1 回合' },
+  longlin: { name: '龙鳞护体', icon: '🐲', mp: 20, type: 'shield', mult: 1.5, desc: '龙鳞覆身，获得护盾并回复少量法力' },
+  fanyin: { name: '净世梵音', icon: '🔔', mp: 26, type: 'magicall', mult: .95, status: { t: 'burn', turns: 2, chance: .5 }, desc: '梵音荡魔，对全体造成法术伤害并可能灼烧' },
+  lianhua: { name: '莲华护体', icon: '🪷', mp: 22, type: 'shieldall', mult: 1.1, desc: '莲台绽放，为全体同伴附上护盾' },
+  duya: { name: '毒牙突袭', icon: '🦷', mp: 18, type: 'phys', target: 'one', mult: 1.3, status: { t: 'poison', turns: 3, chance: .8 }, desc: '淬毒獠牙，80% 概率使目标中毒 3 回合' },
+  huling: { name: '唤灵护盾', icon: '✨', mp: 20, type: 'shieldall', mult: 1.0, desc: '灵力化盾，为自己与召唤兽附加护盾' }
 };
 
 /* ===================== 物品 ===================== */
@@ -558,15 +1291,24 @@ const ITEMS = {
   mp2: { name: '玉露丸', icon: '💧', price: 170, type: 'potion', desc: '恢复 180 点法力', mp: 180 },
   net: { name: '捆仙索', icon: '🪢', price: 120, type: 'tool', desc: '捕捉时消耗，捕捉成功率 +35%' },
   exp1: { name: '修行丹', icon: '🟡', price: 200, type: 'potion', desc: '服用后获得 300 点经验', exp: 300 },
-  w1: { name: '青竹剑', icon: '🗡️', price: 180, type: 'equip', slot: 'weapon', desc: '攻击 +8', stats: { atk: 8 }, lv: 1 },
-  w2: { name: '玄铁枪', icon: '🔱', price: 640, type: 'equip', slot: 'weapon', desc: '攻击 +22', stats: { atk: 22 }, lv: 8 },
-  w3: { name: '寒月刃', icon: '⚔️', price: 1680, type: 'equip', slot: 'weapon', desc: '攻击 +48 灵力 +8', stats: { atk: 48, mag: 8 }, lv: 14 },
-  a1: { name: '粗布衣', icon: '👕', price: 160, type: 'equip', slot: 'armor', desc: '防御 +6 气血 +30', stats: { def: 6, hp: 30 }, lv: 1 },
-  a2: { name: '锁子甲', icon: '🥋', price: 580, type: 'equip', slot: 'armor', desc: '防御 +18 气血 +90', stats: { def: 18, hp: 90 }, lv: 8 },
-  a3: { name: '玄冰甲', icon: '🛡️', price: 1560, type: 'equip', slot: 'armor', desc: '防御 +40 气血 +220', stats: { def: 40, hp: 220 }, lv: 14 },
-  b1: { name: '桃木符', icon: '🔮', price: 150, type: 'equip', slot: 'trinket', desc: '灵力 +6 法防 +4', stats: { mag: 6, mdef: 4 }, lv: 1 },
-  b2: { name: '灵犀佩', icon: '📿', price: 540, type: 'equip', slot: 'trinket', desc: '灵力 +16 法防 +10', stats: { mag: 16, mdef: 10 }, lv: 8 },
-  b3: { name: '太虚玉', icon: '💠', price: 1460, type: 'equip', slot: 'trinket', desc: '灵力 +34 法防 +22', stats: { mag: 34, mdef: 22 }, lv: 14 }
+  book_poison: { name: '毒牙书', icon: '📗', price: 260, type: 'book', desc: '打入召唤兽，习得「淬毒撕咬」', petSkill: 'poison' },
+  book_heal: { name: '回春书', icon: '📖', price: 280, type: 'book', desc: '打入召唤兽，习得「回春术」', petSkill: 'heal' },
+  book_crit: { name: '破军书', icon: '📕', price: 320, type: 'book', desc: '打入召唤兽，习得「破军击」', petSkill: 'crit' },
+  w0: { name: '木剑', icon: '🪵', q: 'white', price: 60, type: 'equip', slot: 'weapon', desc: '攻击 +4', stats: { atk: 4 }, lv: 1 },
+  w1: { name: '青竹剑', icon: '🗡️', q: 'green', price: 180, type: 'equip', slot: 'weapon', desc: '攻击 +10 速度 +2', stats: { atk: 10, spd: 2 }, lv: 1 },
+  w2: { name: '玄铁枪', icon: '🔱', q: 'green', price: 640, type: 'equip', slot: 'weapon', desc: '攻击 +26 气血 +40', stats: { atk: 26, hp: 40 }, lv: 8 },
+  w3: { name: '寒月刃', icon: '⚔️', q: 'blue', price: 1680, type: 'equip', slot: 'weapon', desc: '攻击 +52 灵力 +10 速度 +4', stats: { atk: 52, mag: 10, spd: 4 }, lv: 14 },
+  w4: { name: '赤霄破军枪', icon: '🔥', q: 'purple', price: 4200, type: 'equip', slot: 'weapon', desc: '攻击 +84 气血 +120 速度 +8', stats: { atk: 84, hp: 120, spd: 8 }, lv: 18 },
+  a0: { name: '麻布衣', icon: '🧵', q: 'white', price: 50, type: 'equip', slot: 'armor', desc: '防御 +3 气血 +16', stats: { def: 3, hp: 16 }, lv: 1 },
+  a1: { name: '粗布衣', icon: '👕', q: 'green', price: 160, type: 'equip', slot: 'armor', desc: '防御 +8 气血 +40', stats: { def: 8, hp: 40 }, lv: 1 },
+  a2: { name: '锁子甲', icon: '🥋', q: 'green', price: 580, type: 'equip', slot: 'armor', desc: '防御 +22 气血 +110', stats: { def: 22, hp: 110 }, lv: 8 },
+  a3: { name: '玄冰甲', icon: '🛡️', q: 'blue', price: 1560, type: 'equip', slot: 'armor', desc: '防御 +46 气血 +260 法防 +10', stats: { def: 46, hp: 260, mdef: 10 }, lv: 14 },
+  a4: { name: '天蚕玄甲', icon: '🥻', q: 'purple', price: 4000, type: 'equip', slot: 'armor', desc: '防御 +74 气血 +460 法防 +18', stats: { def: 74, hp: 460, mdef: 18 }, lv: 18 },
+  b0: { name: '木符', icon: '🪬', q: 'white', price: 45, type: 'equip', slot: 'trinket', desc: '灵力 +3', stats: { mag: 3 }, lv: 1 },
+  b1: { name: '桃木符', icon: '🔮', q: 'green', price: 150, type: 'equip', slot: 'trinket', desc: '灵力 +8 法防 +5', stats: { mag: 8, mdef: 5 }, lv: 1 },
+  b2: { name: '灵犀佩', icon: '📿', q: 'green', price: 540, type: 'equip', slot: 'trinket', desc: '灵力 +18 法防 +12', stats: { mag: 18, mdef: 12 }, lv: 8 },
+  b3: { name: '太虚玉', icon: '💠', q: 'blue', price: 1460, type: 'equip', slot: 'trinket', desc: '灵力 +38 法防 +24 气血 +60', stats: { mag: 38, mdef: 24, hp: 60 }, lv: 14 },
+  b4: { name: '九霄灵玉', icon: '🔮', q: 'purple', price: 3900, type: 'equip', slot: 'trinket', desc: '灵力 +62 法防 +40 速度 +6', stats: { mag: 62, mdef: 40, spd: 6 }, lv: 18 }
 };
 
 /* ===================== 妖兽 / 召唤兽 ===================== */
@@ -575,95 +1317,189 @@ const SPECIES = {
     name: '竹妖', icon: '🎋', lvBase: 1, exp: 1, gold: 1,
     base: { hp: 60, mp: 20, atk: 12, def: 8, mag: 6, mdef: 5, spd: 10 },
     grow: { hp: 15, mp: 3, atk: 3.6, def: 3.2, mag: 2.2, mdef: 2.2, spd: 1.9 },
-    skill: { name: '竹叶回春', type: 'heal', mult: 0.9 }, pet: true, skillDesc: '施放竹叶灵气，为出战者回复气血'
+    skill: { name: '竹叶回春', type: 'heal', mult: 0.9 }, pet: true, skillDesc: '施放竹叶灵气，为出战者回复气血',
+    art: { k: 'spirit', c1: '#8fbf6e', c2: '#5d8a48', c3: '#dff2b8' }
   },
   qingshe: {
     name: '青蛇', icon: '🐍', lvBase: 2, exp: 1.05, gold: 1,
     base: { hp: 52, mp: 18, atk: 14, def: 7, mag: 7, mdef: 5, spd: 14 },
     grow: { hp: 12, mp: 2.6, atk: 4.6, def: 2.7, mag: 2.4, mdef: 2.0, spd: 2.4 },
-    skill: { name: '毒牙', type: 'phys', mult: 1.35 }, pet: true, skillDesc: '毒牙撕咬，物理伤害提升'
+    skill: { name: '毒牙', type: 'phys', mult: 1.35 }, pet: true, skillDesc: '毒牙撕咬，物理伤害提升',
+    art: { k: 'snake', c1: '#6fae7c', c2: '#3f7654', c3: '#d7f0c8' }
   },
   shanlang: {
     name: '山狼', icon: '🐺', lvBase: 3, exp: 1.1, gold: 1,
     base: { hp: 62, mp: 10, atk: 15, def: 8, mag: 3, mdef: 4, spd: 12 },
     grow: { hp: 15, mp: 1.6, atk: 5.0, def: 3.0, mag: 1.1, mdef: 1.8, spd: 2.2 },
-    skill: { name: '撕咬', type: 'phys', mult: 1.45 }, pet: true, skillDesc: '猛兽撕咬，物理伤害大幅提升'
+    skill: { name: '撕咬', type: 'phys', mult: 1.45 }, pet: true, skillDesc: '猛兽撕咬，物理伤害大幅提升',
+    art: { k: 'beast', c1: '#9aa4a0', c2: '#6a7472', c3: '#e8e4d6' }
   },
   huayao: {
     name: '花妖', icon: '🌸', lvBase: 6, exp: 1.15, gold: 1.1,
     base: { hp: 58, mp: 32, atk: 9, def: 8, mag: 15, mdef: 8, spd: 12 },
     grow: { hp: 13, mp: 6, atk: 2.6, def: 2.8, mag: 5.2, mdef: 3.2, spd: 2.2 },
-    skill: { name: '落英缤纷', type: 'magic', mult: 1.4 }, pet: true, skillDesc: '花瓣化刃，造成法术伤害'
+    skill: { name: '落英缤纷', type: 'magic', mult: 1.4 }, pet: true, skillDesc: '花瓣化刃，造成法术伤害',
+    art: { k: 'spirit', c1: '#e9a3bf', c2: '#c06a91', c3: '#ffe3ef' }
   },
   dufeng: {
     name: '毒蜂', icon: '🐝', lvBase: 7, exp: 1.15, gold: 1.1,
     base: { hp: 48, mp: 16, atk: 13, def: 6, mag: 8, mdef: 5, spd: 16 },
     grow: { hp: 10, mp: 2.2, atk: 4.0, def: 2.2, mag: 2.6, mdef: 1.9, spd: 2.8 },
-    skill: { name: '毒针', type: 'phys', mult: 1.3 }, pet: true, skillDesc: '尾针突刺，速度快，附带毒伤'
+    skill: { name: '毒针', type: 'phys', mult: 1.3 }, pet: true, skillDesc: '尾针突刺，速度快，附带毒伤',
+    art: { k: 'bug', c1: '#e8c14e', c2: '#8a6a20', c3: '#fff2b0' }
   },
   shiling: {
     name: '石灵', icon: '🗿', lvBase: 9, exp: 1.3, gold: 1.2,
     base: { hp: 95, mp: 8, atk: 14, def: 15, mag: 4, mdef: 9, spd: 6 },
     grow: { hp: 22, mp: 1.2, atk: 4.2, def: 5.6, mag: 1.2, mdef: 3.2, spd: 1.1 },
-    skill: { name: '泰山压顶', type: 'phys', mult: 1.6 }, pet: true, skillDesc: '沉重一击，伤害极高但速度较慢'
+    skill: { name: '泰山压顶', type: 'phys', mult: 1.6 }, pet: true, skillDesc: '沉重一击，伤害极高但速度较慢',
+    art: { k: 'stone', c1: '#9a978a', c2: '#6e6b5f', c3: '#d9ffb0' }
   },
   xuelang: {
     name: '雪狼', icon: '🐺', lvBase: 12, exp: 1.35, gold: 1.25,
     base: { hp: 85, mp: 12, atk: 19, def: 11, mag: 4, mdef: 6, spd: 14 },
     grow: { hp: 19, mp: 1.8, atk: 5.6, def: 3.9, mag: 1.3, mdef: 2.4, spd: 2.5 },
-    skill: { name: '冰爪', type: 'phys', mult: 1.5 }, pet: true, skillDesc: '寒冰利爪，物理伤害极为凶狠'
+    skill: { name: '冰爪', type: 'phys', mult: 1.5 }, pet: true, skillDesc: '寒冰利爪，物理伤害极为凶狠',
+    art: { k: 'beast', c1: '#cfe4ec', c2: '#7fa3b4', c3: '#ffffff' }
   },
   bingpo: {
     name: '冰魄', icon: '❄️', lvBase: 14, exp: 1.4, gold: 1.3,
     base: { hp: 70, mp: 48, atk: 10, def: 10, mag: 22, mdef: 12, spd: 13 },
     grow: { hp: 14, mp: 8, atk: 2.6, def: 3.2, mag: 6.6, mdef: 4.2, spd: 2.3 },
-    skill: { name: '寒冰咒', type: 'magic', mult: 1.55 }, pet: true, skillDesc: '极寒之息，法术伤害惊人'
+    skill: { name: '寒冰咒', type: 'magic', mult: 1.55 }, pet: true, skillDesc: '极寒之息，法术伤害惊人',
+    art: { k: 'ghost', c1: '#b9e8f2', c2: '#6fb9d6', c3: '#eafcff' }
   },
   baiyuan: {
     name: '白猿', icon: '🐒', lvBase: 15, exp: 1.4, gold: 1.3,
     base: { hp: 92, mp: 10, atk: 20, def: 12, mag: 4, mdef: 6, spd: 12 },
     grow: { hp: 21, mp: 1.4, atk: 5.8, def: 4.2, mag: 1.2, mdef: 2.2, spd: 2.2 },
-    skill: { name: '巨力击', type: 'phys', mult: 1.65 }, pet: true, skillDesc: '以蛮力重击，物理伤害冠绝群兽'
+    skill: { name: '巨力击', type: 'phys', mult: 1.65 }, pet: true, skillDesc: '以蛮力重击，物理伤害冠绝群兽',
+    art: { k: 'beast', c1: '#efeade', c2: '#b8ae98', c3: '#fffdf4' }
+  },
+  linghu: {
+    name: '灵狐', icon: '🦊', lvBase: 16, exp: 1.45, gold: 1.35,
+    base: { hp: 78, mp: 34, atk: 17, def: 9, mag: 17, mdef: 9, spd: 17 },
+    grow: { hp: 16, mp: 5, atk: 4.6, def: 2.9, mag: 4.8, mdef: 2.8, spd: 3.1 },
+    skill: { name: '幻火', type: 'magic', mult: 1.5 }, pet: true, skillDesc: '狐火灼魂，法术与速度兼备',
+    art: { k: 'beast', c1: '#e8a25e', c2: '#b96a34', c3: '#fff0d8' }
+  },
+  fengyao: {
+    name: '枫妖', icon: '🍁', lvBase: 11, exp: 1.25, gold: 1.2,
+    base: { hp: 66, mp: 30, atk: 13, def: 9, mag: 16, mdef: 9, spd: 13 },
+    grow: { hp: 15, mp: 5.4, atk: 3.4, def: 3.0, mag: 5.0, mdef: 3.2, spd: 2.3 },
+    skill: { name: '枫火燎原', type: 'magic', mult: 1.45 }, pet: true, skillDesc: '枫叶化火，灼烧敌人',
+    art: { k: 'spirit', c1: '#e2704a', c2: '#a83c2a', c3: '#ffd9a0' }
+  },
+  huoyou: {
+    name: '火幽', icon: '🔥', lvBase: 13, exp: 1.3, gold: 1.25,
+    base: { hp: 72, mp: 40, atk: 12, def: 8, mag: 21, mdef: 10, spd: 14 },
+    grow: { hp: 14, mp: 6.6, atk: 3.0, def: 2.8, mag: 6.0, mdef: 3.4, spd: 2.4 },
+    skill: { name: '幽火', type: 'magic', mult: 1.5 }, pet: false,
+    art: { k: 'ghost', c1: '#f0a04e', c2: '#c8542a', c3: '#fff0b8' }
+  },
+  duanlang: {
+    name: '毒蟒', icon: '🐍', lvBase: 13, exp: 1.35, gold: 1.3,
+    base: { hp: 108, mp: 20, atk: 21, def: 12, mag: 8, mdef: 7, spd: 11 },
+    grow: { hp: 24, mp: 2.4, atk: 5.2, def: 3.8, mag: 2.2, mdef: 2.4, spd: 1.8 },
+    skill: { name: '毒雾缠身', type: 'phys', mult: 1.4 }, pet: false,
+    art: { k: 'snake', c1: '#8a70b8', c2: '#5a4482', c3: '#e2d0ff' }
+  },
+  shuimu: {
+    name: '水母妖', icon: '🪼', lvBase: 12, exp: 1.3, gold: 1.25,
+    base: { hp: 80, mp: 44, atk: 10, def: 9, mag: 20, mdef: 12, spd: 12 },
+    grow: { hp: 16, mp: 7, atk: 2.6, def: 3.0, mag: 5.6, mdef: 3.8, spd: 2.1 },
+    skill: { name: '雷水麻痹', type: 'magic', mult: 1.35 }, pet: true, skillDesc: '雷水触须，可能麻痹敌人',
+    art: { k: 'ghost', c1: '#a9d8e8', c2: '#5b9eb8', c3: '#e8fbff' }
+  },
+  guiling: {
+    name: '龟灵', icon: '🐢', lvBase: 14, exp: 1.4, gold: 1.35,
+    base: { hp: 130, mp: 16, atk: 15, def: 22, mag: 6, mdef: 14, spd: 6 },
+    grow: { hp: 28, mp: 2, atk: 3.8, def: 6.6, mag: 1.6, mdef: 4.6, spd: 1.1 },
+    skill: { name: '玄甲护体', type: 'phys', mult: 1.3 }, pet: true, skillDesc: '玄甲如山，防御极高',
+    art: { k: 'stone', c1: '#7fae8a', c2: '#4c7a5c', c3: '#cfffe0' }
+  },
+  tongjia: {
+    name: '铜甲尸', icon: '🧟', lvBase: 15, exp: 1.45, gold: 1.4,
+    base: { hp: 120, mp: 12, atk: 23, def: 16, mag: 5, mdef: 8, spd: 9 },
+    grow: { hp: 26, mp: 1.6, atk: 5.6, def: 4.6, mag: 1.4, mdef: 2.6, spd: 1.5 },
+    skill: { name: '尸毒爪', type: 'phys', mult: 1.5 }, pet: false,
+    art: { k: 'demon', c1: '#9a8a5a', c2: '#6a5c34', c3: '#d9ff9a' }
+  },
+  chaoling: {
+    name: '潮灵', icon: '🌊', lvBase: 17, exp: 1.5, gold: 1.45,
+    base: { hp: 88, mp: 52, atk: 12, def: 11, mag: 25, mdef: 14, spd: 15 },
+    grow: { hp: 17, mp: 8, atk: 2.8, def: 3.4, mag: 6.6, mdef: 4.2, spd: 2.6 },
+    skill: { name: '怒潮', type: 'magic', mult: 1.6 }, pet: true, skillDesc: '引潮而击，法术伤害极高',
+    art: { k: 'fish', c1: '#5fb8d8', c2: '#2e7fa8', c3: '#dff7ff' }
   },
   mumei: {
     name: '竹林木魅', icon: '👹', lvBase: 6, exp: 4, gold: 6, boss: true,
     base: { hp: 300, mp: 40, atk: 12, def: 8, mag: 10, mdef: 6, spd: 11 },
     grow: { hp: 22, mp: 4, atk: 2.4, def: 2.4, mag: 2.6, mdef: 2.0, spd: 1.6 },
-    skill: { name: '妖藤缠绕', type: 'phys', mult: 1.4 }
+    skill: { name: '妖藤缠绕', type: 'phys', mult: 1.4 },
+    art: { k: 'demon', c1: '#5f8a5a', c2: '#365a38', c3: '#c8f0a0' }
   },
   shuyao: {
     name: '幽谷树妖', icon: '🌳', lvBase: 11, exp: 4.5, gold: 7, boss: true,
     base: { hp: 520, mp: 60, atk: 16, def: 12, mag: 15, mdef: 9, spd: 11 },
     grow: { hp: 34, mp: 5, atk: 3.0, def: 3.0, mag: 2.6, mdef: 2.6, spd: 1.6 },
-    skill: { name: '万木朝宗', type: 'magic', mult: 1.45 }
+    skill: { name: '万木朝宗', type: 'magic', mult: 1.45 },
+    art: { k: 'demon', c1: '#8a7a4a', c2: '#5a4c28', c3: '#e8ffa8' }
+  },
+  fengmo: {
+    name: '枫落魔君', icon: '🍂', lvBase: 16, exp: 5.5, gold: 9, boss: true,
+    base: { hp: 700, mp: 80, atk: 24, def: 15, mag: 24, mdef: 12, spd: 12 },
+    grow: { hp: 36, mp: 6, atk: 3.2, def: 3.4, mag: 3.2, mdef: 2.8, spd: 1.8 },
+    skill: { name: '万叶飞霜', type: 'magic', mult: 1.5 },
+    art: { k: 'demon', c1: '#b8503c', c2: '#7a2c22', c3: '#ffcf8a' }
   },
   xuemo: {
     name: '雪山雪魔', icon: '👺', lvBase: 18, exp: 6, gold: 10, boss: true,
     base: { hp: 900, mp: 90, atk: 28, def: 18, mag: 26, mdef: 14, spd: 13 },
     grow: { hp: 38, mp: 6, atk: 2.8, def: 4.0, mag: 2.6, mdef: 3.0, spd: 1.8 },
-    skill: { name: '风雪咆哮', type: 'magic', mult: 1.5 }
+    skill: { name: '风雪咆哮', type: 'magic', mult: 1.5 },
+    art: { k: 'demon', c1: '#a8c8dc', c2: '#688aa4', c3: '#eaffff' }
+  },
+  haiyao: {
+    name: '东海蛟王', icon: '🐉', lvBase: 19, exp: 7, gold: 12, boss: true,
+    base: { hp: 1180, mp: 120, atk: 32, def: 20, mag: 32, mdef: 16, spd: 15 },
+    grow: { hp: 42, mp: 7, atk: 3.0, def: 4.2, mag: 3.0, mdef: 3.2, spd: 2.0 },
+    skill: { name: '蛟龙翻海', type: 'magic', mult: 1.55 },
+    art: { k: 'fish', c1: '#4a9ec8', c2: '#1f5f88', c3: '#dffaff' }
   }
 };
 
 /* ===================== 地图 ===================== */
 const MAPS = {
   zhulin: {
-    id: 'zhulin', name: '竹林小径', icon: '🎋', art: 'bamboo', lv: '1 - 5', unlock: 1,
+    id: 'zhulin', name: '竹林小径', icon: '🎋', art: 'bamboo', lv: '1 - 6', unlock: 1,
     sub: '翠影婆娑 · 妖气初现',
     monsters: ['zhuyiao', 'qingshe', 'shanlang'], boss: 'mumei', bossLv: 6,
-    drops: ['hp1', 'mp1']
+    drops: ['hp1', 'mp1', 'w0', 'a0', 'b0']
   },
   yougu: {
-    id: 'yougu', name: '幽谷密林', icon: '🌫️', art: 'valley', lv: '5 - 10', unlock: 5,
+    id: 'yougu', name: '幽谷密林', icon: '🌫️', art: 'valley', lv: '7 - 11', unlock: 6,
     sub: '雾锁深林 · 花妖夜行',
     monsters: ['huayao', 'dufeng', 'shiling'], boss: 'shuyao', bossLv: 11,
-    drops: ['hp1', 'hp2', 'mp1', 'net']
+    drops: ['hp1', 'hp2', 'mp1', 'net', 'w1', 'a1', 'b1']
   },
   xueshan: {
-    id: 'xueshan', name: '雪山寒岭', icon: '🏔️', art: 'snow', lv: '10 - 18', unlock: 10,
+    id: 'xueshan', name: '雪山寒岭', icon: '🏔️', art: 'snow', lv: '12 - 18', unlock: 11,
     sub: '千山飞雪 · 冰魄封魂',
-    monsters: ['xuelang', 'bingpo', 'baiyuan'], boss: 'xuemo', bossLv: 18,
-    drops: ['hp2', 'mp2', 'net']
+    monsters: ['xuelang', 'bingpo', 'baiyuan', 'duanlang'], boss: 'xuemo', bossLv: 18,
+    drops: ['hp2', 'mp2', 'net', 'w2', 'a2', 'b2']
+  },
+  fenglin: {
+    id: 'fenglin', name: '枫落古道', icon: '🍁', art: 'maple', lv: '12 - 19', unlock: 12,
+    sub: '霜叶如血 · 古道藏妖',
+    monsters: ['fengyao', 'huoyou', 'tongjia', 'linghu'], boss: 'fengmo', bossLv: 16,
+    drops: ['hp2', 'mp2', 'book_poison', 'book_heal', 'w3', 'a3', 'b3']
+  },
+  coast: {
+    id: 'coast', name: '蓬莱海岸', icon: '🌊', art: 'coast', lv: '16 - 20', unlock: 16,
+    sub: '潮生碧海 · 蛟龙潜渊',
+    monsters: ['shuimu', 'chaoling', 'guiling'], boss: 'haiyao', bossLv: 19,
+    drops: ['hp2', 'mp2', 'book_crit', 'exp1', 'w3', 'a3', 'b3']
   }
 };
 
@@ -673,64 +1509,134 @@ function rng(seed) { let s = seed % 2147483647; if (s <= 0) s += 2147483646; ret
 const SCENES = {
   town: {
     id: 'town', name: '云阳城', sub: '市井繁华 · 人间烟火', art: 'town', w: 1240, h: 1500,
-    spawn: { x: 620, y: 910 },
+    spawn: { x: 620, y: 960 },
     npcs: [
-      { name: '门派师傅', icon: '📖', x: 500, y: 850, act: 'master' },
-      { name: '百宝阁掌柜', icon: '🏮', x: 740, y: 850, act: 'shop' },
-      { name: '兽栏管事', icon: '🐾', x: 760, y: 1110, act: 'pets' },
-      { name: '客栈小二', icon: '🛖', x: 600, y: 1110, act: 'rest' },
-      { name: '任务榜', icon: '📜', x: 700, y: 1010, act: 'quest' }
+      { name: '门派师傅', x: 515, y: 885, sprite: 'han_m', act: 'master', talk: 'master' },
+      { name: '百宝阁掌柜', x: 725, y: 885, sprite: 'han_f', act: 'shop', talk: 'shop' },
+      { name: '兽栏管事', x: 745, y: 1150, sprite: 'yuan_m', act: 'pets', talk: 'pets' },
+      { name: '客栈小二', x: 525, y: 1150, sprite: 'tang_m', act: 'rest', talk: 'rest' },
+      { name: '说书先生', x: 470, y: 1040, sprite: 'qing_m', act: 'quest', talk: 'story' }
     ],
-    portals: [{ x: 620, y: 150, to: '__map', label: '山门 · 前往秘境' }],
+    portals: [{ x: 620, y: 170, to: '__travel', label: '山门 · 远行' }],
     monsters: [],
-    chests: [{ id: 'town_c1', x: 230, y: 780, reward: { gold: 80 } }]
+    chests: [
+      { id: 'town_c1', x: 250, y: 760, reward: { gold: 120 } },
+      { id: 'town_c2', x: 990, y: 1290, reward: { items: { hp2: 1, mp1: 1 } } }
+    ]
   },
   zhulin: {
     id: 'zhulin', name: '竹林小径', sub: '翠影婆娑 · 妖气初现', art: 'bamboo', w: 1400, h: 1720,
-    spawn: { x: 700, y: 1440 },
-    npcs: [],
-    portals: [{ x: 700, y: 1640, to: 'town', label: '回云阳城' }],
+    spawn: { x: 700, y: 1480 },
+    npcs: [
+      { name: '采药人', x: 620, y: 1300, sprite: 'tang_f', act: 'talk', talk: 'herbalist' }
+    ],
+    portals: [
+      { x: 700, y: 1640, to: 'town', label: '回云阳城' },
+      { x: 700, y: 200, to: 'yougu', label: '深入幽谷' }
+    ],
     monsters: [
-      { sp: 'zhuyiao', x: 470, y: 1200, lv: 3 },
-      { sp: 'qingshe', x: 980, y: 1120, lv: 4 },
-      { sp: 'shanlang', x: 760, y: 900, lv: 5 },
-      { sp: 'zhuyiao', x: 1080, y: 1320, lv: 3 }
+      { sp: 'zhuyiao', x: 680, y: 1200, lv: 3 },
+      { sp: 'qingshe', x: 810, y: 1120, lv: 4 },
+      { sp: 'shanlang', x: 760, y: 930, lv: 5 },
+      { sp: 'zhuyiao', x: 820, y: 1340, lv: 3 },
+      { sp: 'mumei', x: 700, y: 430, lv: 6, boss: true }
     ],
     chests: [
-      { id: 'zl_c1', x: 280, y: 1230, reward: { gold: 80 } },
-      { id: 'zl_c2', x: 1160, y: 760, reward: { items: { hp2: 2 } } }
+      { id: 'zl_c1', x: 280, y: 1230, reward: { gold: 100 } },
+      { id: 'zl_c2', x: 1160, y: 760, reward: { items: { hp2: 2 } } },
+      { id: 'zl_c3', x: 520, y: 640, reward: { items: { w1: 1 }, gold: 60 } }
     ]
   },
   yougu: {
     id: 'yougu', name: '幽谷密林', sub: '雾锁深林 · 花妖夜行', art: 'valley', w: 1440, h: 1760,
-    spawn: { x: 720, y: 1480 },
-    npcs: [],
-    portals: [{ x: 720, y: 1680, to: 'town', label: '回云阳城' }],
+    spawn: { x: 720, y: 1520 },
+    npcs: [
+      { name: '迷路书生', x: 830, y: 1330, sprite: 'qing_m', act: 'talk', talk: 'scholar' }
+    ],
+    portals: [
+      { x: 720, y: 1680, to: 'town', label: '回云阳城' },
+      { x: 720, y: 210, to: 'xueshan', label: '前往雪山' }
+    ],
     monsters: [
-      { sp: 'huayao', x: 460, y: 1250, lv: 7 },
-      { sp: 'dufeng', x: 1000, y: 1170, lv: 8 },
-      { sp: 'shiling', x: 760, y: 950, lv: 9 },
-      { sp: 'huayao', x: 1120, y: 1370, lv: 7 }
+      { sp: 'huayao', x: 610, y: 1250, lv: 8 },
+      { sp: 'dufeng', x: 840, y: 1170, lv: 9 },
+      { sp: 'shiling', x: 760, y: 950, lv: 10 },
+      { sp: 'guiling', x: 840, y: 1420, lv: 10 },
+      { sp: 'shuyao', x: 720, y: 430, lv: 11, boss: true }
     ],
     chests: [
-      { id: 'yg_c1', x: 300, y: 1290, reward: { gold: 140 } },
-      { id: 'yg_c2', x: 1180, y: 800, reward: { items: { mp2: 2 } } }
+      { id: 'yg_c1', x: 300, y: 1290, reward: { gold: 180 } },
+      { id: 'yg_c2', x: 1180, y: 800, reward: { items: { mp2: 2 } } },
+      { id: 'yg_c3', x: 500, y: 600, reward: { items: { a2: 1 }, gold: 120 } }
     ]
   },
   xueshan: {
     id: 'xueshan', name: '雪山寒岭', sub: '千山飞雪 · 冰魄封魂', art: 'snow', w: 1480, h: 1800,
-    spawn: { x: 740, y: 1520 },
-    npcs: [],
-    portals: [{ x: 740, y: 1720, to: 'town', label: '回云阳城' }],
+    spawn: { x: 740, y: 1560 },
+    npcs: [
+      { name: '守山老人', x: 580, y: 1420, sprite: 'han_m', act: 'talk', talk: 'elder' }
+    ],
+    portals: [
+      { x: 740, y: 1720, to: 'town', label: '回云阳城' },
+      { x: 740, y: 220, to: 'fenglin', label: '下行枫林' }
+    ],
     monsters: [
-      { sp: 'xuelang', x: 480, y: 1280, lv: 13 },
-      { sp: 'bingpo', x: 1020, y: 1200, lv: 14 },
-      { sp: 'baiyuan', x: 780, y: 980, lv: 15 },
-      { sp: 'xuelang', x: 1140, y: 1400, lv: 13 }
+      { sp: 'xuelang', x: 620, y: 1290, lv: 14 },
+      { sp: 'bingpo', x: 860, y: 1210, lv: 15 },
+      { sp: 'baiyuan', x: 780, y: 950, lv: 16 },
+      { sp: 'duanlang', x: 860, y: 1430, lv: 15 },
+      { sp: 'xuemo', x: 740, y: 430, lv: 18, boss: true }
     ],
     chests: [
-      { id: 'xs_c1', x: 320, y: 1330, reward: { gold: 220 } },
-      { id: 'xs_c2', x: 1200, y: 840, reward: { items: { hp2: 3 } } }
+      { id: 'xs_c1', x: 320, y: 1330, reward: { gold: 280 } },
+      { id: 'xs_c2', x: 1200, y: 840, reward: { items: { hp2: 3 } } },
+      { id: 'xs_c3', x: 560, y: 620, reward: { items: { b3: 1 }, gold: 200 } }
+    ]
+  },
+  fenglin: {
+    id: 'fenglin', name: '枫落古道', sub: '霜叶如血 · 古道藏妖', art: 'maple', w: 1440, h: 1760,
+    spawn: { x: 720, y: 1520 },
+    npcs: [
+      { name: '琴师', x: 830, y: 1340, sprite: 'qing_f', act: 'talk', talk: 'musician' }
+    ],
+    portals: [
+      { x: 720, y: 1680, to: 'town', label: '回云阳城' },
+      { x: 720, y: 210, to: 'coast', label: '东行海岸' }
+    ],
+    monsters: [
+      { sp: 'fengyao', x: 610, y: 1260, lv: 13 },
+      { sp: 'huoyou', x: 840, y: 1180, lv: 15 },
+      { sp: 'tongjia', x: 760, y: 950, lv: 16 },
+      { sp: 'linghu', x: 650, y: 1450, lv: 16 },
+      { sp: 'fengmo', x: 720, y: 420, lv: 16, boss: true }
+    ],
+    chests: [
+      { id: 'fl_c1', x: 300, y: 1300, reward: { gold: 320 } },
+      { id: 'fl_c2', x: 1180, y: 800, reward: { items: { book_poison: 1 } } },
+      { id: 'fl_c3', x: 560, y: 620, reward: { items: { a3: 1 }, gold: 200 } }
+    ]
+  },
+  coast: {
+    id: 'coast', name: '蓬莱海岸', sub: '潮生碧海 · 蛟龙潜渊', art: 'coast', w: 1520, h: 1840,
+    spawn: { x: 760, y: 1480 },
+    npcs: [
+      { name: '老渔翁', x: 650, y: 1590, sprite: 'yuan_m', act: 'talk', talk: 'fisher' }
+    ],
+    portals: [
+      { x: 760, y: 1780, to: 'fenglin', label: '回枫落古道' },
+      { x: 1180, y: 1760, to: 'town', label: '乘舟回城' }
+    ],
+    monsters: [
+      { sp: 'shuimu', x: 900, y: 1250, lv: 17 },
+      { sp: 'chaoling', x: 860, y: 1680, lv: 18 },
+      { sp: 'guiling', x: 660, y: 1710, lv: 18 },
+      { sp: 'shuimu', x: 870, y: 1490, lv: 17 },
+      { sp: 'haiyao', x: 760, y: 1160, lv: 19, boss: true }
+    ],
+    chests: [
+      { id: 'hs_c1', x: 330, y: 1450, reward: { gold: 420 } },
+      { id: 'hs_c2', x: 1240, y: 1560, reward: { items: { exp1: 2 } } },
+      { id: 'hs_c3', x: 450, y: 1630, reward: { items: { w4: 1 }, gold: 300 } }
     ]
   }
 };
@@ -742,75 +1648,304 @@ let worldGuard = false;
 function worldArt(sc) {
   const r = rng(sc.w + sc.h * 3 + sc.id.length * 97);
   const pal = {
-    town: ['#263d32', '#0c1512', '#c9b98e'],
-    bamboo: ['#1d3a2a', '#07110e', '#9fc4a0'],
-    valley: ['#283438', '#0a1113', '#9fb3ac'],
-    snow: ['#2c3d4a', '#091018', '#cfe3ee']
-  }[sc.art] || ['#263d32', '#0c1512', '#c9b98e'];
-  let deco = '';
-  for (let i = 0; i < 42; i++) {
-    const x = 50 + r() * (sc.w - 100), y = 80 + r() * (sc.h - 140);
-    if (Math.hypot(x - sc.spawn.x, y - sc.spawn.y) < 110) continue;
-    if (sc.art === 'town') {
-      if (r() > .5) deco += `<circle cx="${x}" cy="${y}" r="${7 + r() * 9}" fill="#172a21" opacity=".85"/>`;
-      else deco += `<rect x="${x}" y="${y - 14}" width="5" height="16" rx="2.5" fill="#413525" opacity=".8"/><circle cx="${x + 2}" cy="${y - 20}" r="8" fill="#3a5839" opacity=".85"/>`;
-    } else if (sc.art === 'snow') {
-      deco += `<path d="M${x} ${y} l-11 24 h22 z" fill="#5e7480" opacity=".5"/><rect x="${x - 1.5}" y="${y + 20}" width="3" height="8" fill="#4a626c" opacity=".6"/>`;
-    } else {
-      deco += `<g opacity=".7"><rect x="${x}" y="${y - 48}" width="5" height="66" rx="2" fill="#2d4f38"/><path d="M${x + 2} ${y - 38} q-24 -10 -32 -26 q24 4 32 14" stroke="#427056" stroke-width="4" fill="none"/><path d="M${x + 3} ${y - 24} q26 -8 34 -24 q-22 2 -34 12" stroke="#427056" stroke-width="4" fill="none"/></g>`;
-    }
-  }
-  let houses = '';
-  if (sc.art === 'town') {
-    houses = sc.npcs.map(n => `<g opacity=".95">
-      <rect x="${n.x - 78}" y="${n.y - 34}" width="156" height="78" rx="8" fill="#2a231a"/>
-      <path d="M${n.x - 96} ${n.y - 34} L${n.x} ${n.y - 88} L${n.x + 96} ${n.y - 34} Z" fill="#6d3a2c"/>
-      <rect x="${n.x - 16}" y="${n.y + 4}" width="32" height="40" rx="3" fill="#171310"/>
-      <rect x="${n.x - 62}" y="${n.y - 14}" width="26" height="22" rx="2" fill="#e8c47a" opacity=".35"/>
-      <rect x="${n.x + 36}" y="${n.y - 14}" width="26" height="22" rx="2" fill="#e8c47a" opacity=".35"/>
-    </g>`).join('');
-  }
+    town: { g1: '#5d6a4a', g2: '#33402e', path: '#c8ad78', edge: '#6f7d50', mist: '#dbe6c4' },
+    bamboo: { g1: '#35583c', g2: '#1d3326', path: '#9fae78', edge: '#4a7350', mist: '#cfe8cf' },
+    valley: { g1: '#3a5245', g2: '#213528', path: '#78876b', edge: '#4b6250', mist: '#c9dcd2' },
+    snow: { g1: '#7d99a6', g2: '#40596a', path: '#cfe0e6', edge: '#8fb0bf', mist: '#eaf6fa' },
+    maple: { g1: '#6b4a34', g2: '#3f2a1e', path: '#c29a6a', edge: '#8a5334', mist: '#f0cfa8' },
+    coast: { g1: '#c3ac7f', g2: '#8e7a52', path: '#e6d4a4', edge: '#a58e61', mist: '#cfeff0' }
+  }[sc.art] || { g1: '#3f5741', g2: '#2b3d2c', path: '#a8946a', edge: '#5e7346', mist: '#cfe0c2' };
   const cx = Math.round(sc.w / 2);
-  const pathD = sc.art === 'town'
-    ? `M${cx} 170 L${cx} ${sc.h - 100} M240 ${sc.spawn.y} L${sc.w - 240} ${sc.spawn.y}`
-    : `M${cx} ${sc.h - 90} Q${cx + 90} ${sc.h * .55} ${cx - 50} 220`;
-  let lanterns = '';
+  let deco = '', extra = '';
+  const tree = (x, y, h, flip = 1) => `<image href="assets/scene/tree.png" x="${x - h * .54}" y="${y - h}" width="${h * 1.08}" height="${h}" opacity=".95" transform="translate(${flip < 0 ? x * 2 : 0},0) scale(${flip},1)" style="pointer-events:none"/>`;
+  const lantern = (x, y, h = 74) => `<image href="assets/scene/lantern.png" x="${x - h * .53}" y="${y - h}" width="${h * 1.06}" height="${h}" style="pointer-events:none"/>`;
+
   if (sc.art === 'town') {
-    for (let y = 300; y < sc.h - 160; y += 150) {
-      lanterns += `<circle cx="${cx - 40}" cy="${y}" r="6" fill="#e8b96a" opacity=".55"/><circle cx="${cx - 40}" cy="${y}" r="16" fill="#e8b96a" opacity=".1"/>
-        <circle cx="${cx + 40}" cy="${y + 70}" r="6" fill="#e8b96a" opacity=".55"/><circle cx="${cx + 40}" cy="${y + 70}" r="16" fill="#e8b96a" opacity=".1"/>`;
+    /* 中央广场石板 + 暖色灯火 */
+    extra += `<ellipse cx="${cx}" cy="${sc.spawn.y + 40}" rx="300" ry="210" fill="${pal.path}" opacity=".2"/>
+      <ellipse cx="${cx}" cy="${sc.spawn.y + 40}" rx="230" ry="160" fill="#f0d8a0" opacity=".07"/>
+      <path d="M${cx - 300} ${sc.spawn.y + 40} h600" stroke="#f6e2b0" stroke-width="1.5" opacity=".18" stroke-dasharray="10 14"/>`;
+    [[cx - 268, 1010], [cx + 268, 1010], [cx - 275, 1420], [cx + 275, 1420]].forEach(([x, y], i) => {
+      deco += tree(x, y, 180 + (i % 2) * 30, x > cx ? -1 : 1);
+    });
+    for (let y = 470; y < sc.h - 160; y += 380) {
+      deco += lantern(cx - 196, y, 72) + lantern(cx + 196, y + 190, 72);
     }
+    const houses = [[cx - 246, 900, 1], [cx + 246, 900, -1], [cx - 246, 1180, 1], [cx + 246, 1180, -1]];
+    houses.forEach(([hx, hy, f], hi) => {
+      deco += `<g transform="translate(${hx},${hy}) scale(${f},1)" style="pointer-events:none">
+        <ellipse cx="0" cy="40" rx="118" ry="18" fill="#1d2a1f" opacity=".5"/>
+        <rect x="-96" y="-62" width="192" height="102" rx="3" fill="#6b5236"/>
+        <rect x="-96" y="-62" width="192" height="8" fill="#8a6c46"/>
+        <rect x="-96" y="-14" width="192" height="54" fill="#4b3a26"/>
+        <path d="M-118 -58 Q-104 -112 0 -120 Q104 -112 118 -58 Z" fill="url(#roofg-${sc.id})" stroke="#22382c" stroke-width="4"/>
+        <path d="M0 -120 V-58" stroke="#2b4436" stroke-width="2" opacity=".5"/>
+        <path d="M-118 -58 Q-104 -112 0 -120 Q104 -112 118 -58" fill="none" stroke="#8fb08a" stroke-width="1.5" opacity=".35"/>
+        <path d="M-126 -56h252" stroke="#1e2a1c" stroke-width="8" stroke-linecap="round"/>
+        <rect x="-24" y="-6" width="48" height="46" rx="2" fill="#241d14"/>
+        <path d="M0 -6v46M-24 20h48" stroke="#5c4a30" stroke-width="2"/>
+        <rect x="-82" y="-38" width="40" height="26" rx="2" fill="#f0cf8a"/>
+        <rect x="42" y="-38" width="40" height="26" rx="2" fill="#f0cf8a"/>
+        <path d="M-82 -24h40M-62 -38v26M42 -24h40M62 -38v26" stroke="#4a3520" stroke-width="2.4"/>
+        <rect x="-98" y="-62" width="13" height="102" fill="#7d3028"/>
+        <rect x="85" y="-62" width="13" height="102" fill="#7d3028"/>
+        <rect x="-40" y="-48" width="80" height="17" rx="3" fill="#2c2018" stroke="#c9a25e" stroke-width="1.4"/>
+        <text x="0" y="-35" font-size="10" fill="#e8cc90" text-anchor="middle" letter-spacing="2">${['门派','百宝','客栈','兽栏'][hi]}</text>
+        <g><line x1="-88" y1="-56" x2="-88" y2="-42" stroke="#3a2a18" stroke-width="2"/>
+          <ellipse cx="-88" cy="-32" rx="9" ry="11" fill="#d8564c"/><ellipse cx="-88" cy="-32" rx="14" ry="16" fill="#ffb27a" opacity=".18"/>
+          <rect x="-93" y="-44" width="10" height="4" fill="#e8c47a"/></g>
+        <g><line x1="88" y1="-56" x2="88" y2="-42" stroke="#3a2a18" stroke-width="2"/>
+          <ellipse cx="88" cy="-32" rx="9" ry="11" fill="#d8564c"/><ellipse cx="88" cy="-32" rx="14" ry="16" fill="#ffb27a" opacity=".18"/>
+          <rect x="83" y="-44" width="10" height="4" fill="#e8c47a"/></g>
+      </g>`;
+    });
+    /* 街边摊位 */
+    const stall = (x, y, f) => `<g transform="translate(${x},${y}) scale(${f},1)" style="pointer-events:none">
+      <ellipse cx="0" cy="34" rx="76" ry="14" fill="#1d2a1f" opacity=".4"/>
+      <rect x="-62" y="-4" width="124" height="40" rx="4" fill="#7a5a36" stroke="#3f2c16" stroke-width="3"/>
+      <rect x="-62" y="20" width="124" height="16" fill="#5c4124"/>
+      <path d="M-70 -6 h140 l-14 -34 h-112 Z" fill="#c8553f" stroke="#7d2c20" stroke-width="3"/>
+      <path d="M-70 -6 h140" stroke="#f0d49a" stroke-width="4"/>
+      <path d="M-26 -40 v34 M22 -40 v34" stroke="#f6e2b0" stroke-width="3" opacity=".75"/>
+      <circle cx="-38" cy="6" r="10" fill="#e0a84f"/><circle cx="-16" cy="6" r="9" fill="#c8553f"/><circle cx="8" cy="6" r="10" fill="#8fb05e"/>
+      <circle cx="34" cy="6" r="9" fill="#e0a84f"/>
+    </g>`;
+    deco += stall(cx - 162, sc.spawn.y - 236, 1) + stall(cx + 162, sc.spawn.y + 206, -1);
+    extra += `<g opacity=".55" fill="none" stroke="#f6e2b0" style="pointer-events:none">
+      <circle cx="${cx}" cy="${sc.spawn.y + 30}" r="150" stroke-width="2" opacity=".2"/>
+      <circle cx="${cx}" cy="${sc.spawn.y + 30}" r="116" stroke-width="1.5" opacity=".16" stroke-dasharray="9 12"/>
+    </g>`;
+  } else if (sc.art === 'bamboo') {
+    const stalks = [];
+    for (let i = 0; i < 40; i++) {
+      const x = 40 + r() * (sc.w - 80), y = 120 + r() * (sc.h - 220);
+      if (Math.abs(x - cx) < 88) continue;
+      stalks.push([x, y, 200 + r() * 150, .5 + r() * .42]);
+    }
+    for (let y = 480; y < sc.h - 120; y += 300) {
+      stalks.push([cx - 142, y + 60, 260, .8], [cx + 144, y + 180, 240, .78]);
+    }
+    stalks.forEach(([x, y, h, o]) => {
+      deco += `<g opacity="${o}" style="pointer-events:none">
+        <path d="M${x} ${y} q-10 -${h * .5} 4 -${h}" stroke="#416b3f" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <path d="M${x} ${y} q-10 -${h * .5} 4 -${h}" stroke="#79a967" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M${x + 2} ${y - h * .55} q-30 -14 -46 -2 q26 18 46 2Z" fill="#5b8f52"/>
+        <path d="M${x + 3} ${y - h * .38} q32 -16 48 -4 q-28 20 -48 4Z" fill="#6ba05c"/>
+        <path d="M${x + 2} ${y - h * .78} q26 -10 38 0 q-22 14 -38 0Z" fill="#79b466"/>
+      </g>`;
+    });
+    const rocks = [[cx - 250, 900], [cx + 260, 820], [cx - 240, 1460], [cx + 250, 1420]];
+    rocks.forEach(([x, y]) => deco += `<ellipse cx="${x}" cy="${y}" rx="46" ry="24" fill="#44553c"/><ellipse cx="${x - 8}" cy="${y - 8}" rx="30" ry="14" fill="#5d7050" opacity=".7"/>`);
+    deco += `<g opacity=".5" fill="#a8d88a">${Array.from({ length: 18 }, () => `<ellipse cx="${r() * sc.w}" cy="${300 + r() * (sc.h - 400)}" rx="3" ry="1.6" transform="rotate(${r() * 60 - 30})"/>`).join('')}</g>`;
+    extra += `<g fill="#d8f0c8" opacity=".1"><ellipse cx="${cx - 200}" cy="${sc.h * .4}" rx="280" ry="58"/><ellipse cx="${cx + 220}" cy="${sc.h * .62}" rx="300" ry="46"/></g>`;
+  } else if (sc.art === 'valley') {
+    for (let i = 0; i < 22; i++) {
+      const x = 60 + r() * (sc.w - 120), y = 200 + r() * (sc.h - 360);
+      if (Math.abs(x - cx) < 96) continue;
+      deco += `<g opacity=".62" style="pointer-events:none">
+        <path d="M${x} ${y} q-8 -60 6 -86" stroke="#2b3f2f" stroke-width="8" fill="none"/>
+        <circle cx="${x + 6}" cy="${y - 92}" r="34" fill="#2f4a34"/><circle cx="${x - 16}" cy="${y - 74}" r="22" fill="#37553b"/>
+      </g>`;
+    }
+    for (let y = 620; y < sc.h - 260; y += 380) {
+      deco += `<g opacity=".6"><path d="M${cx + 150} ${y + 90} q-14 -70 8 -110" stroke="#2b3f2f" stroke-width="9" fill="none"/>
+        <circle cx="${cx + 158}" cy="${y - 24}" r="40" fill="#2e4a35"/><circle cx="${cx + 128}" cy="${y}" r="26" fill="#37553b"/></g>`;
+    }
+    for (let i = 0; i < 14; i++) {
+      const x = 90 + r() * (sc.w - 180), y = 300 + r() * (sc.h - 500);
+      if (Math.abs(x - cx) < 96) continue;
+      deco += `<g opacity=".85"><ellipse cx="${x}" cy="${y}" rx="15" ry="5" fill="#2f4436"/><path d="M${x} ${y} v-16" stroke="#d8c7a0" stroke-width="4"/><path d="M${x - 9} ${y - 16} q9 -12 18 0 Z" fill="#c98a5e"/><circle cx="${x - 5}" cy="${y - 17}" r="1.6" fill="#fff2cf"/></g>`;
+    }
+    extra = `<g opacity=".12" fill="${pal.mist}"><ellipse cx="${cx - 220}" cy="${sc.h * .45}" rx="300" ry="60"/><ellipse cx="${cx + 240}" cy="${sc.h * .62}" rx="340" ry="52"/></g>`;
+    /* 幽光蘑菇 + 萤火 */
+    const shroom = (x, y, s) => `<g transform="translate(${x},${y}) scale(${s})" style="pointer-events:none">
+      <ellipse cx="0" cy="3" rx="30" ry="9" fill="#6fe0c0" opacity=".12"/>
+      <path d="M0 0 v-18" stroke="#d9e6cf" stroke-width="5" stroke-linecap="round"/>
+      <path d="M-15 -18 q15 -17 30 0 Z" fill="#4fb6a0" stroke="#a7f2dd" stroke-width="2"/>
+      <circle cx="-6" cy="-22" r="1.8" fill="#eafff8"/><circle cx="8" cy="-20" r="1.5" fill="#eafff8"/>
+    </g>`;
+    deco += shroom(cx - 158, sc.spawn.y + 66, 1.15) + shroom(cx + 168, sc.spawn.y - 46, .92) + shroom(cx + 118, sc.spawn.y + 208, 1.35) + shroom(cx - 190, sc.spawn.y - 230, .85);
+    extra += `<g fill="#b9ffd9">${Array.from({ length: 16 }, () => {
+      const x = cx - 170 + r() * 340, y = sc.spawn.y - 280 + r() * 560;
+      return `<circle cx="${x}" cy="${y}" r="${1.6 + r() * 1.6}" opacity="${.25 + r() * .5}"/>`;
+    }).join('')}</g>`;
+    extra += `<circle cx="${cx - 158}" cy="${sc.spawn.y + 44}" r="52" fill="url(#glow-${sc.id})" opacity=".3"/>`;
+  } else if (sc.art === 'snow') {
+    const pines = [];
+    for (let i = 0; i < 30; i++) {
+      const x = 60 + r() * (sc.w - 120), y = 200 + r() * (sc.h - 320);
+      if (Math.abs(x - cx) < 92) continue;
+      pines.push([x, y, 120 + r() * 90]);
+    }
+    for (let y = 560; y < sc.h - 200; y += 340) pines.push([cx - 150, y + 90, 190], [cx + 152, y + 210, 170]);
+    for (const [x, y, h] of pines) {
+      deco += `<g opacity=".8" style="pointer-events:none">
+        <path d="M${x} ${y} l-${h * .34} 0 l${h * .34} -${h} l${h * .34} ${h} Z" fill="#2f4a52"/>
+        <path d="M${x} ${y - h * .72} l-${h * .22} ${h * .34} l${h * .44} 0 Z" fill="#eaf6fa"/>
+        <path d="M${x} ${y - h * .42} l-${h * .3} ${h * .42} l${h * .6} 0 Z" fill="#dceef4"/>
+        <rect x="${x - 3}" y="${y}" width="6" height="16" fill="#3d5258"/>
+      </g>`;
+    }
+    extra = `<g fill="#eef8ff" opacity=".5">
+      ${Array.from({ length: 60 }, () => `<circle cx="${r() * sc.w}" cy="${r() * sc.h}" r="${.8 + r() * 1.8}"/>`).join('')}
+    </g>`;
+    deco += `<image href="assets/scene/mountain2.png" x="${cx - 420}" y="90" width="840" height="380" opacity=".25" style="pointer-events:none"/>`;
+  } else if (sc.art === 'maple') {
+    const spots = [[220, 700], [1210, 660], [250, 1250], [1180, 1230], [430, 1580], [1000, 1600], [cx - 165, 1120], [cx + 170, 900], [cx + 165, 1520]];
+    spots.forEach(([x, y], i) => { deco += tree(x, y, 210 + (i % 3) * 34, x > cx ? -1 : 1); });
+    deco += lantern(cx - 150, sc.h - 420, 92) + lantern(cx + 150, 760, 92);
+    for (let i = 0; i < 46; i++) {
+      const x = 60 + r() * (sc.w - 120), y = 260 + r() * (sc.h - 360);
+      deco += `<path d="M${x} ${y} l7 5 l-6 5 l-6 -5 Z" fill="${r() > .5 ? '#d9633c' : '#a83f2a'}" opacity=".65"/>`;
+    }
+  } else if (sc.art === 'coast') {
+    const shore = 1340;
+    const pierX = cx + 180;
+    extra = `<g style="pointer-events:none">
+      <defs>
+        <linearGradient id="sea-${sc.id}" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1d4f5e"/><stop offset=".55" stop-color="#2f7180"/><stop offset=".88" stop-color="#57a2a6"/><stop offset="1" stop-color="#8fd0c8"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="${sc.w}" height="${shore}" fill="url(#sea-${sc.id})"/>
+      <rect x="0" y="0" width="${sc.w}" height="${shore}" fill="url(#wtex-${sc.id})" opacity=".06"/>
+      <g stroke="#a9e6e4" fill="none" opacity=".26" stroke-width="2.2" stroke-linecap="round">
+        ${Array.from({ length: 22 }, () => {
+          const x = r() * sc.w, y = 200 + r() * (shore - 420), w = 20 + r() * 44;
+          return `<path d="M${x} ${y} q${w * .3} -7 ${w * .5} 0 q${w * .3} 7 ${w * .55} 1"/>`;
+        }).join('')}
+      </g>
+      <g fill="#eafcfa" opacity=".42">
+        ${Array.from({ length: 30 }, () => `<circle cx="${r() * sc.w}" cy="${140 + r() * (shore - 340)}" r="${.8 + r() * 1.9}"/>`).join('')}
+      </g>
+      <g opacity=".42" fill="#17414e">
+        <path d="M0 250 Q120 178 250 218 Q360 252 480 198 L512 250 Z"/>
+        <path d="M520 316 Q590 274 660 304 Q720 330 780 300 L800 328 Z"/>
+        <path d="M980 268 Q1060 218 1140 246 L1140 276 Z"/>
+      </g>
+      <g transform="translate(${cx + 236}, 420)" opacity=".8">
+        <path d="M0 0 h70 l-12 14 h-46 Z" fill="#5a3f26" stroke="#33230f" stroke-width="2"/>
+        <path d="M34 0 v-44 l30 20 l-30 10" fill="#f6ecd4" opacity=".9" stroke="#8a7a56" stroke-width="1.5"/>
+      </g>
+      <g stroke="#0e2e36" fill="none" opacity=".5" stroke-width="2" stroke-linecap="round">
+        <path d="M150 372 q7 -8 14 0 q7 8 14 0"/><path d="M186 350 q6 -7 12 0 q6 7 12 0"/>
+      </g>
+      <path d="M0 ${shore - 74} Q${sc.w * .26} ${shore - 132} ${sc.w * .52} ${shore - 86} T${sc.w} ${shore - 112} L${sc.w} ${shore} L0 ${shore} Z" fill="#6fb9bb" opacity=".45"/>
+      <path d="M0 ${shore - 26} Q${sc.w * .3} ${shore - 62} ${sc.w * .55} ${shore - 16} T${sc.w} ${shore - 42}" stroke="#bff0ec" stroke-width="7" fill="none" opacity=".6"/>
+      <path d="M0 ${shore + 2} Q${sc.w * .4} ${shore - 26} ${sc.w * .7} ${shore + 8} T${sc.w} ${shore - 6}" stroke="#f2fffc" stroke-width="10" fill="none" opacity=".55"/>
+      <path d="M0 ${shore + 16} Q${sc.w * .35} ${shore + 34} ${sc.w * .68} ${shore + 12} T${sc.w} ${shore + 26} L${sc.w} ${sc.h} L0 ${sc.h} Z" fill="#a08a5f" opacity=".34"/>
+      <ellipse cx="${cx - 196}" cy="${sc.spawn.y + 92}" rx="150" ry="62" fill="#4a94a0" opacity=".85"/>
+      <ellipse cx="${cx - 196}" cy="${sc.spawn.y + 92}" rx="150" ry="62" fill="none" stroke="#cdf2ea" stroke-width="3" opacity=".5"/>
+      <ellipse cx="${cx - 196}" cy="${sc.spawn.y + 92}" rx="120" ry="44" fill="#6fb9bb" opacity=".35"/>
+      <ellipse cx="${cx}" cy="1196" rx="150" ry="52" fill="#2c5b64" opacity=".6"/>
+      <ellipse cx="${cx}" cy="1188" rx="108" ry="34" fill="#6d7f68"/>
+      <ellipse cx="${cx - 10}" cy="1182" rx="74" ry="22" fill="#8a9a80"/>
+      <g fill="#f2e2b8" opacity=".55">
+        ${Array.from({ length: 40 }, () => `<ellipse cx="${r() * sc.w}" cy="${shore + 60 + r() * (sc.h - shore - 140)}" rx="${1.4 + r() * 2}" ry="${1 + r() * 1.4}"/>`).join('')}
+      </g>
+    </g>`;
+    const rocks = [];
+    for (let i = 0; i < 16; i++) {
+      const x = 60 + r() * (sc.w - 120), y = shore + 90 + r() * (sc.h - shore - 260);
+      if (Math.abs(x - cx) < 120) continue;
+      rocks.push([x, y, 30 + r() * 26, 14 + r() * 12]);
+    }
+    for (let y = shore + 120; y < sc.h - 220; y += 380) rocks.push([cx - 175, y, 44, 22], [cx + 190, y + 170, 38, 19]);
+    rocks.forEach(([x, y, rx, ry]) => {
+      deco += `<ellipse cx="${x}" cy="${y + ry * .5}" rx="${rx * .9}" ry="${ry * .5}" fill="#6d5f42" opacity=".35"/>
+        <ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#8a7a60"/><ellipse cx="${x - 6}" cy="${y - 6}" rx="${rx * .66}" ry="${ry * .62}" fill="#a89677" opacity=".85"/>`;
+    });
+    /* 海中礁石 */
+    [[cx - 250, 700], [cx + 230, 820], [cx - 150, 1020], [cx + 300, 1120]].forEach(([x, y]) => {
+      deco += `<ellipse cx="${x}" cy="${y}" rx="54" ry="26" fill="#3c5a5c"/><ellipse cx="${x - 8}" cy="${y - 10}" rx="36" ry="16" fill="#57787a"/>
+        <path d="M${x - 40} ${y + 14} q40 14 80 0" stroke="#9fe0e2" stroke-width="3" fill="none" opacity=".6"/>`;
+    });
+    /* 木栈桥（右侧，避开出生点） */
+    deco += `<g opacity=".96" style="pointer-events:none">
+      <ellipse cx="${pierX}" cy="${shore + 84}" rx="96" ry="16" fill="#4a3a24" opacity=".35"/>
+      <rect x="${pierX - 74}" y="${shore - 30}" width="148" height="112" fill="#8a6a44"/>
+      <rect x="${pierX - 74}" y="${shore - 30}" width="148" height="112" fill="none" stroke="#4a3520" stroke-width="3"/>
+      ${Array.from({ length: 6 }, (_, i) => `<path d="M${pierX - 74 + i * 30} ${shore - 30} v112" stroke="#5f4628" stroke-width="2.4"/>`).join('')}
+      <rect x="${pierX - 86}" y="${shore - 38}" width="13" height="126" rx="4" fill="#4f3a22"/>
+      <rect x="${pierX + 73}" y="${shore - 38}" width="13" height="126" rx="4" fill="#4f3a22"/>
+      <path d="M${pierX - 80} ${shore - 34} v-58" stroke="#3a2a18" stroke-width="3"/>
+      <ellipse cx="${pierX - 80}" cy="${shore - 96}" rx="9" ry="11" fill="#d8564c"/>
+      <ellipse cx="${pierX - 80}" cy="${shore - 96}" rx="15" ry="17" fill="#ffb27a" opacity=".2"/>
+      <path d="M${pierX + 96} ${shore + 96} q-8 -34 -40 -36 l0 18 q24 2 26 22 Z" fill="#7a5a34" stroke="#4a3520" stroke-width="2.5"/>
+    </g>`;
+    /* 沙滩小物 */
+    deco += `<g opacity=".9" style="pointer-events:none">
+      <ellipse cx="${cx + 88}" cy="${sc.spawn.y + 176}" rx="62" ry="17" fill="#9c8659" opacity=".4"/>
+      <path d="M${cx + 30} ${sc.spawn.y + 168} q56 -26 116 -4 q-58 26 -116 4Z" fill="#8a6a44" stroke="#4a3520" stroke-width="2.5"/>
+      <path d="M${cx + 40} ${sc.spawn.y + 169} q46 -18 96 -3" stroke="#c9a878" stroke-width="2.4" fill="none"/>
+      <g fill="#f6e6c2" stroke="#b99a6a" stroke-width="1.2">
+        <path d="M${cx - 330} ${sc.spawn.y + 220} q10 -12 20 0 q-10 10 -20 0Z"/>
+        <path d="M${cx + 292} ${sc.spawn.y + 44} q9 -11 18 0 q-9 9 -18 0Z"/>
+      </g>
+      <g stroke="#d8895f" stroke-width="2.6" fill="none" stroke-linecap="round">
+        <path d="M${cx - 300} ${sc.spawn.y + 320} l0 -10 M${cx - 300} ${sc.spawn.y + 310} l8 -6 M${cx - 300} ${sc.spawn.y + 310} l-8 -6 M${cx - 300} ${sc.spawn.y + 310} l0 8"/>
+      </g>
+    </g>`;
   }
+
+  const pathD = sc.art === 'town'
+    ? `M${cx} 180 L${cx} ${sc.h - 120} M180 ${sc.spawn.y} L${sc.w - 180} ${sc.spawn.y}`
+    : sc.art === 'coast'
+      ? `M${cx} ${sc.h - 80} Q${cx + 70} ${sc.h * .84} ${cx + 8} 1420`
+      : `M${cx} ${sc.h - 70} Q${cx + 120} ${sc.h * .56} ${cx - 70} 220`;
+  const bg = sc.art === 'town'
+    ? `<rect width="100%" height="100%" fill="${pal.g1}"/>
+       <rect width="100%" height="100%" fill="url(#wtex-${sc.id})" opacity=".1"/>
+       <ellipse cx="${cx}" cy="${sc.h * .55}" rx="${sc.w * .62}" ry="${sc.h * .45}" fill="#e2c98c" opacity=".05"/>`
+    : `<rect width="100%" height="100%" fill="${pal.g1}"/>
+       <rect width="100%" height="100%" fill="url(#wtex-${sc.id})" opacity="${sc.art === 'coast' ? .1 : .26}"/>`;
+
   return `<svg width="${sc.w}" height="${sc.h}" viewBox="0 0 ${sc.w} ${sc.h}" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <radialGradient id="wbg-${sc.id}" cx="50%" cy="42%" r="72%">
-        <stop offset="0" stop-color="${pal[0]}"/><stop offset="1" stop-color="${pal[1]}"/>
-      </radialGradient>
-      <radialGradient id="wvig-${sc.id}" cx="50%" cy="50%" r="62%">
-        <stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/>
-      </radialGradient>
-      <pattern id="wdot-${sc.id}" width="46" height="46" patternUnits="userSpaceOnUse">
-        <circle cx="7" cy="7" r="1.3" fill="#fff" opacity=".05"/><circle cx="30" cy="28" r="1" fill="#000" opacity=".14"/>
+      <linearGradient id="wbg-${sc.id}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${pal.g2}"/><stop offset=".45" stop-color="${pal.g1}"/><stop offset="1" stop-color="${pal.g2}"/>
+      </linearGradient>
+      <pattern id="wtex-${sc.id}" width="128" height="128" patternUnits="userSpaceOnUse">
+        <image href="assets/scene/tile_stone1.png" width="128" height="128"/>
       </pattern>
+      <pattern id="roofTex-${sc.id}" width="128" height="128" patternUnits="userSpaceOnUse">
+        <image href="assets/scene/roof.png" width="128" height="128"/>
+      </pattern>
+      <linearGradient id="roofg-${sc.id}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#7aa87e"/><stop offset=".55" stop-color="#4e7a5e"/><stop offset="1" stop-color="#31543f"/>
+      </linearGradient>
+      <radialGradient id="wvig-${sc.id}" cx="50%" cy="46%" r="66%">
+        <stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/>
+      </radialGradient>
+      <radialGradient id="glow-${sc.id}" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#8effd8" stop-opacity=".85"/><stop offset="1" stop-color="#8effd8" stop-opacity="0"/>
+      </radialGradient>
     </defs>
     <rect width="100%" height="100%" fill="url(#wbg-${sc.id})"/>
-    <rect width="100%" height="100%" fill="url(#wdot-${sc.id})"/>
-    <path d="${pathD}" stroke="${pal[2]}" stroke-width="92" fill="none" opacity=".07" stroke-linecap="round"/>
-    <path d="${pathD}" stroke="${pal[2]}" stroke-width="24" fill="none" opacity=".1" stroke-linecap="round"/>
-    ${houses}${lanterns}${deco}
+    ${bg}
+    ${extra}
+    <path d="${pathD}" stroke="#20180f" stroke-width="96" fill="none" opacity=".16" stroke-linecap="round"/>
+    <path d="${pathD}" stroke="${pal.path}" stroke-width="76" fill="none" opacity=".46" stroke-linecap="round"/>
+    <path d="${pathD}" stroke="${pal.edge}" stroke-width="66" fill="none" opacity=".28" stroke-dasharray="24 20" stroke-linecap="round"/>
+    ${deco}
+    <ellipse cx="${cx}" cy="${sc.spawn.y}" rx="330" ry="150" fill="#fff" opacity=".045" style="pointer-events:none"/>
     <rect width="100%" height="100%" fill="url(#wvig-${sc.id})"/>
   </svg>`;
 }
 
 function worldEntities(sc) {
   const npcs = sc.npcs.map((n, i) => `<button class="w-entity w-npc" style="left:${n.x}px;top:${n.y}px" data-act="worldNpc" data-arg="${i}">
-    <span class="av">${n.icon}<i class="ring"></i></span><span class="nm">${n.name}</span></button>`).join('');
+    ${n.obj ? `<span class="spr obj">${icon(n.obj === 'quest' ? 'scroll' : 'shop')}</span>` : `<img class="spr" src="${npcSprite(n)}" alt="">`}
+    <span class="nm">${n.name}</span>
+    ${(n.act === 'master' || n.act === 'quest' || n.talk) ? '<i class="mark">!</i>' : ''}
+  </button>`).join('');
   const mons = (sc.monsters || []).map((m, i) => `<button class="w-entity w-mon" style="left:${m.x}px;top:${m.y}px" data-act="worldMon" data-arg="${i}">
-    <span class="av">${SPECIES[m.sp].icon}</span><span class="nm">${SPECIES[m.sp].name} · Lv.${m.lv}</span></button>`).join('');
+    <span class="spr mon">${monArt(m.sp)}</span><span class="nm">${SPECIES[m.sp].name} · Lv.${m.lv}${m.boss ? ' · 首领' : ''}</span>
+    ${m.boss ? '<i class="mark">★</i>' : ''}</button>`).join('');
   const chests = (sc.chests || []).filter(c => !(S.player.chests || []).includes(c.id)).map(c => `<button class="w-entity w-chest" style="left:${c.x}px;top:${c.y}px" data-act="worldChest" data-arg="${c.id}">
-    <span class="av">🎁</span><span class="nm">宝箱</span></button>`).join('');
+    <span class="spr chest">${icon('chest')}</span><span class="nm">宝箱</span></button>`).join('');
   const portals = sc.portals.map((p, i) => `<button class="w-entity w-portal" style="left:${p.x}px;top:${p.y}px" data-act="worldPortal" data-arg="${i}">
-    <span class="av">🌀</span><span class="nm">${p.label}</span></button>`).join('');
+    <span class="spr portal">${icon('portal')}</span><span class="nm">${p.label}</span></button>`).join('');
   return npcs + mons + chests + portals;
 }
 
@@ -840,13 +1975,15 @@ function renderWorld() {
     <div class="world-art" id="worldArt">${worldArt(sc)}${worldEntities(sc)}</div>
     <div class="w-fade" id="wFade"></div>
     <div class="hero-lock" id="heroLock">
-      <span class="h-shadow"></span><span class="h-av">${SECTS[S.player.sect].icon}</span><span class="h-nm">${S.player.name}</span>
+      <span class="h-shadow"></span><img class="h-spr" src="${playerSprite()}" alt=""><span class="h-nm">${S.player.name || '少侠'}</span>
     </div>
     <div class="world-top">
-      <div class="w-scene"><b>${sc.name}</b><span>${sc.sub}</span></div>
-      <div class="w-quest"><div class="qt"><b>${mi ? mi.q.name : '江湖已定'}</b><span>${mi ? mi.q.desc : '主线已完成，可继续历练'}</span></div>${mi ? '<button data-act="walkQuest">前往</button>' : ''}</div>
+      <div class="world-top-row">
+        <div class="w-scene"><b>${sc.name}</b><span>${sc.sub}</span></div>
+        <div class="w-quest"><div class="qt"><b>${mi ? mi.q.name : '江湖已定'}${mi ? `<i style="font-style:normal;font-size:10px;color:#8fa093;margin-left:4px">${mi.cur}/${mi.q.need}</i>` : ''}</b><span>${mi ? mi.q.desc : '主线已完成，可继续历练'}</span></div>${mi ? (mi.done ? '<button data-act="claimMain">领奖</button>' : '<button data-act="walkQuest">带路</button>') : ''}</div>
+      </div>
     </div>
-    <button class="joy" id="joy"><span class="knob"></span><span class="joy-hint">拖动行走</span></button>
+    <button class="joy" id="joy"><span class="knob"></span><span class="joy-hint">行走</span></button>
   </div>`;
   bindWorld();
 }
@@ -928,8 +2065,8 @@ function worldLoop(t) {
   const hero = document.getElementById('heroLock');
   if (hero) {
     hero.classList.toggle('walk', W.moving);
-    const av = hero.querySelector('.h-av');
-    if (av) av.style.transform = dx < -.1 ? 'scaleX(-1)' : (dx > .1 ? 'scaleX(1)' : av.style.transform);
+    const av = hero.querySelector('.h-spr');
+    if (av && Math.abs(dx) > .1) av.style.setProperty('--flip', dx < 0 ? -1 : 1);
   }
   checkWorldNear(t);
   if (!W) return;
@@ -962,7 +2099,9 @@ function checkWorldNear(t) {
     if (d > 165) W.suppressM.delete(i);
     if (d < 100 && d < bd) { bd = d; near = { type: 'monster', idx: i, label: '挑战 · ' + SPECIES[m.sp].name }; }
   });
-  if (near && near.type === 'monster' && bd < 40 && !W.suppressM.has(near.idx) && Date.now() - W.lastBattle > 2500) { W.suppressM.add(near.idx); beginWorldBattle(); return; }
+  if (near && near.type === 'monster' && bd < 40 && !W.suppressM.has(near.idx) && Date.now() - W.lastBattle > 2500) {
+    W.suppressM.add(near.idx); beginWorldBattle(sc.monsters[near.idx]); return;
+  }
   if (near && near.type === 'chest' && bd < 42) { claimChest(near.id); return; }
   if (!near) { W.near = null; W.nearSince = 0; showWorldAct(null); return; }
   if (!W.near || W.near.label !== near.label) { W.near = near; W.nearSince = t; }
@@ -985,6 +2124,9 @@ function openWorldNpc(i) {
   const n = SCENES[S.player.scene].npcs[i];
   if (!n) return;
   if (W) W.suppressN.add(i);
+  S.player.daily.talks = (S.player.daily.talks || 0) + 1;
+  save();
+  if (n.talk) return openTalk(n.talk);
   if (n.act === 'shop') return go('shop');
   if (n.act === 'pets') return go('pets');
   if (n.act === 'quest') return go('quest');
@@ -992,12 +2134,43 @@ function openWorldNpc(i) {
   if (n.act === 'rest') return ACT.rest();
 }
 
-function beginWorldBattle() {
+let talkState = null;
+function openTalk(key) {
+  const t = TALKS[key];
+  if (!t) return;
+  S.player.talks = S.player.talks || {};
+  const seen = (S.player.talks[key] = (S.player.talks[key] || 0) + 1);
+  const lines = (seen > 1 && t.repeat && t.repeat.length) ? t.repeat : t.lines;
+  talkState = { key, lineIdx: 0, lines: lines.slice(), action: t.act };
+  renderTalk();
+}
+function renderTalk() {
+  if (!talkState) return;
+  const t = TALKS[talkState.key];
+  const line = talkState.lines[talkState.lineIdx];
+  const last = talkState.lineIdx >= talkState.lines.length - 1;
+  openSheet(`
+    <div class="talk">
+      <div class="talk-portrait"><img src="assets/chars/${t.sprite}.png" alt=""><span class="talk-lv">江湖人</span></div>
+      <div class="talk-body">
+        <div class="talk-name">${t.name}</div>
+        <div class="talk-text">${line}</div>
+        <div class="talk-dots">${talkState.lines.map((_, i) => `<i class="${i <= talkState.lineIdx ? 'on' : ''}"></i>`).join('')}</div>
+        <div class="sheet-actions">
+          ${last && talkState.action ? `<button class="btn gold" data-act="talkAction">${talkState.action.label}</button>` : ''}
+          ${last ? `<button class="btn ghost" data-act="closeSheet">告辞</button>` : `<button class="btn gold" data-act="talkNext">继续</button>`}
+        </div>
+      </div>
+    </div>`, true);
+}
+
+function beginWorldBattle(m) {
   if (B) return;
   worldGuard = true;
   lastWorldScene = S.player.scene;
   if (W) { W.target = null; W.pending = null; cancelAnimationFrame(W.raf); }
-  startBattle('wild');
+  window._enc = m || null;
+  startBattle(m && m.boss ? 'boss' : 'wild');
 }
 
 function switchScene(to, quest) {
@@ -1017,6 +2190,29 @@ function switchScene(to, quest) {
   }, 220);
 }
 
+function openPortal(p) {
+  if (!p) return;
+  if (p.to === '__travel') return openTravelSheet();
+  switchScene(p.to);
+}
+
+function openTravelSheet() {
+  const p = S.player;
+  openSheet(`
+    <h3>山门 · 远行</h3>
+    <div class="sub">择一处秘境，踏风而行</div>
+    ${Object.values(MAPS).map(m => {
+      const lock = p.level < m.unlock;
+      return `<button class="row" data-act="travelTo" data-arg="${m.id}" style="width:100%;text-align:left;${lock ? 'opacity:.5' : ''}">
+        <div class="r-ico">${m.icon}</div>
+        <div class="r-main"><div class="r-name">${m.name} ${lock ? `<span class="tag off">Lv.${m.unlock} 解锁</span>` : `<span class="tag">Lv.${m.lv}</span>`}</div>
+        <div class="r-desc">${m.sub}</div></div>
+        <div class="r-right" style="color:#e6c384">${lock ? icon('shield') : icon('arrow')}</div>
+      </button>`;
+    }).join('')}
+    <div class="sheet-actions"><button class="btn ghost" data-act="closeSheet">留在城中</button></div>`, true);
+}
+
 function claimChest(id) {
   if (!W) return;
   const sc = SCENES[S.player.scene];
@@ -1025,6 +2221,7 @@ function claimChest(id) {
   S.player.chests = S.player.chests || [];
   if (S.player.chests.includes(id)) return;
   S.player.chests.push(id);
+  S.player.daily.chests = (S.player.daily.chests || 0) + 1;
   save();
   const btn = [...document.querySelectorAll('.w-chest')].find(el => el.dataset.arg === id);
   if (btn) { btn.style.transition = 'transform .2s, opacity .2s'; btn.style.transform = 'translate(-50%,-70%) scale(.2)'; btn.style.opacity = '0'; setTimeout(() => btn.remove(), 220); }
@@ -1035,49 +2232,145 @@ function claimChest(id) {
 function walkQuest() {
   if (!W) return;
   const mi = mainQuestInfo();
-  if (!mi) return toast('主线已完成，去秘境自由历练吧');
+  if (!mi) return toast('主线已完成，可自由历练');
   const key = mi.q.key;
-  const sc = SCENES[S.player.scene];
   const matches = m => key === '__capture' ? SPECIES[m.sp].pet : m.sp === key;
-  const idx = (sc.monsters || []).findIndex(matches);
-  if (idx >= 0) {
-    const m = sc.monsters[idx];
-    W.target = { x: m.x, y: m.y + 20 };
-    W.pending = { type: 'monster', idx };
-    return toast('前往目标 · ' + SPECIES[m.sp].name);
+  const dest = Object.keys(SCENES).find(id => (SCENES[id].monsters || []).some(matches));
+  if (!dest) return toast('暂时找不到目标', 'bad');
+  if (S.player.scene !== dest) {
+    toast('前往 · ' + SCENES[dest].name);
+    switchScene(dest, true);
+    return;
   }
-  if (S.player.scene !== 'town') {
-    const pi = Math.max(sc.portals.findIndex(p => p.to === 'town'), 0);
-    const p = sc.portals[pi];
-    W.target = { x: p.x, y: p.y };
-    W.pending = { type: 'portal', idx: pi, quest: true };
-    return toast('目标不在此地，先经传送阵回城');
-  }
-  const dest = Object.keys(SCENES).find(id => id !== 'town' && (SCENES[id].monsters || []).some(matches));
-  if (!dest) return toast('当前没有可追踪的目标', 'bad');
-  S.player.map = dest;
-  const p = sc.portals[0];
-  W.target = { x: p.x, y: p.y };
-  W.pending = { type: 'portal', idx: 0, quest: true };
-  toast('前往 ' + MAPS[dest].name);
+  const sc = SCENES[dest];
+  const idx = sc.monsters.findIndex(matches);
+  const m = sc.monsters[idx];
+  W.target = { x: m.x, y: m.y + 22 };
+  W.pending = { type: 'monster', idx };
+  toast('前往目标 · ' + SPECIES[m.sp].name);
 }
 
 /* ===================== 任务 ===================== */
 const MAIN_QUESTS = [
-  { id: 'm1', name: '初入江湖', desc: '在竹林小径击败 3 只竹妖，试试身手。', key: 'zhuyiao', need: 3, rw: { exp: 150, gold: 120 } },
-  { id: 'm2', name: '竹林妖影', desc: '竹林深处妖气弥漫，击败竹林木魅。', key: 'mumei', need: 1, rw: { exp: 260, gold: 200, items: { net: 2 } } },
-  { id: 'm3', name: '灵兽为伴', desc: '在战斗中捕捉任意一只召唤兽。', key: '__capture', need: 1, rw: { exp: 220, gold: 150, items: { hp2: 1 } } },
-  { id: 'm4', name: '幽谷异动', desc: '前往幽谷密林，击败 5 只花妖。', key: 'huayao', need: 5, rw: { exp: 480, gold: 260 } },
-  { id: 'm5', name: '古木成精', desc: '击败盘踞幽谷的树妖，为民除害。', key: 'shuyao', need: 1, rw: { exp: 700, gold: 360, items: { hp2: 2 } } },
-  { id: 'm6', name: '雪岭寒踪', desc: '登上雪山寒岭，击败 6 只雪狼。', key: 'xuelang', need: 6, rw: { exp: 1000, gold: 480 } },
-  { id: 'm7', name: '冰封之祸', desc: '雪山雪魔作乱，将其击败，还人间太平。', key: 'xuemo', need: 1, rw: { exp: 1800, gold: 900, items: { hp2: 3, mp2: 2 } } }
+  { id: 'm1', name: '初入江湖', desc: '出城往北，在竹林小径击败 3 只竹妖。', key: 'zhuyiao', need: 3, rw: { exp: 160, gold: 140, items: { hp2: 1 } } },
+  { id: 'm2', name: '竹林妖影', desc: '竹林深处的竹林木魅在作祟，将它击败。', key: 'mumei', need: 1, rw: { exp: 320, gold: 240, items: { net: 2, w1: 1 } } },
+  { id: 'm3', name: '灵兽为伴', desc: '将妖兽打至残血后捕捉，收服第一只召唤兽。', key: '__capture', need: 1, rw: { exp: 300, gold: 200, items: { hp2: 2, book_heal: 1 } } },
+  { id: 'm4', name: '幽谷异动', desc: '前往幽谷密林，击败 5 只花妖。', key: 'huayao', need: 5, rw: { exp: 650, gold: 360, items: { a2: 1 } } },
+  { id: 'm5', name: '古木成精', desc: '击败盘踞幽谷的树妖，为书生开路。', key: 'shuyao', need: 1, rw: { exp: 980, gold: 460, items: { hp2: 2, book_poison: 1 } } },
+  { id: 'm6', name: '雪岭寒踪', desc: '登上雪山寒岭，击败 6 只雪狼。', key: 'xuelang', need: 6, rw: { exp: 1400, gold: 620, items: { w3: 1 } } },
+  { id: 'm7', name: '冰封之祸', desc: '雪山雪魔作乱，将其击败，还人间太平。', key: 'xuemo', need: 1, rw: { exp: 2100, gold: 1000, items: { hp2: 3, mp2: 2 } } },
+  { id: 'm8', name: '枫叶魔音', desc: '枫落古道的魔君以琴音惑人，破其魔音。', key: 'fengmo', need: 1, rw: { exp: 2600, gold: 1200, items: { a3: 1, book_crit: 1 } } },
+  { id: 'm9', name: '东海蛟影', desc: '蓬莱海岸蛟王兴风作浪，斩蛟平潮。', key: 'haiyao', need: 1, rw: { exp: 3600, gold: 1800, items: { w4: 1, b4: 1 } } }
 ];
 
 const DAILIES = [
-  { id: 'd1', name: '降妖除魔', desc: '战胜 3 场战斗', key: 'battles', need: 3, rw: { gold: 160, exp: 220 } },
-  { id: 'd2', name: '灵兽结缘', desc: '捕捉 1 只召唤兽', key: 'captures', need: 1, rw: { gold: 130, items: { net: 2 } } },
-  { id: 'd3', name: '历练不辍', desc: '击败 8 只妖兽', key: 'kills', need: 8, rw: { gold: 220, exp: 380 } }
+  { id: 'd1', name: '降妖除魔', desc: '战胜 3 场战斗', key: 'battles', need: 3, act: 25, rw: { gold: 200, exp: 260 } },
+  { id: 'd2', name: '灵兽结缘', desc: '捕捉 1 只召唤兽', key: 'captures', need: 1, act: 20, rw: { gold: 160, items: { net: 2 } } },
+  { id: 'd3', name: '历练不辍', desc: '击败 8 只妖兽', key: 'kills', need: 8, act: 25, rw: { gold: 260, exp: 420 } },
+  { id: 'd4', name: '寻宝探幽', desc: '开启 2 个宝箱', key: 'chests', need: 2, act: 15, rw: { gold: 180, exp: 200 } },
+  { id: 'd5', name: '广结善缘', desc: '与 3 位江湖人交谈', key: 'talks', need: 3, act: 15, rw: { gold: 140, items: { hp2: 2 } } }
 ];
+const ACT_CHESTS = [
+  { at: 40, rw: { gold: 300, exp: 200 } },
+  { at: 70, rw: { gold: 500, exp: 400, items: { net: 1 } } },
+  { at: 100, rw: { gold: 800, exp: 700, items: { hp2: 3 } } }
+];
+
+/* ===================== 江湖对话 ===================== */
+const TALKS = {
+  master: {
+    name: '门派师傅', sprite: 'han_m', act: { label: '请教门派法术', act: 'master' },
+    lines: [
+      '你既已下山，便是我门中行走江湖的脸面。',
+      '云阳城北的竹林近来妖气大盛，先拿那些竹妖练练手。',
+      '切记：气血不足时莫要逞强，丹药与召唤兽都是保命的本钱。'
+    ],
+    repeat: [
+      '修行不在朝夕，根基扎稳了，招式自然有威力。',
+      '若遇强敌，先看它的属性，再决定用物理还是法术。'
+    ]
+  },
+  shop: {
+    name: '百宝阁掌柜', sprite: 'han_f', act: { label: '进入百宝阁', act: 'shop' },
+    lines: [
+      '客官里边请！兵器丹药、灵符法器，小店一应俱全。',
+      '白绿蓝紫四品装备，品相越好，附加词条越强。',
+      '银两不够？去秘境走一遭，妖兽身上油水可不少。'
+    ],
+    repeat: ['新到了一批玄品兵器，客官要不要瞧瞧？']
+  },
+  pets: {
+    name: '兽栏管事', sprite: 'yuan_m', act: { label: '查看兽栏', act: 'pets' },
+    lines: [
+      '灵兽也通人性，资质分丙、乙、甲、天四等。',
+      '资质越高，成长越快；再打入技能书，便如虎添翼。',
+      '残血的妖兽才好收服，捆仙索能添三分把握。'
+    ],
+    repeat: ['兽栏最多容六只灵兽，多了可就挤不下了。']
+  },
+  rest: {
+    name: '客栈小二', sprite: 'tang_m', act: { label: '打尖歇息', act: 'rest' },
+    lines: [
+      '客官一路风尘，快请坐！本店的桂花酿可是一绝。',
+      '歇上一宿，气血法力尽复，召唤兽也能缓过劲来。'
+    ],
+    repeat: ['客官慢走，江湖路远，保重身子。']
+  },
+  story: {
+    name: '说书先生', sprite: 'qing_m', act: { label: '查看江湖事', act: 'quest' },
+    lines: [
+      '话说三百年前，东海蛟王掀翻渔舟，蓬莱海岸至今不宁。',
+      '又有枫落古道魔音夜响，过路客商十去九不回。',
+      '少侠若有心，可去任务榜上看看，官府正悬赏呢。'
+    ],
+    repeat: ['今日新话：雪山深处似有异动，守山老人已三日未归。']
+  },
+  herbalist: {
+    name: '采药人', sprite: 'tang_f',
+    lines: [
+      '这竹林里的竹妖，白日里看着是竹子，夜里就活了。',
+      '我采了半辈子药，最怕的不是妖，是那竹林木魅的藤。',
+      '少侠若往深处去，替我看看我那药篓还在不在。'
+    ],
+    repeat: ['竹叶能入药，竹妖的妖丹更是好东西，可惜我打不过。']
+  },
+  scholar: {
+    name: '迷路书生', sprite: 'qing_m',
+    lines: [
+      '小生赴京赶考，误入此谷，绕了三日仍未出去。',
+      '那树妖盘在谷口，小生一介书生，实在不敢近前。',
+      '若少侠能除此妖，小生愿以家传玉佩相赠。'
+    ],
+    repeat: ['谷中雾大，少侠可循着灯笼走，莫要偏离石径。']
+  },
+  elder: {
+    name: '守山老人', sprite: 'han_m',
+    lines: [
+      '老朽守这雪山四十年，从未见过这般大的风雪。',
+      '雪魔每逢月圆便下山，卷走牛羊，连猎户也不敢上山了。',
+      '它怕火，可惜老朽的柴刀砍不动那层冰甲。'
+    ],
+    repeat: ['山顶风大，少侠且把护体真气运足了再上去。']
+  },
+  musician: {
+    name: '琴师', sprite: 'qing_f',
+    lines: [
+      '你听，这枫林里的琴声，不是我弹的。',
+      '枫落魔君以琴音摄魂，听久了便会忘了来路。',
+      '若能破他魔音，我这把焦尾琴，便赠予知音。'
+    ],
+    repeat: ['叶落无声，魔音却有痕。循着红叶最红处走。']
+  },
+  fisher: {
+    name: '老渔翁', sprite: 'yuan_m',
+    lines: [
+      '这片海，三十年前还是清的，如今浪里都带着腥气。',
+      '蛟王盘在礁石下，一翻身便是三尺高的浪。',
+      '少侠要去，切记莫在浪头正高时下水。'
+    ],
+    repeat: ['潮起潮落，蛟王每月只醒一回，机缘要自己把握。']
+  }
+};
 
 /* ===================== 存档 ===================== */
 const SAVE_KEY = 'huantang_xianyuan_v1';
@@ -1087,10 +2380,10 @@ function defaultState() {
   return {
     ver: 1, created: false,
     player: {
-      name: '', sect: 'tiance', level: 1, exp: 0, hp: 0, mp: 0, gold: 80,
+      name: '', sect: 'tiance', gender: 'm', level: 1, exp: 0, hp: 0, mp: 0, gold: 120,
       equip: { weapon: null, armor: null, trinket: null },
       kills: {}, captures: 0, questIdx: 0, map: 'zhulin', wins: 0,
-      daily: { date: todayKey(), battles: 0, captures: 0, kills: 0, claimed: [] }
+      daily: { date: todayKey(), battles: 0, captures: 0, kills: 0, chests: 0, talks: 0, claimed: [], actChests: [] }
     },
     bag: { hp1: 5, mp1: 2 },
     pets: [], activePet: null,
@@ -1107,7 +2400,7 @@ function loadSave() {
     S = Object.assign(defaultState(), d);
     S.player = Object.assign(defaultState().player, d.player || {});
     S.player.equip = Object.assign({ weapon: null, armor: null, trinket: null }, (d.player && d.player.equip) || {});
-    S.player.daily = Object.assign({ date: todayKey(), battles: 0, captures: 0, kills: 0, claimed: [] }, (d.player && d.player.daily) || {});
+    S.player.daily = Object.assign({ date: todayKey(), battles: 0, captures: 0, kills: 0, chests: 0, talks: 0, claimed: [], actChests: [] }, (d.player && d.player.daily) || {});
     S.bag = d.bag || {}; S.pets = d.pets || []; S.activePet = d.activePet ?? null;
     checkDailyReset();
   } catch (e) { S = defaultState(); }
@@ -1127,8 +2420,12 @@ function save(now) {
 function checkDailyReset() {
   const d = S.player.daily;
   if (d.date !== todayKey()) {
-    S.player.daily = { date: todayKey(), battles: 0, captures: 0, kills: 0, claimed: [] };
+    S.player.daily = { date: todayKey(), battles: 0, captures: 0, kills: 0, chests: 0, talks: 0, claimed: [], actChests: [] };
   }
+}
+function dailyAct() {
+  const dl = S.player.daily;
+  return DAILIES.filter(d => dl.claimed.includes(d.id)).reduce((n, d) => n + (d.act || 0), 0);
 }
 
 /* ===================== 数值 ===================== */
@@ -1144,9 +2441,14 @@ function playerStats() {
 
 function expNeed(lv) { return Math.round(50 * lv + 28 * lv * lv); }
 
+const PET_SKILLS = {
+  heal: { name: '回春术', type: 'heal', mult: 1.0 },
+  poison: { name: '淬毒撕咬', type: 'phys', mult: 1.35, status: 'poison' },
+  crit: { name: '破军击', type: 'phys', mult: 1.7 }
+};
 function petStats(pet) {
-  const sp = SPECIES[pet.sp], st = {};
-  STAT_KEYS.forEach(k => st[k] = Math.round(sp.base[k] + sp.grow[k] * (pet.level - 1)));
+  const sp = SPECIES[pet.sp], st = {}, apt = pet.apt || 1;
+  STAT_KEYS.forEach(k => st[k] = Math.round((sp.base[k] + sp.grow[k] * (pet.level - 1)) * apt));
   return st;
 }
 
@@ -1154,9 +2456,13 @@ function petExpNeed(lv) { return Math.round(50 * lv + 35 * lv * lv); }
 
 function makePet(spId, level) {
   const sp = SPECIES[spId];
+  const roll = Math.random();
+  const apt = roll < .45 ? { v: .92, label: '丙' } : roll < .8 ? { v: 1.0, label: '乙' } : roll < .96 ? { v: 1.1, label: '甲' } : { v: 1.2, label: '天' };
   const pet = {
     uid: 'p' + Date.now() + rnd(100, 999), sp: spId,
-    name: sp.name, level: clamp(level, 1, 20), exp: 0, hp: 0
+    name: sp.name, level: clamp(level, 1, 20), exp: 0, hp: 0,
+    apt: apt.v, aptLabel: apt.label,
+    books: [{ ...sp.skill }]
   };
   pet.hp = petStats(pet).hp;
   return pet;
@@ -1227,13 +2533,27 @@ function ensureVitals() {
 /* ===================== 通用 UI ===================== */
 const overlay = () => document.getElementById('overlay');
 
+let toastQ = [], toastBusy = false;
 function toast(msg, kind) {
+  toastQ.push([msg, kind]);
+  if (toastQ.length > 8) toastQ.shift();
+  if (!toastBusy) nextToast();
+}
+function nextToast() {
   const box = document.getElementById('toasts');
+  const item = toastQ.shift();
+  if (!box || !item) { toastBusy = false; return; }
+  toastBusy = true;
+  box.innerHTML = '';
   const el = document.createElement('div');
-  el.className = 'toast' + (kind ? ' ' + kind : '');
-  el.textContent = msg;
+  el.className = 'toast' + (item[1] ? ' ' + item[1] : '');
+  el.textContent = item[0];
   box.appendChild(el);
-  setTimeout(() => el.remove(), 1900);
+  setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-8px)';
+    setTimeout(() => { el.remove(); nextToast(); }, 180);
+  }, 1150);
 }
 
 let sheetLock = false;
@@ -1358,28 +2678,29 @@ function renderTop() {
   const need = expNeed(p.level);
   const expPct = p.level >= 20 ? 100 : clamp(p.exp / need * 100, 0, 100);
   document.getElementById('topbar').innerHTML = `
-    <button class="tb-badge" data-act="go" data-arg="hero" aria-label="角色详情">${sct.icon}</button>
+    <button class="tb-badge" data-act="go" data-arg="hero" aria-label="角色详情">
+      <img src="${playerSprite()}" alt=""><span class="tb-cap">${p.level}</span>
+    </button>
     <div class="tb-main">
       <div class="tb-row">
         <span class="tb-name">${p.name || '无名少侠'}</span>
-        <span class="tb-lv">Lv.${p.level}</span>
         <span class="tb-sect">${sct.name}</span>
       </div>
       <div class="bar hp"><i style="width:${hpPct}%"></i><span>${Math.max(0, Math.round(p.hp))} / ${st.hp}</span></div>
       <div class="bar mp"><i style="width:${mpPct}%"></i><span>${Math.max(0, Math.round(p.mp))} / ${st.mp}</span></div>
     </div>
-    <div class="tb-gold">🪙 ${fmt(p.gold)}<small>${p.level >= 20 ? '已至化境' : '修为 ' + p.exp + '/' + need}</small></div>
+    <div class="tb-gold"><b>${icon('coin')}${fmt(p.gold)}</b><small>${p.level >= 20 ? '已至化境' : '修为 ' + p.exp + '/' + need}</small></div>
     <div id="expbar"><i style="width:${expPct}%"></i></div>`;
 }
 
 function renderTabbar() {
   const tabs = [
-    ['bag', '🎒', '背包'], ['pets', '🐾', '宠物'], ['quest', '📜', '任务'], ['shop', '🏪', '商店'], ['settings', '⚙️', '设置']
+    ['bag', 'bag', '背包'], ['pets', 'paw', '宠物'], ['quest', 'scroll', '任务'], ['shop', 'shop', '商店'], ['settings', 'gear', '设置']
   ];
   const dot = hasClaimable();
   document.getElementById('tabbar').innerHTML = tabs.map(([k, ic, nm]) => `
     <button class="tab ${S.tab === k ? 'on' : ''}" data-act="go" data-arg="${k}">
-      <i>${ic}</i>${nm}${k === 'quest' && dot ? '<span class="dot"></span>' : ''}
+      <i>${icon(ic)}</i>${nm}${k === 'quest' && dot ? '<span class="dot"></span>' : ''}
     </button>`).join('');
 }
 
@@ -1414,7 +2735,9 @@ function dailyProgress(d) {
 function hasClaimable() {
   const mi = mainQuestInfo();
   if (mi && mi.done) return true;
-  return DAILIES.some(d => dailyProgress(d) >= d.need && !S.player.daily.claimed.includes(d.id));
+  if (DAILIES.some(d => dailyProgress(d) >= d.need && !S.player.daily.claimed.includes(d.id))) return true;
+  const act = dailyAct(), claimed = S.player.daily.actChests || [];
+  return ACT_CHESTS.some((c, i) => act >= c.at && !claimed.includes(i));
 }
 
 function screenTown() {
@@ -1425,10 +2748,10 @@ function screenTown() {
       <div class="veil"></div>
       <div class="st-tag">云阳城 · 安全区</div>
       <div class="scene-txt"><div class="st-name">云阳城</div><div class="st-sub">市井繁华 · 人间烟火</div></div>
-      <button class="hotspot" style="left:4%" data-act="rest" aria-label="悦来客栈"><span>🛖</span><b>客栈</b></button>
-      <button class="hotspot" style="left:27%" data-act="go" data-arg="shop" aria-label="百宝阁"><span>🏮</span><b>百宝阁</b></button>
-      <button class="hotspot" style="left:50%" data-act="master" aria-label="门派师傅"><span>📖</span><b>师傅</b></button>
-      <button class="hotspot" style="left:73%" data-act="go" data-arg="wild" aria-label="山门秘境"><span>⛰️</span><b>山门</b>${mi && mi.done ? '<i class="dotp"></i>' : ''}</button>
+      <button class="hotspot" style="left:4%" data-act="rest" aria-label="悦来客栈"><span>${icon('potion')}</span><b>客栈</b></button>
+      <button class="hotspot" style="left:27%" data-act="go" data-arg="shop" aria-label="百宝阁"><span>${icon('shop')}</span><b>百宝阁</b></button>
+      <button class="hotspot" style="left:50%" data-act="master" aria-label="门派师傅"><span>${icon('scroll')}</span><b>师傅</b></button>
+      <button class="hotspot" style="left:73%" data-act="openTravel" aria-label="山门秘境"><span>${icon('map')}</span><b>山门</b>${mi && mi.done ? '<i class="dotp"></i>' : ''}</button>
     </div>
     <div class="sec-title">当前要务<small>${mi ? '第 ' + (p.questIdx + 1) + ' / ' + MAIN_QUESTS.length + ' 章' : '全部完成'}</small></div>
     ${mi ? `<div class="row" data-act="go" data-arg="quest">
@@ -1445,7 +2768,7 @@ function screenTown() {
       <div class="r-desc">${pet ? `Lv.${pet.level} · ${SPECIES[pet.sp].skill.name} · 气血 ${pet.hp}/${petMaxHp(pet)}` : '独自迎敌，前往宠物页设置出战灵兽'}</div></div>
       <div class="r-right"><button class="btn sm" data-act="go" data-arg="pets">${pet ? '更换' : '设置'}</button></div>
     </div>
-    <button class="btn gold wide" data-act="go" data-arg="wild" style="margin-top:12px">⛰️ 前往秘境历练</button>`;
+    <button class="btn gold wide" data-act="openTravel" style="margin-top:12px">${icon('map')} 前往秘境历练</button>`;
 }
 
 /* ===================== 秘境 ===================== */
@@ -1500,8 +2823,9 @@ function screenHero() {
   const p = S.player, sct = SECTS[p.sect], st = playerStats();
   const eqName = slot => {
     const id = p.equip[slot];
-    return id ? `<span class="eq-name">${ITEMS[id].icon} ${ITEMS[id].name}</span><button class="btn sm ghost" data-act="unequip" data-arg="${slot}">卸下</button>`
-      : `<span class="eq-name" style="color:#6f7d75">— 未装备 —</span>`;
+    if (!id) return `<span class="eq-name" style="color:#6f7d75">— 未装备 —</span>`;
+    const q = qOf(id);
+    return `<span class="eq-name" style="color:${q.c}">${ITEMS[id].name} <i style="font-style:normal;font-size:10px;opacity:.8">${q.name}</i></span><button class="btn sm ghost" data-act="unequip" data-arg="${slot}">卸下</button>`;
   };
   return `
     <div class="pagebar">
@@ -1509,11 +2833,11 @@ function screenHero() {
       <span class="ptitle">角色</span>
     </div>
     <div class="hero-head">
-      <div class="hero-av">${sct.icon}</div>
+      <div class="hero-av"><img src="${playerSprite()}" alt=""></div>
       <div class="hero-info">
         <h2>${p.name || '无名少侠'}</h2>
         <p>${sct.name} · Lv.${p.level} · ${sct.motto}</p>
-        <p style="color:#c8b385">战斗胜利 ${p.wins} 场 · 捕捉 ${p.captures} 只</p>
+        <p style="color:#d3ba85">战斗胜利 ${p.wins} 场 · 捕捉 ${p.captures} 只 · 主线 ${Math.min(p.questIdx + 1, MAIN_QUESTS.length)}/${MAIN_QUESTS.length}</p>
       </div>
     </div>
     <div class="sec-title">属性<small>${p.level >= 20 ? '修为圆满' : '修为 ' + p.exp + ' / ' + expNeed(p.level)}</small></div>
@@ -1521,15 +2845,21 @@ function screenHero() {
       ${STAT_KEYS.map(k => `<div class="stat"><span>${STAT_NAMES[k]}</span><b>${st[k]}</b></div>`).join('')}
     </div>
     <div class="sec-title">装备</div>
-    <div class="equip-row"><span style="width:38px">🗡️ 武器</span>${eqName('weapon')}</div>
-    <div class="equip-row"><span style="width:38px">🥋 衣甲</span>${eqName('armor')}</div>
-    <div class="equip-row"><span style="width:38px">🔮 灵饰</span>${eqName('trinket')}</div>
-    <div class="sec-title">门派法术<small>按灵力与攻击结算</small></div>
-    <div>${sct.skills.map(id => {
-      const s = SPELLS[id];
-      return `<span class="skill-chip">${s.icon} ${s.name} <span style="color:#7fb6e0;font-size:9px">${s.mp}法力</span></span>`;
-    }).join('')}</div>
-    <div style="font-size:10px;line-height:1.7;color:#8b9a90;padding:0 2px">
+    <div class="equip-row"><span style="width:46px">${icon('sword')} 武器</span>${eqName('weapon')}</div>
+    <div class="equip-row"><span style="width:46px">${icon('shield')} 衣甲</span>${eqName('armor')}</div>
+    <div class="equip-row"><span style="width:46px">${icon('spark')} 灵饰</span>${eqName('trinket')}</div>
+    <div class="sec-title">门派法术<small>共 ${sct.skills.length} 式</small></div>
+    <div class="grid2" style="gap:8px">
+      ${sct.skills.map(id => {
+        const s = SPELLS[id];
+        return `<div class="row" style="margin:0;padding:9px 10px">
+          <div class="r-ico" style="width:36px;height:36px;font-size:0">${icon('spark')}</div>
+          <div class="r-main"><div class="r-name" style="font-size:13px">${s.name}</div>
+          <div class="r-desc" style="font-size:11px;color:#8fc3e8">${s.mp} 法力</div></div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div style="font-size:11.5px;line-height:1.75;color:#9dae9f;padding:10px 2px 0">
       ${sct.skills.map(id => `「${SPELLS[id].name}」${SPELLS[id].desc}`).join('<br>')}
     </div>
     <div class="sec-title">存档</div>
@@ -1546,25 +2876,26 @@ function screenBag() {
   const potions = ids.filter(id => ITEMS[id].type !== 'equip');
   const equips = ids.filter(id => ITEMS[id].type === 'equip');
   const row = id => {
-    const it = ITEMS[id];
+    const it = ITEMS[id], q = it.q ? qOf(id) : null;
     let action = '';
     if (it.type === 'potion') action = `<button class="btn sm" data-act="useItem" data-arg="${id}">使用</button>`;
     else if (it.type === 'equip') action = `<button class="btn sm" data-act="equipItem" data-arg="${id}">装备</button>`;
+    else if (it.type === 'book') action = `<span class="tag">宠物打书</span>`;
     else action = `<span class="tag">战斗中用</span>`;
-    return `<div class="row">
-      <div class="r-ico">${it.icon}</div>
-      <div class="r-main"><div class="r-name">${it.name} <span style="color:#8fa093;font-size:10px">×${S.bag[id]}</span></div>
+    return `<div class="row" ${q ? qStyle(id) : ''}>
+      <div class="r-ico">${icon(itemIcon(id))}</div>
+      <div class="r-main"><div class="r-name">${it.name} ${q ? `<span style="color:${q.c};font-size:10px;border:1px solid ${q.c}66;padding:0 4px;border-radius:4px">${q.name}</span>` : ''} <span style="color:#8fa093;font-size:10px">×${S.bag[id]}</span></div>
       <div class="r-desc">${it.desc}${it.type === 'equip' ? ` · 需 Lv.${it.lv}` : ''}</div></div>
       <div class="r-right">${action}</div>
     </div>`;
   };
   return `
-    <div class="pagebar"><span class="ptitle">背包</span><button class="btn sm ghost" data-act="go" data-arg="world" style="margin-left:auto">🌍 回世界</button></div>
+    <div class="pagebar"><span class="ptitle">背包</span><button class="btn sm ghost" data-act="go" data-arg="world" style="margin-left:auto">${icon('map')} 回世界</button></div>
     <div class="sec-title" style="margin-top:6px">丹药 · 道具<small>${potions.length} 种</small></div>
     ${potions.length ? potions.map(row).join('') : '<div class="empty">行囊空空，去百宝阁看看？</div>'}
     <div class="sec-title">装备<small>${equips.length} 件</small></div>
     ${equips.length ? equips.map(row).join('') : '<div class="empty">暂无多余装备</div>'}
-    <div style="margin-top:14px"><button class="btn wide" data-act="shop">🏮 前往百宝阁</button></div>`;
+    <div style="margin-top:14px"><button class="btn wide" data-act="shop">${icon('shop')} 前往百宝阁</button></div>`;
 }
 
 /* ===================== 任务 ===================== */
@@ -1576,7 +2907,7 @@ function screenQuest() {
     if (i > p.questIdx) return '';
     const cur = q.key === '__capture' ? p.captures : (p.kills[q.key] || 0);
     return `<div class="row" style="border-color:rgba(217,176,106,.4)">
-      <div class="r-ico">📜</div>
+      <div class="r-ico">${icon('scroll')}</div>
       <div class="r-main">
         <div class="r-name">${q.name} ${cur >= q.need ? '<span class="tag on">可领取</span>' : '<span class="tag">进行中</span>'}</div>
         <div class="r-desc">${q.desc}</div>
@@ -1590,64 +2921,86 @@ function screenQuest() {
   }).join('');
 
   return `
-    <div class="pagebar"><span class="ptitle">任务</span><button class="btn sm ghost" data-act="go" data-arg="world" style="margin-left:auto">🌍 回世界</button></div>
-    <div class="sec-title" style="margin-top:6px">主线 · 江湖行<small>第 ${Math.min(p.questIdx + 1, MAIN_QUESTS.length)} 章</small></div>
+    <div class="pagebar"><span class="ptitle">任务</span><button class="btn sm ghost" data-act="go" data-arg="world" style="margin-left:auto">${icon('map')} 回世界</button></div>
+    <div class="sec-title" style="margin-top:6px">主线 · 江湖行<small>第 ${Math.min(p.questIdx + 1, MAIN_QUESTS.length)} 章 / 共 ${MAIN_QUESTS.length} 章</small></div>
     ${mainList || '<div class="empty">主线已全部完成</div>'}
-    <div class="sec-title">日常 · 每日历练<small>每日 0 点重置</small></div>
+    <div class="sec-title">每日历练<small>每日 0 点重置</small></div>
+    <div class="act-card">
+      <div class="act-head"><b>活跃度 ${dailyAct()}</b><span>/ 100</span></div>
+      <div class="pbar" style="height:9px"><i style="width:${Math.min(100, dailyAct())}%"></i></div>
+      <div class="act-chests">
+        ${ACT_CHESTS.map((c, i) => {
+          const claimed = (dl.actChests || []).includes(i);
+          const ok = dailyAct() >= c.at && !claimed;
+          return `<button class="act-chest ${ok ? 'ok' : ''} ${claimed ? 'done' : ''}" data-act="claimActChest" data-arg="${i}" ${ok ? '' : 'disabled'}>
+            <span>${icon('chest')}</span><b>${claimed ? '已领' : c.at}</b></button>`;
+        }).join('')}
+      </div>
+    </div>
     ${DAILIES.map(d => {
       const cur = dailyProgress(d), done = cur >= d.need, claimed = dl.claimed.includes(d.id);
       const rw = [];
-      if (d.rw.gold) rw.push(`🪙 ${d.rw.gold}`);
-      if (d.rw.exp) rw.push(`✨ ${d.rw.exp}`);
-      if (d.rw.items) for (const k in d.rw.items) rw.push(`${ITEMS[k].icon}${ITEMS[k].name}×${d.rw.items[k]}`);
+      if (d.rw.gold) rw.push(`银两 ${d.rw.gold}`);
+      if (d.rw.exp) rw.push(`修为 ${d.rw.exp}`);
+      if (d.rw.items) for (const k in d.rw.items) rw.push(`${ITEMS[k].name}×${d.rw.items[k]}`);
       return `<div class="row">
-        <div class="r-ico">${claimed ? '✅' : '🗓️'}</div>
-        <div class="r-main"><div class="r-name">${d.name}</div>
-        <div class="r-desc">${d.desc} · 奖励 ${rw.join(' ')}</div>
+        <div class="r-ico" style="font-size:0">${icon(claimed ? 'star' : 'clock')}</div>
+        <div class="r-main"><div class="r-name">${d.name} <span class="tag">活跃 +${d.act}</span></div>
+        <div class="r-desc">${d.desc} · 奖励 ${rw.join(' / ')}</div>
         <div class="pbar"><i style="width:${cur / d.need * 100}%"></i></div></div>
-        <div class="r-right"><div style="font-size:9px;color:#8fa093;margin-bottom:5px">${cur}/${d.need}</div>
+        <div class="r-right"><div style="font-size:10px;color:#8fa093;margin-bottom:5px">${cur}/${d.need}</div>
         <button class="btn sm ${done && !claimed ? 'gold' : 'ghost'}" data-act="claimDaily" data-arg="${d.id}" ${done && !claimed ? '' : 'disabled'}>${claimed ? '已领' : '领取'}</button></div>
       </div>`;
     }).join('')}
-    <div class="empty" style="font-size:10px">提示：击败妖兽、捕捉召唤兽都会累计日常进度</div>`;
+    <div class="hintline" style="padding-top:6px">击败妖兽、捕捉灵兽、开启宝箱、与江湖人交谈都会累计日常进度。</div>`;
 }
 
 /* ===================== 召唤兽 ===================== */
 function screenPets() {
   const list = S.pets;
+  const aptColor = { '丙': '#a9b6a6', '乙': '#8ee0a4', '甲': '#7fc4ff', '天': '#d7a6ff' };
   return `
-    <div class="pagebar"><span class="ptitle">召唤兽</span><span class="pmuted">${list.length} 只 · 仅一只出战</span><button class="btn sm ghost" data-act="go" data-arg="world">🌍 回世界</button></div>
+    <div class="pagebar"><span class="ptitle">召唤兽</span><span class="pmuted">${list.length} 只 · 仅一只出战</span><button class="btn sm ghost" data-act="go" data-arg="world">${icon('map')} 回世界</button></div>
     ${list.length ? list.map(pet => {
       const sp = SPECIES[pet.sp], ps = petStats(pet), on = S.activePet === pet.uid;
-      return `<div class="row" style="${on ? 'border-color:rgba(240,212,154,.6)' : ''}">
-        <div class="r-ico" style="font-size:26px">${sp.icon}</div>
+      const books = (pet.books && pet.books.length) ? pet.books : (sp.skill && sp.skill.pet ? [sp.skill] : []);
+      return `<div class="row" style="align-items:flex-start;${on ? 'border-color:rgba(248,231,187,.6)' : ''}">
+        <div class="r-ico" style="width:54px;height:54px;font-size:0;padding:2px">${monArt(pet.sp)}</div>
         <div class="r-main">
-          <div class="r-name">${pet.name} <span style="font-size:11px;color:#8fa093">Lv.${pet.level}</span> ${on ? '<span class="tag on">出战中</span>' : ''}</div>
-          <div class="r-desc">气血 ${ps.hp} · 攻击 ${ps.atk} · 灵力 ${ps.mag}</div>
-          <div class="r-desc" style="color:#c9a25e">灵技 · ${sp.skill.name}</div>
+          <div class="r-name">${pet.name} <span style="font-size:11px;color:#8fa093">Lv.${pet.level}</span>
+            <span style="font-size:10px;color:${aptColor[pet.aptLabel] || '#a9b6a6'};border:1px solid ${aptColor[pet.aptLabel] || '#a9b6a6'}55;padding:0 5px;border-radius:4px">资质${pet.aptLabel || '乙'}</span>
+            ${on ? '<span class="tag on">出战</span>' : ''}</div>
+          <div class="r-desc">气血 ${ps.hp} · 攻击 ${ps.atk} · 灵力 ${ps.mag} · 速度 ${ps.spd}</div>
+          ${books.length ? `<div class="r-desc" style="color:#e6c384">灵技 · ${books.map(b => b.name).join(' / ')}</div>` : '<div class="r-desc" style="color:#6f7d75">灵技 · 尚未习得</div>'}
           <div class="pbar"><i style="width:${clamp(pet.hp / ps.hp * 100, 0, 100)}%"></i></div>
         </div>
         <div class="r-right" style="display:flex;flex-direction:column;gap:6px">
           ${on ? '' : `<button class="btn sm" data-act="setPet" data-arg="${pet.uid}">出战</button>`}
-          <button class="btn sm ghost" data-act="releasePet" data-arg="${pet.uid}">放生</button>
+          <button class="btn sm ghost" data-act="petBooks" data-arg="${pet.uid}">打书</button>
+          <button class="btn sm ghost" data-act="releasePet" data-arg="${pet.uid}" style="color:#e8a49a">放生</button>
         </div>
       </div>`;
-    }).join('') : `<div class="empty">尚未收服召唤兽<br>在秘境中把妖兽打至残血，再用「捕捉」</div>`}
-    <button class="btn gold wide" data-act="go" data-arg="wild" style="margin-top:12px">⛰️ 去秘境捕捉</button>`;
+    }).join('') : `<div class="empty">尚未收服召唤兽<br>将妖兽打至残血，再用「捕捉」收服</div>`}
+    <div class="sec-title">打书说明</div>
+    <div class="hintline">每只召唤兽最多 3 个灵技；使用技能书可习得新灵技，已有同名灵技不会重复。<br>资质分 丙 / 乙 / 甲 / 天，资质越高，成长属性越强。</div>
+    <button class="btn gold wide" data-act="openTravel" style="margin-top:14px">${icon('map')} 去秘境捕捉</button>`;
 }
 
 /* ===================== 商店 ===================== */
 function screenShop() {
   const p = S.player;
-  const list = Object.keys(ITEMS).filter(id => ITEMS[id].type !== 'equip').map(id => shopRow(id));
+  const list = Object.keys(ITEMS).filter(id => ITEMS[id].type !== 'equip' && ITEMS[id].type !== 'book').map(id => shopRow(id));
+  const books = Object.keys(ITEMS).filter(id => ITEMS[id].type === 'book').map(id => shopRow(id));
   const eqs = Object.keys(ITEMS).filter(id => ITEMS[id].type === 'equip').map(id => shopRow(id));
   return `
-    <div class="pagebar"><span class="ptitle">百宝阁</span><span class="pmuted">🪙 ${fmt(p.gold)}</span><button class="btn sm ghost" data-act="go" data-arg="world">🌍 回世界</button></div>
-    <div class="sec-title" style="margin-top:0">丹药 · 道具</div>
+    <div class="pagebar"><span class="ptitle">百宝阁</span><span class="pmuted">${icon('coin')} ${fmt(p.gold)}</span><button class="btn sm ghost" data-act="go" data-arg="world">${icon('map')} 回世界</button></div>
+    <div class="sec-title" style="margin-top:0">丹药 · 道具<small>行走江湖必备</small></div>
     ${list.join('')}
-    <div class="sec-title">兵器 · 灵符</div>
+    <div class="sec-title">灵兽奇书<small>用于打书</small></div>
+    ${books.join('')}
+    <div class="sec-title">兵器 · 衣甲 · 灵饰<small>白 绿 蓝 紫 四品</small></div>
     ${eqs.join('')}
-    <div class="empty" style="font-size:11px">银两可通过主线、日常与战斗获得</div>`;
+    <div class="hintline" style="text-align:center;padding:6px 0 4px">银两可通过主线、日常与战斗获得</div>`;
 }
 
 /* ===================== 设置 ===================== */
@@ -1748,7 +3101,7 @@ const ACT = {
     if (!m) return;
     if (Math.hypot(m.x - W.x, m.y - W.y) > 100) {
       W.target = { x: m.x, y: m.y + 30 }; W.pending = { type: 'monster', idx: i };
-    } else { W.suppressM.add(i); beginWorldBattle(); }
+    } else { W.suppressM.add(i); beginWorldBattle(m); }
   },
 
   worldChest: id => {
@@ -1766,17 +3119,32 @@ const ACT = {
     if (!p) return;
     if (Math.hypot(p.x - W.x, p.y - W.y) > 90) {
       W.target = { x: p.x, y: p.y + 30 }; W.pending = { type: 'portal', idx: i };
-    } else switchScene(p.to);
+    } else openPortal(p);
   },
 
   worldAct: () => {
     if (!W || !W.near) return;
     const n = W.near;
     if (n.type === 'npc') openWorldNpc(n.idx);
-    else if (n.type === 'monster') { W.suppressM.add(n.idx); beginWorldBattle(); }
+    else if (n.type === 'monster') { W.suppressM.add(n.idx); beginWorldBattle(SCENES[S.player.scene].monsters[n.idx]); }
     else if (n.type === 'chest') claimChest(n.id);
-    else if (n.type === 'portal') { const p = SCENES[S.player.scene].portals[n.idx]; if (p) switchScene(p.to); }
+    else if (n.type === 'portal') { const p = SCENES[S.player.scene].portals[n.idx]; if (p) openPortal(p); }
   },
+
+  talkNext: () => { if (talkState && talkState.lineIdx < talkState.lines.length - 1) { talkState.lineIdx++; renderTalk(); } },
+  talkAction: () => {
+    if (!talkState || !talkState.action) return;
+    const a = talkState.action;
+    talkState = null;
+    closeSheet();
+    if (a.act === 'shop') go('shop');
+    else if (a.act === 'pets') go('pets');
+    else if (a.act === 'quest') go('quest');
+    else if (a.act === 'rest') ACT.rest();
+    else if (a.act === 'master') ACT.master();
+  },
+  travelTo: id => { closeSheet(); if (id === 'town') switchScene('town'); else switchScene(id); },
+  openTravel: () => openTravelSheet(),
 
   walkQuest: () => walkQuest(),
 
@@ -1882,7 +3250,7 @@ const ACT = {
       <div style="font-size:11px;line-height:1.8;color:#a9b8ae;margin-bottom:10px">${sct.desc}</div>
       ${sct.skills.map(id => {
         const s = SPELLS[id];
-        return `<div class="row"><div class="r-ico">${s.icon}</div>
+        return `<div class="row"><div class="r-ico" style="font-size:0">${icon('spark')}</div>
           <div class="r-main"><div class="r-name">${s.name} <span class="tag">${s.mp} 法力</span></div>
           <div class="r-desc">${s.desc}</div></div></div>`;
       }).join('')}
@@ -1908,6 +3276,62 @@ const ACT = {
     save(); render();
   },
 
+  claimActChest: i => {
+    const c = ACT_CHESTS[i], dl = S.player.daily;
+    if (!c) return;
+    dl.actChests = dl.actChests || [];
+    if (dl.actChests.includes(i)) return;
+    if (dailyAct() < c.at) return toast('活跃度不足', 'bad');
+    dl.actChests.push(i);
+    grant(c.rw);
+    save(); render();
+  },
+
+  petBooks: uid => {
+    const pet = S.pets.find(x => x.uid === uid);
+    if (!pet) return;
+    const books = pet.books || [];
+    const bagBooks = Object.keys(S.bag).filter(id => ITEMS[id] && ITEMS[id].type === 'book' && S.bag[id] > 0);
+    openSheet(`
+      <h3>${pet.name} · 打书</h3>
+      <div class="sub">资质 ${pet.aptLabel || '乙'} · 灵技 ${books.length} / 3</div>
+      <div class="grid2" style="gap:8px;margin-bottom:12px">
+        ${books.map(b => `<div class="row" style="margin:0;padding:9px 10px">
+          <div class="r-ico" style="width:34px;height:34px;font-size:0">${icon('spark')}</div>
+          <div class="r-main"><div class="r-name" style="font-size:12.5px">${b.name}</div>
+          <div class="r-desc" style="font-size:10.5px">${b.type === 'heal' ? '治疗' : b.status ? '伤害 + 中毒' : '物理伤害'}</div></div>
+        </div>`).join('')}
+      </div>
+      <div class="sec-title" style="margin-top:0">背包中的技能书</div>
+      ${bagBooks.length ? bagBooks.map(id => {
+        const it = ITEMS[id];
+        return `<div class="row">
+          <div class="r-ico">${it.icon}</div>
+          <div class="r-main"><div class="r-name">${it.name} <span style="color:#8fa093;font-size:10px">×${S.bag[id]}</span></div>
+          <div class="r-desc">${it.desc}</div></div>
+          <div class="r-right"><button class="btn sm" data-act="learnBook" data-arg="${uid}|${id}">打书</button></div>
+        </div>`;
+      }).join('') : '<div class="empty" style="padding:14px">暂无技能书，可去百宝阁购买</div>'}
+      <div class="sheet-actions"><button class="btn ghost" data-act="closeSheet">收起</button></div>`, true);
+  },
+
+  learnBook: arg => {
+    const [uid, id] = (arg || '').split('|');
+    const pet = S.pets.find(x => x.uid === uid), it = ITEMS[id];
+    if (!pet || !it || bagCount(id) < 1) return;
+    const books = pet.books || (pet.books = []);
+    const sk = PET_SKILLS[it.petSkill];
+    if (!sk) return;
+    if (books.some(b => b.name === sk.name)) return toast('已习得此灵技', 'bad');
+    if (books.length >= 3) return toast('灵技已满（3 个）', 'bad');
+    if (!removeItem(id, 1)) return;
+    books.push({ ...sk });
+    save();
+    toast(`${pet.name} 习得「${sk.name}」`, 'good');
+    ACT.petBooks(uid);
+    render();
+  },
+
   resetGame: () => {
     confirmBox('重置江湖', '将清空当前角色与所有存档，从头开始。', '重置', () => {
       try { localStorage.removeItem(SAVE_KEY); } catch (e) { }
@@ -1921,12 +3345,24 @@ const ACT = {
     document.querySelectorAll('.sect-card').forEach(el => el.classList.toggle('sel', el.dataset.arg === id));
     const info = document.getElementById('sectInfo');
     if (info) info.innerHTML = sectDetail(SECTS[id]);
+    const sp = document.getElementById('createSprite');
+    if (sp) sp.src = charSprite(id, createGender);
+    const nm = document.getElementById('createSectName');
+    if (nm) nm.textContent = SECTS[id].name;
   },
 
   pickName: name => {
     createName = name;
     const box = document.getElementById('nameChips');
     if (box) box.innerHTML = nameChipsHTML();
+  },
+
+  pickGender: g => {
+    createGender = g;
+    const box = document.getElementById('genderChips');
+    if (box) box.innerHTML = genderChipsHTML();
+    const sp = document.getElementById('createSprite');
+    if (sp) sp.src = charSprite(createSel, g);
   },
 
   rollNames: () => {
@@ -1942,6 +3378,7 @@ const ACT = {
     S.created = true;
     S.player.name = name;
     S.player.sect = createSel;
+    S.player.gender = createGender;
     const st = playerStats();
     S.player.hp = st.hp; S.player.mp = st.mp;
     save(true);
@@ -1964,26 +3401,27 @@ const ACT = {
 };
 
 function sectDetail(s) {
-  return `<div style="font-size:10.5px;line-height:1.8;color:#9fb0a5;padding:2px 4px 0">
-    ${s.skills.map(id => `「${SPELLS[id].name}」${SPELLS[id].desc}`).join('<br>')}
+  return `<div style="font-size:11px;line-height:1.7;color:#c9b98e;padding:2px 4px 4px;letter-spacing:.5px">
+    绝技 · ${s.skills.map(id => SPELLS[id].name).join(' / ')}
   </div>`;
 }
 
 function shopRow(id) {
-  const it = ITEMS[id], p = S.player;
+  const it = ITEMS[id], p = S.player, q = it.q ? qOf(id) : null;
   const lock = it.type === 'equip' && p.level < it.lv;
-  return `<div class="row">
-    <div class="r-ico">${it.icon}</div>
-    <div class="r-main"><div class="r-name">${it.name}${lock ? ` <span class="tag off">Lv.${it.lv}</span>` : ''}</div>
+  return `<div class="row" ${q ? qStyle(id) : ''}>
+    <div class="r-ico">${icon(itemIcon(id))}</div>
+    <div class="r-main"><div class="r-name">${it.name}${q ? ` <span style="color:${q.c};font-size:10px;border:1px solid ${q.c}55;padding:0 4px;border-radius:4px">${q.name}</span>` : ''}${lock ? ` <span class="tag off">Lv.${it.lv}</span>` : ''}</div>
     <div class="r-desc">${it.desc}</div></div>
-    <div class="r-right" style="display:flex;align-items:center;gap:7px">
-      <span style="font-size:10px;color:#d9b06a">🪙${it.price}</span>
-      <button class="btn sm" data-act="buy" data-arg="${id}" ${p.gold < it.price || lock ? 'disabled' : ''}>购</button>
+    <div class="r-right" style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:11px;color:#e6c384">${icon('coin')}${it.price}</span>
+      <button class="btn sm" data-act="buy" data-arg="${id}" ${p.gold < it.price || lock ? 'disabled' : ''}>购买</button>
     </div></div>`;
 }
 
 /* ===================== 创角 ===================== */
 let createSel = 'tiance';
+let createGender = 'm';
 let createName = '';
 let createNames = [];
 const NAME_POOL = ['云清和', '沈墨白', '苏轻寒', '顾长风', '叶知秋', '白小楼', '谢听雨', '陆离', '江晚吟', '宋别鹤'];
@@ -1995,27 +3433,37 @@ function nameChipsHTML() {
   return createNames.map(n => `<button class="name-chip ${n === createName ? 'sel' : ''}" data-act="pickName" data-arg="${n}">${n}</button>`).join('')
     + '<button class="name-chip" data-act="rollNames">↻ 换一批</button>';
 }
+function genderChipsHTML() {
+  return ['m', 'f'].map(g => `<button class="name-chip gender ${g === createGender ? 'sel' : ''}" data-act="pickGender" data-arg="${g}">${g === 'm' ? '少年' : '少女'}</button>`).join('');
+}
+
 function openCreate() {
   document.getElementById('topbar').classList.add('hidden');
   document.getElementById('tabbar').classList.add('hidden');
   document.getElementById('screen').innerHTML = '';
-  createSel = 'tiance';
+  createSel = 'tiance'; createGender = 'm';
   rollNames();
   openSheet(`
     <h3>幻唐仙缘</h3>
     <div class="sub">择一门派 · 入这江湖</div>
-    <div class="sec-title" style="margin-top:0">道号</div>
+    <div class="create-stage">
+      <img id="createSprite" src="${charSprite(createSel, createGender)}" alt="">
+      <div class="create-info"><b id="createSectName">${SECTS[createSel].name}</b><span>${SECTS[createSel].motto}</span></div>
+    </div>
+    <div class="sec-title" style="margin-top:4px">道号<span class="gender-inline" id="genderChips">${genderChipsHTML()}</span></div>
     <div class="name-chips" id="nameChips">${nameChipsHTML()}</div>
-    ${Object.keys(SECTS).map(id => {
-      const s = SECTS[id];
-      return `<button class="sect-card ${id === createSel ? 'sel' : ''}" data-act="pickSect" data-arg="${id}">
-        <span class="sc-ico">${s.icon}</span>
-        <span style="flex:1;min-width:0"><span class="sc-name">${s.name}</span>
-        <div class="sc-motto">${s.motto}</div><div class="sc-desc">${s.desc}</div></span>
-      </button>`;
-    }).join('')}
+    <div class="sect-grid">
+      ${Object.keys(SECTS).map(id => {
+        const s = SECTS[id];
+        return `<button class="sect-card compact ${id === createSel ? 'sel' : ''}" data-act="pickSect" data-arg="${id}">
+          <span class="sc-ico">${s.icon}</span>
+          <span class="sc-name">${s.name}</span>
+          <span class="sc-motto">${s.motto}</span>
+        </button>`;
+      }).join('')}
+    </div>
     <div id="sectInfo">${sectDetail(SECTS[createSel])}</div>
-    <div class="sheet-actions"><button class="btn gold" data-act="createChar">踏入江湖</button></div>`, true, true);
+    <div class="sheet-actions sticky"><button class="btn gold" data-act="createChar">踏入江湖</button></div>`, true, true);
 }
 
 /* ===================== 全局事件 ===================== */
@@ -2041,25 +3489,28 @@ function makeEnemy(spId, level) {
   const sp = SPECIES[spId], st = {};
   STAT_KEYS.forEach(k => st[k] = Math.round(sp.base[k] + sp.grow[k] * (level - 1)));
   if (!sp.boss) {
-    st.hp = Math.round(st.hp * 0.68);
-    st.atk = Math.round(st.atk * 0.55);
-    st.mag = Math.round(st.mag * 0.55);
-    st.def = Math.round(st.def * 0.75);
-    st.mdef = Math.round(st.mdef * 0.75);
+    st.hp = Math.round(st.hp * 0.74);
+    st.atk = Math.round(st.atk * 0.8);
+    st.mag = Math.round(st.mag * 0.8);
+    st.def = Math.round(st.def * 0.8);
+    st.mdef = Math.round(st.mdef * 0.8);
   }
   return {
     uid: 'e' + Math.random().toString(36).slice(2, 7), side: 'enemy', kind: 'enemy', sp: spId,
     name: sp.name, icon: sp.icon, level,
     hp: st.hp, maxhp: st.hp, mp: st.mp, maxmp: st.mp,
     atk: st.atk, def: st.def, mag: st.mag, mdef: st.mdef, spd: st.spd,
-    defending: false, buff: 0, boss: !!sp.boss, skill: sp.skill, captured: false
+    defending: false, buff: 0, boss: !!sp.boss, skill: sp.skill, captured: false,
+    st: {}, shield: 0, shieldTurns: 0
   };
 }
 
 function startBattle(mode) {
   if (B) return;
-  const p = S.player, map = MAPS[p.map] || MAPS.zhulin;
-  if (mode === 'boss' && p.level < map.bossLv - 2) {
+  const p = S.player;
+  const enc = window._enc; window._enc = null;
+  const map = MAPS[enc ? (S.player.scene in MAPS ? S.player.scene : p.map) : p.map] || MAPS.zhulin;
+  if (mode === 'boss' && !enc && p.level < map.bossLv - 2) {
     return toast(`需达到 Lv.${map.bossLv - 2} 方可挑战首领`, 'bad');
   }
   ensureVitals();
@@ -2068,7 +3519,7 @@ function startBattle(mode) {
     uid: 'player', side: 'ally', kind: 'player', name: p.name || '少侠', icon: SECTS[p.sect].icon,
     level: p.level, hp: p.hp, maxhp: st.hp, mp: p.mp, maxmp: st.mp,
     atk: st.atk, def: st.def, mag: st.mag, mdef: st.mdef, spd: st.spd,
-    defending: false, buff: 0
+    defending: false, buff: 0, st: {}, shield: 0, shieldTurns: 0
   };
   const allies = [pu];
   let petUnit = null;
@@ -2079,12 +3530,16 @@ function startBattle(mode) {
       uid: 'pet', side: 'ally', kind: 'pet', sp: pet.sp, name: pet.name, icon: SPECIES[pet.sp].icon,
       level: pet.level, hp: pet.hp, maxhp: ps.hp, mp: 0, maxmp: 0,
       atk: ps.atk, def: ps.def, mag: ps.mag, mdef: ps.mdef, spd: ps.spd,
-      defending: false, buff: 0
+      defending: false, buff: 0, st: {}, shield: 0, shieldTurns: 0
     };
     allies.push(petUnit);
   }
   const enemies = [];
-  if (mode === 'boss') {
+  if (enc) {
+    const lv = enc.lv || clamp(p.level, 1, 20);
+    enemies.push(makeEnemy(enc.sp, lv));
+    if (!enc.boss && lv >= 6 && Math.random() < .55) enemies.push(makeEnemy(pick(map.monsters), Math.max(1, lv - 1)));
+  } else if (mode === 'boss') {
     enemies.push(makeEnemy(map.boss, map.bossLv));
   } else {
     const n = p.level <= 1 ? 1 : (p.level < 4 ? rnd(1, 2) : rnd(1, 3));
@@ -2098,31 +3553,64 @@ function startBattle(mode) {
   renderBattle();
   blog(`遭遇 ${enemies.map(e => e.name).join('、')}！`);
   if (mode === 'boss') setTimeout(() => toast(`首领「${enemies[0].name}」现身！`, 'bad'), 300);
-  if (!petUnit) setTimeout(() => toast('当前无出战召唤兽', 'bad'), 600);
   if (B.auto) setTimeout(autoAction, 700); else showCmd();
+}
+
+function battleArt() {
+  const art = (MAPS[S.player.scene] && MAPS[S.player.scene].art) || 'bamboo';
+  const pal = {
+    bamboo: ['#1f3b2c', '#0a1712', '#5a8a5c'],
+    valley: ['#26382f', '#0a1310', '#4f6a56'],
+    snow: ['#35505f', '#0b1720', '#9fc2d2'],
+    maple: ['#4a2f22', '#150c08', '#a8603c'],
+    coast: ['#244a52', '#08161a', '#4f8a96']
+  }[art] || ['#1f3b2c', '#0a1712', '#5a8a5c'];
+  return `<svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${pal[0]}"/><stop offset=".55" stop-color="${pal[1]}"/><stop offset="1" stop-color="#070f0c"/>
+      </linearGradient>
+      <radialGradient id="bmoon" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#fdf2cf" stop-opacity=".85"/><stop offset="1" stop-color="#fdf2cf" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="400" height="700" fill="url(#bsky)"/>
+    <circle cx="315" cy="96" r="86" fill="url(#bmoon)"/>
+    <circle cx="315" cy="96" r="26" fill="#fbf0c8" opacity=".55"/>
+    <g stroke="#dff1e6" fill="none" opacity=".09" stroke-width="2.4" stroke-linecap="round">
+      <path d="M14 300 q34 -20 68 0 q34 20 68 0 q34 -20 68 0"/>
+      <path d="M186 246 q28 -16 56 0 q28 16 56 0"/>
+      <path d="M-14 386 q30 -18 60 0 q30 18 60 0"/>
+    </g>
+    <path d="M0 430 L58 352 L120 420 L196 330 L268 414 L332 356 L400 424 L400 700 L0 700Z" fill="${pal[2]}" opacity=".2"/>
+    <path d="M0 505 L78 440 L160 510 L246 444 L328 508 L400 466 L400 700 L0 700Z" fill="#08120e" opacity=".72"/>
+    <path d="M0 560 Q100 528 200 556 T400 540 L400 700 L0 700Z" fill="#060e0b" opacity=".85"/>
+    <ellipse cx="200" cy="612" rx="250" ry="76" fill="#040b08" opacity=".7"/>
+    <ellipse cx="200" cy="470" rx="210" ry="126" fill="#f4e2b4" opacity=".045"/>
+    <g stroke="#93c39a" fill="none" opacity=".22" stroke-width="2" stroke-linecap="round">
+      <path d="M28 604 q3 -16 9 -22 M36 606 q0 -18 4 -26 M44 606 q-2 -14 2 -20"/>
+      <path d="M352 588 q4 -18 10 -24 M361 590 q0 -20 5 -28 M370 590 q-2 -16 3 -22"/>
+      <path d="M96 646 q3 -12 7 -16 M102 647 q0 -13 3 -18"/>
+      <path d="M300 652 q3 -12 7 -16 M306 653 q0 -13 3 -18"/>
+    </g>
+    <image href="assets/scene/tree.png" x="-90" y="196" width="330" height="330" opacity=".22"/>
+    <image href="assets/scene/tree.png" x="248" y="240" width="260" height="260" opacity=".18" transform="translate(756,0) scale(-1,1)"/>
+    <g opacity=".25" fill="#f8f0d8">
+      <circle cx="60" cy="120" r="1.6"/><circle cx="140" cy="70" r="1.2"/><circle cx="240" cy="140" r="1.4"/><circle cx="352" cy="60" r="1.2"/><circle cx="90" cy="240" r="1.1"/>
+    </g>
+  </svg>`;
 }
 
 function renderBattle() {
   const el = document.getElementById('battle');
   el.classList.remove('hidden');
   el.innerHTML = `
-    <div class="fog"></div>
-    <div class="b-art">
-      <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice">
-        <defs><radialGradient id="bmoon" cx="50%" cy="50%" r="50%">
-          <stop offset="0" stop-color="#f6ecc6" stop-opacity=".55"/><stop offset="1" stop-color="#f6ecc6" stop-opacity="0"/>
-        </radialGradient></defs>
-        <circle cx="318" cy="86" r="60" fill="url(#bmoon)"/>
-        <circle cx="318" cy="86" r="18" fill="#f4e9c4" opacity=".5"/>
-        <path d="M0 430 L64 366 L128 424 L198 340 L268 418 L330 372 L400 430 L400 700 L0 700Z" fill="#0a1614" opacity=".55"/>
-        <path d="M0 520 L86 466 L166 524 L248 462 L330 518 L400 486 L400 700 L0 700Z" fill="#07100e" opacity=".72"/>
-        <ellipse cx="200" cy="620" rx="230" ry="70" fill="#050c0a" opacity=".55"/>
-      </svg>
-    </div>
+    <div class="b-art">${battleArt()}</div>
+    <div class="after"></div>
     <div class="b-intro"><span>${B.mode === 'boss' ? '首领来袭' : '遭遇妖兽'}</span></div>
     <div class="b-round">
-      <span>第 <b id="bRound">1</b> 回合</span>
-      <button class="auto ${B.auto ? 'on' : ''}" data-act="toggleAuto">自动 ${B.auto ? '◉' : '○'}</button>
+      <span class="rlabel">第 <b id="bRound">1</b> 回合</span>
+      <button class="auto ${B.auto ? 'on' : ''}" data-act="toggleAuto">自动 ${B.auto ? '开' : '关'}</button>
       <button class="auto speed" data-act="cycleSpeed">${B.speed}x</button>
       <button class="auto" data-act="skipBattle">跳过</button>
     </div>
@@ -2134,12 +3622,27 @@ function renderBattle() {
   paintBattle();
 }
 
+function stIcons(u) {
+  const st = u.st || {};
+  let s = '';
+  if (st.poison && st.poison.turns > 0) s += '<span class="st-ico poison" title="中毒">毒</span>';
+  if (st.burn && st.burn.turns > 0) s += '<span class="st-ico burn" title="灼烧">灼</span>';
+  if (st.stun && st.stun.turns > 0) s += '<span class="st-ico stun" title="眩晕">晕</span>';
+  if (u.shield > 0) s += '<span class="st-ico shield" title="护盾">盾</span>';
+  if (u.buff > 0) s += '<span class="st-ico shield" title="兽王">兽</span>';
+  return s;
+}
+
 function unitHTML(u) {
+  const art = u.kind === 'player'
+    ? `<img src="${playerSprite()}" alt="">`
+    : `<span class="spr ${u.side === 'ally' ? 'pet' : ''}">${monArt(u.sp)}</span>`;
   return `<div class="unit ${u.side}" data-uid="${u.uid}" ${u.side === 'enemy' ? `data-act="selectTarget" data-arg="${u.uid}"` : ''}>
     <div class="u-name">${u.name} <em>Lv.${u.level}</em></div>
-    <div class="u-av">${u.icon}${u.buff > 0 ? '<span class="u-tag">兽王</span>' : ''}</div>
+    <div class="u-art"><span class="u-shadow"></span>${art}</div>
     <div class="u-hp ${u.side === 'ally' ? 'ally' : ''}"><i style="width:100%"></i></div>
     <div class="u-num">${Math.round(u.hp)}/${u.maxhp}</div>
+    <div class="u-stat">${stIcons(u)}</div>
   </div>`;
 }
 
@@ -2155,6 +3658,8 @@ function paintBattle() {
     if (bar) bar.style.width = clamp(u.hp / u.maxhp * 100, 0, 100) + '%';
     const num = node.querySelector('.u-num');
     if (num) num.textContent = `${Math.max(0, Math.round(u.hp))}/${u.maxhp}`;
+    const st = node.querySelector('.u-stat');
+    if (st) st.innerHTML = stIcons(u);
     node.classList.toggle('dead', u.hp <= 0);
     node.classList.toggle('sel', u.side === 'enemy' && u.uid === B.sel && u.hp > 0);
   });
@@ -2205,14 +3710,25 @@ async function pulse(uid) {
   n.classList.remove('act');
 }
 
-function applyDamage(u, dmg, crit) {
+function applyStatus(u, type, turns) {
+  if (!u || u.hp <= 0) return;
+  u.st = u.st || {};
+  u.st[type] = { turns, rate: type === 'poison' ? .06 : .08 };
+}
+
+function applyDamage(u, dmg, crit, silent) {
+  if (u.shield > 0) {
+    const ab = Math.min(u.shield, dmg);
+    u.shield -= ab; dmg -= ab;
+    if (ab > 0) setTimeout(() => toast(`${u.name} 护盾抵消 ${ab}`, 'good'), 60);
+  }
   u.hp = Math.max(0, u.hp - dmg);
   paintBattle();
   const node = document.querySelector(`#battle .unit[data-uid="${u.uid}"]`);
   if (node) {
     node.classList.add('hit');
     setTimeout(() => node.classList.remove('hit'), 320);
-    const av = node.querySelector('.u-av');
+    const av = node.querySelector('.u-art');
     if (av && B && !B.skip) {
       const s = document.createElement('div');
       s.className = 'slash';
@@ -2225,7 +3741,7 @@ function applyDamage(u, dmg, crit) {
     const stack = (u._fx = (u._fx || 0) + 1) % 3;
     f.style.left = (50 + (stack - 1) * 13) + '%';
     f.style.animationDelay = (stack * 30) + 'ms';
-    node.appendChild(f);
+    (av || node).appendChild(f);
     setTimeout(() => f.remove(), 1100);
   }
   if (B && !B.skip) {
@@ -2244,7 +3760,7 @@ function applyHeal(u, n) {
     const f = document.createElement('div');
     f.className = 'floater heal';
     f.textContent = '+' + real;
-    node.appendChild(f);
+    (node.querySelector('.u-art') || node).appendChild(f);
     setTimeout(() => f.remove(), 1000);
   }
   return real;
@@ -2266,12 +3782,12 @@ function cmdMain() {
   const canSkill = sct.skills.some(id => p.mp >= SPELLS[id].mp);
   const netN = bagCount('net');
   return `<div class="cmd-grid">
-    <button class="cmd" data-act="bAttack"><i>⚔️</i>攻击<small>物理</small></button>
-    <button class="cmd" data-act="bSkill" ${canSkill ? '' : 'disabled'}><i>✨</i>法术<small>${sct.name}</small></button>
-    <button class="cmd" data-act="bItem"><i>🎒</i>道具<small>${Object.keys(S.bag).filter(k => ITEMS[k] && ITEMS[k].type === 'potion').length} 种</small></button>
-    <button class="cmd" data-act="bCapture"><i>🪢</i>捕捉<small>${netN ? '捆仙索×' + netN : '收服灵兽'}</small></button>
-    <button class="cmd" data-act="bDefend"><i>🛡️</i>防御<small>减伤一半</small></button>
-    <button class="cmd run" data-act="bFlee"><i>🏃</i>逃跑<small>七成把握</small></button>
+    <button class="cmd" data-act="bAttack"><i>${icon('sword')}</i>攻击<small>物理</small></button>
+    <button class="cmd" data-act="bSkill" ${canSkill ? '' : 'disabled'}><i>${icon('spark')}</i>法术<small>${sct.name}</small></button>
+    <button class="cmd" data-act="bItem"><i>${icon('potion')}</i>道具<small>${Object.keys(S.bag).filter(k => ITEMS[k] && ITEMS[k].type === 'potion').length} 种</small></button>
+    <button class="cmd" data-act="bCapture"><i>${icon('net')}</i>捕捉<small>${netN ? '捆仙索×' + netN : '收服灵兽'}</small></button>
+    <button class="cmd" data-act="bDefend"><i>${icon('shield')}</i>防御<small>减伤一半</small></button>
+    <button class="cmd run" data-act="bFlee"><i>${icon('run')}</i>逃跑<small>七成把握</small></button>
   </div>`;
 }
 
@@ -2287,7 +3803,7 @@ function skillPanel() {
     ${sct.skills.map(id => {
       const s = SPELLS[id], ok = p.mp >= s.mp;
       return `<button class="opt" data-act="doSkill" data-arg="${id}" ${ok ? '' : 'disabled'}>
-        <span class="oi">${s.icon}</span><span class="oname">${s.name}</span><span class="ocost">${s.mp}法</span></button>`;
+        <span class="oi">${icon('spark')}</span><span class="oname">${s.name}</span><span class="ocost">${s.mp}法</span></button>`;
     }).join('')}
     <button class="opt back" data-act="backCmd">返回</button>
   </div>`;
@@ -2300,7 +3816,7 @@ function itemPanel() {
     ${ids.length ? ids.map(id => {
       const it = ITEMS[id];
       return `<button class="opt" data-act="doItem" data-arg="${id}">
-        <span class="oi">${it.icon}</span><span class="oname">${it.name}×${S.bag[id]}</span><span class="ocost">${it.hp ? '+' + it.hp + '血' : it.mp ? '+' + it.mp + '法' : '+' + it.exp + '经验'}</span></button>`;
+        <span class="oi">${icon('potion')}</span><span class="oname">${it.name}×${S.bag[id]}</span><span class="ocost">${it.hp ? '+' + it.hp + '血' : it.mp ? '+' + it.mp + '法' : '+' + it.exp + '经验'}</span></button>`;
     }).join('') : '<div class="empty" style="grid-column:1/-1;padding:10px">没有可用丹药</div>'}
     <button class="opt back" data-act="backCmd">返回</button>
   </div>`;
@@ -2316,9 +3832,9 @@ function capturePanel() {
   const netN = bagCount('net');
   document.getElementById('cmdWrap').innerHTML = `<div class="panel">
     <button class="opt" data-act="doCapture" data-arg="none">
-      <span class="oi">🪢</span><span class="oname">直接捕捉</span><span class="ocost">${Math.round(base * 100)}%</span></button>
+      <span class="oi">${icon('net')}</span><span class="oname">直接捕捉</span><span class="ocost">${Math.round(base * 100)}%</span></button>
     <button class="opt" data-act="doCapture" data-arg="net" ${netN ? '' : 'disabled'}>
-      <span class="oi">✨</span><span class="oname">捆仙索 ×${netN}</span><span class="ocost">${Math.round(withNet * 100)}%</span></button>
+      <span class="oi">${icon('net')}</span><span class="oname">捆仙索 ×${netN}</span><span class="ocost">${Math.round(withNet * 100)}%</span></button>
     <button class="opt back" data-act="backCmd">返回</button>
   </div>`;
 }
@@ -2330,12 +3846,38 @@ function captureChance(t, net) {
   return clamp(c, 0.05, 0.95);
 }
 
+/* 回合结束：持续伤害与状态结算 */
+async function tickStatuses() {
+  if (!B || B.ended) return;
+  const units = B.allies.concat(B.enemies).filter(u => u.hp > 0);
+  for (const u of units) {
+    if (!B || B.ended) return;
+    const st = u.st || {};
+    for (const k of ['poison', 'burn']) {
+      if (st[k] && st[k].turns > 0) {
+        const dmg = Math.max(2, Math.round(u.maxhp * st[k].rate));
+        applyDamage(u, dmg, false, true);
+        blog(`${u.name} 受${k === 'poison' ? '中毒' : '灼烧'}侵蚀，损失 ${dmg} 气血`);
+        st[k].turns--;
+        if (st[k].turns <= 0) delete st[k];
+        await bwait(180);
+        if (checkEnd()) return;
+      }
+    }
+    if (u.shield > 0) {
+      u.shieldTurns = (u.shieldTurns || 0) - 1;
+      if (u.shieldTurns <= 0) { u.shield = 0; u.shieldTurns = 0; }
+    }
+    paintBattle();
+  }
+}
+
 /* 回合推进 */
 async function playerAction(act) {
   if (!B || B.busy || B.ended) return;
   B.busy = true;
   const w = document.getElementById('cmdWrap');
-  if (w) w.innerHTML = '<div class="empty" style="padding:10px;font-size:10px">…</div>';
+  if (w) w.innerHTML = '<div class="turn-wait"><i></i><span>回合结算中</span></div>';
   const order = [{ u: B.player, act }];
   if (B.pet && B.pet.hp > 0) order.push({ u: B.pet, act: petAI(B.pet) });
   aliveEnemies().forEach(e => order.push({ u: e, act: enemyAI(e) }));
@@ -2349,6 +3891,8 @@ async function playerAction(act) {
     if (checkEnd()) break;
   }
   if (!B || B.ended) return;
+  await tickStatuses();
+  if (!B || B.ended) return;
   B.allies.forEach(a => a.defending = false);
   B.enemies.forEach(e => e.defending = false);
   if (B.pet && B.pet.buff > 0) B.pet.buff--;
@@ -2361,11 +3905,11 @@ async function playerAction(act) {
 
 function petAI(pet) {
   const sp = SPECIES[pet.sp];
-  if (sp.skill.type === 'heal') {
-    if (B.player.hp < B.player.maxhp * 0.9) return { type: 'petskill' };
-    return { type: 'attack' };
-  }
-  if (Math.random() < 0.72) return { type: 'petskill' };
+  const books = (pet.books && pet.books.length) ? pet.books : [sp.skill];
+  const heal = books.find(b => b.type === 'heal');
+  if (heal && B.player.hp < B.player.maxhp * 0.85) return { type: 'petskill', book: heal };
+  const atkBooks = books.filter(b => b.type !== 'heal');
+  if (atkBooks.length && Math.random() < 0.72) return { type: 'petskill', book: pick(atkBooks) };
   return { type: 'attack' };
 }
 
@@ -2376,6 +3920,11 @@ function enemyAI(e) {
 
 async function executeAction(actor, act) {
   if (!B || B.ended) return;
+  if (actor.st && actor.st.stun && actor.st.stun.turns > 0) {
+    blog(`${actor.name} 眩晕中，无法行动`);
+    await bwait(240);
+    return;
+  }
   if (act.type === 'attack') {
     const t = targetFor(actor);
     if (!t) return;
@@ -2392,29 +3941,31 @@ async function executeAction(actor, act) {
   if (act.type === 'petskill') {
     const sp = SPECIES[actor.sp];
     if (!sp) return;
-    if (sp.skill.type === 'heal') {
+    const sk = act.book || sp.skill;
+    if (sk.type === 'heal') {
       const t = B.player;
       await pulse(actor.uid);
-      const heal = applyHeal(t, actor.mag * sp.skill.mult + 22);
-      blog(`${actor.name} 施放「${sp.skill.name}」，为 ${t.name} 回复 ${heal} 气血`);
-    } else if (sp.skill.type === 'magic') {
+      const heal = applyHeal(t, actor.mag * sk.mult + 22);
+      blog(`${actor.name} 施放「${sk.name}」，为 ${t.name} 回复 ${heal} 气血`);
+    } else if (sk.type === 'magic') {
       const t = currentTarget();
       if (!t) return;
       await pulse(actor.uid);
-      let dmg = damageOf(actor, t, sp.skill.mult, true);
+      let dmg = damageOf(actor, t, sk.mult, true);
       if (actor.buff > 0) dmg = Math.round(dmg * 1.6);
       applyDamage(t, dmg, false);
-      blog(`${actor.name} 施放「${sp.skill.name}」，${t.name} 受到 ${dmg} 点法术伤害`);
+      blog(`${actor.name} 施放「${sk.name}」，${t.name} 受到 ${dmg} 点法术伤害`);
     } else {
       const t = currentTarget();
       if (!t) return;
       await pulse(actor.uid);
-      let dmg = damageOf(actor, t, sp.skill.mult, false);
+      let dmg = damageOf(actor, t, sk.mult, false);
       if (actor.buff > 0) dmg = Math.round(dmg * 1.6);
       const crit = Math.random() < 0.1;
       if (crit) dmg = Math.round(dmg * 1.5);
       applyDamage(t, dmg, crit);
-      blog(`${actor.name} 施放「${sp.skill.name}」，${t.name} 受到 ${dmg} 点伤害`);
+      if (sk.status && Math.random() < .7) applyStatus(t, sk.status, 3);
+      blog(`${actor.name} 施放「${sk.name}」，${t.name} 受到 ${dmg} 点伤害`);
     }
     return;
   }
@@ -2426,6 +3977,8 @@ async function executeAction(actor, act) {
     const magic = actor.skill.type === 'magic';
     let dmg = damageOf(actor, t, actor.skill.mult, magic);
     applyDamage(t, dmg, false);
+    const inf = { duanlang: 'poison', tongjia: 'poison', huoyou: 'burn', shuimu: 'stun', fengyao: 'burn' }[actor.sp];
+    if (inf && Math.random() < .4) applyStatus(t, inf, inf === 'stun' ? 1 : 3);
     blog(`${actor.name} 施放「${actor.skill.name}」，${t.name} 受到 ${dmg} 点${magic ? '法术' : ''}伤害`);
     return;
   }
@@ -2444,6 +3997,21 @@ async function executeAction(actor, act) {
       let sum = 0;
       B.allies.filter(a => a.hp > 0).forEach(a => sum += applyHeal(a, B.player.mag * s.mult + 30));
       blog(`你施放「${s.name}」，同伴共回复 ${sum} 点气血`);
+    } else if (s.type === 'shield') {
+      await pulse('player');
+      B.player.shield = Math.round(B.player.mag * s.mult + 60);
+      B.player.shieldTurns = 3;
+      showCombo(s.name);
+      if (s.name === '龙鳞护体') B.player.mp = Math.min(B.player.maxmp, B.player.mp + 12);
+      blog(`你施展「${s.name}」，获得 ${B.player.shield} 点护盾（3 回合）`);
+      paintBattle();
+    } else if (s.type === 'shieldall') {
+      await pulse('player');
+      const amount = Math.round(B.player.mag * s.mult + 45);
+      B.allies.filter(a => a.hp > 0).forEach(a => { a.shield = amount; a.shieldTurns = 3; });
+      showCombo(s.name);
+      blog(`你施展「${s.name}」，全体同伴获得 ${amount} 点护盾`);
+      paintBattle();
     } else if (s.type === 'buffpet') {
       await pulse('player');
       if (B.pet && B.pet.hp > 0) {
@@ -2469,19 +4037,25 @@ async function executeAction(actor, act) {
         blog(`你独自扑向 ${t.name}，造成 ${dmg} 点伤害`);
       }
     } else {
-      const targets = s.target === 'all' ? aliveEnemies() : [currentTarget()].filter(Boolean);
+      const magic = s.type === 'magic' || s.type === 'magicall';
+      const targets = (s.target === 'all' || s.type === 'magicall') ? aliveEnemies() : [currentTarget()].filter(Boolean);
       await pulse('player');
       showCombo(s.name);
       let total = 0;
       for (const t of targets) {
         if (!t || t.hp <= 0) continue;
         const crit = Math.random() < 0.1;
-        let dmg = damageOf(B.player, t, s.mult, s.type === 'magic');
+        let dmg = damageOf(B.player, t, s.mult, magic);
         if (crit) dmg = Math.round(dmg * 1.5);
         applyDamage(t, dmg, crit);
+        if (s.status) {
+          const ch = s.status.chance == null ? 1 : s.status.chance;
+          if (Math.random() < ch) applyStatus(t, s.status.t, s.status.turns);
+        }
         total += dmg;
       }
-      blog(`你施放「${s.name}」，共造成 ${total} 点${s.type === 'magic' ? '法术' : ''}伤害`);
+      blog(`你施放「${s.name}」，共造成 ${total} 点${magic ? '法术' : ''}伤害`);
+      if (s.status && Math.random() < .5) toast('状态已附加', 'good');
     }
     renderTop();
     return;
@@ -2573,8 +4147,8 @@ function finishWin() {
   B.enemies.forEach(e => {
     if (e.captured) return;
     const sp = SPECIES[e.sp];
-    exp += Math.round((22 + 16 * e.level) * sp.exp);
-    gold += Math.round((10 + 7 * e.level) * sp.gold);
+    exp += Math.round((28 + 19 * e.level) * sp.exp);
+    gold += Math.round((14 + 9 * e.level) * sp.gold);
     p.kills[e.sp] = (p.kills[e.sp] || 0) + 1;
     p.daily.kills++;
     killCount++;
