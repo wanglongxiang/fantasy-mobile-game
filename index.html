@@ -1121,6 +1121,10 @@ const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.ge
 const SPRITE_OF = { tiance: 'tang', longgong: 'han', putuo: 'qing', wanshou: 'yuan' };
 const charSprite = (sect, gender) => `assets/chars/${SPRITE_OF[sect] || 'han'}_${gender === 'f' ? 'f' : 'm'}.png`;
 const playerSprite = () => charSprite(S.player.sect, S.player.gender);
+/* 预载立绘与场景素材，避免首屏空白 */
+['han_m', 'han_f', 'qing_m', 'qing_f', 'tang_m', 'tang_f', 'yuan_m', 'yuan_f']
+  .forEach(n => { const im = new Image(); im.src = `assets/chars/${n}.png`; });
+['tree', 'lantern', 'tile_stone1', 'mountain2'].forEach(n => { const im = new Image(); im.src = `assets/scene/${n}.png`; });
 const npcSprite = n => n.sprite ? `assets/chars/${n.sprite}.png` : charSprite('tiance', 'm');
 
 const ICON_PATHS = {
