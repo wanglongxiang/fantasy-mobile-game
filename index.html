@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0d1620">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<title>幻唐仙缘 · 问道江湖</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1a1c'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle'%3E%F0%9F%8F%AF%3C/text%3E%3C/svg%3E">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#05090b;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;color:#e9ddc6;-webkit-user-select:none;user-select:none;-webkit-text-size-adjust:100%}
+body{display:flex;align-items:center;justify-content:center}
+:root{
+  --gold:#d9b06a;--gold-2:#f0d49a;--gold-dim:#8d7448;
+  --paper:#f2e7cf;--muted:#9aa79e;
+  --hp:#c8494f;--hp-2:#f2776d;--mp:#4a8fd0;--exp:#e0b74f;
+  --card:rgba(22,36,40,.78);--card-2:rgba(30,48,48,.62);
+  --line:rgba(217,176,106,.22);
+  --app-h:100dvh;
+}
+#app{
+  position:relative;width:100%;max-width:430px;height:var(--app-h);overflow:hidden;touch-action:manipulation;
+  display:flex;flex-direction:column;
+  background:
+    radial-gradient(120% 60% at 50% 0%,rgba(56,92,92,.45),transparent 60%),
+    radial-gradient(100% 50% at 50% 100%,rgba(74,58,32,.35),transparent 65%),
+    linear-gradient(180deg,#0c1620 0%,#101f27 40%,#122320 100%);
+}
+#app::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:34px 34px;mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 70%);
+}
+#app::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 90px rgba(0,0,0,.7);
+}
+@media (min-width:560px){
+  body{background:radial-gradient(80% 60% at 50% 40%,#152322,#05090b 70%)}
+  #app{height:min(860px,calc(100dvh - 40px));border-radius:38px;border:9px solid #1b211f;
+    box-shadow:0 40px 100px rgba(0,0,0,.75),0 0 0 1px rgba(217,176,106,.22),inset 0 0 0 1px rgba(0,0,0,.6)}
+  #app::after{border-radius:30px}
+}
+.hidden{display:none!important}
+button{font-family:inherit;color:inherit;border:none;background:none;cursor:pointer}
+::-webkit-scrollbar{width:0;height:0}
+
+/* ============ 顶部状态栏 ============ */
+#topbar{
+  position:relative;z-index:5;flex:none;
+  padding:calc(8px + env(safe-area-inset-top)) 12px 8px;
+  display:flex;align-items:center;gap:9px;
+  background:linear-gradient(180deg,rgba(8,16,20,.92),rgba(10,20,24,.55) 70%,transparent);
+}
+.tb-badge{
+  width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:21px;
+  background:radial-gradient(circle at 35% 30%,#2c4a44,#101c1c);
+  border:1px solid rgba(217,176,106,.55);box-shadow:0 0 12px rgba(217,176,106,.18),inset 0 0 10px rgba(0,0,0,.6);
+}
+.tb-main{flex:1;min-width:0}
+.tb-row{display:flex;align-items:center;gap:6px;margin-bottom:4px;white-space:nowrap}
+.tb-name{font-size:14px;font-weight:600;color:#f4e9d2;letter-spacing:.5px;max-width:96px;overflow:hidden;text-overflow:ellipsis}
+.tb-lv{font-size:10px;color:#0f1a18;background:linear-gradient(180deg,#f0d49a,#c9a25e);padding:1px 6px;border-radius:8px;font-weight:700}
+.tb-sect{font-size:10px;color:#b9c8bb;border:1px solid rgba(217,176,106,.3);border-radius:8px;padding:1px 6px}
+.bar{position:relative;height:9px;border-radius:6px;background:rgba(0,0,0,.55);overflow:hidden;border:1px solid rgba(255,255,255,.07)}
+.bar>i{position:absolute;inset:0;width:100%;transform-origin:left;display:block;transition:width .3s ease}
+.bar>span{position:absolute;inset:0;font-size:8px;line-height:9px;text-align:center;color:rgba(255,255,255,.92);text-shadow:0 1px 2px #000;letter-spacing:.3px}
+.bar.hp>i{background:linear-gradient(90deg,#8e2f36,#d9565a)}
+.bar.mp>i{background:linear-gradient(90deg,#2e5d8c,#5aa1e0)}
+.bar+.bar{margin-top:3px}
+.tb-gold{flex:none;text-align:right;font-size:12px;color:var(--gold-2);font-weight:600;line-height:1.3}
+.tb-gold small{display:block;font-size:8px;color:#7f8f85;font-weight:400}
+#expbar{position:absolute;left:0;right:0;bottom:0;height:2px;background:rgba(0,0,0,.4)}
+#expbar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8d6b2c,#f0d49a);transition:width .4s}
+
+/* ============ 屏幕 ============ */
+#screen{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:4px 14px 18px;position:relative;z-index:2;scroll-behavior:smooth;overscroll-behavior:contain}
+.sec-title{display:flex;align-items:center;gap:8px;margin:16px 0 9px;font-family:"Songti SC","STSong",serif;font-size:15px;color:#e8d9b8;letter-spacing:2px}
+.sec-title::before{content:"";width:3px;height:14px;border-radius:2px;background:linear-gradient(180deg,#f0d49a,#8d6b2c)}
+.sec-title small{margin-left:auto;font-family:inherit;font-size:10px;color:#7f8f85;letter-spacing:0}
+
+/* 场景图 */
+.scene{position:relative;height:168px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 10px 26px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.04)}
+.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.scene .veil{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(6,12,14,.86))}
+.scene .scene-txt{position:absolute;left:15px;bottom:12px;right:15px}
+.scene .st-name{font-family:"Songti SC","STSong",serif;font-size:25px;letter-spacing:5px;color:#f7ecd4;text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.scene .st-sub{font-size:10px;color:#c6b992;letter-spacing:1.5px;margin-top:2px}
+.scene .st-tag{position:absolute;top:12px;right:12px;font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(0,0,0,.5);border:1px solid var(--line);color:var(--gold-2)}
+
+/* 卡片网格 */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.tile{
+  position:relative;display:flex;align-items:center;gap:10px;padding:11px 10px;min-height:62px;
+  border-radius:13px;background:linear-gradient(160deg,rgba(38,58,58,.7),rgba(16,28,30,.85));
+  border:1px solid var(--line);text-align:left;transition:transform .12s,box-shadow .2s;
+}
+.tile:active{transform:scale(.97);box-shadow:0 0 18px rgba(217,176,106,.25)}
+.tile .t-ico{width:36px;height:36px;flex:none;border-radius:10px;display:grid;place-items:center;font-size:20px;background:radial-gradient(circle at 35% 25%,rgba(240,212,154,.28),rgba(0,0,0,.35));border:1px solid rgba(217,176,106,.28)}
+.tile .t-body{min-width:0;display:block}
+.tile .t-name{display:block;font-size:13px;color:#f0e4ca;font-weight:600;letter-spacing:.5px}
+.tile .t-desc{display:block;font-size:9.5px;color:#8fa093;margin-top:2px;line-height:1.35}
+.tile .t-badge{position:absolute;top:6px;right:7px;font-size:8px;padding:1px 5px;border-radius:6px;background:#b7413f;color:#ffe9c9}
+
+/* 按钮 */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:0 16px;
+  border-radius:12px;font-size:14px;font-weight:600;letter-spacing:1px;color:#f6ecd6;
+  background:linear-gradient(180deg,rgba(64,92,84,.9),rgba(24,40,40,.95));
+  border:1px solid rgba(217,176,106,.42);box-shadow:0 4px 14px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12);
+  transition:transform .1s,filter .2s;
+}
+.btn:active{transform:scale(.96);filter:brightness(1.15)}
+.btn.gold{background:linear-gradient(180deg,#e2c184,#b98f4c);color:#2a1f0c;border-color:#f4dcae;text-shadow:0 1px 0 rgba(255,255,255,.35)}
+.btn.ghost{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);color:#c9d3c9}
+.btn.danger{background:linear-gradient(180deg,rgba(120,50,50,.85),rgba(60,24,24,.95));border-color:rgba(200,90,80,.5)}
+.btn:disabled{opacity:.4;filter:grayscale(.5)}
+.btn.wide{width:100%}
+.btn.sm{min-height:36px;font-size:12px;padding:0 12px;border-radius:9px}
+
+/* 列表行 */
+.row{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,.06);margin-bottom:8px}
+.row .r-ico{width:38px;height:38px;flex:none;display:grid;place-items:center;font-size:21px;border-radius:10px;background:rgba(0,0,0,.32);border:1px solid rgba(217,176,106,.2)}
+.row .r-main{flex:1;min-width:0}
+.row .r-name{font-size:13px;color:#eee2c8;display:flex;align-items:center;gap:6px}
+.row .r-desc{font-size:10px;color:#8b9a90;margin-top:2px;line-height:1.4}
+.row .r-right{flex:none;text-align:right}
+.tag{font-size:9px;padding:1px 6px;border-radius:6px;border:1px solid rgba(217,176,106,.35);color:#d9b06a}
+.tag.on{background:rgba(217,176,106,.18)}
+.tag.off{color:#6f7d75;border-color:rgba(255,255,255,.12)}
+.empty{padding:28px 10px;text-align:center;color:#6f7d75;font-size:12px;line-height:1.8}
+
+/* 进度条（任务） */
+.pbar{height:6px;border-radius:4px;background:rgba(0,0,0,.5);overflow:hidden;margin-top:6px}
+.pbar>i{display:block;height:100%;background:linear-gradient(90deg,#8d6b2c,#e8c47c);transition:width .3s}
+
+/* ============ 底部导航 ============ */
+#tabbar{
+  position:relative;z-index:6;flex:none;display:flex;
+  padding:4px 6px calc(6px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(10,18,20,.6),rgba(8,14,16,.98) 40%);
+  border-top:1px solid rgba(217,176,106,.18);
+}
+.tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  min-height:52px;border-radius:11px;color:#7d8d84;font-size:10px;letter-spacing:1px;position:relative;transition:color .2s;
+}
+.tab i{font-style:normal;font-size:20px;line-height:1;filter:grayscale(.55);transition:.2s}
+.tab.on{color:#f0d49a}
+.tab.on i{filter:none;transform:translateY(-1px);text-shadow:0 0 12px rgba(240,212,154,.65)}
+.tab.on::after{content:"";position:absolute;bottom:2px;width:18px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,#f0d49a,transparent)}
+.tab .dot{position:absolute;top:6px;right:calc(50% - 17px);width:6px;height:6px;border-radius:50%;background:#e2564f;box-shadow:0 0 6px #e2564f}
+
+/* ============ 弹层 ============ */
+#overlay{position:absolute;inset:0;z-index:40;display:flex;align-items:flex-end;justify-content:center;background:rgba(3,7,9,.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);animation:fadeIn .18s ease}
+#overlay.center{align-items:center;padding:20px}
+.sheet{
+  width:100%;max-height:88%;overflow-y:auto;padding:16px 16px calc(18px + env(safe-area-inset-bottom));
+  border-radius:20px 20px 0 0;border:1px solid rgba(217,176,106,.28);border-bottom:none;
+  background:linear-gradient(180deg,#182a2c,#0e1a1c 70%);
+  box-shadow:0 -14px 50px rgba(0,0,0,.7);animation:sheetUp .24s cubic-bezier(.2,.9,.3,1);
+}
+#overlay.center .sheet{border-radius:18px;border-bottom:1px solid rgba(217,176,106,.28);max-width:340px;animation:pop .2s ease}
+.sheet h3{margin:0 0 4px;font-family:"Songti SC","STSong",serif;font-size:19px;letter-spacing:3px;color:#f4e7ca;text-align:center}
+.sheet .sub{text-align:center;font-size:10px;color:#83938a;margin-bottom:14px;letter-spacing:1px}
+.sheet .sheet-actions{display:flex;gap:10px;margin-top:16px}
+.sheet .sheet-actions .btn{flex:1}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* 选择门派 */
+.sect-card{display:flex;gap:11px;padding:11px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.035);margin-bottom:8px;text-align:left;width:100%;transition:.15s}
+.sect-card.sel{border-color:rgba(240,212,154,.85);background:rgba(217,176,106,.12);box-shadow:0 0 18px rgba(217,176,106,.16)}
+.sect-card .sc-ico{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:23px;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.2),rgba(0,0,0,.4));border:1px solid rgba(217,176,106,.3)}
+.sect-card .sc-name{display:block;font-size:14px;color:#f2e6cc;font-family:"Songti SC","STSong",serif;letter-spacing:2px}
+.sect-card .sc-motto{font-size:9px;color:#c8b385;margin:1px 0 3px;letter-spacing:1px}
+.sect-card .sc-desc{font-size:9.5px;color:#8c9c92;line-height:1.45}
+
+.input{
+  width:100%;min-height:44px;padding:0 12px;border-radius:10px;background:rgba(0,0,0,.4);
+  border:1px solid rgba(217,176,106,.3);color:#f2e6cc;font-size:16px;outline:none;text-align:center;letter-spacing:2px;
+  font-family:inherit;
+}
+.input:focus{border-color:rgba(240,212,154,.8);box-shadow:0 0 14px rgba(217,176,106,.2)}
+
+/* ============ 战斗 ============ */
+#battle{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;
+  background:
+    radial-gradient(80% 45% at 50% 62%,rgba(90,110,80,.35),transparent 70%),
+    radial-gradient(60% 40% at 50% 10%,rgba(70,110,120,.3),transparent 70%),
+    linear-gradient(180deg,#0a1418,#12211f 55%,#0b1512);
+  animation:fadeIn .25s ease;
+}
+#battle .b-art{position:absolute;inset:0;pointer-events:none;opacity:.85}
+#battle .b-art svg{position:absolute;inset:0;width:100%;height:100%}
+#battle .fog{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:radial-gradient(ellipse 60% 12% at 20% 70%,rgba(200,220,210,.16),transparent 70%),
+             radial-gradient(ellipse 60% 10% at 80% 55%,rgba(200,220,210,.12),transparent 70%)}
+#battle .b-round{position:relative;z-index:2;flex:none;display:flex;align-items:center;gap:8px;
+  padding:calc(8px + env(safe-area-inset-top)) 14px 4px;font-size:10px;color:#a9b8ae;letter-spacing:1px}
+#battle .b-round b{color:#f0d49a;font-weight:600}
+#battle .b-round .auto{margin-left:auto;display:flex;align-items:center;gap:6px;padding:5px 9px;border-radius:20px;
+  border:1px solid rgba(217,176,106,.3);background:rgba(0,0,0,.35);font-size:10px;color:#9fb0a5}
+#battle .b-round .auto.on{color:#0f1a18;background:linear-gradient(180deg,#f0d49a,#c9a25e);border-color:#f4dcae;font-weight:700}
+#battle .b-log{position:relative;z-index:2;flex:none;height:22px;padding:0 14px;font-size:10.5px;color:#c7d3c8;
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;letter-spacing:.5px}
+#battle .b-log span{color:#f0d49a}
+.enemy-area{position:relative;z-index:2;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 10px}
+.unit{position:relative;width:90px;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 4px;border-radius:12px;transition:.2s;flex:none}
+.unit .u-av{position:relative;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:30px;
+  background:radial-gradient(circle at 38% 30%,rgba(190,215,200,.35),rgba(10,20,20,.75) 70%);
+  border:1px solid rgba(217,176,106,.3);box-shadow:inset 0 -6px 12px rgba(0,0,0,.5)}
+.enemy .u-av{border-color:rgba(200,120,110,.4);background:radial-gradient(circle at 38% 30%,rgba(230,170,150,.3),rgba(30,14,14,.8) 70%)}
+.unit .u-name{font-size:9.5px;color:#dcd0b6;max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.unit .u-name em{font-style:normal;color:#8fa093;font-size:8.5px}
+.unit .u-hp{width:72px;height:5px;border-radius:3px;background:rgba(0,0,0,.6);overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+.unit .u-hp>i{display:block;height:100%;background:linear-gradient(90deg,#8e2f36,#e0635f);transition:width .25s}
+.unit .u-hp.ally>i{background:linear-gradient(90deg,#2f7a52,#67c288)}
+.unit .u-num{font-size:8px;color:#86988c;letter-spacing:.2px;line-height:1}
+.unit.sel{background:rgba(217,176,106,.1);box-shadow:0 0 0 1px rgba(240,212,154,.7),0 0 18px rgba(217,176,106,.25)}
+.unit.sel::before{content:"▼";position:absolute;top:-11px;font-size:10px;color:#f0d49a;animation:bounce 1s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.unit.dead{opacity:.25;filter:grayscale(1)}
+.unit.hit{animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}60%{transform:translateX(5px)}}
+.unit.act .u-av{transform:translateY(-6px) scale(1.06);box-shadow:0 0 22px rgba(240,212,154,.5)}
+.unit .u-av{transition:transform .18s,box-shadow .2s}
+.unit .u-tag{position:absolute;top:-2px;right:2px;font-size:8px;padding:0 4px;border-radius:5px;background:rgba(0,0,0,.6);border:1px solid rgba(217,176,106,.3);color:#e8cf9c}
+.vs-line{position:relative;z-index:2;flex:none;display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 0;color:#6f8176;font-size:9px;letter-spacing:3px}
+.vs-line::before,.vs-line::after{content:"";height:1px;width:60px;background:linear-gradient(90deg,transparent,rgba(217,176,106,.35),transparent)}
+.ally-area{position:relative;z-index:2;flex:none;display:flex;justify-content:center;gap:22px;padding:0 10px 6px}
+.floater{position:absolute;left:50%;top:12px;transform:translateX(-50%);font-size:20px;font-weight:800;pointer-events:none;
+  color:#ffd9a1;text-shadow:0 2px 6px #000,0 0 12px rgba(255,140,90,.6);animation:floatUp 1s ease-out forwards;z-index:9;font-family:"Songti SC",serif}
+.floater.heal{color:#8ef0b0;text-shadow:0 2px 6px #000,0 0 12px rgba(90,240,150,.6)}
+.floater.crit{font-size:24px;color:#ffb066}
+@keyframes floatUp{0%{opacity:0;transform:translate(-50%,10px) scale(.7)}20%{opacity:1;transform:translate(-50%,-4px) scale(1.15)}100%{opacity:0;transform:translate(-50%,-46px) scale(.95)}}
+.combo{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font-family:"Songti SC",serif;font-size:26px;letter-spacing:6px;color:#ffe4ae;text-shadow:0 0 24px rgba(255,190,90,.8),0 3px 10px #000;pointer-events:none;animation:comboIn 1s ease forwards;z-index:12;white-space:nowrap}
+@keyframes comboIn{0%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}25%{opacity:1;transform:translate(-50%,-50%) scale(1)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-62%) scale(1)}}
+
+.cmd-wrap{position:relative;z-index:2;flex:none;padding:8px 12px calc(10px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg,rgba(8,16,18,.2),rgba(6,12,14,.92) 40%);border-top:1px solid rgba(217,176,106,.16)}
+.cmd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.cmd{min-height:52px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+  font-size:12px;letter-spacing:1px;color:#ece0c8;background:linear-gradient(170deg,rgba(46,68,62,.92),rgba(18,30,30,.96));
+  border:1px solid rgba(217,176,106,.3);transition:transform .1s,filter .2s}
+.cmd i{font-style:normal;font-size:17px;line-height:1}
+.cmd small{font-size:8px;color:#8fa093}
+.cmd:active{transform:scale(.95);filter:brightness(1.2)}
+.cmd:disabled{opacity:.35}
+.cmd.run{color:#c9a9a0;border-color:rgba(190,120,110,.3)}
+.panel{max-height:168px;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;gap:7px;padding-bottom:2px}
+.opt{display:flex;align-items:center;gap:7px;min-height:44px;padding:6px 9px;border-radius:10px;text-align:left;
+  background:rgba(40,60,56,.6);border:1px solid rgba(217,176,106,.22);font-size:11px;color:#e5dac2}
+.opt:active{background:rgba(70,96,86,.8)}
+.opt:disabled{opacity:.35}
+.opt .oi{font-size:16px}
+.opt .oname{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.opt .ocost{font-size:9px;color:#7fb6e0}
+.opt.back{grid-column:1/-1;justify-content:center;color:#9fb0a5;background:rgba(255,255,255,.04);min-height:36px}
+
+/* 结果 */
+.result{text-align:center;padding:8px 4px}
+.result .rttl{font-family:"Songti SC",serif;font-size:30px;letter-spacing:8px;color:#f6e3b6;text-shadow:0 0 24px rgba(240,196,120,.55)}
+.result .rsub{font-size:10px;color:#8d9c92;letter-spacing:2px;margin-top:2px}
+.reward-grid{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.rw{display:flex;align-items:center;gap:5px;padding:6px 10px;border-radius:9px;background:rgba(217,176,106,.1);border:1px solid rgba(217,176,106,.28);font-size:11px;color:#f0d9a8}
+
+/* toast */
+#toasts{position:absolute;left:0;right:0;top:34%;z-index:60;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none}
+.toast{padding:8px 16px;border-radius:20px;background:rgba(8,16,18,.92);border:1px solid rgba(217,176,106,.4);font-size:12px;color:#f0e3c6;
+  box-shadow:0 6px 24px rgba(0,0,0,.6);animation:toastIn .25s ease,toastOut .3s ease 1.5s forwards;max-width:86%;text-align:center}
+.toast.bad{border-color:rgba(210,110,100,.55);color:#ffc9bd}
+.toast.good{border-color:rgba(120,210,150,.45);color:#c6f0cf}
+@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateY(-8px)}}
+
+/* 角色页 */
+.hero-head{display:flex;align-items:center;gap:14px;padding:16px 14px;border-radius:16px;border:1px solid var(--line);
+  background:linear-gradient(150deg,rgba(56,84,76,.55),rgba(14,26,28,.9));position:relative;overflow:hidden}
+.hero-head::after{content:"";position:absolute;right:-30px;top:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(240,212,154,.16),transparent 65%)}
+.hero-av{width:66px;height:66px;flex:none;border-radius:50%;display:grid;place-items:center;font-size:32px;
+  background:radial-gradient(circle at 35% 28%,#3c6258,#101c1c);border:2px solid rgba(240,212,154,.5);box-shadow:0 0 20px rgba(240,212,154,.2)}
+.hero-info h2{margin:0;font-family:"Songti SC","STSong",serif;font-size:20px;letter-spacing:3px;color:#f6ead0}
+.hero-info p{margin:3px 0 0;font-size:10px;color:#a5b5a9;letter-spacing:1px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.stat{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);font-size:11px;color:#9faea2}
+.stat b{color:#f0e4c8;font-weight:600;font-size:12px}
+.equip-row{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:11px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);margin-bottom:7px;font-size:11px;color:#93a399}
+.equip-row>span:first-child{flex:none;width:54px;white-space:nowrap}
+.equip-row .eq-name{flex:1;color:#e6d9bd}
+.skill-chip{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;margin:0 6px 6px 0;border-radius:9px;
+  background:rgba(217,176,106,.09);border:1px solid rgba(217,176,106,.25);font-size:10.5px;color:#e8d6ae}
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="topbar"></header>
+  <main id="screen"></main>
+  <nav id="tabbar"></nav>
+  <section id="battle" class="hidden"></section>
+  <div id="overlay" class="hidden"></div>
+  <div id="toasts"></div>
+</div>
+<script>
+/* ===================== 基础工具 ===================== */
+const $ = (s, r = document) => r.querySelector(s);
+const rnd = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const fmt = n => n >= 10000 ? (n / 10000).toFixed(1) + '万' : String(n);
+const STAT_KEYS = ['hp', 'mp', 'atk', 'def', 'mag', 'mdef', 'spd'];
+const STAT_NAMES = { hp: '气血', mp: '法力', atk: '攻击', def: '防御', mag: '灵力', mdef: '法防', spd: '速度' };
+const todayKey = () => { const d = new Date(); return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`; };
+
+/* ===================== 门派 ===================== */
+const SECTS = {
+  tiance: {
+    name: '天策府', icon: '⚔️', tone: '#c0563f', motto: '铁血丹心 · 长枪破阵',
+    desc: '物理输出门派。气血厚重，攻击凌厉，一杆长枪可横扫千军。',
+    base: { hp: 78, mp: 24, atk: 15, def: 11, mag: 5, mdef: 6, spd: 11 },
+    grow: { hp: 17, mp: 4.5, atk: 5.6, def: 4.2, mag: 1.1, mdef: 2.4, spd: 2.1 },
+    skills: ['pojun', 'hengsao']
+  },
+  longgong: {
+    name: '龙宫', icon: '🐉', tone: '#4a86c8', motto: '沧海龙吟 · 法术无双',
+    desc: '法术输出门派。体质稍弱，灵力澎湃，群体法术伤害极高。',
+    base: { hp: 62, mp: 42, atk: 9, def: 8, mag: 16, mdef: 9, spd: 11 },
+    grow: { hp: 12, mp: 8.5, atk: 2.6, def: 2.9, mag: 6.2, mdef: 3.8, spd: 2.2 },
+    skills: ['longteng', 'longjuan']
+  },
+  putuo: {
+    name: '普陀山', icon: '🪷', tone: '#7fb98a', motto: '慈航普度 · 甘露回春',
+    desc: '治疗辅助门派。攻守均衡，可为自己与召唤兽疗伤续命。',
+    base: { hp: 70, mp: 38, atk: 10, def: 10, mag: 12, mdef: 9, spd: 12 },
+    grow: { hp: 14.5, mp: 7.2, atk: 3.2, def: 3.7, mag: 4.6, mdef: 3.6, spd: 2.4 },
+    skills: ['yangliu', 'puti']
+  },
+  wanshou: {
+    name: '万兽山庄', icon: '🐾', tone: '#c99a4e', motto: '万兽听令 · 与兽同袍',
+    desc: '召唤兽门派。自身灵巧，最善御兽，能大幅强化出战召唤兽。',
+    base: { hp: 72, mp: 30, atk: 12, def: 10, mag: 9, mdef: 7, spd: 14 },
+    grow: { hp: 15, mp: 5.6, atk: 4.4, def: 3.5, mag: 3.2, mdef: 3.0, spd: 2.9 },
+    skills: ['shouwang', 'wanshou']
+  }
+};
+
+const SPELLS = {
+  pojun: { name: '破军斩', icon: '🗡️', mp: 14, type: 'phys', target: 'one', mult: 1.95, desc: '聚气于枪，对单体造成高额物理伤害' },
+  hengsao: { name: '横扫千军', icon: '🌀', mp: 30, type: 'phys', target: 'all', mult: 1.05, desc: '长枪横扫，对全体敌人造成物理伤害' },
+  longteng: { name: '龙腾', icon: '🐲', mp: 16, type: 'magic', target: 'one', mult: 1.95, desc: '召龙而出，对单体造成高额法术伤害' },
+  longjuan: { name: '龙卷雨击', icon: '🌊', mp: 32, type: 'magic', target: 'all', mult: 1.15, desc: '水龙卷地，对全体敌人造成法术伤害' },
+  yangliu: { name: '杨柳甘露', icon: '🌿', mp: 15, type: 'heal', target: 'self', mult: 1.6, desc: '以甘露疗伤，恢复自身气血' },
+  puti: { name: '菩提心佑', icon: '🍃', mp: 30, type: 'healall', mult: 1.1, desc: '佛光笼罩，治疗自己与召唤兽' },
+  shouwang: { name: '兽王令', icon: '🐺', mp: 14, type: 'buffpet', desc: '号令万兽，召唤兽攻击提升 60%，持续 3 回合' },
+  wanshou: { name: '万兽奔腾', icon: '🐅', mp: 28, type: 'combo', mult: 1.5, desc: '与召唤兽合击单体，双方各造成一次伤害' }
+};
+
+/* ===================== 物品 ===================== */
+const ITEMS = {
+  hp1: { name: '小还丹', icon: '🔴', price: 40, type: 'potion', desc: '恢复 100 点气血', hp: 100 },
+  hp2: { name: '大还丹', icon: '❤️', price: 150, type: 'potion', desc: '恢复 350 点气血', hp: 350 },
+  mp1: { name: '清心散', icon: '🔵', price: 55, type: 'potion', desc: '恢复 60 点法力', mp: 60 },
+  mp2: { name: '玉露丸', icon: '💧', price: 170, type: 'potion', desc: '恢复 180 点法力', mp: 180 },
+  net: { name: '捆仙索', icon: '🪢', price: 120, type: 'tool', desc: '捕捉时消耗，捕捉成功率 +35%' },
+  exp1: { name: '修行丹', icon: '🟡', price: 200, type: 'potion', desc: '服用后获得 300 点经验', exp: 300 },
+  w1: { name: '青竹剑', icon: '🗡️', price: 180, type: 'equip', slot: 'weapon', desc: '攻击 +8', stats: { atk: 8 }, lv: 1 },
+  w2: { name: '玄铁枪', icon: '🔱', price: 640, type: 'equip', slot: 'weapon', desc: '攻击 +22', stats: { atk: 22 }, lv: 8 },
+  w3: { name: '寒月刃', icon: '⚔️', price: 1680, type: 'equip', slot: 'weapon', desc: '攻击 +48 灵力 +8', stats: { atk: 48, mag: 8 }, lv: 14 },
+  a1: { name: '粗布衣', icon: '👕', price: 160, type: 'equip', slot: 'armor', desc: '防御 +6 气血 +30', stats: { def: 6, hp: 30 }, lv: 1 },
+  a2: { name: '锁子甲', icon: '🥋', price: 580, type: 'equip', slot: 'armor', desc: '防御 +18 气血 +90', stats: { def: 18, hp: 90 }, lv: 8 },
+  a3: { name: '玄冰甲', icon: '🛡️', price: 1560, type: 'equip', slot: 'armor', desc: '防御 +40 气血 +220', stats: { def: 40, hp: 220 }, lv: 14 },
+  b1: { name: '桃木符', icon: '🔮', price: 150, type: 'equip', slot: 'trinket', desc: '灵力 +6 法防 +4', stats: { mag: 6, mdef: 4 }, lv: 1 },
+  b2: { name: '灵犀佩', icon: '📿', price: 540, type: 'equip', slot: 'trinket', desc: '灵力 +16 法防 +10', stats: { mag: 16, mdef: 10 }, lv: 8 },
+  b3: { name: '太虚玉', icon: '💠', price: 1460, type: 'equip', slot: 'trinket', desc: '灵力 +34 法防 +22', stats: { mag: 34, mdef: 22 }, lv: 14 }
+};
+
+/* ===================== 妖兽 / 召唤兽 ===================== */
+const SPECIES = {
+  zhuyiao: {
+    name: '竹妖', icon: '🎋', lvBase: 1, exp: 1, gold: 1,
+    base: { hp: 60, mp: 20, atk: 12, def: 8, mag: 6, mdef: 5, spd: 10 },
+    grow: { hp: 15, mp: 3, atk: 3.6, def: 3.2, mag: 2.2, mdef: 2.2, spd: 1.9 },
+    skill: { name: '竹叶回春', type: 'heal', mult: 0.9 }, pet: true, skillDesc: '施放竹叶灵气，为出战者回复气血'
+  },
+  qingshe: {
+    name: '青蛇', icon: '🐍', lvBase: 2, exp: 1.05, gold: 1,
+    base: { hp: 52, mp: 18, atk: 14, def: 7, mag: 7, mdef: 5, spd: 14 },
+    grow: { hp: 12, mp: 2.6, atk: 4.6, def: 2.7, mag: 2.4, mdef: 2.0, spd: 2.4 },
+    skill: { name: '毒牙', type: 'phys', mult: 1.35 }, pet: true, skillDesc: '毒牙撕咬，物理伤害提升'
+  },
+  shanlang: {
+    name: '山狼', icon: '🐺', lvBase: 3, exp: 1.1, gold: 1,
+    base: { hp: 62, mp: 10, atk: 15, def: 8, mag: 3, mdef: 4, spd: 12 },
+    grow: { hp: 15, mp: 1.6, atk: 5.0, def: 3.0, mag: 1.1, mdef: 1.8, spd: 2.2 },
+    skill: { name: '撕咬', type: 'phys', mult: 1.45 }, pet: true, skillDesc: '猛兽撕咬，物理伤害大幅提升'
+  },
+  huayao: {
+    name: '花妖', icon: '🌸', lvBase: 6, exp: 1.15, gold: 1.1,
+    base: { hp: 58, mp: 32, atk: 9, def: 8, mag: 15, mdef: 8, spd: 12 },
+    grow: { hp: 13, mp: 6, atk: 2.6, def: 2.8, mag: 5.2, mdef: 3.2, spd: 2.2 },
+    skill: { name: '落英缤纷', type: 'magic', mult: 1.4 }, pet: true, skillDesc: '花瓣化刃，造成法术伤害'
+  },
+  dufeng: {
+    name: '毒蜂', icon: '🐝', lvBase: 7, exp: 1.15, gold: 1.1,
+    base: { hp: 48, mp: 16, atk: 13, def: 6, mag: 8, mdef: 5, spd: 16 },
+    grow: { hp: 10, mp: 2.2, atk: 4.0, def: 2.2, mag: 2.6, mdef: 1.9, spd: 2.8 },
+    skill: { name: '毒针', type: 'phys', mult: 1.3 }, pet: true, skillDesc: '尾针突刺，速度快，附带毒伤'
+  },
+  shiling: {
+    name: '石灵', icon: '🗿', lvBase: 9, exp: 1.3, gold: 1.2,
+    base: { hp: 95, mp: 8, atk: 14, def: 15, mag: 4, mdef: 9, spd: 6 },
+    grow: { hp: 22, mp: 1.2, atk: 4.2, def: 5.6, mag: 1.2, mdef: 3.2, spd: 1.1 },
+    skill: { name: '泰山压顶', type: 'phys', mult: 1.6 }, pet: true, skillDesc: '沉重一击，伤害极高但速度较慢'
+  },
+  xuelang: {
+    name: '雪狼', icon: '🐺', lvBase: 12, exp: 1.35, gold: 1.25,
+    base: { hp: 85, mp: 12, atk: 19, def: 11, mag: 4, mdef: 6, spd: 14 },
+    grow: { hp: 19, mp: 1.8, atk: 5.6, def: 3.9, mag: 1.3, mdef: 2.4, spd: 2.5 },
+    skill: { name: '冰爪', type: 'phys', mult: 1.5 }, pet: true, skillDesc: '寒冰利爪，物理伤害极为凶狠'
+  },
+  bingpo: {
+    name: '冰魄', icon: '❄️', lvBase: 14, exp: 1.4, gold: 1.3,
+    base: { hp: 70, mp: 48, atk: 10, def: 10, mag: 22, mdef: 12, spd: 13 },
+    grow: { hp: 14, mp: 8, atk: 2.6, def: 3.2, mag: 6.6, mdef: 4.2, spd: 2.3 },
+    skill: { name: '寒冰咒', type: 'magic', mult: 1.55 }, pet: true, skillDesc: '极寒之息，法术伤害惊人'
+  },
+  baiyuan: {
+    name: '白猿', icon: '🐒', lvBase: 15, exp: 1.4, gold: 1.3,
+    base: { hp: 92, mp: 10, atk: 20, def: 12, mag: 4, mdef: 6, spd: 12 },
+    grow: { hp: 21, mp: 1.4, atk: 5.8, def: 4.2, mag: 1.2, mdef: 2.2, spd: 2.2 },
+    skill: { name: '巨力击', type: 'phys', mult: 1.65 }, pet: true, skillDesc: '以蛮力重击，物理伤害冠绝群兽'
+  },
+  mumei: {
+    name: '竹林木魅', icon: '👹', lvBase: 6, exp: 4, gold: 6, boss: true,
+    base: { hp: 300, mp: 40, atk: 12, def: 8, mag: 10, mdef: 6, spd: 11 },
+    grow: { hp: 22, mp: 4, atk: 2.4, def: 2.4, mag: 2.6, mdef: 2.0, spd: 1.6 },
+    skill: { name: '妖藤缠绕', type: 'phys', mult: 1.4 }
+  },
+  shuyao: {
+    name: '幽谷树妖', icon: '🌳', lvBase: 11, exp: 4.5, gold: 7, boss: true,
+    base: { hp: 520, mp: 60, atk: 16, def: 12, mag: 15, mdef: 9, spd: 11 },
+    grow: { hp: 34, mp: 5, atk: 3.0, def: 3.0, mag: 2.6, mdef: 2.6, spd: 1.6 },
+    skill: { name: '万木朝宗', type: 'magic', mult: 1.45 }
+  },
+  xuemo: {
+    name: '雪山雪魔', icon: '👺', lvBase: 18, exp: 6, gold: 10, boss: true,
+    base: { hp: 900, mp: 90, atk: 28, def: 18, mag: 26, mdef: 14, spd: 13 },
+    grow: { hp: 38, mp: 6, atk: 2.8, def: 4.0, mag: 2.6, mdef: 3.0, spd: 1.8 },
+    skill: { name: '风雪咆哮', type: 'magic', mult: 1.5 }
+  }
+};
+
+/* ===================== 地图 ===================== */
+const MAPS = {
+  zhulin: {
+    id: 'zhulin', name: '竹林小径', icon: '🎋', art: 'bamboo', lv: '1 - 5', unlock: 1,
+    sub: '翠影婆娑 · 妖气初现',
+    monsters: ['zhuyiao', 'qingshe', 'shanlang'], boss: 'mumei', bossLv: 6,
+    drops: ['hp1', 'mp1']
+  },
+  yougu: {
+    id: 'yougu', name: '幽谷密林', icon: '🌫️', art: 'valley', lv: '5 - 10', unlock: 5,
+    sub: '雾锁深林 · 花妖夜行',
+    monsters: ['huayao', 'dufeng', 'shiling'], boss: 'shuyao', bossLv: 11,
+    drops: ['hp1', 'hp2', 'mp1', 'net']
+  },
+  xueshan: {
+    id: 'xueshan', name: '雪山寒岭', icon: '🏔️', art: 'snow', lv: '10 - 18', unlock: 10,
+    sub: '千山飞雪 · 冰魄封魂',
+    monsters: ['xuelang', 'bingpo', 'baiyuan'], boss: 'xuemo', bossLv: 18,
+    drops: ['hp2', 'mp2', 'net']
+  }
+};
+
+/* ===================== 任务 ===================== */
+const MAIN_QUESTS = [
+  { id: 'm1', name: '初入江湖', desc: '在竹林小径击败 3 只竹妖，试试身手。', key: 'zhuyiao', need: 3, rw: { exp: 150, gold: 120 } },
+  { id: 'm2', name: '竹林妖影', desc: '竹林深处妖气弥漫，击败竹林木魅。', key: 'mumei', need: 1, rw: { exp: 260, gold: 200, items: { net: 2 } } },
+  { id: 'm3', name: '灵兽为伴', desc: '在战斗中捕捉任意一只召唤兽。', key: '__capture', need: 1, rw: { exp: 220, gold: 150, items: { hp2: 1 } } },
+  { id: 'm4', name: '幽谷异动', desc: '前往幽谷密林，击败 5 只花妖。', key: 'huayao', need: 5, rw: { exp: 480, gold: 260 } },
+  { id: 'm5', name: '古木成精', desc: '击败盘踞幽谷的树妖，为民除害。', key: 'shuyao', need: 1, rw: { exp: 700, gold: 360, items: { hp2: 2 } } },
+  { id: 'm6', name: '雪岭寒踪', desc: '登上雪山寒岭，击败 6 只雪狼。', key: 'xuelang', need: 6, rw: { exp: 1000, gold: 480 } },
+  { id: 'm7', name: '冰封之祸', desc: '雪山雪魔作乱，将其击败，还人间太平。', key: 'xuemo', need: 1, rw: { exp: 1800, gold: 900, items: { hp2: 3, mp2: 2 } } }
+];
+
+const DAILIES = [
+  { id: 'd1', name: '降妖除魔', desc: '战胜 3 场战斗', key: 'battles', need: 3, rw: { gold: 160, exp: 220 } },
+  { id: 'd2', name: '灵兽结缘', desc: '捕捉 1 只召唤兽', key: 'captures', need: 1, rw: { gold: 130, items: { net: 2 } } },
+  { id: 'd3', name: '历练不辍', desc: '击败 8 只妖兽', key: 'kills', need: 8, rw: { gold: 220, exp: 380 } }
+];
+
+/* ===================== 存档 ===================== */
+const SAVE_KEY = 'huantang_xianyuan_v1';
+let S = null;
+
+function defaultState() {
+  return {
+    ver: 1, created: false,
+    player: {
+      name: '', sect: 'tiance', level: 1, exp: 0, hp: 0, mp: 0, gold: 80,
+      equip: { weapon: null, armor: null, trinket: null },
+      kills: {}, captures: 0, questIdx: 0, map: 'zhulin', wins: 0,
+      daily: { date: todayKey(), battles: 0, captures: 0, kills: 0, claimed: [] }
+    },
+    bag: { hp1: 5, mp1: 2 },
+    pets: [], activePet: null,
+    tab: 'town'
+  };
+}
+
+function loadSave() {
+  let raw = null;
+  try { raw = localStorage.getItem(SAVE_KEY); } catch (e) { raw = null; }
+  if (!raw) { S = defaultState(); return; }
+  try {
+    const d = JSON.parse(raw);
+    S = Object.assign(defaultState(), d);
+    S.player = Object.assign(defaultState().player, d.player || {});
+    S.player.equip = Object.assign({ weapon: null, armor: null, trinket: null }, (d.player && d.player.equip) || {});
+    S.player.daily = Object.assign({ date: todayKey(), battles: 0, captures: 0, kills: 0, claimed: [] }, (d.player && d.player.daily) || {});
+    S.bag = d.bag || {}; S.pets = d.pets || []; S.activePet = d.activePet ?? null;
+    checkDailyReset();
+  } catch (e) { S = defaultState(); }
+}
+
+let saveTimer = null;
+function save(now) {
+  if (!S || !S.created) return;
+  const doIt = () => {
+    try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); } catch (e) { }
+    saveTimer = null;
+  };
+  if (now) { clearTimeout(saveTimer); doIt(); }
+  else { clearTimeout(saveTimer); saveTimer = setTimeout(doIt, 400); }
+}
+
+function checkDailyReset() {
+  const d = S.player.daily;
+  if (d.date !== todayKey()) {
+    S.player.daily = { date: todayKey(), battles: 0, captures: 0, kills: 0, claimed: [] };
+  }
+}
+
+/* ===================== 数值 ===================== */
+function playerStats() {
+  const p = S.player, sct = SECTS[p.sect];
+  const st = {};
+  STAT_KEYS.forEach(k => st[k] = Math.round(sct.base[k] + sct.grow[k] * (p.level - 1)));
+  Object.values(p.equip).forEach(id => {
+    if (id && ITEMS[id] && ITEMS[id].stats) for (const k in ITEMS[id].stats) st[k] += ITEMS[id].stats[k];
+  });
+  return st;
+}
+
+function expNeed(lv) { return Math.round(50 * lv + 28 * lv * lv); }
+
+function petStats(pet) {
+  const sp = SPECIES[pet.sp], st = {};
+  STAT_KEYS.forEach(k => st[k] = Math.round(sp.base[k] + sp.grow[k] * (pet.level - 1)));
+  return st;
+}
+
+function petExpNeed(lv) { return Math.round(50 * lv + 35 * lv * lv); }
+
+function makePet(spId, level) {
+  const sp = SPECIES[spId];
+  const pet = {
+    uid: 'p' + Date.now() + rnd(100, 999), sp: spId,
+    name: sp.name, level: clamp(level, 1, 20), exp: 0, hp: 0
+  };
+  pet.hp = petStats(pet).hp;
+  return pet;
+}
+
+function activePet() {
+  if (S.activePet == null) return null;
+  return S.pets.find(p => p.uid === S.activePet) || null;
+}
+
+function bagCount(id) { return S.bag[id] || 0; }
+
+function addItem(id, n = 1) {
+  S.bag[id] = (S.bag[id] || 0) + n;
+  save();
+}
+
+function removeItem(id, n = 1) {
+  if (!S.bag[id]) return false;
+  S.bag[id] -= n;
+  if (S.bag[id] <= 0) delete S.bag[id];
+  save();
+  return true;
+}
+
+/* 经验与升级 */
+function addExp(n) {
+  const p = S.player;
+  p.exp += n;
+  const gained = [];
+  while (p.level < 20 && p.exp >= expNeed(p.level)) {
+    p.exp -= expNeed(p.level);
+    p.level++;
+    const st = playerStats();
+    p.hp = Math.min(st.hp, p.hp + Math.round(st.hp * 0.35));
+    p.mp = Math.min(st.mp, p.mp + Math.round(st.mp * 0.35));
+    gained.push(p.level);
+  }
+  if (p.level >= 20) p.exp = Math.min(p.exp, expNeed(20));
+  save();
+  return gained;
+}
+
+function addPetExp(pet, n) {
+  pet.exp += n;
+  let ups = 0;
+  while (pet.level < 20 && pet.exp >= petExpNeed(pet.level)) {
+    pet.exp -= petExpNeed(pet.level);
+    pet.level++; ups++;
+    pet.hp = petStats(pet).hp;
+  }
+  if (pet.level >= 20) pet.exp = Math.min(pet.exp, petExpNeed(20));
+  return ups;
+}
+
+/* 存档初始化时补满气血法力 */
+function ensureVitals() {
+  const st = playerStats();
+  if (!S.player.hp || S.player.hp > st.hp) S.player.hp = st.hp;
+  if (!S.player.mp || S.player.mp > st.mp) S.player.mp = st.mp;
+  (S.pets || []).forEach(pet => {
+    const mx = petStats(pet).hp;
+    if (typeof pet.hp !== 'number') pet.hp = mx;
+    else pet.hp = clamp(pet.hp, 0, mx);
+  });
+}
+
+/* ===================== 通用 UI ===================== */
+const overlay = () => document.getElementById('overlay');
+
+function toast(msg, kind) {
+  const box = document.getElementById('toasts');
+  const el = document.createElement('div');
+  el.className = 'toast' + (kind ? ' ' + kind : '');
+  el.textContent = msg;
+  box.appendChild(el);
+  setTimeout(() => el.remove(), 1900);
+}
+
+let sheetLock = false;
+function openSheet(html, center, lock) {
+  const ov = overlay();
+  ov.innerHTML = '<div class="sheet">' + html + '</div>';
+  ov.classList.remove('hidden');
+  ov.classList.toggle('center', !!center);
+  sheetLock = !!lock;
+}
+function closeSheet() {
+  const ov = overlay();
+  ov.classList.add('hidden');
+  ov.innerHTML = '';
+  sheetLock = false;
+}
+
+let pendingConfirm = null;
+function confirmBox(title, text, okText, fn) {
+  pendingConfirm = fn;
+  openSheet(`
+    <h3>${title}</h3>
+    <div class="sub">${text}</div>
+    <div class="sheet-actions">
+      <button class="btn ghost" data-act="closeSheet">取消</button>
+      <button class="btn gold" data-act="doConfirm">${okText || '确定'}</button>
+    </div>`, true);
+}
+
+/* ===================== 场景插画 ===================== */
+function sceneArt(kind) {
+  const g = (id, c1, c2, c3) => `<linearGradient id="sky-${id}" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="${c1}"/><stop offset=".65" stop-color="${c2}"/><stop offset="1" stop-color="${c3}"/></linearGradient>`;
+  const moon = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#f6ecc6" opacity=".9"/>
+    <circle cx="${x}" cy="${y}" r="${r + 7}" fill="#f6ecc6" opacity=".08"/>`;
+  const mist = `<ellipse cx="120" cy="150" rx="150" ry="16" fill="#cfe0d5" opacity=".07"/>
+    <ellipse cx="300" cy="132" rx="130" ry="12" fill="#cfe0d5" opacity=".06"/>`;
+
+  if (kind === 'town') {
+    return `<svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice">
+      <defs>${g('town', '#1b3038', '#2c4a46', '#0c1714')}</defs>
+      <rect width="400" height="190" fill="url(#sky-town)"/>
+      ${moon(318, 38, 17)}
+      <g fill="#0d1d1b" opacity=".55"><path d="M0 118 L52 74 L104 118 L160 82 L222 122 L286 88 L344 118 L400 96 L400 190 L0 190Z"/></g>
+      <g fill="#08120f" opacity=".9">
+        <path d="M0 140 L400 140 L400 190 L0 190Z"/>
+        <path d="M48 140 L48 108 L92 108 L92 140Z"/><path d="M36 108 L70 88 L104 108Z"/>
+        <path d="M118 142 L118 96 L166 96 L166 142Z"/><path d="M106 96 L142 70 L178 96Z"/>
+        <path d="M196 142 L196 112 L240 112 L240 142Z"/><path d="M186 112 L218 92 L250 112Z"/>
+        <path d="M272 143 L272 100 L318 100 L318 143Z"/><path d="M260 100 L295 74 L330 100Z"/>
+        <path d="M338 142 L338 116 L378 116 L378 142Z"/><path d="M330 116 L358 98 L386 116Z"/>
+      </g>
+      <g fill="#f2c272">
+        <rect x="66" y="118" width="5" height="7" opacity=".85"/><rect x="140" y="112" width="5" height="7" opacity=".7"/>
+        <rect x="214" y="124" width="5" height="7" opacity=".8"/><rect x="292" y="116" width="5" height="7" opacity=".65"/>
+      </g>
+      ${mist}
+    </svg>`;
+  }
+  if (kind === 'bamboo') {
+    const stalk = (x, h, o) => `<g opacity="${o}" fill="#3f6b4a">
+      <rect x="${x}" y="${190 - h}" width="4.5" height="${h}" rx="2"/>
+      <rect x="${x - 2}" y="${190 - h * .72}" width="8.5" height="2.4" fill="#26452f"/>
+      <rect x="${x - 2}" y="${190 - h * .42}" width="8.5" height="2.4" fill="#26452f"/>
+      <path d="M${x + 4} ${190 - h * .8} q14 -7 24 -2 q-16 7 -24 2Z"/>
+      <path d="M${x} ${190 - h * .55} q-16 -6 -26 2 q17 5 26 -2Z"/>
+    </g>`;
+    return `<svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice">
+      <defs>${g('bam', '#16302f', '#284c40', '#0a1512')}</defs>
+      <rect width="400" height="190" fill="url(#sky-bam)"/>
+      ${moon(86, 40, 15)}
+      <path d="M0 138 Q90 112 180 140 T400 126 L400 190 L0 190Z" fill="#0b1a15" opacity=".85"/>
+      ${stalk(28, 150, .5)}${stalk(120, 178, .35)}${stalk(232, 160, .28)}${stalk(352, 182, .42)}${stalk(300, 130, .22)}
+      <g fill="#b9e0bf" opacity=".5">
+        <circle cx="200" cy="70" r="1.4"/><circle cx="150" cy="104" r="1.2"/><circle cx="268" cy="86" r="1.3"/><circle cx="88" cy="60" r="1"/>
+      </g>
+      ${mist}
+    </svg>`;
+  }
+  if (kind === 'valley') {
+    return `<svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice">
+      <defs>${g('val', '#1a2622', '#243a30', '#0a120e')}</defs>
+      <rect width="400" height="190" fill="url(#sky-val)"/>
+      ${moon(300, 46, 13)}
+      <g fill="#0a1611" opacity=".85">
+        <path d="M0 190 L22 96 L44 190Z"/><path d="M34 190 L58 62 L86 190Z"/><path d="M76 190 L96 108 L118 190Z"/>
+        <path d="M290 190 L312 70 L336 190Z"/><path d="M328 190 L352 92 L376 190Z"/><path d="M370 190 L392 108 L410 190Z"/>
+      </g>
+      <g fill="#0e2018" opacity=".9"><path d="M0 150 Q60 126 120 152 T260 146 T400 154 L400 190 L0 190Z"/></g>
+      <g opacity=".75">
+        <circle cx="160" cy="150" r="3" fill="#e8a9c0"/><circle cx="205" cy="142" r="2.4" fill="#f0c9a0"/>
+        <circle cx="246" cy="156" r="3" fill="#c9b3e8"/><circle cx="112" cy="158" r="2.2" fill="#9fd8b8"/>
+      </g>
+      <ellipse cx="200" cy="140" rx="180" ry="22" fill="#cfe0d5" opacity=".06"/>
+      ${mist}
+    </svg>`;
+  }
+  if (kind === 'snow') {
+    return `<svg viewBox="0 0 400 190" preserveAspectRatio="xMidYMid slice">
+      <defs>${g('snow', '#1a2e3a', '#2f4d5c', '#101d24')}</defs>
+      <rect width="400" height="190" fill="url(#sky-snow)"/>
+      ${moon(310, 36, 18)}
+      <path d="M0 150 L70 66 L118 118 L168 52 L228 128 L286 78 L340 130 L400 96 L400 190 L0 190Z" fill="#c9dbe2" opacity=".2"/>
+      <path d="M0 158 L60 104 L110 148 L170 92 L232 152 L292 112 L352 154 L400 132 L400 190 L0 190Z" fill="#e6f1f4" opacity=".3"/>
+      <path d="M0 170 L400 170 L400 190 L0 190Z" fill="#eef6f8" opacity=".35"/>
+      <g fill="#eaf5f8" opacity=".8">
+        <circle cx="60" cy="44" r="1.5"/><circle cx="130" cy="70" r="1.2"/><circle cx="210" cy="38" r="1.4"/>
+        <circle cx="270" cy="90" r="1.1"/><circle cx="350" cy="60" r="1.3"/><circle cx="170" cy="120" r="1.2"/>
+        <circle cx="90" cy="96" r="1"/><circle cx="240" cy="112" r="1.1"/>
+      </g>
+      ${mist}
+    </svg>`;
+  }
+  return '';
+}
+
+/* ===================== 顶栏 / 导航 ===================== */
+function renderTop() {
+  const p = S.player, st = playerStats(), sct = SECTS[p.sect];
+  const hpPct = clamp(p.hp / st.hp * 100, 0, 100);
+  const mpPct = clamp(p.mp / st.mp * 100, 0, 100);
+  const need = expNeed(p.level);
+  const expPct = p.level >= 20 ? 100 : clamp(p.exp / need * 100, 0, 100);
+  document.getElementById('topbar').innerHTML = `
+    <div class="tb-badge">${sct.icon}</div>
+    <div class="tb-main">
+      <div class="tb-row">
+        <span class="tb-name">${p.name || '无名少侠'}</span>
+        <span class="tb-lv">Lv.${p.level}</span>
+        <span class="tb-sect">${sct.name}</span>
+      </div>
+      <div class="bar hp"><i style="width:${hpPct}%"></i><span>${Math.max(0, Math.round(p.hp))} / ${st.hp}</span></div>
+      <div class="bar mp"><i style="width:${mpPct}%"></i><span>${Math.max(0, Math.round(p.mp))} / ${st.mp}</span></div>
+    </div>
+    <div class="tb-gold">🪙 ${fmt(p.gold)}<small>${p.level >= 20 ? '已至化境' : '修为 ' + p.exp + '/' + need}</small></div>
+    <div id="expbar"><i style="width:${expPct}%"></i></div>`;
+}
+
+function renderTabbar() {
+  const tabs = [
+    ['town', '🏯', '城镇'], ['wild', '⛰️', '秘境'], ['hero', '🧿', '角色'], ['bag', '🎒', '行囊'], ['quest', '📜', '任务']
+  ];
+  const dot = hasClaimable();
+  document.getElementById('tabbar').innerHTML = tabs.map(([k, ic, nm]) => `
+    <button class="tab ${S.tab === k ? 'on' : ''}" data-act="go" data-arg="${k}">
+      <i>${ic}</i>${nm}${k === 'quest' && dot ? '<span class="dot"></span>' : ''}
+    </button>`).join('');
+}
+
+function go(tab) {
+  S.tab = tab; save();
+  const sc = document.getElementById('screen');
+  sc.scrollTop = 0;
+  render();
+}
+
+/* ===================== 主城 ===================== */
+function mainQuestInfo() {
+  const q = MAIN_QUESTS[S.player.questIdx];
+  if (!q) return null;
+  const cur = q.key === '__capture' ? S.player.captures : (S.player.kills[q.key] || 0);
+  return { q, cur: Math.min(cur, q.need), done: cur >= q.need };
+}
+
+function dailyProgress(d) {
+  const dl = S.player.daily;
+  return Math.min(dl[d.key] || 0, d.need);
+}
+
+function hasClaimable() {
+  const mi = mainQuestInfo();
+  if (mi && mi.done) return true;
+  return DAILIES.some(d => dailyProgress(d) >= d.need && !S.player.daily.claimed.includes(d.id));
+}
+
+function screenTown() {
+  const p = S.player, sct = SECTS[p.sect], mi = mainQuestInfo();
+  const pet = activePet();
+  return `
+    <div class="scene">${sceneArt('town')}
+      <div class="veil"></div>
+      <div class="st-tag">安全区</div>
+      <div class="scene-txt"><div class="st-name">云阳城</div><div class="st-sub">市井繁华 · 人间烟火</div></div>
+    </div>
+    <div class="sec-title">城中去处</div>
+    <div class="grid2">
+      <button class="tile" data-act="rest"><span class="t-ico">🛖</span><span class="t-body">
+        <span class="t-name">悦来客栈</span><span class="t-desc">歇脚疗伤，气血法力全满</span></span></button>
+      <button class="tile" data-act="shop"><span class="t-ico">🏮</span><span class="t-body">
+        <span class="t-name">百宝阁</span><span class="t-desc">丹药 · 兵器 · 灵符</span></span></button>
+      <button class="tile" data-act="pets"><span class="t-ico">🐾</span><span class="t-body">
+        <span class="t-name">召唤兽栏</span><span class="t-desc">${S.pets.length ? `已有 ${S.pets.length} 只灵兽` : '尚无灵兽，快去捕捉'}</span></span></button>
+      <button class="tile" data-act="master"><span class="t-ico">📖</span><span class="t-body">
+        <span class="t-name">门派师傅</span><span class="t-desc">${sct.name} · 修习法术</span></span></button>
+    </div>
+    <div class="sec-title">当前要务<small>${mi ? '第 ' + (p.questIdx + 1) + ' / ' + MAIN_QUESTS.length + ' 章' : '全部完成'}</small></div>
+    ${mi ? `<div class="row">
+      <div class="r-ico">📜</div>
+      <div class="r-main"><div class="r-name">${mi.q.name}${mi.done ? '<span class="tag on">可领取</span>' : ''}</div>
+      <div class="r-desc">${mi.q.desc}</div>
+      <div class="pbar"><i style="width:${mi.cur / mi.q.need * 100}%"></i></div></div>
+      <div class="r-right" style="font-size:10px;color:#8fa093">${mi.cur}/${mi.q.need}</div>
+    </div>` : `<div class="row"><div class="r-ico">🏆</div><div class="r-main"><div class="r-name">江湖已定</div><div class="r-desc">主线已全部完成，可继续挑战日常与首领。</div></div></div>`}
+    <div class="sec-title">远行</div>
+    <button class="btn gold wide" data-act="go" data-arg="wild" style="margin-bottom:9px">⛰️ 前往秘境历练</button>
+    <div class="row">
+      <div class="r-ico">🐾</div>
+      <div class="r-main"><div class="r-name">出战召唤兽</div>
+      <div class="r-desc">${pet ? `${pet.name} · Lv.${pet.level} · ${SPECIES[pet.sp].skill.name}` : '未设置出战召唤兽，战斗中将独自迎敌'}</div></div>
+      <div class="r-right"><button class="btn sm" data-act="pets">${pet ? '查看' : '设置'}</button></div>
+    </div>
+    <button class="btn ghost wide" data-act="tips" style="margin-top:9px">📖 玩法说明</button>`;
+}
+
+/* ===================== 秘境 ===================== */
+function screenWild() {
+  const p = S.player;
+  const map = MAPS[p.map] || MAPS.zhulin;
+  const unlocked = p.level >= map.unlock;
+  const bossUnlock = p.level >= map.bossLv - 2;
+  return `
+    <div class="scene">${sceneArt(map.art)}
+      <div class="veil"></div>
+      <div class="st-tag">推荐 Lv.${map.lv}</div>
+      <div class="scene-txt"><div class="st-name">${map.name}</div><div class="st-sub">${map.sub}</div></div>
+    </div>
+    <div class="sec-title">选择秘境</div>
+    <div class="grid2">
+      ${Object.values(MAPS).map(m => {
+        const lock = p.level < m.unlock;
+        return `<button class="tile" data-act="pickMap" data-arg="${m.id}" style="${p.map === m.id ? 'border-color:rgba(240,212,154,.75);box-shadow:0 0 16px rgba(217,176,106,.18)' : ''};${lock ? 'opacity:.55' : ''}">
+          <span class="t-ico">${lock ? '🔒' : m.icon}</span>
+          <span class="t-body"><span class="t-name">${m.name}</span>
+          <span class="t-desc">${lock ? `Lv.${m.unlock} 解锁` : 'Lv.' + m.lv}</span></span></button>`;
+      }).join('')}
+    </div>
+    <div class="sec-title">此地妖兽<small>点击卡片可查看</small></div>
+    <div class="grid2">
+      ${map.monsters.map(id => {
+        const sp = SPECIES[id];
+        return `<button class="tile" data-act="beastInfo" data-arg="${id}">
+          <span class="t-ico">${sp.icon}</span>
+          <span class="t-body"><span class="t-name">${sp.name}</span>
+          <span class="t-desc">${sp.pet ? '可捕捉 · ' + sp.skill.name : '凶悍妖兽'}</span></span></button>`;
+      }).join('')}
+    </div>
+    <div class="sec-title">历练</div>
+    ${unlocked ? `
+      <button class="btn gold wide" data-act="explore" style="margin-bottom:9px">⚔️ 探索遇敌</button>
+      <button class="btn wide" data-act="challengeBoss" ${bossUnlock ? '' : 'disabled'}>
+        👑 挑战首领 · ${SPECIES[map.boss].name}${bossUnlock ? '' : `（需 Lv.${map.bossLv - 2}）`}
+      </button>
+      <div class="empty" style="padding:12px 0 0;font-size:10px">首领掉落丰厚，建议带足丹药与召唤兽</div>`
+      : `<div class="empty">此秘境需达到 Lv.${map.unlock} 方可进入<br>回到竹林小径继续历练吧</div>`}
+    <div style="height:8px"></div>`;
+}
+
+/* ===================== 角色 ===================== */
+function screenHero() {
+  const p = S.player, sct = SECTS[p.sect], st = playerStats();
+  const eqName = slot => {
+    const id = p.equip[slot];
+    return id ? `<span class="eq-name">${ITEMS[id].icon} ${ITEMS[id].name}</span><button class="btn sm ghost" data-act="unequip" data-arg="${slot}">卸下</button>`
+      : `<span class="eq-name" style="color:#6f7d75">— 未装备 —</span>`;
+  };
+  return `
+    <div class="hero-head">
+      <div class="hero-av">${sct.icon}</div>
+      <div class="hero-info">
+        <h2>${p.name || '无名少侠'}</h2>
+        <p>${sct.name} · Lv.${p.level} · ${sct.motto}</p>
+        <p style="color:#c8b385">战斗胜利 ${p.wins} 场 · 捕捉 ${p.captures} 只</p>
+      </div>
+    </div>
+    <div class="sec-title">属性<small>${p.level >= 20 ? '修为圆满' : '修为 ' + p.exp + ' / ' + expNeed(p.level)}</small></div>
+    <div class="stat-grid">
+      ${STAT_KEYS.map(k => `<div class="stat"><span>${STAT_NAMES[k]}</span><b>${st[k]}</b></div>`).join('')}
+    </div>
+    <div class="sec-title">装备</div>
+    <div class="equip-row"><span style="width:38px">🗡️ 武器</span>${eqName('weapon')}</div>
+    <div class="equip-row"><span style="width:38px">🥋 衣甲</span>${eqName('armor')}</div>
+    <div class="equip-row"><span style="width:38px">🔮 灵饰</span>${eqName('trinket')}</div>
+    <div class="sec-title">门派法术<small>按灵力与攻击结算</small></div>
+    <div>${sct.skills.map(id => {
+      const s = SPELLS[id];
+      return `<span class="skill-chip">${s.icon} ${s.name} <span style="color:#7fb6e0;font-size:9px">${s.mp}法力</span></span>`;
+    }).join('')}</div>
+    <div style="font-size:10px;line-height:1.7;color:#8b9a90;padding:0 2px">
+      ${sct.skills.map(id => `「${SPELLS[id].name}」${SPELLS[id].desc}`).join('<br>')}
+    </div>
+    <div class="sec-title">存档</div>
+    <div class="row">
+      <div class="r-ico">💾</div>
+      <div class="r-main"><div class="r-name">自动存档</div><div class="r-desc">进度已保存在本机浏览器，关闭页面也可续玩</div></div>
+      <div class="r-right"><button class="btn sm ghost" data-act="resetGame">重置</button></div>
+    </div>`;
+}
+
+/* ===================== 行囊 ===================== */
+function screenBag() {
+  const ids = Object.keys(S.bag).filter(id => S.bag[id] > 0 && ITEMS[id]);
+  const potions = ids.filter(id => ITEMS[id].type !== 'equip');
+  const equips = ids.filter(id => ITEMS[id].type === 'equip');
+  const row = id => {
+    const it = ITEMS[id];
+    let action = '';
+    if (it.type === 'potion') action = `<button class="btn sm" data-act="useItem" data-arg="${id}">使用</button>`;
+    else if (it.type === 'equip') action = `<button class="btn sm" data-act="equipItem" data-arg="${id}">装备</button>`;
+    else action = `<span class="tag">战斗中用</span>`;
+    return `<div class="row">
+      <div class="r-ico">${it.icon}</div>
+      <div class="r-main"><div class="r-name">${it.name} <span style="color:#8fa093;font-size:10px">×${S.bag[id]}</span></div>
+      <div class="r-desc">${it.desc}${it.type === 'equip' ? ` · 需 Lv.${it.lv}` : ''}</div></div>
+      <div class="r-right">${action}</div>
+    </div>`;
+  };
+  return `
+    <div class="sec-title">丹药 · 道具<small>${potions.length} 种</small></div>
+    ${potions.length ? potions.map(row).join('') : '<div class="empty">行囊空空，去百宝阁看看？</div>'}
+    <div class="sec-title">装备<small>${equips.length} 件</small></div>
+    ${equips.length ? equips.map(row).join('') : '<div class="empty">暂无多余装备</div>'}
+    <div style="margin-top:14px"><button class="btn wide" data-act="shop">🏮 前往百宝阁</button></div>`;
+}
+
+/* ===================== 任务 ===================== */
+function screenQuest() {
+  const p = S.player, mi = mainQuestInfo(), dl = p.daily;
+  const mainList = MAIN_QUESTS.map((q, i) => {
+    if (i < p.questIdx) return `<div class="row" style="opacity:.5">
+      <div class="r-ico">✅</div><div class="r-main"><div class="r-name">${q.name}</div><div class="r-desc">已完成</div></div></div>`;
+    if (i > p.questIdx) return '';
+    const cur = q.key === '__capture' ? p.captures : (p.kills[q.key] || 0);
+    return `<div class="row" style="border-color:rgba(217,176,106,.4)">
+      <div class="r-ico">📜</div>
+      <div class="r-main">
+        <div class="r-name">${q.name} ${cur >= q.need ? '<span class="tag on">可领取</span>' : '<span class="tag">进行中</span>'}</div>
+        <div class="r-desc">${q.desc}</div>
+        <div class="pbar"><i style="width:${Math.min(cur / q.need, 1) * 100}%"></i></div>
+      </div>
+      <div class="r-right">
+        <div style="font-size:9px;color:#8fa093;margin-bottom:5px">${Math.min(cur, q.need)}/${q.need}</div>
+        <button class="btn sm ${cur >= q.need ? 'gold' : 'ghost'}" data-act="claimMain" ${cur >= q.need ? '' : 'disabled'}>领取</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+    <div class="sec-title">主线 · 江湖行<small>第 ${Math.min(p.questIdx + 1, MAIN_QUESTS.length)} 章</small></div>
+    ${mainList || '<div class="empty">主线已全部完成</div>'}
+    <div class="sec-title">日常 · 每日历练<small>每日 0 点重置</small></div>
+    ${DAILIES.map(d => {
+      const cur = dailyProgress(d), done = cur >= d.need, claimed = dl.claimed.includes(d.id);
+      const rw = [];
+      if (d.rw.gold) rw.push(`🪙 ${d.rw.gold}`);
+      if (d.rw.exp) rw.push(`✨ ${d.rw.exp}`);
+      if (d.rw.items) for (const k in d.rw.items) rw.push(`${ITEMS[k].icon}${ITEMS[k].name}×${d.rw.items[k]}`);
+      return `<div class="row">
+        <div class="r-ico">${claimed ? '✅' : '🗓️'}</div>
+        <div class="r-main"><div class="r-name">${d.name}</div>
+        <div class="r-desc">${d.desc} · 奖励 ${rw.join(' ')}</div>
+        <div class="pbar"><i style="width:${cur / d.need * 100}%"></i></div></div>
+        <div class="r-right"><div style="font-size:9px;color:#8fa093;margin-bottom:5px">${cur}/${d.need}</div>
+        <button class="btn sm ${done && !claimed ? 'gold' : 'ghost'}" data-act="claimDaily" data-arg="${d.id}" ${done && !claimed ? '' : 'disabled'}>${claimed ? '已领' : '领取'}</button></div>
+      </div>`;
+    }).join('')}
+    <div class="empty" style="font-size:10px">提示：击败妖兽、捕捉召唤兽都会累计日常进度</div>`;
+}
+
+/* ===================== 路由 ===================== */
+function render() {
+  if (!S || !S.created) return;
+  ensureVitals();
+  renderTop();
+  renderTabbar();
+  const sc = document.getElementById('screen');
+  const cur = sc.scrollTop;
+  if (S.tab === 'town') sc.innerHTML = screenTown();
+  else if (S.tab === 'wild') sc.innerHTML = screenWild();
+  else if (S.tab === 'hero') sc.innerHTML = screenHero();
+  else if (S.tab === 'bag') sc.innerHTML = screenBag();
+  else if (S.tab === 'quest') sc.innerHTML = screenQuest();
+  sc.scrollTop = cur;
+}
+
+/* ===================== 奖励 ===================== */
+function grant(rw) {
+  const p = S.player;
+  if (rw.gold) { p.gold += rw.gold; }
+  if (rw.items) for (const id in rw.items) S.bag[id] = (S.bag[id] || 0) + rw.items[id];
+  let ups = [];
+  if (rw.exp) ups = addExp(rw.exp);
+  save();
+  const parts = [];
+  if (rw.gold) parts.push(`🪙${rw.gold}`);
+  if (rw.exp) parts.push(`✨${rw.exp}`);
+  if (rw.items) for (const id in rw.items) parts.push(`${ITEMS[id].icon}${ITEMS[id].name}×${rw.items[id]}`);
+  toast('获得 ' + parts.join(' '), 'good');
+  if (ups.length) {
+    renderTop();
+    setTimeout(() => toast(`境界提升！已是 Lv.${p.level}`, 'good'), 350);
+  }
+}
+
+/* ===================== 交互动作 ===================== */
+const ACT = {
+  go: t => go(t),
+  closeSheet: () => closeSheet(),
+  doConfirm: () => { const fn = pendingConfirm; pendingConfirm = null; closeSheet(); if (fn) fn(); },
+
+  rest: () => {
+    const st = playerStats();
+    S.player.hp = st.hp; S.player.mp = st.mp;
+    if (S.pets.length) S.pets.forEach(p => p.hp = petStats(p).hp);
+    save(); render();
+    toast('客栈一梦，气血法力尽复', 'good');
+  },
+
+  pickMap: id => {
+    if (S.player.level < MAPS[id].unlock) return toast(`需达到 Lv.${MAPS[id].unlock} 才能进入`, 'bad');
+    S.player.map = id; save(); render();
+  },
+
+  beastInfo: id => {
+    const sp = SPECIES[id];
+    openSheet(`
+      <h3>${sp.name}</h3>
+      <div class="sub">${sp.pet ? '可捕捉为召唤兽' : '首领 · 不可捕捉'}</div>
+      <div class="stat-grid">
+        ${STAT_KEYS.map(k => `<div class="stat"><span>${STAT_NAMES[k]}</span><b>${Math.round(sp.base[k])}</b></div>`).join('')}
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:#a9b8ae;line-height:1.7">
+        ${sp.pet ? `专属技能「${sp.skill.name}」：${sp.skillDesc}` : '此地首领，实力强横，击败可获得大量奖励。'}
+      </div>
+      <div class="sheet-actions"><button class="btn" data-act="closeSheet">知道了</button></div>`, true);
+  },
+
+  shop: () => {
+    const p = S.player;
+    const list = Object.keys(ITEMS).filter(id => ITEMS[id].type !== 'equip').map(id => shopRow(id));
+    const eqs = Object.keys(ITEMS).filter(id => ITEMS[id].type === 'equip').map(id => shopRow(id));
+    openSheet(`
+      <h3>百宝阁</h3>
+      <div class="sub">童叟无欺 · 现有 🪙${fmt(p.gold)}</div>
+      <div class="sec-title" style="margin-top:0">丹药 · 道具</div>
+      ${list.join('')}
+      <div class="sec-title">兵器 · 灵符</div>
+      ${eqs.join('')}
+      <div class="sheet-actions"><button class="btn ghost" data-act="closeSheet">离开</button></div>`);
+  },
+
+  buy: id => {
+    const it = ITEMS[id], p = S.player;
+    if (p.gold < it.price) return toast('银两不足', 'bad');
+    if (it.type === 'equip' && p.level < it.lv) return toast(`需达到 Lv.${it.lv} 方可使用`, 'bad');
+    p.gold -= it.price;
+    addItem(id, 1);
+    toast(`购得 ${it.name}`, 'good');
+    ACT.shop();
+    renderTop();
+  },
+
+  useItem: id => {
+    const it = ITEMS[id], p = S.player, st = playerStats();
+    if (bagCount(id) < 1) return;
+    if (it.type === 'tool') return toast('捆仙索需在战斗捕捉时使用', 'bad');
+    if (it.hp) { p.hp = Math.min(st.hp, p.hp + it.hp); }
+    if (it.mp) { p.mp = Math.min(st.mp, p.mp + it.mp); }
+    if (it.exp) { const ups = addExp(it.exp); if (ups.length) toast(`修为精进，已达 Lv.${p.level}`, 'good'); }
+    removeItem(id, 1);
+    toast(`服下 ${it.name}`, 'good');
+    render(); save();
+  },
+
+  equipItem: id => {
+    const it = ITEMS[id], p = S.player;
+    if (p.level < it.lv) return toast(`需达到 Lv.${it.lv}`, 'bad');
+    if (bagCount(id) < 1) return;
+    const old = p.equip[it.slot];
+    p.equip[it.slot] = id;
+    removeItem(id, 1);
+    if (old) addItem(old, 1);
+    const st = playerStats();
+    p.hp = Math.min(p.hp, st.hp); p.mp = Math.min(p.mp, st.mp);
+    save(); render();
+    toast(`已装备 ${it.name}`, 'good');
+  },
+
+  unequip: slot => {
+    const id = S.player.equip[slot];
+    if (!id) return;
+    S.player.equip[slot] = null;
+    addItem(id, 1);
+    const st = playerStats();
+    S.player.hp = Math.min(S.player.hp, st.hp);
+    save(); render(); toast('已卸下装备');
+  },
+
+  pets: () => {
+    const p = S.player;
+    if (!S.pets.length) {
+      return openSheet(`<h3>召唤兽栏</h3><div class="sub">空空如也</div>
+        <div style="font-size:11px;line-height:1.8;color:#a9b8ae;padding:6px 4px 10px">
+          在秘境战斗中，将妖兽气血削弱后使用「捕捉」指令，便可将其收为召唤兽。<br>
+          捕捉时可使用捆仙索提高成功率，但每次捕捉都会消耗一个回合。
+        </div>
+        <div class="sheet-actions"><button class="btn" data-act="closeSheet">知道了</button></div>`, true);
+    }
+    openSheet(`
+      <h3>召唤兽栏</h3>
+      <div class="sub">已收服 ${S.pets.length} 只 · 同时仅一只出战</div>
+      ${S.pets.map(pet => {
+        const sp = SPECIES[pet.sp], ps = petStats(pet), on = S.activePet === pet.uid;
+        return `<div class="row" style="${on ? 'border-color:rgba(240,212,154,.6)' : ''}">
+          <div class="r-ico">${sp.icon}</div>
+          <div class="r-main"><div class="r-name">${pet.name} <span style="font-size:10px;color:#8fa093">Lv.${pet.level}</span> ${on ? '<span class="tag on">出战</span>' : ''}</div>
+          <div class="r-desc">气血 ${ps.hp} · 攻击 ${ps.atk} · 灵力 ${ps.mag} · ${sp.skill.name}</div>
+          <div class="pbar"><i style="width:${pet.hp / ps.hp * 100}%"></i></div></div>
+          <div class="r-right" style="display:flex;flex-direction:column;gap:5px">
+            ${on ? '' : `<button class="btn sm" data-act="setPet" data-arg="${pet.uid}">出战</button>`}
+            <button class="btn sm ghost" data-act="releasePet" data-arg="${pet.uid}">放生</button>
+          </div></div>`;
+      }).join('')}
+      <div class="sheet-actions"><button class="btn ghost" data-act="closeSheet">关闭</button></div>`);
+  },
+
+  setPet: uid => {
+    S.activePet = uid; save(); ACT.pets(); render();
+    toast('召唤兽已出战', 'good');
+  },
+
+  releasePet: uid => {
+    const pet = S.pets.find(x => x.uid === uid);
+    if (!pet) return;
+    confirmBox('放生召唤兽', `确定放生「${pet.name}」吗？此操作不可撤销。`, '放生', () => {
+      S.pets = S.pets.filter(x => x.uid !== uid);
+      if (S.activePet === uid) S.activePet = S.pets[0] ? S.pets[0].uid : null;
+      save(); ACT.pets(); render();
+      toast('已放生');
+    });
+  },
+
+  tips: () => {
+    openSheet(`
+      <h3>玩法说明</h3>
+      <div class="sub">一图胜千言，且看这份江湖指南</div>
+      <div style="font-size:11px;line-height:1.85;color:#b9c8bb">
+        <b style="color:#e8cf9c">◆ 历练</b><br>在「秘境」选择地图，点「探索遇敌」进入战斗。等级越高可解锁更深的秘境，击败首领可获得丰厚奖励。<br>
+        <b style="color:#e8cf9c">◆ 战斗指令</b><br>攻击：普通物理攻击；法术：消耗法力施放门派技能；道具：战斗中服丹回血；捕捉：收服濒死的野生妖兽；防御：本回合减伤一半；逃跑：七成把握脱身。<br>
+        <b style="color:#e8cf9c">◆ 捕捉与召唤兽</b><br>妖兽气血越低越易捕捉，「捆仙索」可再提高 35% 成功率。收服的召唤兽会随战斗成长，同一时间只会有一只出战。<br>
+        <b style="color:#e8cf9c">◆ 任务与日常</b><br>主线随章节推进，日常任务每日 0 点重置。完成进度后在「任务」页领取奖励。<br>
+        <b style="color:#e8cf9c">◆ 存档</b><br>进度自动保存在本机浏览器（localStorage），更换设备或清理浏览器数据会丢失存档。
+      </div>
+      <div class="sheet-actions"><button class="btn" data-act="closeSheet">知道了</button></div>`, true);
+  },
+
+  master: () => {
+    const sct = SECTS[S.player.sect];
+    openSheet(`
+      <h3>${sct.name} · 师尊</h3>
+      <div class="sub">${sct.motto}</div>
+      <div style="font-size:11px;line-height:1.8;color:#a9b8ae;margin-bottom:10px">${sct.desc}</div>
+      ${sct.skills.map(id => {
+        const s = SPELLS[id];
+        return `<div class="row"><div class="r-ico">${s.icon}</div>
+          <div class="r-main"><div class="r-name">${s.name} <span class="tag">${s.mp} 法力</span></div>
+          <div class="r-desc">${s.desc}</div></div></div>`;
+      }).join('')}
+      <div class="sheet-actions"><button class="btn" data-act="closeSheet">谨遵师命</button></div>`, true);
+  },
+
+  claimMain: () => {
+    const mi = mainQuestInfo();
+    if (!mi || !mi.done) return toast('尚未完成', 'bad');
+    const p = S.player;
+    grant(mi.q.rw);
+    p.questIdx++;
+    save(); render();
+  },
+
+  claimDaily: id => {
+    const d = DAILIES.find(x => x.id === id);
+    const p = S.player;
+    if (!d || p.daily.claimed.includes(id)) return;
+    if (dailyProgress(d) < d.need) return toast('进度不足', 'bad');
+    p.daily.claimed.push(id);
+    grant(d.rw);
+    save(); render();
+  },
+
+  resetGame: () => {
+    confirmBox('重置江湖', '将清空当前角色与所有存档，从头开始。', '重置', () => {
+      try { localStorage.removeItem(SAVE_KEY); } catch (e) { }
+      S = defaultState();
+      openCreate(true);
+    });
+  },
+
+  pickSect: id => {
+    createSel = id;
+    document.querySelectorAll('.sect-card').forEach(el => el.classList.toggle('sel', el.dataset.arg === id));
+    const info = document.getElementById('sectInfo');
+    if (info) info.innerHTML = sectDetail(SECTS[id]);
+  },
+
+  createChar: () => {
+    const input = document.getElementById('nameInput');
+    let name = (input && input.value || '').trim().slice(0, 8);
+    if (!name) name = pick(['云清和', '沈墨白', '苏轻寒', '顾长风', '叶知秋']);
+    S = defaultState();
+    S.created = true;
+    S.player.name = name;
+    S.player.sect = createSel;
+    const st = playerStats();
+    S.player.hp = st.hp; S.player.mp = st.mp;
+    save(true);
+    closeSheet();
+    document.getElementById('tabbar').classList.remove('hidden');
+    document.getElementById('topbar').classList.remove('hidden');
+    go('town');
+    setTimeout(() => {
+      openSheet(`<h3>序章 · 入世</h3>
+        <div class="sub">云阳城外，竹影摇风</div>
+        <div style="font-size:11.5px;line-height:1.9;color:#c3d0c4;text-indent:2em">
+          你自 ${SECTS[createSel].name} 学艺初成，奉师命下山历练。途经云阳城，听闻城外竹林近来妖气渐盛，往来客商屡遭侵扰。
+        </div>
+        <div style="font-size:11.5px;line-height:1.9;color:#c3d0c4;text-indent:2em">
+          行囊中有几枚丹药，尚无召唤兽相随。且去竹林小径会一会那竹妖，若能收服一只灵兽结伴同行，此行便稳当了。
+        </div>
+        <div class="sheet-actions"><button class="btn gold" data-act="closeSheet">踏入江湖</button></div>`, true);
+    }, 260);
+  }
+};
+
+function sectDetail(s) {
+  return `<div style="font-size:10.5px;line-height:1.8;color:#9fb0a5;padding:2px 4px 0">
+    ${s.skills.map(id => `「${SPELLS[id].name}」${SPELLS[id].desc}`).join('<br>')}
+  </div>`;
+}
+
+function shopRow(id) {
+  const it = ITEMS[id], p = S.player;
+  const lock = it.type === 'equip' && p.level < it.lv;
+  return `<div class="row">
+    <div class="r-ico">${it.icon}</div>
+    <div class="r-main"><div class="r-name">${it.name}${lock ? ` <span class="tag off">Lv.${it.lv}</span>` : ''}</div>
+    <div class="r-desc">${it.desc}</div></div>
+    <div class="r-right" style="display:flex;align-items:center;gap:7px">
+      <span style="font-size:10px;color:#d9b06a">🪙${it.price}</span>
+      <button class="btn sm" data-act="buy" data-arg="${id}" ${p.gold < it.price || lock ? 'disabled' : ''}>购</button>
+    </div></div>`;
+}
+
+/* ===================== 创角 ===================== */
+let createSel = 'tiance';
+function openCreate() {
+  document.getElementById('topbar').classList.add('hidden');
+  document.getElementById('tabbar').classList.add('hidden');
+  document.getElementById('screen').innerHTML = '';
+  createSel = 'tiance';
+  openSheet(`
+    <h3>幻唐仙缘</h3>
+    <div class="sub">择一门派 · 入这江湖</div>
+    <div style="margin-bottom:12px"><input id="nameInput" class="input" maxlength="8" placeholder="取个道号（可留空）"></div>
+    ${Object.keys(SECTS).map(id => {
+      const s = SECTS[id];
+      return `<button class="sect-card ${id === createSel ? 'sel' : ''}" data-act="pickSect" data-arg="${id}">
+        <span class="sc-ico">${s.icon}</span>
+        <span style="flex:1;min-width:0"><span class="sc-name">${s.name}</span>
+        <div class="sc-motto">${s.motto}</div><div class="sc-desc">${s.desc}</div></span>
+      </button>`;
+    }).join('')}
+    <div id="sectInfo">${sectDetail(SECTS[createSel])}</div>
+    <div class="sheet-actions"><button class="btn gold" data-act="createChar">踏入江湖</button></div>`, true, true);
+}
+
+/* ===================== 全局事件 ===================== */
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  const fn = ACT[el.dataset.act];
+  if (fn && !el.disabled) fn(el.dataset.arg, el, e);
+});
+document.getElementById('overlay').addEventListener('click', e => {
+  if (e.target.id !== 'overlay') return;
+  if (sheetLock) return;
+  if (B && B.ended) { ACT.battleTown(); return; }
+  closeSheet();
+});
+document.addEventListener('visibilitychange', () => { if (document.hidden) save(true); });
+
+/* ===================== 回合制战斗 ===================== */
+let B = null;
+let autoOn = false;
+
+function makeEnemy(spId, level) {
+  const sp = SPECIES[spId], st = {};
+  STAT_KEYS.forEach(k => st[k] = Math.round(sp.base[k] + sp.grow[k] * (level - 1)));
+  if (!sp.boss) {
+    st.hp = Math.round(st.hp * 0.68);
+    st.atk = Math.round(st.atk * 0.55);
+    st.mag = Math.round(st.mag * 0.55);
+    st.def = Math.round(st.def * 0.75);
+    st.mdef = Math.round(st.mdef * 0.75);
+  }
+  return {
+    uid: 'e' + Math.random().toString(36).slice(2, 7), side: 'enemy', kind: 'enemy', sp: spId,
+    name: sp.name, icon: sp.icon, level,
+    hp: st.hp, maxhp: st.hp, mp: st.mp, maxmp: st.mp,
+    atk: st.atk, def: st.def, mag: st.mag, mdef: st.mdef, spd: st.spd,
+    defending: false, buff: 0, boss: !!sp.boss, skill: sp.skill, captured: false
+  };
+}
+
+function startBattle(mode) {
+  if (B) return;
+  const p = S.player, map = MAPS[p.map] || MAPS.zhulin;
+  if (mode === 'boss' && p.level < map.bossLv - 2) {
+    return toast(`需达到 Lv.${map.bossLv - 2} 方可挑战首领`, 'bad');
+  }
+  ensureVitals();
+  const st = playerStats();
+  const pu = {
+    uid: 'player', side: 'ally', kind: 'player', name: p.name || '少侠', icon: SECTS[p.sect].icon,
+    level: p.level, hp: p.hp, maxhp: st.hp, mp: p.mp, maxmp: st.mp,
+    atk: st.atk, def: st.def, mag: st.mag, mdef: st.mdef, spd: st.spd,
+    defending: false, buff: 0
+  };
+  const allies = [pu];
+  let petUnit = null;
+  const pet = activePet();
+  if (pet && pet.hp > 0) {
+    const ps = petStats(pet);
+    petUnit = {
+      uid: 'pet', side: 'ally', kind: 'pet', sp: pet.sp, name: pet.name, icon: SPECIES[pet.sp].icon,
+      level: pet.level, hp: pet.hp, maxhp: ps.hp, mp: 0, maxmp: 0,
+      atk: ps.atk, def: ps.def, mag: ps.mag, mdef: ps.mdef, spd: ps.spd,
+      defending: false, buff: 0
+    };
+    allies.push(petUnit);
+  }
+  const enemies = [];
+  if (mode === 'boss') {
+    enemies.push(makeEnemy(map.boss, map.bossLv));
+  } else {
+    const n = p.level <= 1 ? 1 : (p.level < 4 ? rnd(1, 2) : rnd(1, 3));
+    const lvCap = p.level < 4 ? p.level : 20;
+    for (let i = 0; i < n; i++) enemies.push(makeEnemy(pick(map.monsters), clamp(p.level + rnd(-1, 1), 1, lvCap)));
+  }
+  B = {
+    mode, mapId: map.id, allies, player: pu, pet: petUnit, enemies, round: 1,
+    sel: enemies[0].uid, busy: false, ended: false, auto: autoOn, result: false
+  };
+  renderBattle();
+  blog(`遭遇 ${enemies.map(e => e.name).join('、')}！`);
+  if (mode === 'boss') setTimeout(() => toast(`首领「${enemies[0].name}」现身！`, 'bad'), 300);
+  if (!petUnit) setTimeout(() => toast('当前无出战召唤兽', 'bad'), 600);
+  if (B.auto) setTimeout(autoAction, 700); else showCmd();
+}
+
+function renderBattle() {
+  const el = document.getElementById('battle');
+  el.classList.remove('hidden');
+  el.innerHTML = `
+    <div class="fog"></div>
+    <div class="b-art">
+      <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid slice">
+        <defs><radialGradient id="bmoon" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#f6ecc6" stop-opacity=".55"/><stop offset="1" stop-color="#f6ecc6" stop-opacity="0"/>
+        </radialGradient></defs>
+        <circle cx="318" cy="86" r="60" fill="url(#bmoon)"/>
+        <circle cx="318" cy="86" r="18" fill="#f4e9c4" opacity=".5"/>
+        <path d="M0 430 L64 366 L128 424 L198 340 L268 418 L330 372 L400 430 L400 700 L0 700Z" fill="#0a1614" opacity=".55"/>
+        <path d="M0 520 L86 466 L166 524 L248 462 L330 518 L400 486 L400 700 L0 700Z" fill="#07100e" opacity=".72"/>
+        <ellipse cx="200" cy="620" rx="230" ry="70" fill="#050c0a" opacity=".55"/>
+      </svg>
+    </div>
+    <div class="b-round">
+      <span>第 <b id="bRound">1</b> 回合</span>
+      <span style="color:#6f8176">${B.mode === 'boss' ? '首领战' : '野外遭遇'}</span>
+      <button class="auto ${B.auto ? 'on' : ''}" data-act="toggleAuto">自动 ${B.auto ? '◉' : '○'}</button>
+    </div>
+    <div class="b-log" id="bLog"></div>
+    <div class="enemy-area" id="enemyArea">${B.enemies.map(u => unitHTML(u)).join('')}</div>
+    <div class="vs-line">交 战</div>
+    <div class="ally-area" id="allyArea">${B.allies.map(u => unitHTML(u)).join('')}</div>
+    <div class="cmd-wrap" id="cmdWrap"></div>`;
+  paintBattle();
+}
+
+function unitHTML(u) {
+  return `<div class="unit ${u.side}" data-uid="${u.uid}" ${u.side === 'enemy' ? `data-act="selectTarget" data-arg="${u.uid}"` : ''}>
+    <div class="u-name">${u.name} <em>Lv.${u.level}</em></div>
+    <div class="u-av">${u.icon}${u.buff > 0 ? '<span class="u-tag">兽王</span>' : ''}</div>
+    <div class="u-hp ${u.side === 'ally' ? 'ally' : ''}"><i style="width:100%"></i></div>
+    <div class="u-num">${Math.round(u.hp)}/${u.maxhp}</div>
+  </div>`;
+}
+
+function paintBattle() {
+  if (!B) return;
+  const el = document.getElementById('battle');
+  const rd = el.querySelector('#bRound');
+  if (rd) rd.textContent = B.round;
+  el.querySelectorAll('.unit').forEach(node => {
+    const u = findUnit(node.dataset.uid);
+    if (!u) return;
+    const bar = node.querySelector('.u-hp>i');
+    if (bar) bar.style.width = clamp(u.hp / u.maxhp * 100, 0, 100) + '%';
+    const num = node.querySelector('.u-num');
+    if (num) num.textContent = `${Math.max(0, Math.round(u.hp))}/${u.maxhp}`;
+    node.classList.toggle('dead', u.hp <= 0);
+    node.classList.toggle('sel', u.side === 'enemy' && u.uid === B.sel && u.hp > 0);
+  });
+}
+
+function findUnit(uid) {
+  return B ? B.allies.concat(B.enemies).find(u => u.uid === uid) : null;
+}
+function blog(msg) {
+  const el = document.getElementById('bLog');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.opacity = '0';
+  requestAnimationFrame(() => { el.style.opacity = '1'; el.style.transition = 'opacity .2s'; });
+}
+const aliveEnemies = () => B.enemies.filter(e => e.hp > 0);
+const aliveAllies = () => B.allies.filter(a => a.hp > 0);
+
+function currentTarget() {
+  const t = B.enemies.find(e => e.uid === B.sel);
+  return (t && t.hp > 0) ? t : aliveEnemies()[0];
+}
+function targetFor(actor) {
+  if (actor.side === 'enemy') { const a = aliveAllies(); return a.length ? pick(a) : null; }
+  return currentTarget() || null;
+}
+
+function damageOf(actor, target, mult, magic) {
+  const A = magic ? actor.mag : Math.max(actor.atk, (actor.mag || 0) * 0.8);
+  const D = magic ? target.mdef : target.def;
+  let base = A * mult - D * 0.55;
+  base *= 0.92 + Math.random() * 0.16;
+  if (target.defending) base *= 0.5;
+  return Math.max(1, Math.round(base));
+}
+
+async function pulse(uid) {
+  const n = document.querySelector(`#battle .unit[data-uid="${uid}"]`);
+  if (!n) return;
+  n.classList.add('act');
+  await sleep(180);
+  n.classList.remove('act');
+}
+
+function applyDamage(u, dmg, crit) {
+  u.hp = Math.max(0, u.hp - dmg);
+  paintBattle();
+  const node = document.querySelector(`#battle .unit[data-uid="${u.uid}"]`);
+  if (node) {
+    node.classList.add('hit');
+    setTimeout(() => node.classList.remove('hit'), 320);
+    const f = document.createElement('div');
+    f.className = 'floater' + (crit ? ' crit' : '');
+    f.textContent = (crit ? '暴击 ' : '-') + dmg;
+    node.appendChild(f);
+    setTimeout(() => f.remove(), 1000);
+  }
+  if (u.hp <= 0 && !u.dead) { u.dead = true; blog(`${u.name} 力竭倒下`); }
+}
+
+function applyHeal(u, n) {
+  const real = Math.min(u.maxhp - u.hp, Math.round(n));
+  u.hp += real;
+  paintBattle();
+  const node = document.querySelector(`#battle .unit[data-uid="${u.uid}"]`);
+  if (node) {
+    const f = document.createElement('div');
+    f.className = 'floater heal';
+    f.textContent = '+' + real;
+    node.appendChild(f);
+    setTimeout(() => f.remove(), 1000);
+  }
+  return real;
+}
+
+function showCombo(text) {
+  const el = document.getElementById('battle');
+  if (!el) return;
+  const d = document.createElement('div');
+  d.className = 'combo';
+  d.textContent = text;
+  el.appendChild(d);
+  setTimeout(() => d.remove(), 1000);
+}
+
+/* 指令面板 */
+function cmdMain() {
+  const p = S.player, sct = SECTS[p.sect];
+  const canSkill = sct.skills.some(id => p.mp >= SPELLS[id].mp);
+  const netN = bagCount('net');
+  return `<div class="cmd-grid">
+    <button class="cmd" data-act="bAttack"><i>⚔️</i>攻击<small>物理</small></button>
+    <button class="cmd" data-act="bSkill" ${canSkill ? '' : 'disabled'}><i>✨</i>法术<small>${sct.name}</small></button>
+    <button class="cmd" data-act="bItem"><i>🎒</i>道具<small>${Object.keys(S.bag).filter(k => ITEMS[k] && ITEMS[k].type === 'potion').length} 种</small></button>
+    <button class="cmd" data-act="bCapture"><i>🪢</i>捕捉<small>${netN ? '捆仙索×' + netN : '收服灵兽'}</small></button>
+    <button class="cmd" data-act="bDefend"><i>🛡️</i>防御<small>减伤一半</small></button>
+    <button class="cmd run" data-act="bFlee"><i>🏃</i>逃跑<small>七成把握</small></button>
+  </div>`;
+}
+
+function showCmd() {
+  if (!B || B.ended || B.busy) return;
+  const w = document.getElementById('cmdWrap');
+  if (w) w.innerHTML = cmdMain();
+}
+
+function skillPanel() {
+  const p = S.player, sct = SECTS[p.sect];
+  document.getElementById('cmdWrap').innerHTML = `<div class="panel">
+    ${sct.skills.map(id => {
+      const s = SPELLS[id], ok = p.mp >= s.mp;
+      return `<button class="opt" data-act="doSkill" data-arg="${id}" ${ok ? '' : 'disabled'}>
+        <span class="oi">${s.icon}</span><span class="oname">${s.name}</span><span class="ocost">${s.mp}法</span></button>`;
+    }).join('')}
+    <button class="opt back" data-act="backCmd">返回</button>
+  </div>`;
+}
+
+function itemPanel() {
+  const ids = Object.keys(S.bag).filter(id => ITEMS[id] && ITEMS[id].type === 'potion' && S.bag[id] > 0);
+  const p = S.player, st = playerStats();
+  document.getElementById('cmdWrap').innerHTML = `<div class="panel">
+    ${ids.length ? ids.map(id => {
+      const it = ITEMS[id];
+      return `<button class="opt" data-act="doItem" data-arg="${id}">
+        <span class="oi">${it.icon}</span><span class="oname">${it.name}×${S.bag[id]}</span><span class="ocost">${it.hp ? '+' + it.hp + '血' : it.mp ? '+' + it.mp + '法' : '+' + it.exp + '经验'}</span></button>`;
+    }).join('') : '<div class="empty" style="grid-column:1/-1;padding:10px">没有可用丹药</div>'}
+    <button class="opt back" data-act="backCmd">返回</button>
+  </div>`;
+}
+
+function capturePanel() {
+  const t = currentTarget();
+  if (!t) return;
+  if (t.boss) return toast('首领无法捕捉', 'bad');
+  const sp = SPECIES[t.sp];
+  if (!sp.pet) return toast('此妖兽不可捕捉', 'bad');
+  const base = captureChance(t, false), withNet = captureChance(t, true);
+  const netN = bagCount('net');
+  document.getElementById('cmdWrap').innerHTML = `<div class="panel">
+    <button class="opt" data-act="doCapture" data-arg="none">
+      <span class="oi">🪢</span><span class="oname">直接捕捉</span><span class="ocost">${Math.round(base * 100)}%</span></button>
+    <button class="opt" data-act="doCapture" data-arg="net" ${netN ? '' : 'disabled'}>
+      <span class="oi">✨</span><span class="oname">捆仙索 ×${netN}</span><span class="ocost">${Math.round(withNet * 100)}%</span></button>
+    <button class="opt back" data-act="backCmd">返回</button>
+  </div>`;
+}
+
+function captureChance(t, net) {
+  let c = (1 - t.hp / t.maxhp) * 0.62 + 0.1;
+  if (S.player.sect === 'wanshou') c += 0.1;
+  if (net) c += 0.35;
+  return clamp(c, 0.05, 0.95);
+}
+
+/* 回合推进 */
+async function playerAction(act) {
+  if (!B || B.busy || B.ended) return;
+  B.busy = true;
+  const w = document.getElementById('cmdWrap');
+  if (w) w.innerHTML = '<div class="empty" style="padding:10px;font-size:10px">…</div>';
+  const order = [{ u: B.player, act }];
+  if (B.pet && B.pet.hp > 0) order.push({ u: B.pet, act: petAI(B.pet) });
+  aliveEnemies().forEach(e => order.push({ u: e, act: enemyAI(e) }));
+  order.sort((a, b) => (b.u.spd - a.u.spd) + (Math.random() - 0.5) * 2);
+  await sleep(120);
+  for (const it of order) {
+    if (!B || B.ended) break;
+    if (it.u.hp <= 0) continue;
+    await executeAction(it.u, it.act);
+    await sleep(200);
+    if (checkEnd()) break;
+  }
+  if (!B || B.ended) return;
+  B.allies.forEach(a => a.defending = false);
+  B.enemies.forEach(e => e.defending = false);
+  if (B.pet && B.pet.buff > 0) B.pet.buff--;
+  B.round++;
+  B.busy = false;
+  paintBattle();
+  if (B.auto) { await sleep(420); autoAction(); }
+  else showCmd();
+}
+
+function petAI(pet) {
+  const sp = SPECIES[pet.sp];
+  if (sp.skill.type === 'heal') {
+    if (B.player.hp < B.player.maxhp * 0.9) return { type: 'petskill' };
+    return { type: 'attack' };
+  }
+  if (Math.random() < 0.72) return { type: 'petskill' };
+  return { type: 'attack' };
+}
+
+function enemyAI(e) {
+  if (e.skill && e.skill.type !== 'heal' && Math.random() < 0.42) return { type: 'eskill' };
+  return { type: 'attack' };
+}
+
+async function executeAction(actor, act) {
+  if (!B || B.ended) return;
+  if (act.type === 'attack') {
+    const t = targetFor(actor);
+    if (!t) return;
+    await pulse(actor.uid);
+    const crit = Math.random() < 0.12;
+    let dmg = damageOf(actor, t, 1.1, false);
+    if (actor.buff > 0) dmg = Math.round(dmg * 1.6);
+    if (crit) dmg = Math.round(dmg * 1.6);
+    applyDamage(t, dmg, crit);
+    blog(`${actor.name} 挥击 ${t.name}，造成 ${dmg} 点伤害`);
+    return;
+  }
+
+  if (act.type === 'petskill') {
+    const sp = SPECIES[actor.sp];
+    if (!sp) return;
+    if (sp.skill.type === 'heal') {
+      const t = B.player;
+      await pulse(actor.uid);
+      const heal = applyHeal(t, actor.mag * sp.skill.mult + 22);
+      blog(`${actor.name} 施放「${sp.skill.name}」，为 ${t.name} 回复 ${heal} 气血`);
+    } else if (sp.skill.type === 'magic') {
+      const t = currentTarget();
+      if (!t) return;
+      await pulse(actor.uid);
+      let dmg = damageOf(actor, t, sp.skill.mult, true);
+      if (actor.buff > 0) dmg = Math.round(dmg * 1.6);
+      applyDamage(t, dmg, false);
+      blog(`${actor.name} 施放「${sp.skill.name}」，${t.name} 受到 ${dmg} 点法术伤害`);
+    } else {
+      const t = currentTarget();
+      if (!t) return;
+      await pulse(actor.uid);
+      let dmg = damageOf(actor, t, sp.skill.mult, false);
+      if (actor.buff > 0) dmg = Math.round(dmg * 1.6);
+      const crit = Math.random() < 0.1;
+      if (crit) dmg = Math.round(dmg * 1.5);
+      applyDamage(t, dmg, crit);
+      blog(`${actor.name} 施放「${sp.skill.name}」，${t.name} 受到 ${dmg} 点伤害`);
+    }
+    return;
+  }
+
+  if (act.type === 'eskill') {
+    const t = targetFor(actor);
+    if (!t) return;
+    await pulse(actor.uid);
+    const magic = actor.skill.type === 'magic';
+    let dmg = damageOf(actor, t, actor.skill.mult, magic);
+    applyDamage(t, dmg, false);
+    blog(`${actor.name} 施放「${actor.skill.name}」，${t.name} 受到 ${dmg} 点${magic ? '法术' : ''}伤害`);
+    return;
+  }
+
+  if (act.type === 'skill') {
+    const s = SPELLS[act.skill];
+    if (!s) return;
+    if (B.player.mp < s.mp) { blog('法力不足，无法施法'); return; }
+    B.player.mp -= s.mp;
+    if (s.type === 'heal') {
+      const real = applyHeal(B.player, B.player.mag * s.mult + 40);
+      await pulse('player');
+      blog(`你施放「${s.name}」，回复 ${real} 点气血`);
+    } else if (s.type === 'healall') {
+      await pulse('player');
+      let sum = 0;
+      B.allies.filter(a => a.hp > 0).forEach(a => sum += applyHeal(a, B.player.mag * s.mult + 30));
+      blog(`你施放「${s.name}」，同伴共回复 ${sum} 点气血`);
+    } else if (s.type === 'buffpet') {
+      await pulse('player');
+      if (B.pet && B.pet.hp > 0) {
+        B.pet.buff = 4;
+        showCombo('兽王令');
+        blog(`你号令万兽，${B.pet.name} 攻击提升 60%（3 回合）`);
+        paintBattle();
+      } else {
+        blog('你施展兽王令，却无召唤兽可听令');
+      }
+    } else if (s.type === 'combo') {
+      const t = currentTarget();
+      if (!t) return;
+      await pulse('player');
+      showCombo('万兽奔腾');
+      let dmg = damageOf(B.player, t, s.mult, false);
+      applyDamage(t, dmg, false);
+      if (B.pet && B.pet.hp > 0) {
+        const d2 = damageOf(B.pet, t, 1.2, false);
+        setTimeout(() => applyDamage(t, d2, false), 180);
+        blog(`你与 ${B.pet.name} 合击 ${t.name}，共造成 ${dmg + d2} 点伤害`);
+      } else {
+        blog(`你独自扑向 ${t.name}，造成 ${dmg} 点伤害`);
+      }
+    } else {
+      const targets = s.target === 'all' ? aliveEnemies() : [currentTarget()].filter(Boolean);
+      await pulse('player');
+      showCombo(s.name);
+      let total = 0;
+      for (const t of targets) {
+        if (!t || t.hp <= 0) continue;
+        const crit = Math.random() < 0.1;
+        let dmg = damageOf(B.player, t, s.mult, s.type === 'magic');
+        if (crit) dmg = Math.round(dmg * 1.5);
+        applyDamage(t, dmg, crit);
+        total += dmg;
+      }
+      blog(`你施放「${s.name}」，共造成 ${total} 点${s.type === 'magic' ? '法术' : ''}伤害`);
+    }
+    renderTop();
+    return;
+  }
+
+  if (act.type === 'item') {
+    const it = ITEMS[act.item];
+    if (!it || bagCount(act.item) < 1) return;
+    const real = it.hp ? applyHeal(B.player, it.hp) : 0;
+    if (it.mp) B.player.mp = Math.min(B.player.maxmp, B.player.mp + it.mp);
+    if (it.exp) { const ups = addExp(it.exp); if (ups.length) toast(`修为精进，已达 Lv.${S.player.level}`, 'good'); }
+    removeItem(act.item, 1);
+    paintBattle();
+    blog(`你服下「${it.name}」${real ? '，回复 ' + real + ' 点气血' : ''}`);
+    return;
+  }
+
+  if (act.type === 'capture') {
+    const t = currentTarget();
+    if (!t || t.hp <= 0) return;
+    if (t.boss) { blog('首领威压太盛，无法捕捉'); return; }
+    const sp = SPECIES[t.sp];
+    if (!sp.pet) { blog('此妖兽无法捕捉'); return; }
+    if (S.pets.length >= 6) { blog('兽栏已满（最多 6 只），无法再收服'); return; }
+    if (act.net) {
+      if (!removeItem('net', 1)) { blog('捆仙索不足'); return; }
+    }
+    await pulse('player');
+    const chance = captureChance(t, act.net);
+    if (Math.random() < chance) {
+      t.captured = true; t.hp = 0; 
+      const pet = makePet(t.sp, t.level);
+      S.pets.push(pet);
+      if (S.activePet == null) S.activePet = pet.uid;
+      S.player.captures++;
+      S.player.daily.captures++;
+      save();
+      paintBattle();
+      showCombo('收服成功');
+      blog(`成功收服 ${sp.name}（Lv.${t.level}）！`);
+      setTimeout(() => toast(`收服 ${sp.name}！已收入兽栏`, 'good'), 500);
+    } else {
+      blog(`捕捉失败，${sp.name} 挣脱了${act.net ? '捆仙索' : ''}`);
+      setTimeout(() => toast('捕捉失败', 'bad'), 200);
+    }
+    return;
+  }
+
+  if (act.type === 'defend') {
+    actor.defending = true;
+    blog(`${actor.name} 凝神防御，本回合受伤减半`);
+    return;
+  }
+
+  if (act.type === 'flee') {
+    await pulse('player');
+    if (Math.random() < 0.7) {
+      B.ended = true;
+      blog('你且战且退，成功脱离战斗');
+      setTimeout(() => { endBattle(); go('town'); toast('已脱离战斗'); }, 500);
+    } else {
+      blog('逃跑失败，被妖兽拦住了去路');
+    }
+    return;
+  }
+}
+
+function checkEnd() {
+  if (!B || B.ended) return true;
+  if (B.player.hp <= 0) { B.ended = true; setTimeout(finishLose, 450); return true; }
+  if (B.enemies.every(e => e.hp <= 0)) { B.ended = true; setTimeout(finishWin, 420); return true; }
+  return false;
+}
+
+function syncVitals() {
+  if (!B) return;
+  S.player.hp = Math.max(0, Math.round(B.player.hp));
+  S.player.mp = Math.max(0, Math.min(B.player.maxmp, Math.round(B.player.mp)));
+  const pet = activePet();
+  if (pet && B.pet) pet.hp = Math.max(0, Math.round(B.pet.hp));
+}
+
+function finishWin() {
+  if (!B || B.result) return;
+  B.result = true;
+  syncVitals();
+  const p = S.player, map = MAPS[B.mapId];
+  let exp = 0, gold = 0, killCount = 0;
+  B.enemies.forEach(e => {
+    if (e.captured) return;
+    const sp = SPECIES[e.sp];
+    exp += Math.round((22 + 16 * e.level) * sp.exp);
+    gold += Math.round((10 + 7 * e.level) * sp.gold);
+    p.kills[e.sp] = (p.kills[e.sp] || 0) + 1;
+    p.daily.kills++;
+    killCount++;
+  });
+  p.daily.battles++;
+  p.wins++;
+  p.gold += gold;
+  const drops = {};
+  const boss = B.mode === 'boss';
+  const dropN = boss ? 2 : (Math.random() < 0.4 ? 1 : 0);
+  for (let i = 0; i < dropN; i++) {
+    const id = pick(map.drops);
+    drops[id] = (drops[id] || 0) + 1;
+    S.bag[id] = (S.bag[id] || 0) + 1;
+  }
+  const ups = addExp(exp);
+  let petMsg = '';
+  const pet = activePet();
+  if (pet && B.pet && B.pet.hp > 0) {
+    const pexp = Math.round(exp * 0.75);
+    const pu = addPetExp(pet, pexp);
+    petMsg = `${pet.name} 获得 ${pexp} 经验${pu ? `，升至 Lv.${pet.level}` : ''}`;
+  }
+  save(true);
+  const dropChips = Object.keys(drops).map(id => `<span class="rw">${ITEMS[id].icon} ${ITEMS[id].name}×${drops[id]}</span>`).join('');
+  openSheet(`
+    <div class="result">
+      <div class="rttl">战斗胜利</div>
+      <div class="rsub">${boss ? '首领伏诛 · 一方太平' : '妖魔授首 · 历练有成'}</div>
+      <div class="reward-grid">
+        <span class="rw">✨ 经验 +${exp}</span>
+        <span class="rw">🪙 银两 +${gold}</span>
+        ${dropChips}
+      </div>
+      ${ups.length ? `<div style="font-size:11px;color:#f0d49a;margin-top:8px">境界提升！已达 Lv.${p.level}</div>` : ''}
+      ${petMsg ? `<div style="font-size:10px;color:#9ec9a8;margin-top:6px">${petMsg}</div>` : ''}
+      <div class="sheet-actions" style="margin-top:16px">
+        <button class="btn ghost" data-act="battleTown">返回城镇</button>
+        <button class="btn gold" data-act="battleAgain">继续探索</button>
+      </div>
+    </div>`, true);
+  renderTop();
+}
+
+function finishLose() {
+  if (!B) return;
+  B.result = true;
+  syncVitals();
+  const p = S.player, st = playerStats();
+  const loss = Math.floor(p.gold * 0.1);
+  p.gold = Math.max(0, p.gold - loss);
+  p.hp = Math.max(1, Math.round(st.hp * 0.3));
+  p.mp = Math.max(0, Math.round(st.mp * 0.3));
+  S.pets.forEach(pet => pet.hp = Math.max(1, Math.round(petStats(pet).hp * 0.3)));
+  save(true);
+  openSheet(`
+    <div class="result">
+      <div class="rttl" style="color:#e9a79b">力竭倒地</div>
+      <div class="rsub">幸得路人相救，送回云阳城</div>
+      <div class="reward-grid"><span class="rw" style="border-color:rgba(210,110,100,.4);color:#f0b8ac">🪙 遗落银两 ${loss}</span></div>
+      <div style="font-size:10.5px;color:#9fb0a5;line-height:1.8;margin-top:8px">建议先提升等级、装备与丹药，或收服一只召唤兽同行。</div>
+      <div class="sheet-actions" style="margin-top:14px">
+        <button class="btn wide gold" data-act="battleTown">返回城镇疗伤</button>
+      </div>
+    </div>`, true);
+  renderTop();
+}
+
+function endBattle() {
+  if (B) {
+    syncVitals();
+    const pet = activePet();
+    if (pet && B.pet) pet.hp = Math.max(0, Math.round(B.pet.hp));
+  }
+  B = null;
+  const el = document.getElementById('battle');
+  el.classList.add('hidden');
+  el.innerHTML = '';
+  closeSheet();
+  save(true);
+  ensureVitals();
+  render();
+}
+
+function autoAction() {
+  if (!B || B.ended || B.busy) return;
+  const p = S.player, sct = SECTS[p.sect], st = playerStats();
+  const healSkill = sct.skills.find(id => ['heal', 'healall'].includes(SPELLS[id].type));
+  let act;
+  if (healSkill && p.hp < st.hp * 0.5 && p.mp >= SPELLS[healSkill].mp) {
+    act = { type: 'skill', skill: healSkill };
+  } else if (p.hp < st.hp * 0.35) {
+    const potion = ['hp2', 'hp1'].find(id => bagCount(id) > 0);
+    act = potion ? { type: 'item', item: potion } : { type: 'attack' };
+  } else {
+    const dmgSkills = sct.skills.filter(id => ['phys', 'magic', 'combo'].includes(SPELLS[id].type) && p.mp >= SPELLS[id].mp);
+    if (dmgSkills.length && Math.random() < 0.8) act = { type: 'skill', skill: pick(dmgSkills) };
+    else act = { type: 'attack' };
+  }
+  playerAction(act);
+}
+
+Object.assign(ACT, {
+  explore: () => startBattle('normal'),
+  challengeBoss: () => startBattle('boss'),
+  startBattle: m => startBattle(m),
+  selectTarget: uid => {
+    if (!B || B.busy || B.ended) return;
+    const u = findUnit(uid);
+    if (!u || u.hp <= 0) return;
+    B.sel = uid; paintBattle();
+  },
+  bAttack: () => { const t = currentTarget(); if (!t) return; playerAction({ type: 'attack' }); },
+  bSkill: () => { if (B && !B.busy && !B.ended) skillPanel(); },
+  bItem: () => { if (B && !B.busy && !B.ended) itemPanel(); },
+  bCapture: () => { if (B && !B.busy && !B.ended) capturePanel(); },
+  bDefend: () => playerAction({ type: 'defend' }),
+  bFlee: () => playerAction({ type: 'flee' }),
+  doSkill: id => { playerAction({ type: 'skill', skill: id }); },
+  doItem: id => { playerAction({ type: 'item', item: id }); },
+  doCapture: mode => { playerAction({ type: 'capture', net: mode === 'net' }); },
+  backCmd: () => { if (B && !B.busy && !B.ended) { showCmd(); paintBattle(); } },
+  toggleAuto: () => {
+    if (!B) return;
+    B.auto = !B.auto;
+    autoOn = B.auto;
+    const btn = document.querySelector('#battle .auto');
+    if (btn) { btn.classList.toggle('on', B.auto); btn.innerHTML = '自动 ' + (B.auto ? '◉' : '○'); }
+    toast(B.auto ? '已开启自动战斗' : '已关闭自动战斗');
+    if (B.auto && !B.busy && !B.ended) autoAction();
+  },
+  battleAgain: () => { const m = B ? B.mode : 'normal'; endBattle(); startBattle(m); },
+  battleTown: () => { endBattle(); go('town'); }
+});
+
+/* 初始位置 + 兜底（防止战斗面板在没有 B 时残留） */
+function boot() {
+  const setH = () => document.documentElement.style.setProperty('--app-h', window.innerHeight + 'px');
+  setH();
+  window.addEventListener('resize', setH);
+  window.addEventListener('orientationchange', () => setTimeout(setH, 250));
+
+  loadSave();
+  if (!S.created) {
+    openCreate();
+  } else {
+    ensureVitals();
+    S.tab = S.tab || 'town';
+    go(S.tab);
+  }
+  // 每 30 秒自动存档
+  setInterval(() => save(true), 30000);
+}
+
+boot();
+</script>
+</body>
+</html>
