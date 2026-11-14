@@ -196,8 +196,7 @@ svg{display:block}
 .enemy .spr{position:relative;width:100%;aspect-ratio:3/4;background-size:cover;background-position:50% 12%;border-radius:14px;overflow:hidden;border:1px solid rgba(217,180,108,.22);box-shadow:0 10px 22px rgba(0,0,0,.55),inset 0 0 0 1px rgba(0,0,0,.3);filter:saturate(1.08) contrast(1.05);
   animation:breathe 3.4s ease-in-out infinite}
 .enemy .spr::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,15,0) 58%,rgba(6,10,15,.78) 100%)}
-.hero .spr::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;
-  background:radial-gradient(circle at 50% 46%,rgba(12,18,26,.14),rgba(6,10,15,.9) 74%)}
+.hero .spr::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,15,0) 58%,rgba(6,10,15,.86) 100%)}
 @keyframes breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-4px) scale(1.018)}}
 .enemy.hit .spr{animation:hitShake .32s ease}
 @keyframes hitShake{0%,100%{transform:translateX(0);filter:none}20%{transform:translateX(-7px) rotate(-2deg)}45%{transform:translateX(6px) rotate(2deg);filter:brightness(1.7) saturate(.4)}70%{transform:translateX(-3px)}}
@@ -215,9 +214,7 @@ svg{display:block}
 .btField{position:relative;z-index:3;flex:1;display:flex;align-items:flex-end;justify-content:flex-start;padding:0 8px 4px;
   background:radial-gradient(ellipse 46% 34% at 26% 99%,rgba(0,0,0,.55),transparent 72%)}
 .hero{position:relative;width:150px;max-width:42%;margin-left:2px;display:flex;flex-direction:column;align-items:center}
-.hero .spr{position:relative;width:100%;aspect-ratio:3/4;background-size:cover;background-position:50% 8%;filter:brightness(1.14) saturate(1.1);
-  -webkit-mask-image:radial-gradient(ellipse 60% 63% at 50% 50%,#000 56%,transparent 86%);
-  mask-image:radial-gradient(ellipse 60% 63% at 50% 50%,#000 56%,transparent 86%);
+.hero .spr{position:relative;width:100%;aspect-ratio:3/4;background-size:cover;background-position:50% 8%;border-radius:16px;overflow:hidden;border:1px solid rgba(246,226,176,.45);box-shadow:0 14px 30px rgba(0,0,0,.62),0 0 26px rgba(246,226,176,.12);filter:saturate(1.06) contrast(1.03);
   animation:breathe 3.8s ease-in-out infinite}
 .hero.atk .spr{animation:heroLunge .45s ease}
 @keyframes heroLunge{0%,100%{transform:translateX(0)}35%{transform:translateX(26px) scale(1.03)}60%{transform:translateX(18px)}}
@@ -1824,6 +1821,12 @@ function showCreate(){
 }
 
 /* ================= 初始化 ================= */
+function preloadArt(){
+  const urls=new Set(SCENES.map(s=>s.art));
+  Object.keys(SECTS).forEach(k=>urls.add(SECTS[k].art));
+  Object.keys(MOBS).forEach(k=>urls.add(MOBS[k].art));
+  urls.forEach(u=>{const im=new Image();im.src=u});
+}
 function boot(){
   const fresh=!localStorage.getItem(KEY);
   S=load()||newGame();
@@ -1831,7 +1834,7 @@ function boot(){
   if(!S.hp||S.hp>st0.hp)S.hp=st0.hp;
   if(!S.mp||S.mp>st0.mp)S.mp=st0.mp;
   if(!S.counts)S.counts={};
-  renderDock();renderHUD();setScene(S.scene||'city');renderWorld();initDust();
+  renderDock();renderHUD();setScene(S.scene||'city');renderWorld();initDust();setTimeout(preloadArt,300);
   setInterval(()=>{
     if(B&&!B.over)return;
     const st=stats();
