@@ -1119,9 +1119,11 @@ function renderFight(b){
 
 /* ---------------- 师门 ---------------- */
 function sectTask(){
-  const pool=SCENES.filter(s=>!s.town);
-  const sc=pool[(S.sectQ.idx*3+S.lv)%pool.length];
-  const mob=sc.mobs[(S.sectQ.idx+1)%sc.mobs.length];
+  const pool=SCENES.filter(s=>!s.town&&s.lv<=Math.max(1,S.lv));
+  const sc=pool.length?pool[(S.sectQ.idx+S.lv)%pool.length]:SCENES[1];
+  const mp=sc.mobs.filter(k=>MOBS[k].lv<=S.lv+3);
+  const arr=mp.length?mp:sc.mobs;
+  const mob=arr[S.sectQ.idx%arr.length];
   return {sc:sc.id,mob,need:2+(S.sectQ.idx%3),lv:S.lv+2};
 }
 function renderSect(b){
@@ -1258,6 +1260,7 @@ function mkEnemy(item){
 function startBattle(cfg){
   const st=stats();
   if(S.hp<=0||S.hp>st.hp)S.hp=st.hp;
+  if(S.hp<st.hp*.3){S.hp=st.hp;toast('调息完毕 · 气血已复原')}
   if(S.mp<0||S.mp>st.mp)S.mp=st.mp;
   B={cfg,wave:0,enemies:[],p:{hp:Math.round(S.hp),mp:Math.round(S.mp),buffs:{},rage:40},busy:false,auto:false,target:0,over:false};
   B.cfg.scene=B.cfg.scene||S.scene;
