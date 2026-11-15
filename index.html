@@ -338,7 +338,8 @@ body.creating #top,body.creating #mini,body.creating #qtr,body.creating #party,b
 .ent.npc.speaking .plate{opacity:0}
 .ent.npc.speaking .qmark{display:none!important}
 .ent .plate .nm{font-size:10px;letter-spacing:.8px;color:#f6e8cc;text-shadow:0 1px 4px #000,0 0 8px rgba(0,0,0,.9);background:rgba(6,10,16,.46);padding:0 5px;border-radius:5px}
-.ent .plate .tt{font-size:8px;letter-spacing:.6px;color:#cbb996;text-shadow:0 1px 3px #000;margin-top:1px}
+.ent .plate .tt{display:none;font-size:8px;letter-spacing:.6px;color:#cbb996;text-shadow:0 1px 3px #000;margin-top:1px}
+.ent.npc.near .plate .tt{display:block}
 .ent .plate .lv{font-size:8px;color:#f0b8ae;text-shadow:0 1px 3px #000;margin-top:1px}
 .ent.ply .plate .nm{color:#ffe9b8;font-size:10.5px;border:1px solid rgba(246,226,176,.35);background:rgba(10,14,20,.6);padding:0 7px}
 .ent.ply .fig{filter:drop-shadow(0 0 1px rgba(8,12,16,.9)) drop-shadow(0 8px 10px rgba(0,0,0,.55)) drop-shadow(0 0 6px rgba(246,226,176,.14))}
@@ -1468,7 +1469,7 @@ function updateNear(dt){
   const sc=W.sc;let best=null,bd=72;
   (sc.npcs||[]).forEach(n=>{
     const d=Math.hypot(W.px-n.x,W.py-n.y);
-    const el=W.npcEls[n.id];if(el)el.classList.toggle('far',d>170);
+    const el=W.npcEls[n.id];if(el)el.classList.toggle('far',d>150);
     if(d>130)n._autoMet=false;
     if(d<bd){bd=d;best=n}
   });
