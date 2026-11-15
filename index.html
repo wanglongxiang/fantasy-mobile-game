@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#070b11">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>九州问道 · 云海仙途</title>
+<title>山河九渡 · 落霞少年</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;height:100%;overflow:hidden;background:#04070b;font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;color:#eae0cb;-webkit-user-select:none;user-select:none;-webkit-text-size-adjust:100%}
@@ -124,7 +124,7 @@ svg{display:block}
 .shFoot{flex:none;padding:8px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);display:flex;gap:8px;background:rgba(6,10,15,.9)}
 
 .h2{font-family:var(--serif);font-size:13px;letter-spacing:3px;color:#e9d9b6;margin:18px 2px 9px;display:flex;align-items:center;gap:8px}
-.h2::before{content:"";width:2px;height:12px;background:linear-gradient(180deg,var(--gold2),transparent)}
+.h2::before{content:"◆";width:auto;height:auto;background:none;color:var(--gold);font-size:7px;line-height:1;opacity:.85}
 .h2 em{font-style:normal;margin-left:auto;font-family:inherit;font-size:9px;letter-spacing:0;color:#78857f}
 .card{background:linear-gradient(155deg,rgba(30,42,50,.6),rgba(12,18,24,.85));border:1px solid rgba(217,180,108,.16);border-radius:15px;position:relative;box-shadow:0 8px 20px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.04)}
 .card.pad{padding:13px}
@@ -193,7 +193,7 @@ svg{display:block}
 .enemy.dead{opacity:0;transform:translateY(14px) scale(.9)}
 .enemy.tgt::after{content:"";position:absolute;inset:0 0 26%;border:1px solid rgba(246,226,176,.6);border-radius:14px;box-shadow:0 0 26px rgba(246,226,176,.22);animation:pulseT 1.6s ease-in-out infinite}
 @keyframes pulseT{0%,100%{opacity:.35}50%{opacity:.9}}
-.enemy .spr{position:relative;width:100%;aspect-ratio:3/4;background-size:cover;background-position:50% 12%;border-radius:14px;overflow:hidden;border:1px solid rgba(217,180,108,.22);box-shadow:0 10px 22px rgba(0,0,0,.55),inset 0 0 0 1px rgba(0,0,0,.3);filter:saturate(1.08) contrast(1.05);
+.enemy .spr{position:relative;width:100%;aspect-ratio:3/4;background-size:cover;background-position:50% 12%;border-radius:14px;overflow:hidden;border:1px solid rgba(217,180,108,.22);box-shadow:0 10px 22px rgba(0,0,0,.55),inset 0 0 0 1px rgba(0,0,0,.3);filter:saturate(1.08) contrast(1.05);mix-blend-mode:multiply;background-color:transparent;
   animation:breathe 3.4s ease-in-out infinite}
 .enemy .spr::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,15,0) 58%,rgba(6,10,15,.78) 100%)}
 .hero .spr::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(6,10,15,0) 58%,rgba(6,10,15,.86) 100%)}
@@ -213,7 +213,7 @@ svg{display:block}
 /* 玩家侧 */
 .btField{position:relative;z-index:3;flex:1;display:flex;align-items:flex-end;justify-content:flex-start;padding:0 8px 4px;
   background:radial-gradient(ellipse 46% 34% at 26% 99%,rgba(0,0,0,.55),transparent 72%)}
-.hero{position:relative;width:150px;max-width:42%;margin-left:2px;display:flex;flex-direction:column;align-items:center}
+.hero{position:relative;width:132px;max-width:40%;margin-left:2px;display:flex;flex-direction:column;align-items:center}
 .hero .spr{position:relative;width:100%;aspect-ratio:3/4;background-size:cover;background-position:50% 8%;border-radius:16px;overflow:hidden;border:1px solid rgba(246,226,176,.45);box-shadow:0 14px 30px rgba(0,0,0,.62),0 0 26px rgba(246,226,176,.12);filter:saturate(1.06) contrast(1.03);
   animation:breathe 3.8s ease-in-out infinite}
 .hero.atk .spr{animation:heroLunge .45s ease}
@@ -268,7 +268,7 @@ svg{display:block}
 .result .rw span{padding:3px 9px;border-radius:7px;background:rgba(217,180,108,.1);border:1px solid var(--line2)}
 
 /* Toast / 弹窗 */
-#toast{position:absolute;left:50%;top:26%;transform:translate(-50%,-10px);z-index:60;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;opacity:0;transition:.3s}
+#toast{position:absolute;left:50%;bottom:calc(214px + env(safe-area-inset-bottom));top:auto;transform:translate(-50%,0) translateY(8px);z-index:60;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;opacity:0;transition:.3s}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 #toast .t{background:rgba(8,13,19,.92);border:1px solid var(--line);color:#f4e8d0;font-size:11.5px;padding:7px 15px;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,.6);white-space:nowrap}
 #modal{position:absolute;inset:0;z-index:55;display:flex;align-items:center;justify-content:center;padding:26px;background:rgba(3,6,10,.7);backdrop-filter:blur(5px)}
@@ -300,17 +300,176 @@ svg{display:block}
 .sectCard.on{border-color:#f6e2b0;box-shadow:0 0 0 1px #f6e2b0,0 0 26px rgba(246,226,176,.35)}
 .sectCard.on::before{content:"已择";position:absolute;top:8px;right:8px;z-index:3;font-size:8.5px;letter-spacing:1px;color:#2a1f08;background:linear-gradient(180deg,#f7e4b6,#c9a15c);padding:2px 7px;border-radius:7px}
 #create .cf{flex:none;padding-top:14px}
-body.creating #top,body.creating #world,body.creating #dock{visibility:hidden}
+body.creating #top,body.creating #mini,body.creating #qtr,body.creating #party,body.creating #joy,body.creating #sideBtns,body.creating #chat,body.creating #sceneIntro{visibility:hidden}
+
+/* ================= 大世界舞台 ================= */
+#stage{position:absolute;inset:0;z-index:0;overflow:hidden;background:#070b10;touch-action:none;cursor:default}
+#far{position:absolute;inset:-16%;background-size:cover;background-position:50% 44%;filter:blur(10px) brightness(.46) saturate(.72);opacity:.6;will-change:transform;transform:scale(1.1)}
+#gw{position:absolute;left:0;top:0;width:1000px;height:1330px;background-size:cover;background-position:50% 50%;will-change:transform;transform-origin:0 0}
+.gwshade{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,9,14,.66) 0%,rgba(5,9,14,.16) 16%,rgba(5,9,14,.02) 38%,rgba(4,8,12,.3) 66%,rgba(4,7,11,.72) 100%),
+  radial-gradient(82% 58% at 50% 46%,transparent 40%,rgba(3,6,10,.42) 100%)}
+#props,#ents,#fx{position:absolute;inset:0;pointer-events:none}
+#props .prop,#ents .ent,#fx .fxz{pointer-events:auto}
+#vignette{position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(118% 74% at 50% 46%,transparent 50%,rgba(2,5,9,.66) 100%)}
+#fade{position:absolute;inset:0;background:#03060a;opacity:0;pointer-events:none;transition:opacity .4s ease;z-index:30}
+#fade.on{opacity:1}
+#weather{position:absolute;inset:0;pointer-events:none;z-index:3;width:100%;height:100%}
+#sceneIntro{position:absolute;left:0;right:0;top:20%;z-index:6;pointer-events:none;text-align:center;opacity:0;transition:opacity .7s ease}
+#sceneIntro.on{opacity:1}
+#sceneIntro .zh{font-family:var(--serif);font-size:34px;letter-spacing:12px;color:#fbf3e2;text-shadow:0 4px 26px rgba(0,0,0,.95),0 0 34px rgba(217,180,108,.3);padding-left:12px}
+#sceneIntro .en{font-size:8px;letter-spacing:6px;color:rgba(240,226,196,.55);margin-top:8px}
+#sceneIntro .ln{width:90px;height:1px;margin:14px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+#sceneIntro .ds{font-family:var(--serif);font-size:11.5px;line-height:2;letter-spacing:1px;color:rgba(244,233,212,.92);margin:16px auto 0;max-width:280px;text-shadow:0 2px 10px #000;background:rgba(5,9,14,.42);padding:8px 12px;border-radius:10px;backdrop-filter:blur(3px)}
+#sceneIntro .amb{font-size:9.5px;letter-spacing:1px;color:rgba(217,180,108,.8);margin-top:12px;text-shadow:0 1px 6px #000}
+#sceneIntro .qte{font-family:var(--serif);font-size:10.5px;letter-spacing:.5px;color:rgba(226,211,182,.86);margin-top:10px;text-shadow:0 1px 6px #000;opacity:.9}
+
+/* 实体 */
+.ent{position:absolute;left:0;top:0;transform:translate(-50%,-100%);will-change:left,top;z-index:2}
+.ent .fig{position:relative;display:block;filter:drop-shadow(0 7px 9px rgba(0,0,0,.52))}
+.ent .fig svg{display:block;overflow:visible}
+.ent .sh{position:absolute;left:50%;bottom:-2px;width:38px;height:10px;margin-left:-19px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.66),transparent 72%)}
+.ent .ring{position:absolute;left:50%;bottom:-1px;width:56px;height:19px;margin-left:-28px;border-radius:50%;border:1px solid rgba(246,226,176,.34);box-shadow:0 0 16px rgba(246,226,176,.24),inset 0 0 14px rgba(246,226,176,.16);animation:ringPulse 3.4s ease-in-out infinite;pointer-events:none;transition:opacity .3s}
+@keyframes ringPulse{0%,100%{opacity:.35;transform:scale(.92)}50%{opacity:.85;transform:scale(1.04)}}
+.ent .plate{position:absolute;left:50%;bottom:calc(100% - 2px);transform:translateX(-50%);text-align:center;white-space:nowrap;pointer-events:none;line-height:1.35;transition:opacity .3s}
+.say b{color:#f6e2b0;font-weight:500;margin-right:4px}
+.ent.npc.far:not(.q) .plate{opacity:0}
+.ent.npc.far:not(.q) .ring{opacity:.45}
+.ent.npc.speaking .plate{opacity:0}
+.ent.npc.speaking .qmark{display:none!important}
+.ent .plate .nm{font-size:10px;letter-spacing:.8px;color:#f6e8cc;text-shadow:0 1px 4px #000,0 0 8px rgba(0,0,0,.9);background:rgba(6,10,16,.46);padding:0 5px;border-radius:5px}
+.ent .plate .tt{font-size:8px;letter-spacing:.6px;color:#cbb996;text-shadow:0 1px 3px #000;margin-top:1px}
+.ent .plate .lv{font-size:8px;color:#f0b8ae;text-shadow:0 1px 3px #000;margin-top:1px}
+.ent.ply .plate .nm{color:#ffe9b8;font-size:10.5px;border:1px solid rgba(246,226,176,.35);background:rgba(10,14,20,.6);padding:0 7px}
+.ent.ply .fig{filter:drop-shadow(0 0 1px rgba(8,12,16,.9)) drop-shadow(0 8px 10px rgba(0,0,0,.55)) drop-shadow(0 0 6px rgba(246,226,176,.14))}
+.ent.ply{z-index:9}
+.ent.walk .fig{animation:stepBob .46s ease-in-out infinite}
+@keyframes stepBob{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-2px) rotate(-1deg)}75%{transform:translateY(-2px) rotate(1deg)}}
+.qmark{position:absolute;left:50%;top:-21px;margin-left:-9px;width:18px;height:18px;display:none;place-items:center;font-size:15px;font-weight:800;color:#ffe0a0;text-shadow:0 0 8px rgba(246,226,176,.9),0 2px 4px #000;animation:qBob 1.4s ease-in-out infinite}
+.ent.q .qmark{display:grid}
+@keyframes qBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.ent.mob .msp{width:66px;height:82px;background-size:cover;background-position:50% 20%;mix-blend-mode:multiply;
+  filter:drop-shadow(0 7px 10px rgba(0,0,0,.5)) saturate(1.12) brightness(1.12) contrast(1.05);
+  -webkit-mask-image:radial-gradient(ellipse 47% 46% at 50% 43%,#000 42%,rgba(0,0,0,.72) 62%,transparent 78%);mask-image:radial-gradient(ellipse 47% 46% at 50% 43%,#000 42%,rgba(0,0,0,.72) 62%,transparent 78%)}
+.ent.mob .plate .nm{color:#f4c6bc}
+.ent.dead{opacity:0;transition:opacity .4s}
+.portal .pgate{position:relative;width:64px;height:76px;border-radius:50% 50% 42% 42%;border:1px solid rgba(140,220,220,.5);
+  background:radial-gradient(ellipse at 50% 60%,rgba(120,215,210,.42),rgba(40,120,140,.12) 55%,transparent 72%);
+  box-shadow:0 0 24px rgba(120,220,215,.42),inset 0 0 22px rgba(150,240,230,.3);animation:portalPulse 2.6s ease-in-out infinite}
+@keyframes portalPulse{0%,100%{transform:scale(.96);opacity:.75}50%{transform:scale(1.06);opacity:1}}
+.portal .plate .nm{color:#a8ece0;border:1px solid rgba(120,220,215,.3)}
+.ent .figwrap{position:relative;transition:transform .28s ease}
+.ent.ply .mntfig{display:none;position:absolute;left:50%;bottom:-2px;width:94px;height:64px;margin-left:-47px;z-index:-1;pointer-events:none}
+.ent.ply.mounted .mntfig{display:block}
+.ent.ply.mounted .figwrap{transform:translateY(-24px) scale(.92)}
+/* 世界道具 */
+.prop{position:absolute;transform:translate(-50%,-100%);filter:drop-shadow(0 8px 10px rgba(0,0,0,.45));pointer-events:none}
+.prop svg{display:block}
+/* NPC 搭话气泡 */
+.say{position:absolute;z-index:12;max-width:180px;padding:7px 10px;border-radius:10px;background:rgba(9,14,20,.9);border:1px solid rgba(217,180,108,.32);color:#f2e6cf;font-size:10.5px;line-height:1.7;letter-spacing:.4px;box-shadow:0 10px 24px rgba(0,0,0,.6);pointer-events:none;animation:popIn .25s ease}
+.say::after{content:"";position:absolute;left:50%;bottom:-5px;width:8px;height:8px;margin-left:-4px;transform:rotate(45deg);background:rgba(9,14,20,.9);border-right:1px solid rgba(217,180,108,.32);border-bottom:1px solid rgba(217,180,108,.32)}
+
+/* HUD 浮层 */
+#top{pointer-events:none;background:linear-gradient(180deg,rgba(4,8,13,.72),rgba(4,8,13,0))}
+#top .av,#top .coin{pointer-events:auto}
+#mini{position:absolute;right:11px;top:calc(86px + env(safe-area-inset-top));z-index:8;width:102px;border-radius:13px;overflow:hidden;
+  border:1px solid rgba(217,180,108,.3);background:rgba(6,10,15,.62);backdrop-filter:blur(6px);box-shadow:0 8px 20px rgba(0,0,0,.5)}
+#miniC{display:block;width:100%;height:102px}
+#miniFoot{padding:3px 0 4px;text-align:center;font-size:9px;letter-spacing:1.5px;color:#e8d8b4;border-top:1px solid rgba(217,180,108,.14);background:rgba(6,10,15,.5)}
+#miniFoot em{font-style:normal;color:#8b9a95;font-size:8px;margin-left:3px}
+#party{position:absolute;left:12px;top:calc(88px + env(safe-area-inset-top));z-index:8;display:flex;gap:6px}
+.pm{width:34px;height:34px;border-radius:50%;border:1px solid rgba(217,180,108,.3);background-size:cover;background-position:50% 12%;box-shadow:0 4px 10px rgba(0,0,0,.5);position:relative;opacity:.92}
+.pm span{position:absolute;left:50%;bottom:-9px;transform:translateX(-50%);font-size:7.5px;color:#d9c9a4;white-space:nowrap;text-shadow:0 1px 3px #000}
+#qtr{position:absolute;left:12px;top:calc(134px + env(safe-area-inset-top));z-index:8;width:196px;padding:9px 11px 10px;border-radius:12px;
+  background:linear-gradient(135deg,rgba(12,18,25,.8),rgba(8,12,18,.55));border:1px solid rgba(217,180,108,.22);backdrop-filter:blur(8px);box-shadow:0 8px 22px rgba(0,0,0,.45)}
+#qtr .qh{display:flex;align-items:center;gap:5px;font-size:8.5px;letter-spacing:2px;color:#d9b46c}
+#qtr .qh b{font-weight:500;color:#8b9a95;letter-spacing:.5px;margin-left:auto;font-size:7.5px}
+#qtr .qn{font-family:var(--serif);font-size:13px;letter-spacing:1.5px;color:#f6ecd6;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#qtr .qd{font-size:9px;line-height:1.6;color:#b7b3a2;margin-top:3px;max-height:32px;overflow:hidden}
+#qtr .qp{height:2px;border-radius:2px;background:rgba(0,0,0,.55);margin-top:6px;overflow:hidden}
+#qtr .qp i{display:block;height:100%;background:linear-gradient(90deg,#8d6a2c,#ffe0a0)}
+#qtr .go{margin-top:7px;width:100%;height:24px;border-radius:7px;background:linear-gradient(180deg,rgba(247,228,182,.95),rgba(201,161,92,.95));color:#2a1e08;font-size:10px;font-weight:700;letter-spacing:2px}
+#qtr .go:active{filter:brightness(1.1)}
+#joy{position:absolute;left:16px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:9;width:108px;height:108px;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,rgba(10,16,22,.24),rgba(10,16,22,.58) 70%);border:1px solid rgba(217,180,108,.26);box-shadow:0 8px 20px rgba(0,0,0,.45),inset 0 0 20px rgba(246,226,176,.08);touch-action:none}
+#joy::before{content:"";position:absolute;inset:14px;border-radius:50%;border:1px dashed rgba(217,180,108,.2)}
+#joyKnob{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;
+  background:radial-gradient(circle at 40% 34%,rgba(246,226,176,.85),rgba(150,118,66,.85) 65%,rgba(70,54,28,.9));box-shadow:0 4px 12px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.5);transition:transform .08s}
+#sideBtns{position:absolute;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:9;display:flex;flex-direction:column;gap:8px;align-items:center}
+.rnd{width:44px;height:44px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  background:rgba(8,13,19,.7);border:1px solid rgba(217,180,108,.3);color:#f0e2c4;font-size:8px;letter-spacing:.5px;backdrop-filter:blur(6px);box-shadow:0 6px 16px rgba(0,0,0,.5)}
+.rnd b{font-size:14px;line-height:1;margin-bottom:1px}
+.rnd.on{background:rgba(140,105,52,.5);border-color:#f6e2b0;color:#ffeec8;box-shadow:0 0 16px rgba(246,226,176,.4)}
+/* 聊天 */
+#chat{position:absolute;left:92px;right:66px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:9;height:62px;border-radius:11px;overflow:hidden;display:flex;flex-direction:column;
+  background:linear-gradient(180deg,rgba(8,13,19,.44),rgba(8,13,19,.74));border:1px solid rgba(217,180,108,.14);backdrop-filter:blur(5px);transition:height .32s ease,left .32s ease,right .32s ease}
+#chat.open{height:198px;left:12px;right:12px}
+#chatTop{flex:none;display:flex;align-items:center;gap:5px;padding:4px 8px;font-size:8px;letter-spacing:1px;color:#c9b78f;background:rgba(5,9,14,.35)}
+#chatTop .ch{padding:1px 5px;border-radius:4px;border:1px solid rgba(217,180,108,.2);color:#e2d0a8;font-size:7.5px}
+#chatTop .ch.on{background:rgba(217,180,108,.18);color:#ffe6b0}
+#chatTop .tg{margin-left:auto;font-size:9px;color:#a89a7c}
+#chatBody{flex:1;overflow-y:auto;padding:2px 8px 6px;display:flex;flex-direction:column;justify-content:flex-end;gap:1px}
+#chatBody .ln{font-size:9.5px;line-height:1.65;color:#b9c2ba;letter-spacing:.2px;opacity:.92}
+#chatBody .ln b{font-weight:600;color:#d9c9a4}
+#chatBody .ln.sys{color:#a8c8d8}
+#chatBody .ln.guild{color:#d8c090}
+#chatBody .ln.me{color:#cbe0c8}
+/* 战斗队友 */
+#sheet::before{content:"";position:fixed;inset:0;background:rgba(3,6,10,.52);backdrop-filter:blur(2px);z-index:-1}
+#scrim{position:absolute;inset:0;z-index:8;background:rgba(3,6,10,.55);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .25s}
+body.sheeting #scrim{opacity:1}
+body.sheeting #qtr,body.sheeting #mini,body.sheeting #party,body.sheeting #joy,body.sheeting #sideBtns,body.sheeting #chat{opacity:0;pointer-events:none;transition:opacity .18s}
+body.chatOpen #sideBtns,body.chatOpen #joy{opacity:0;pointer-events:none}
+body.dlging #joy,body.dlging #chat,body.dlging #sideBtns{opacity:0;pointer-events:none;transition:opacity .18s}
+body.introing #qtr{opacity:0;pointer-events:none;transition:opacity .4s}
+.allies{position:absolute;left:8px;top:8px;display:flex;flex-direction:column;gap:9px;z-index:6}
+.ally{position:relative;width:36px;height:36px;border-radius:50%;border:1px solid rgba(217,180,108,.45);background-size:cover;background-position:50% 10%;box-shadow:0 4px 12px rgba(0,0,0,.6);transition:transform .24s}
+.ally span{position:absolute;left:40px;top:10px;font-size:8.5px;color:#d9cbb0;white-space:nowrap;text-shadow:0 1px 3px #000}
+.ally.atk{transform:translateX(10px)}
+.ally::after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+@media (max-width:380px){
+  #qtr{width:176px}
+  #chat{left:88px;right:62px}
+  #mini{width:92px}#miniC{height:92px}
+}
+/* 短屏（iPhone SE / 小屏安卓）战斗压缩，保证技能盘与指令行完整可见 */
+@media (max-height:740px){
+  .btHead{padding-top:calc(6px + env(safe-area-inset-top))}
+  .btHead .nm{font-size:14px}
+  .enemies{min-height:138px;padding:6px 8px 2px;gap:5px}
+  .enemy{width:29%;max-width:102px}
+  .enemy .spr{border-radius:10px}
+  .enemy .ename{font-size:9px}
+  .enemy .buffs{margin-top:2px;height:11px}
+  .hero{width:106px}
+  .hero .spr{border-radius:12px}
+  .hero .hname{font-size:11px}
+  .petSide{width:60px}
+  .allies{top:2px;left:6px;gap:6px}
+  .cmd{padding:5px 9px calc(6px + env(safe-area-inset-bottom))}
+  .cmdTop{margin-bottom:5px}
+  .skills{gap:5px}
+  .sk{border-radius:10px}
+  .sk .si{font-size:17px}
+  .sk .sn{font-size:8.5px}
+  .btRow{margin-top:5px}
+  .btRow .btn{min-height:32px;font-size:10.5px}
+}
 </style>
 </head>
 <body>
 <div id="app">
-  <div id="sceneWrap">
-    <div class="scene-img" id="sceneImg"></div>
-    <div class="scene-tint"></div>
-    <div class="fog"></div><div class="fog f2"></div>
-    <canvas id="dust"></canvas>
-    <div class="grain"></div>
+  <div id="stage">
+    <div id="far"></div>
+    <div id="gw">
+      <div class="gwshade"></div>
+      <div id="props"></div>
+      <div id="ents"></div>
+      <div id="fx"></div>
+    </div>
+    <div id="vignette"></div>
+    <canvas id="weather"></canvas>
+    <div id="fade"></div>
   </div>
 
   <header id="top">
@@ -318,7 +477,7 @@ body.creating #top,body.creating #world,body.creating #dock{visibility:hidden}
     <div class="tinfo">
       <div class="trow">
         <span class="tname" id="tName">无名客</span>
-        <span class="tsect" id="tSect">剑宗</span>
+        <span class="tsect" id="tSect">雪崖剑宗</span>
       </div>
       <div class="bar hp"><i id="hpFill"></i><em id="hpTxt"></em></div>
       <div class="bar mp"><i id="mpFill"></i><em id="mpTxt"></em></div>
@@ -330,17 +489,26 @@ body.creating #top,body.creating #world,body.creating #dock{visibility:hidden}
     <div id="expLine"><i id="expFill"></i></div>
   </header>
 
-  <main id="world">
-    <div class="sceneHead" id="sceneHead">
-      <div class="zh" id="scName">云中仙城</div>
-      <div class="en" id="scEn">CITY ABOVE CLOUDS</div>
-      <div class="ln"></div>
-    </div>
-    <div class="rail" id="rail"></div>
-    <div class="questCard" id="questCard"></div>
-  </main>
-
-  <nav id="dock"></nav>
+  <div id="mini"><canvas id="miniC" width="204" height="204"></canvas><div id="miniFoot"><span id="miniName">落霞镇</span><em id="miniLv">Lv.1</em></div></div>
+  <div id="party"></div>
+  <div id="qtr">
+    <div class="qh"><span id="qTag">第一章</span><b id="qLoc">落霞镇</b></div>
+    <div class="qn" id="qName">旧物</div>
+    <div class="qd" id="qDesc"></div>
+    <div class="qp"><i id="qBar" style="width:0%"></i></div>
+    <button class="go" id="qGo">前 往</button>
+  </div>
+  <div id="joy"><i id="joyKnob"></i></div>
+  <div id="sideBtns">
+    <button class="rnd" id="mountBtn"><b>骑</b>召唤</button>
+    <button class="rnd" id="chatBtn"><b>聊</b>频道</button>
+  </div>
+  <div id="chat">
+    <div id="chatTop"><span class="ch on">世界</span><span class="ch">帮派</span><span class="ch">系统</span><span class="tg" id="chatTg">展开</span></div>
+    <div id="chatBody"></div>
+  </div>
+  <div id="sceneIntro"></div>
+  <div id="scrim"></div>
   <section id="sheet"><div class="shHead"><h2 id="shTitle">面板</h2><span class="sub" id="shSub"></span><button class="shClose" id="shClose">✕</button></div><div class="shBody" id="shBody"></div><div class="shFoot" id="shFoot"></div></section>
   <section id="battle" class="hidden"></section>
   <div id="toast"></div>
@@ -358,142 +526,393 @@ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const fmt=n=>n>=10000?(n/10000).toFixed(n>=100000?0:1)+'万':Math.floor(n);
 
 const SECTS={
-  jian:{name:'剑宗',color:'#7fb6d8',desc:'一剑破万法，物理爆发极高',art:ART+'char_jian.jpg',
+  jian:{name:'雪崖剑宗',color:'#7fb6d8',desc:'剑修先学收剑。山上规矩，出剑要有由头。',art:ART+'char_jian.jpg',
     base:{hp:250,mp:80,atk:36,def:18,spd:23,crit:.13},
     skills:[
-      {n:'流云剑诀',i:'剑',mp:8,pw:1.55,t:'atk',d:'单体剑气，稳定输出'},
-      {n:'御剑术',i:'御',mp:14,pw:1.15,t:'atk',eff:'bleed',d:'附加流血，持续掉血'},
-      {n:'破军式',i:'破',mp:22,pw:2.35,t:'atk',d:'蓄力重击，暴击提升'},
-      {n:'剑心通明',i:'心',mp:18,t:'buff',buff:'atk',d:'三回合攻击提升35%'}
+      {n:'照雪',i:'雪',mp:8,pw:1.55,t:'atk',d:'平平一剑，快过念头。'},
+      {n:'回风',i:'风',mp:14,pw:1.15,t:'atk',eff:'bleed',d:'剑锋回带，伤口不肯合。'},
+      {n:'断碑',i:'碑',mp:22,pw:2.35,t:'atk',d:'把力都压在一点上，碑也断得。'},
+      {n:'收剑',i:'收',mp:18,t:'buff',buff:'atk',d:'剑归鞘，气反而更长。'}
     ]},
-  yin:{name:'天音',color:'#7fd8b0',desc:'以音入道，攻守兼备的治疗者',art:ART+'char_yin.jpg',
+  yin:{name:'听松书院',color:'#7fd8b0',desc:'书院也教剑，只是先生先问：你为什么拔剑。',art:ART+'char_yin.jpg',
     base:{hp:290,mp:130,atk:26,def:21,spd:19,crit:.08},
     skills:[
-      {n:'清心咒',i:'清',mp:10,pw:1.15,t:'atk',d:'音波伤敌，回复自身法力'},
-      {n:'玉笛引',i:'笛',mp:16,t:'heal',pw:1.6,d:'回复气血并附加回春'},
-      {n:'天音梵唱',i:'梵',mp:24,pw:1.35,t:'atk',eff:'stun',d:'群体音浪，有概率眩晕'},
-      {n:'普渡众生',i:'渡',mp:20,t:'buff',buff:'def',d:'两回合减伤40%，回血'}
+      {n:'清商',i:'商',mp:10,pw:1.15,t:'atk',d:'一声清商，风也停了。'},
+      {n:'松风引',i:'松',mp:16,t:'heal',pw:1.6,d:'引松风入脉，慢慢把气养回来。'},
+      {n:'琅琅',i:'琅',mp:24,pw:1.35,t:'atk',eff:'stun',d:'书声琅琅，压得人心神一滞。'},
+      {n:'定风波',i:'定',mp:20,t:'buff',buff:'def',d:'先定住自己，再谈别的。'}
     ]},
-  fa:{name:'玄法',color:'#b79ae8',desc:'五雷正法，群攻与控制大师',art:ART+'char_fa.jpg',
+  fa:{name:'云根道观',color:'#b79ae8',desc:'道观在云根。观主说，雷是天上的公文。',art:ART+'char_fa.jpg',
     base:{hp:235,mp:150,atk:40,def:14,spd:20,crit:.11},
     skills:[
-      {n:'掌心雷',i:'雷',mp:9,pw:1.6,t:'atk',d:'引雷击敌，克制鬼物'},
-      {n:'玄冰咒',i:'冰',mp:16,pw:1.25,t:'atk',eff:'freeze',d:'冰封目标，降低速度'},
-      {n:'天罡火',i:'火',mp:20,pw:1.15,t:'atk',eff:'burn',d:'灼烧三回合'},
-      {n:'五雷正法',i:'罡',mp:26,pw:2.6,t:'atk',d:'大范围落雷，超高倍率'}
+      {n:'掌心雷',i:'雷',mp:9,pw:1.6,t:'atk',d:'掌心一点，响在别人耳边。'},
+      {n:'玄冰',i:'冰',mp:16,pw:1.25,t:'atk',eff:'freeze',d:'冷得慢，却钻得深。'},
+      {n:'天罡火',i:'火',mp:20,pw:1.15,t:'atk',eff:'burn',d:'火不急着烧，先留在人身上。'},
+      {n:'五雷正法',i:'罡',mp:26,pw:2.6,t:'atk',d:'观主不许轻用。用了，就要写进观志。'}
     ]},
-  shou:{name:'兽王',color:'#e8a06a',desc:'驭兽为战，宠物越强我越强',art:ART+'char_shou.jpg',
+  shou:{name:'牧山司',color:'#e8a06a',desc:'牧山司管山里的兽，也管山里的人。',art:ART+'char_shou.jpg',
     base:{hp:305,mp:95,atk:32,def:21,spd:21,crit:.12},
     skills:[
-      {n:'猛虎扑',i:'虎',mp:8,pw:1.5,t:'atk',d:'迅猛一击，先手概率高'},
-      {n:'兽血沸腾',i:'血',mp:16,t:'buff',buff:'atk',d:'攻击提升并吸血'},
-      {n:'裂地爪',i:'爪',mp:18,pw:1.9,t:'atk',eff:'armor',d:'破甲，降低敌方防御'},
-      {n:'万兽奔腾',i:'兽',mp:25,pw:2.5,t:'atk',d:'召唤兽群冲击'}
+      {n:'虎扑',i:'虎',mp:8,pw:1.5,t:'atk',d:'兽先动，人后到。'},
+      {n:'兽血',i:'血',mp:16,t:'buff',buff:'atk',d:'热血上头，伤也顾不上。'},
+      {n:'裂地',i:'裂',mp:18,pw:1.9,t:'atk',eff:'armor',d:'一爪下去，甲就不成甲。'},
+      {n:'万兽',i:'兽',mp:25,pw:2.5,t:'atk',d:'山里所有的声音，一起应你。'}
     ]}
 };
 const MOBS={
-  wolf:{n:'灰狼妖',art:ART+'mob_wolf.jpg',lv:3,hp:180,atk:18,def:8,spd:18,crit:.08,tint:'',pet:true,
-    skills:[{n:'撕咬',pw:1.3,t:'atk'},{n:'狼嚎',pw:.9,t:'atk',eff:'armor'}]},
-  wolfred:{n:'赤焰狼',art:ART+'mob_wolf.jpg',lv:9,hp:330,atk:30,def:12,spd:22,crit:.1,tint:'hue-rotate(-28deg) saturate(1.3)',pet:true,
-    skills:[{n:'烈焰撕咬',pw:1.4,t:'atk',eff:'burn'},{n:'狂扑',pw:1.7,t:'atk'}]},
-  wolfsnow:{n:'雪原狼',art:ART+'mob_wolf.jpg',lv:16,hp:520,atk:44,def:18,spd:24,crit:.12,tint:'hue-rotate(150deg) saturate(.85) brightness(1.1)',pet:true,
-    skills:[{n:'冰霜撕咬',pw:1.4,t:'atk',eff:'freeze'},{n:'雪崩扑击',pw:1.9,t:'atk'}]},
-  ghost:{n:'幽魂',art:ART+'mob_ghost.jpg',lv:5,hp:210,atk:20,def:6,spd:20,crit:.09,tint:'',pet:true,
+  wolf:{n:'青背狼',art:ART+'mob_wolf.jpg',lv:3,hp:180,atk:18,def:8,spd:18,crit:.08,tint:'',pet:true,
+    skills:[{n:'撕咬',pw:1.3,t:'atk'},{n:'低嚎',pw:.9,t:'atk',eff:'armor'}]},
+  wolfred:{n:'火尾狼',art:ART+'mob_wolf.jpg',lv:9,hp:330,atk:30,def:12,spd:22,crit:.1,tint:'hue-rotate(-28deg) saturate(1.3)',pet:true,
+    skills:[{n:'带火扑咬',pw:1.4,t:'atk',eff:'burn'},{n:'疯扑',pw:1.7,t:'atk'}]},
+  wolfsnow:{n:'雪背狼',art:ART+'mob_wolf.jpg',lv:16,hp:520,atk:44,def:18,spd:24,crit:.12,tint:'hue-rotate(150deg) saturate(.85) brightness(1.1)',pet:true,
+    skills:[{n:'霜口',pw:1.4,t:'atk',eff:'freeze'},{n:'雪里扑',pw:1.9,t:'atk'}]},
+  ghost:{n:'游魂',art:ART+'mob_ghost.jpg',lv:5,hp:210,atk:20,def:6,spd:20,crit:.09,tint:'',pet:true,
     skills:[{n:'阴风',pw:1.3,t:'atk'},{n:'摄魂',pw:1.0,t:'atk',eff:'stun'}]},
-  ghostking:{n:'鬼将·无咎',art:ART+'mob_ghost.jpg',lv:22,hp:1500,atk:62,def:24,spd:26,crit:.15,tint:'hue-rotate(-90deg) saturate(1.4)',boss:true,
-    skills:[{n:'镇魂戟',pw:1.7,t:'atk'},{n:'幽冥鬼火',pw:1.35,t:'atk',eff:'burn'},{n:'夺魄',pw:2.1,t:'atk',eff:'stun'}]},
-  snake:{n:'青蛇妖',art:ART+'mob_snake.jpg',lv:6,hp:240,atk:22,def:9,spd:21,crit:.1,tint:'',pet:true,
-    skills:[{n:'毒牙',pw:1.2,t:'atk',eff:'poison'},{n:'缠绕',pw:1.5,t:'atk',eff:'stun'}]},
-  stone:{n:'巨岩魔',art:ART+'mob_stone.jpg',lv:11,hp:620,atk:34,def:26,spd:10,crit:.05,tint:'',pet:true,
-    skills:[{n:'落石',pw:1.6,t:'atk'},{n:'岩壁',pw:0,t:'buff',buff:'def'}]},
-  fire:{n:'熔岩魔',art:ART+'mob_fire.jpg',lv:20,hp:980,atk:58,def:20,spd:19,crit:.12,tint:'',boss:true,
-    skills:[{n:'岩浆喷发',pw:1.6,t:'atk',eff:'burn'},{n:'烈焰锤',pw:2.0,t:'atk'}]},
-  fox:{n:'九尾狐仙',art:ART+'mob_fox.jpg',lv:26,hp:1800,atk:76,def:26,spd:28,crit:.18,tint:'',boss:true,pet:true,
-    skills:[{n:'魅惑之心',pw:1.2,t:'atk',eff:'stun'},{n:'九尾狐火',pw:1.9,t:'atk',eff:'burn'},{n:'幻月',pw:2.4,t:'atk'}]},
-  sea:{n:'鲛人海妖',art:ART+'mob_sea.jpg',lv:19,hp:700,atk:48,def:18,spd:23,crit:.12,tint:'',pet:true,
-    skills:[{n:'潮汐斩',pw:1.5,t:'atk'},{n:'水牢',pw:1.1,t:'atk',eff:'freeze'}]},
-  plant:{n:'藤木妖',art:ART+'mob_plant.jpg',lv:13,hp:560,atk:38,def:20,spd:12,crit:.06,tint:'',pet:true,
-    skills:[{n:'荆棘抽打',pw:1.4,t:'atk',eff:'poison'},{n:'根须缠绕',pw:1.2,t:'atk',eff:'stun'}]},
-  flower:{n:'桃源花妖',art:ART+'mob_fox.jpg',lv:15,hp:500,atk:42,def:16,spd:24,crit:.1,tint:'hue-rotate(28deg) saturate(.9)',pet:true,
-    skills:[{n:'落英缤纷',pw:1.35,t:'atk'},{n:'花粉迷障',pw:1.0,t:'atk',eff:'stun'}]}
+  ghostking:{n:'甲胄亡魂',art:ART+'mob_ghost.jpg',lv:22,hp:1500,atk:62,def:24,spd:26,crit:.15,tint:'hue-rotate(-90deg) saturate(1.4)',boss:true,
+    skills:[{n:'旧戟',pw:1.7,t:'atk'},{n:'营火',pw:1.35,t:'atk',eff:'burn'},{n:'点名',pw:2.1,t:'atk',eff:'stun'}]},
+  snake:{n:'竹叶青',art:ART+'mob_snake.jpg',lv:6,hp:240,atk:22,def:9,spd:21,crit:.1,tint:'',pet:true,
+    skills:[{n:'毒牙',pw:1.2,t:'atk',eff:'poison'},{n:'缠',pw:1.5,t:'atk',eff:'stun'}]},
+  stone:{n:'山石精',art:ART+'mob_stone.jpg',lv:11,hp:620,atk:34,def:26,spd:10,crit:.05,tint:'',pet:true,
+    skills:[{n:'落石',pw:1.6,t:'atk'},{n:'抱山',pw:0,t:'buff',buff:'def'}]},
+  fire:{n:'火脉妖',art:ART+'mob_fire.jpg',lv:20,hp:980,atk:58,def:20,spd:19,crit:.12,tint:'',boss:true,
+    skills:[{n:'地火喷',pw:1.6,t:'atk',eff:'burn'},{n:'熔锤',pw:2.0,t:'atk'}]},
+  fox:{n:'桃坞狐',art:ART+'mob_fox.jpg',lv:26,hp:1800,atk:76,def:26,spd:28,crit:.18,tint:'',boss:true,pet:true,
+    skills:[{n:'惑心',pw:1.2,t:'atk',eff:'stun'},{n:'狐火',pw:1.9,t:'atk',eff:'burn'},{n:'幻月',pw:2.4,t:'atk'}]},
+  sea:{n:'渡口河妖',art:ART+'mob_sea.jpg',lv:19,hp:700,atk:48,def:18,spd:23,crit:.12,tint:'',pet:true,
+    skills:[{n:'潮口',pw:1.5,t:'atk'},{n:'水牢',pw:1.1,t:'atk',eff:'freeze'}]},
+  plant:{n:'老藤精',art:ART+'mob_plant.jpg',lv:13,hp:560,atk:38,def:20,spd:12,crit:.06,tint:'',pet:true,
+    skills:[{n:'藤鞭',pw:1.4,t:'atk',eff:'poison'},{n:'缠根',pw:1.2,t:'atk',eff:'stun'}]},
+  flower:{n:'落英精',art:ART+'mob_fox.jpg',lv:15,hp:500,atk:42,def:16,spd:24,crit:.1,tint:'hue-rotate(28deg) saturate(.9)',pet:true,
+    skills:[{n:'花雨',pw:1.35,t:'atk'},{n:'迷障',pw:1.0,t:'atk',eff:'stun'}]}
 };
+
 const SCENES=[
-  {id:'city',n:'云中仙城',en:'CITY ABOVE CLOUDS',art:ART+'scene_city.jpg',lv:1,mobs:[],town:true,
-   d:'万楼叠云，九州修士皆聚于此'},
-  {id:'bamboo',n:'青竹幽径',en:'BAMBOO PATH',art:ART+'scene_bamboo.jpg',lv:1,mobs:['wolf','snake','plant'],
-   d:'竹影摇光，山风里藏着妖兽的低鸣'},
-  {id:'peach',n:'桃源仙谷',en:'PEACH BLOSSOM VALE',art:ART+'scene_peach.jpg',lv:8,mobs:['flower','plant','fox'],
-   d:'落英不谢之地，狐仙守着千年桃树'},
-  {id:'snow',n:'寒霜绝顶',en:'FROST SUMMIT',art:ART+'scene_snow.jpg',lv:14,mobs:['wolfsnow','stone','ghost'],
-   d:'万仞冰封，风过如刀'},
-  {id:'desert',n:'黄沙古塞',en:'DESERT FORTRESS',art:ART+'scene_desert.jpg',lv:18,mobs:['wolfred','ghost','stone'],
-   d:'孤城落日，黄沙下埋着前朝战骨'},
-  {id:'sea',n:'碧海渔村',en:'JADE SEA VILLAGE',art:ART+'scene_sea.jpg',lv:20,mobs:['sea','ghost','ghostking'],
-   d:'潮声如雷，海妖在月色里唱歌'},
-  {id:'ruins',n:'古刹秘境',en:'ANCIENT RUINS',art:ART+'scene_ruins.jpg',lv:24,mobs:['ghost','stone','ghostking'],
-   d:'佛骨沉沙，残碑上的经文仍在发光'},
-  {id:'demon',n:'魔渊火山',en:'DEMON ABYSS',art:ART+'scene_demon.jpg',lv:28,mobs:['fire','ghostking','wolfred'],
-   d:'地火奔涌，魔气冲霄的绝地'}
+{id:'town',n:'落霞镇',en:'LUOXIA TOWN',art:ART+'scene_city.jpg',lv:1,town:1,w:1000,h:1330,weather:'fog',
+ d:'镇子不大。一条青石街从渡口通到山门。街尾老槐树下，常年坐着下棋的人。',
+ q:'温三娘说：镇上没有秘密，只有还没传开的话。',
+ amb:'檐角风铃响了三声。街口有人喊：豆腐——热的——',
+ spawn:{x:500,y:1060},bounds:{x1:60,y1:660,x2:945,y2:1275},
+ obstacles:[{x:110,y:690,w:230,h:110},{x:660,y:690,w:250,h:110},{x:350,y:1120,w:110,h:70}],
+ props:[{t:'lantern',x:340,y:860},{t:'lantern',x:660,y:860},{t:'banner',x:520,y:760,c:'#b8863f'},
+   {t:'stall',x:180,y:1180},{t:'stall',x:790,y:1210},{t:'gate',x:940,y:1030},{t:'gate',x:500,y:1270}],
+ npcs:[
+  {id:'master',n:'陈守拙',t:'雪崖剑宗 · 执事',x:300,y:930,look:{robe:'#8e9aa6',trim:'#3f4b57',hair:'#e2ddd0',beard:1,hat:'bun',weapon:'sword',old:1},
+   act:'sect',auto:'你家长辈，走的那年，也是这个天色。',
+   dlg:['你家长辈，走的那年，也是这个天色。','这枚铜铃，是山门的东西。铃口的缺口，是被人拿剑磕的。','我不问你从哪来。先问一句：学剑，是为了什么。','想好了再答。山上不急着听。'],
+   dlg2:['剑不是给人看的。','山门验才在寒山。去了，少说话。','你师兄谢临，嘴硬，人不坏。']},
+  {id:'smith',n:'周铁山',t:'铁匠',x:700,y:940,look:{robe:'#6b4a34',trim:'#2c2118',hair:'#3a3028',weapon:'hammer',burly:1},
+   act:'forge',auto:'火候不到，说什么都没用。',
+   dlg:['火候不到，说什么都没用。','玄铁两块，五百钱。打出来是什么，看命。','强化？石头留下，钱留下。碎了别哭。'],
+   dlg2:['你这把剑，刃口卷了。','不是打不过人，是打得太多。']},
+  {id:'inn',n:'温三娘',t:'酒肆掌柜',x:430,y:1010,look:{robe:'#a5656a',trim:'#5b3034',hair:'#2e2422',female:1},
+   act:'shop',auto:'客官这身衣裳，走山路可惜了。',
+   dlg:['客官这身衣裳，走山路可惜了。','本店有三样：热的酒、冷的菜、不说实话的人。','你要听哪一样？'],
+   dlg2:['山里的事，酒桌上最真。','北边来的商队说，黄沙驿又开始收“妖祸捐”了。','捐是假的，缺钱是真的。']},
+  {id:'head',n:'老周',t:'落霞镇 · 里正',x:545,y:1150,look:{robe:'#4a5b6e',trim:'#26313c',hair:'#c9c2b2',hat:'official',beard:1,old:1},
+   act:'daily',auto:'镇上事多，一样一样来。',
+   dlg:['镇上的事，说大不大，说小不小。','县里要交妖祸捐，按人头算。交不齐，上头要问。','你要是有空，替镇子做点事。日程我都记着。'],
+   dlg2:['别嫌琐碎。日子就是琐碎堆起来的。','东边竹涧的狼，今年下崽多。']},
+  {id:'dungeon',n:'白衣人',t:'守境人',x:810,y:1010,look:{robe:'#dfe3e6',trim:'#8c949c',hair:'#e8e8e8',hat:'none',weapon:'none',mask:1},
+   act:'dungeon',auto:'秘境不是给人逛的。',
+   dlg:['秘境不是给人逛的。','进去之前，想清楚为什么进。','我在门口等。活着出来，才算你的。'],
+   dlg2:['里头的东西，不认境界，只认命硬。','今日的门，只开三次。']},
+  {id:'mount',n:'马老六',t:'骡马行',x:190,y:1120,look:{robe:'#7c6a4e',trim:'#3d3324',hair:'#4a3d2c',hat:'straw'},
+   act:'mount',auto:'这匹马，脾气比我还大。',
+   dlg:['这匹马，脾气比我还大。','御兽的本事，不是骑上去就算会。','钱够，它就跟你走。钱不够，它踢你。'],
+   dlg2:['跑长途，马比人可靠。','喂它的时候，手要稳。']},
+  {id:'guild',n:'柳三',t:'漕河帮 · 管事',x:870,y:1140,look:{robe:'#4d6357',trim:'#26382f',hair:'#2c2a24',hat:'none',weapon:'none'},
+   act:'guild',auto:'帮派不是抱团取暖。',
+   dlg:['帮派不是抱团取暖，是抱团做事。','漕河帮夜里走货，你要来，先学会闭嘴。','贡献够了，才有资格谈条件。'],
+   dlg2:['这年头，讲义气的少了，讲价钱的多了。','你要真想入伙，先替帮里跑一趟。']},
+  {id:'arena',n:'霍七',t:'擂台 · 执事',x:730,y:1200,look:{robe:'#8a4a44',trim:'#4a2320',hair:'#2a2020',weapon:'sword'},
+   act:'arena',auto:'擂台上没有道理，只有输赢。',
+   dlg:['擂台上没有道理，只有输赢。','输得起，才配赢。','一天五场，多了伤身。'],
+   dlg2:['今天来的几个，手上都有真东西。','别留手。留手的人，先倒。']},
+  {id:'tamer',n:'阿蛮',t:'牧山司 · 灵兽师',x:180,y:1000,look:{robe:'#6f8c5c',trim:'#3c5231',hair:'#2f2a22',female:1,hat:'none'},
+   act:'pet',auto:'妖兽也有名字。',
+   dlg:['妖兽也有名字。你叫它妖，它就只是妖。','打弱了再结契，别打死。','养它，要花心思。不是喂饱就行。'],
+   dlg2:['你这只，眼睛亮，认人。','牧山司的规矩，不驯无主之兽。']},
+  {id:'seal',n:'玄真',t:'封妖司',x:635,y:830,look:{robe:'#6c5a86',trim:'#382d4a',hair:'#d8d2c4',beard:1,weapon:'staff',old:1},
+   act:'seal',auto:'妖不是天生就害人。',
+   dlg:['妖不是天生就害人。','但害了人的，总得有人管。','封妖司的规矩：先看，再问，最后才动手。'],
+   dlg2:['封印不是杀。是把门关上。','门关久了，里头的也会老。']},
+  {id:'ghost',n:'钟九',t:'夜巡 · 鬼差',x:890,y:900,look:{robe:'#33373f',trim:'#1a1d22',hair:'#1f1f1f',hat:'official',weapon:'none'},
+   act:'ghost',auto:'夜里走路的，不一定都是人。',
+   dlg:['夜里走路的，不一定都是人。','抓鬼这差事，钱少，事多。','一趟十轮，撑不住就退。'],
+   dlg2:['古寺那边，最近有旧甲胄走动。','看见甲胄，别喊名字。']}
+ ],
+ portals:[{x:940,y:1060,to:'bamboo',tx:190,ty:1000,n:'东 · 青竹涧'},
+   {x:500,y:1275,to:'ferry',tx:540,ty:1150,n:'南 · 桃溪渡'}],
+ mobs:[{key:'wolf',n:2,zone:[760,700,940,860]}]},
+
+{id:'bamboo',n:'青竹涧',en:'BAMBOO RILL',art:ART+'scene_bamboo.jpg',lv:2,town:0,w:1000,h:1330,weather:'leaf',
+ d:'竹子密，路窄。走了半个时辰，还没走出这片青。',
+ q:'茶棚阿婆说：竹子长得快，忘得也快。',
+ amb:'风过竹梢，像有人在很远的地方叹气。',
+ spawn:{x:150,y:1000},bounds:{x1:60,y1:660,x2:945,y2:1270},
+ obstacles:[{x:400,y:800,w:120,h:80},{x:560,y:1060,w:150,h:70}],
+ props:[{t:'bamboo',x:250,y:900},{t:'bamboo',x:760,y:820},{t:'bamboo',x:860,y:1180},{t:'rock',x:460,y:880},{t:'stall',x:110,y:1120},
+   {t:'gate',x:60,y:1000},{t:'gate',x:520,y:670},{t:'gate',x:940,y:900}],
+ npcs:[
+  {id:'apos',n:'茶棚阿婆',t:'茶棚',x:215,y:1085,look:{robe:'#8d7f66',trim:'#4a4234',hair:'#ded8cc',female:1,old:1,hat:'none'},
+   act:'shop',auto:'歇脚？茶是粗茶，水是山泉。',
+   dlg:['歇脚？茶是粗茶，水是山泉。','这条涧，白天走的人多，夜里少。','听见有人叫你名字，别应。'],
+   dlg2:['阿婆在这儿坐了三十年。','三十年前，这路比现在宽。']},
+  {id:'daoist',n:'袁半仙',t:'游方道人',x:300,y:890,look:{robe:'#7f7a63',trim:'#403c30',hair:'#b8b0a0',beard:1,weapon:'none',hat:'none',old:1},
+   act:'seal',auto:'贫道看你印堂发亮。',
+   dlg:['贫道看你印堂发亮。','别信。贫道看谁都这么说。','山里妖气重，带火折子。'],
+   dlg2:['你要问前程？前程自己走。','贫道只算天气。今日有雨。']},
+  {id:'woodman',n:'老陈',t:'樵夫',x:780,y:1160,look:{robe:'#6b5e48',trim:'#332c20',hair:'#4a4038',hat:'straw',burly:1},
+   act:'talk',auto:'竹子砍了还会长。人不一样。',
+   dlg:['竹子砍了还会长。人不一样。','这条涧我走了四十年。','北边山门的事，别多问。'],
+   dlg2:['今日的柴，够烧三天。','山上的人，不下来。']},
+  {id:'peddler',n:'货郎',t:'行脚货郎',x:520,y:980,look:{robe:'#7a6a52',trim:'#3b3224',hair:'#3a342c',hat:'none'},
+   act:'shop',auto:'针头线脑，山里也用得上。',
+   dlg:['针头线脑，山里也用得上。','担子重，走不快。','你要买什么，自己看。'],
+   dlg2:['山下涨价了。','我这儿还没涨。']}
+ ],
+ portals:[{x:60,y:1000,to:'town',tx:840,ty:1080,n:'西 · 落霞镇'},
+   {x:940,y:900,to:'peach',tx:200,ty:900,n:'东 · 桃花坞'},
+   {x:520,y:670,to:'snow',tx:545,ty:1160,n:'北 · 寒山'}],
+ mobs:[{key:'wolf',n:3,zone:[600,760,930,1150]},{key:'snake',n:2,zone:[470,700,760,950]},{key:'plant',n:1,zone:[700,900,900,1150]}]},
+
+{id:'snow',n:'寒山剑冢',en:'FROST SWORD MOUNDS',art:ART+'scene_snow.jpg',lv:8,town:0,w:1000,h:1330,weather:'snow',
+ d:'雪线以上，草木不生。剑冢的碑都朝着山门。',
+ q:'邢九说：雪盖住的，都是不该再翻出来的。',
+ amb:'雪落在剑鞘上，簌的一声。',
+ spawn:{x:520,y:1150},bounds:{x1:60,y1:680,x2:945,y2:1270},
+ obstacles:[{x:300,y:760,w:160,h:90},{x:700,y:740,w:140,h:80}],
+ props:[{t:'grave',x:260,y:960},{t:'grave',x:360,y:1010},{t:'grave',x:460,y:950},{t:'pine',x:780,y:880},{t:'pine',x:880,y:1080},
+   {t:'gate',x:520,y:1275},{t:'gate',x:65,y:900}],
+ npcs:[
+  {id:'xingjiu',n:'邢九',t:'剑冢守墓人',x:370,y:1090,look:{robe:'#7a8288',trim:'#3a4147',hair:'#e4e0d6',beard:1,weapon:'sword',old:1},
+   act:'talk',auto:'扫雪。',
+   dlg:['扫雪。','剑冢里的名字，比活人记得清楚。','你不必知道哪一座是你家的。'],
+   dlg2:['雪停了，就再扫一遍。','有的名字被雪盖住，是好事。']},
+  {id:'shenmo',n:'沈墨',t:'听松书院 · 先生',x:420,y:900,look:{robe:'#4e6579',trim:'#2a3846',hair:'#3a3630',hat:'none',weapon:'none'},
+   act:'talk',auto:'读书为什么？先别答。',
+   dlg:['读书为什么？','先别答。回去想三日。','想不明白，就再读三年。'],
+   dlg2:['剑能断人，书能断念头。','你身上有山下的味道。这是好事。']},
+  {id:'xielin',n:'谢临',t:'雪崖剑宗 · 师兄',x:650,y:1020,look:{robe:'#cfd8de',trim:'#6d7d8a',hair:'#22221f',weapon:'sword'},
+   act:'duel',auto:'山门验才，我守第三关。',
+   dlg:['山门验才，我守第三关。','别指望我让。','你输了，我请你喝酒。'],
+   dlg2:['你那一剑，起手太慢。','山上的规矩多。先活着，再谈规矩。']}
+ ],
+ portals:[{x:520,y:1275,to:'bamboo',tx:545,ty:790,n:'南 · 青竹涧'},
+   {x:65,y:900,to:'ruins',tx:810,ty:980,n:'西 · 古寺'}],
+ mobs:[{key:'wolfsnow',n:3,zone:[560,740,930,1180]},{key:'stone',n:2,zone:[300,700,600,940]}]},
+
+{id:'ferry',n:'桃溪渡',en:'PEACH CREEK FERRY',art:ART+'scene_sea.jpg',lv:9,town:1,w:1000,h:1330,weather:'rain',
+ d:'渡口只有一条街。白日里船来船往，入夜就只剩水声。',
+ q:'老渡说：河底下的事，岸上的人说不清。',
+ amb:'橹声咿呀。有人在岸边烧纸，火很小。',
+ spawn:{x:520,y:1050},bounds:{x1:60,y1:660,x2:945,y2:1270},
+ obstacles:[{x:600,y:720,w:280,h:120},{x:100,y:760,w:120,h:70}],
+ props:[{t:'boat',x:760,y:880,c:'#4a5560'},{t:'lantern',x:330,y:900},{t:'lantern',x:520,y:820},{t:'stall',x:250,y:1150},{t:'rock',x:140,y:800},
+   {t:'gate',x:520,y:680},{t:'gate',x:940,y:1000}],
+ npcs:[
+  {id:'ferryman',n:'老渡',t:'摆渡人',x:300,y:1160,look:{robe:'#5d6b62',trim:'#2e3832',hair:'#d8d2c4',beard:1,hat:'straw',old:1},
+   act:'talk',auto:'水底下的事，岸上的人说不清。',
+   dlg:['水底下的事，岸上的人说不清。','这条河，涨水时最安静。','过河三个钱。没钱的，讲个故事也行。'],
+   dlg2:['我撑了四十年船。','河认得我，我不认得河。']},
+  {id:'boatgirl',n:'阿水',t:'船娘',x:450,y:1030,look:{robe:'#7fa9b4',trim:'#3f6068',hair:'#28292b',female:1,hat:'none'},
+   act:'shop',auto:'船不稳，坐低些。',
+   dlg:['船不稳，坐低些。','我爹说，夜里别往河心看。','看了，会看见不该看的。'],
+   dlg2:['今日水面平，风却不对。','你要过河，等一等。']},
+  {id:'trader',n:'老骆',t:'行商',x:760,y:1120,look:{robe:'#8a6f4a',trim:'#443420',hair:'#4a4038',hat:'none'},
+   act:'shop',auto:'南边的盐，北边的铁。',
+   dlg:['南边的盐，北边的铁，到我手里都贵三分。','你要买什么？先说好，不赊账。','黄沙驿的镖队又少了一支。'],
+   dlg2:['这年头，货比人金贵。','你若去北边，替我带句话。']}
+ ],
+ portals:[{x:520,y:680,to:'town',tx:540,ty:1150,n:'北 · 落霞镇'},
+   {x:940,y:1000,to:'desert',tx:200,ty:980,n:'东 · 黄沙驿'}],
+ mobs:[{key:'sea',n:2,zone:[600,760,880,980]},{key:'ghost',n:2,zone:[700,1000,920,1200]}]},
+
+{id:'desert',n:'黄沙驿',en:'YELLOW SAND POST',art:ART+'scene_desert.jpg',lv:12,town:0,w:1000,h:1330,weather:'sand',
+ d:'驿站是这条路上唯一的灯。再往东，就是火云涧。',
+ q:'崔六说：这条路上，最不值钱的是命，最值钱的是水。',
+ amb:'风里有沙，打在窗纸上像细小的敲门声。',
+ spawn:{x:160,y:1000},bounds:{x1:60,y1:660,x2:945,y2:1270},
+ obstacles:[{x:380,y:740,w:190,h:80},{x:700,y:760,w:140,h:70}],
+ props:[{t:'banner',x:260,y:850,c:'#8a5a32'},{t:'stall',x:420,y:1140},{t:'rock',x:840,y:800},{t:'grave',x:600,y:1220},
+   {t:'gate',x:60,y:980},{t:'gate',x:940,y:900}],
+ npcs:[
+  {id:'yicheng',n:'崔六',t:'驿丞',x:250,y:1020,look:{robe:'#6d6152',trim:'#39322a',hair:'#3c3730',hat:'official',beard:1},
+   act:'daily',auto:'床硬，饭糙，水贵。',
+   dlg:['驿站的床硬，饭糙，水贵。','住不住？不住也别站在门口挡风。','东边火云涧，最近不太平。'],
+   dlg2:['上个月过去了三拨人。','回来两拨。']},
+  {id:'biaoshi',n:'老刀',t:'镖师',x:470,y:1130,look:{robe:'#6f5140',trim:'#35251c',hair:'#2c2622',weapon:'sword',burly:1},
+   act:'talk',auto:'镖旗倒了，人也得站着。',
+   dlg:['镖旗倒了，人也得站着。','沙匪不讲规矩。','你若要跟镖，跟紧。'],
+   dlg2:['货可以丢，人不能丢。','这话说起来容易。']},
+  {id:'mashang',n:'马商',t:'贩马人',x:740,y:1080,look:{robe:'#7c6a4e',trim:'#3d3324',hair:'#4a3d2c',hat:'straw'},
+   act:'mount',auto:'这匹骆驼，走沙地比马稳。',
+   dlg:['这匹骆驼，走沙地比马稳。','价钱好说。','——其实不好说。'],
+   dlg2:['沙地里，快没有用。','稳，才回得来。']}
+ ],
+ portals:[{x:60,y:980,to:'ferry',tx:810,ty:1000,n:'西 · 桃溪渡'},
+   {x:940,y:900,to:'demon',tx:200,ty:1000,n:'东 · 火云涧'}],
+ mobs:[{key:'wolfred',n:3,zone:[520,760,930,1150]},{key:'ghost',n:2,zone:[640,980,900,1200]}]},
+
+{id:'ruins',n:'古寺遗址',en:'SILENT TEMPLE',art:ART+'scene_ruins.jpg',lv:15,town:0,w:1000,h:1330,weather:'mist',
+ d:'寺塌了一半。剩下的一半，还点着灯。',
+ q:'无尘说：寺没了，佛还在。',
+ amb:'木鱼声断断续续，不知是谁在敲。',
+ spawn:{x:700,y:1000},bounds:{x1:60,y1:680,x2:945,y2:1270},
+ obstacles:[{x:420,y:800,w:110,h:80},{x:180,y:720,w:140,h:90}],
+ props:[{t:'statue',x:520,y:900},{t:'incense',x:600,y:1000},{t:'rock',x:820,y:820},{t:'grave',x:300,y:1180},
+   {t:'gate',x:940,y:980}],
+ npcs:[
+  {id:'monk',n:'无尘',t:'挂单僧',x:330,y:1080,look:{robe:'#8a7a5c',trim:'#463c2c',hair:'#d8d2c4',hat:'none',weapon:'none'},
+   act:'dungeon',auto:'寺早没了。佛还在。',
+   dlg:['寺早没了。佛还在。','残经不能读，读了会做梦。','施主，梦里见到谁，都别答应。'],
+   dlg2:['灯是我点的。','油快没了。']},
+  {id:'herbalist',n:'采药人',t:'山民',x:600,y:1170,look:{robe:'#5f6b4e',trim:'#2f3626',hair:'#3a352c',hat:'straw'},
+   act:'seal',auto:'这地方药多，鬼也多。',
+   dlg:['这地方药多，鬼也多。','我采我的药，它们走它们的路。','你若怕，就白天来。'],
+   dlg2:['那种白花，别碰。','碰了手会麻三天。']},
+  {id:'pilgrim',n:'周氏',t:'香客',x:790,y:1150,look:{robe:'#8a7a70',trim:'#443a34',hair:'#c9c2b2',female:1,old:1},
+   act:'talk',auto:'每月来上一炷香。',
+   dlg:['每月来上一炷香。','寺里的佛，不认得我了。','认得也好，不认得也好。'],
+   dlg2:['灯油是我添的。','添了三年，没见佛睁眼。']}
+ ],
+ portals:[{x:940,y:980,to:'snow',tx:200,ty:900,n:'东 · 寒山'}],
+ mobs:[{key:'ghost',n:3,zone:[500,740,930,1150]},{key:'ghostking',n:1,zone:[700,760,880,920]}]},
+
+{id:'demon',n:'火云涧',en:'FIRE VEIN RIFT',art:ART+'scene_demon.jpg',lv:19,town:0,w:1000,h:1330,weather:'ash',
+ d:'地是热的。石头缝里冒烟，像大地在喘。',
+ q:'秦照说：守不住的那天，会有人来。',
+ amb:'远处闷响一声，脚下的碎石跳了跳。',
+ spawn:{x:150,y:1020},bounds:{x1:60,y1:660,x2:945,y2:1270},
+ obstacles:[{x:380,y:780,w:190,h:90},{x:640,y:1080,w:160,h:70}],
+ props:[{t:'rock',x:300,y:880},{t:'banner',x:520,y:900,c:'#7a3a30'},{t:'incense',x:220,y:1160},{t:'grave',x:760,y:840},
+   {t:'gate',x:60,y:1000}],
+ npcs:[
+  {id:'qinzhao',n:'秦照',t:'镇妖司 · 副使',x:280,y:1100,look:{robe:'#5a4a5e',trim:'#2c2330',hair:'#2a2622',weapon:'sword'},
+   act:'seal',auto:'封印一年薄一寸。',
+   dlg:['火云涧的封印，一年薄一寸。','镇妖司在这里守了七十年。','守不住的那天，会有人来。'],
+   dlg2:['我爹守过，我哥守过。','轮到我了。']},
+  {id:'caoyao',n:'老陶',t:'采药人',x:500,y:1180,look:{robe:'#6b5a44',trim:'#332a20',hair:'#c8c0b0',beard:1,hat:'straw',old:1},
+   act:'shop',auto:'这地方的草，都长在石缝里。',
+   dlg:['这地方的草，都长在石缝里。','采药三十年，没见过山神。','倒是见过不少人，走进去没出来。'],
+   dlg2:['火云涧的药，能治伤，也能伤身。','少用。']},
+  {id:'guard7',n:'阿七',t:'镇妖司 · 守卒',x:430,y:930,look:{robe:'#4f5560',trim:'#242a32',hair:'#26231f',weapon:'sword'},
+   act:'talk',auto:'守到换班。',
+   dlg:['副使让我守这道口。','守到换班。','换班的人，昨天没来。'],
+   dlg2:['别往里头走。','……说了也没用，你们都要往里走。']}
+ ],
+ portals:[{x:60,y:1000,to:'desert',tx:810,ty:900,n:'西 · 黄沙驿'}],
+ mobs:[{key:'fire',n:2,zone:[560,760,900,1080]},{key:'ghostking',n:1,zone:[640,900,880,1140]}]},
+
+{id:'peach',n:'桃花坞',en:'PEACH BLOSSOM HOLLOW',art:ART+'scene_peach.jpg',lv:22,town:0,w:1000,h:1330,weather:'petal',
+ d:'桃花坞不通官道。进来的人，大多不是为了赶路。',
+ q:'白芜说：你们山外的人，总爱替山里的事取名。',
+ amb:'花瓣落在水面上，没有声音。',
+ spawn:{x:150,y:900},bounds:{x1:60,y1:660,x2:945,y2:1270},
+ obstacles:[{x:600,y:700,w:190,h:100},{x:260,y:760,w:120,h:70}],
+ props:[{t:'pine',x:380,y:880},{t:'stall',x:500,y:1140},{t:'rock',x:800,y:1000},{t:'bamboo',x:200,y:1120},
+   {t:'gate',x:60,y:900}],
+ npcs:[
+  {id:'fox',n:'白芜',t:'桃坞狐仙',x:330,y:1040,look:{robe:'#e7dfe4',trim:'#b09aae',hair:'#efe6ea',female:1,fox:1},
+   act:'talk',auto:'桃花开得早，落得也早。',
+   dlg:['桃花开得早，落得也早。','你说这是妖气，我说这是春天。','坐下来喝一杯？'],
+   dlg2:['山外的人，总爱替山里的事取名。','名字取了，就不好改了。']},
+  {id:'wine',n:'酒翁',t:'桃坞酒肆',x:560,y:1120,look:{robe:'#7a6648',trim:'#3b3222',hair:'#d8d2c4',beard:1,hat:'none',old:1},
+   act:'shop',auto:'桃花酿，三年一开坛。',
+   dlg:['桃花酿，三年一开坛。','喝醉了，能看见一些旧事。','看完了，别当真。'],
+   dlg2:['今年花开得凶。','凶年酿酒，酒也凶。']},
+  {id:'farmer',n:'花农',t:'坞里人',x:720,y:1160,look:{robe:'#7f7a5e',trim:'#3c392a',hair:'#3a342c',hat:'straw'},
+   act:'talk',auto:'花开的时候，坞里最热闹。',
+   dlg:['花开的时候，坞里最热闹。','人一多，就不像坞了。','你别摘花，摘了就不开了。'],
+   dlg2:['今年的花，开得早。','早开的花，落得也早。']}
+ ],
+ portals:[{x:60,y:900,to:'bamboo',tx:810,ty:900,n:'西 · 青竹涧'}],
+ mobs:[{key:'flower',n:3,zone:[560,760,920,1150]},{key:'fox',n:1,zone:[760,900,920,1080]}]}
 ];
+
 const ITEMS={
-  potion:{n:'金创药',i:'药',d:'回复 35% 气血',price:120,use:'hp'},
-  mana:{n:'凝神丹',i:'丹',d:'回复 40% 法力',price:150,use:'mp'},
-  stone:{n:'强化石',i:'石',d:'用于装备强化',price:300},
-  wash:{n:'洗髓丹',i:'髓',d:'重置宠物资质',price:280},
-  book:{n:'兽诀残卷',i:'诀',d:'宠物打书材料',price:420},
-  forge:{n:'玄铁',i:'铁',d:'装备打造主材',price:260},
-  egg:{n:'灵兽蛋',i:'蛋',d:'孵化一只随机宠物',price:1200,jade:true},
-  exp:{n:'修炼心得',i:'卷',d:'增加 400 点经验',price:500}
+  potion:{n:'金创药',i:'药',d:'止痛，生肉。江湖人怀里都有一包。',price:120,use:'hp'},
+  mana:{n:'凝神丹',i:'丹',d:'把散掉的气收回来。',price:150,use:'mp'},
+  stone:{n:'淬石',i:'石',d:'铁匠说，石头也有脾气。',price:300},
+  wash:{n:'洗髓丹',i:'髓',d:'洗去一处不该有的东西。',price:280},
+  book:{n:'兽诀残卷',i:'诀',d:'半页字，兽能看懂。',price:420},
+  forge:{n:'玄铁',i:'铁',d:'从北边来的铁，冷得快。',price:260},
+  egg:{n:'灵兽蛋',i:'蛋',d:'蛋壳上有纹，像谁写的字。',price:1200,jade:true},
+  exp:{n:'旧书残页',i:'页',d:'读一页，抵三日打坐。',price:500}
 };
 const QUALITY=[{n:'凡品',c:'#c9c9c9',k:1},{n:'良品',c:'#79d69a',k:1.25},{n:'珍品',c:'#6aa8e8',k:1.55},{n:'仙品',c:'#c08fed',k:1.95}];
 const EQUIP_SLOTS=[{id:'wep',n:'武器'},{id:'hat',n:'头冠'},{id:'clo',n:'法袍'},{id:'belt',n:'腰带'},{id:'shoe',n:'云履'},{id:'acc',n:'灵饰'}];
-const EQUIP_NAMES={wep:['青锋剑','流云剑','斩月刀'],hat:['玉清冠','墨玉冠'],clo:['云纹袍','玄羽衣'],belt:['蟠龙带','素锦带'],shoe:['踏云履','疾风靴'],acc:['昆仑玉','照心镜']};
+const EQUIP_NAMES={wep:['青锋剑','照夜剑','断碑刀'],hat:['玉清冠','墨玉冠'],clo:['云纹袍','玄羽衣'],belt:['蟠龙带','素锦带'],shoe:['踏云履','疾风靴'],acc:['昆仑玉','照心镜']};
 const AFFIX=[{k:'atk',n:'攻击'},{k:'def',n:'防御'},{k:'hp',n:'气血'},{k:'crit',n:'暴击'},{k:'spd',n:'速度'}];
 const SKILLBOOKS=['蛮力','连击','反震','神佑','吸血','法爆'];
 const DAILY=[
-  {id:'sect',n:'师门环任务',need:3,d:'完成 3 环师门任务',pt:10},
-  {id:'ghost',n:'抓鬼一条龙',need:1,d:'完成 1 轮抓鬼',pt:10},
-  {id:'seal',n:'封妖除魔',need:1,d:'封印 1 只妖魔',pt:15},
-  {id:'dungeon',n:'秘境副本',need:1,d:'通关 1 次副本',pt:15},
-  {id:'arena',n:'竞技场',need:1,d:'参与 1 场竞技',pt:10},
-  {id:'catch',n:'灵兽捕捉',need:1,d:'捕捉 1 只宠物',pt:10},
-  {id:'upgrade',n:'装备强化',need:1,d:'强化装备 1 次',pt:10},
-  {id:'talk',n:'江湖见闻',need:1,d:'与 NPC 对话 1 次',pt:5},
-  {id:'buy',n:'坊市采买',need:1,d:'购买任意商品 1 次',pt:5},
-  {id:'wash',n:'灵兽洗练',need:1,d:'洗练宠物资质 1 次',pt:10}
+  {id:'sect',n:'师门差遣',need:3,d:'替陈守拙走三环山门差遣',pt:10},
+  {id:'ghost',n:'夜巡抓鬼',need:1,d:'随钟九走一轮夜路',pt:10},
+  {id:'seal',n:'封妖',need:1,d:'替封妖司关上一扇门',pt:15},
+  {id:'dungeon',n:'秘境',need:1,d:'进一次守境人开的口子',pt:15},
+  {id:'arena',n:'擂台',need:1,d:'上霍七的台子站一场',pt:10},
+  {id:'catch',n:'结契',need:1,d:'与一只妖兽结契',pt:10},
+  {id:'upgrade',n:'淬器',need:1,d:'让周铁山敲一锤',pt:10},
+  {id:'talk',n:'听人说句话',need:1,d:'停下来，与镇上的人说两句',pt:5},
+  {id:'buy',n:'坊市采买',need:1,d:'在温三娘处买一样东西',pt:5},
+  {id:'wash',n:'洗髓',need:1,d:'替灵兽洗一次资质',pt:10}
 ];
 const DUNGEONS=[
-  {id:'d1',n:'青竹秘径',lv:8,art:ART+'scene_bamboo.jpg',mobs:['wolf','snake','plant'],boss:'plant',rw:{exp:260,gold:520,items:{forge:2,stone:2}}},
-  {id:'d2',n:'寒霜洞窟',lv:20,art:ART+'scene_snow.jpg',mobs:['wolfsnow','stone'],boss:'stone',rw:{exp:760,gold:1400,items:{forge:3,stone:3}}},
-  {id:'d3',n:'魔渊之心',lv:32,art:ART+'scene_demon.jpg',mobs:['fire','ghostking'],boss:'fire',rw:{exp:1900,gold:3200,items:{forge:5,stone:5,wash:1}}}
+  {id:'d1',n:'青竹旧道',d:'竹子长得比人快。旧道上还留着前年没扫的叶子。',lv:8,art:ART+'scene_bamboo.jpg',mobs:['wolf','snake','plant'],boss:'plant',rw:{exp:620,gold:900,items:{forge:2,stone:3}}},
+  {id:'d2',n:'雪下石室',d:'雪把门埋了。推开门，里头反倒比外头暖。',lv:20,art:ART+'scene_snow.jpg',mobs:['wolfsnow','stone'],boss:'stone',rw:{exp:1500,gold:2000,items:{forge:3,stone:4}}},
+  {id:'d3',n:'火脉深处',d:'越往里走，越听得见自己的心跳。',lv:32,art:ART+'scene_demon.jpg',mobs:['fire','ghostking'],boss:'fire',rw:{exp:3200,gold:4200,items:{forge:5,stone:6,wash:1}}}
 ];
-const ARENA_NAMES=['云中客','白衣渡我','听雪楼主','一只小妖','剑指苍穹','不渡','青灯古佛','折花人','山月不知','长歌门生','孤舟蓑笠','雾隐','拾柒','沉香','青梅煮酒'];
+const ARENA_NAMES=['陆青','顾照','苏晚','江迟','余七','卖炭翁','背剑少年','书院季生','漕河帮赵五','雪崖弟子','桃坞客','没名字的人','赶考书生','刀客老秦','山月'];
 
 const MAIN=[
-  {n:'初入仙门',d:'前往青竹幽径，击败 3 只妖兽',k:'kill',need:3},
-  {n:'灵兽初契',d:'捕捉 1 只灵兽作为伙伴',k:'catch',need:1},
-  {n:'师门试炼',d:'完成 3 环师门任务',k:'sect',need:3},
-  {n:'荡尽野鬼',d:'抓鬼一条龙通关 1 轮',k:'ghost',need:1},
-  {n:'秘境探幽',d:'通关青竹秘径副本',k:'d1',need:1},
-  {n:'封妖安民',d:'封印 1 只妖魔',k:'seal',need:1},
-  {n:'问鼎竞技',d:'竞技场获胜 1 场',k:'arena',need:1},
-  {n:'寒霜问道',d:'通关寒霜洞窟副本',k:'d2',need:1},
-  {n:'除魔卫道',d:'封印 3 只妖魔',k:'seal3',need:3},
-  {n:'魔渊终战',d:'通关魔渊之心副本',k:'d3',need:1}
+  {n:'旧物',k:'talk',who:'master',sc:'town',need:1,d:'去街尾老槐树下，找陈守拙。',
+   hook:'铜铃在袖里，凉得像一块水。',
+   story:'陈守拙把铜铃放在桌上，没问来处。\n“山门的东西，终究要回山门。”\n他说完，又低头去摆他的棋。'},
+  {n:'出门',k:'kill',sc:'bamboo',need:3,turn:'master',turnSc:'town',d:'青竹涧的狼下了崽，镇上人说，夜里别走那条路。',
+   hook:'你出门时，天还没亮。',
+   story:'三只狼倒在竹影里。\n你第一次听见自己的心跳，比剑快。\n回到镇上，陈守拙只看了一眼你的袖口。'},
+  {n:'山门',k:'duel',who:'xielin',turn:'xielin',turnSc:'snow',sc:'snow',need:1,d:'去寒山，过山门第三关。守关的是谢临。',
+   hook:'山门簿上，有一页被撕掉了。',
+   story:'谢临收剑时，手在抖。\n“你那一剑，”他说，“不像山下学的。”\n他没有再问。'},
+  {n:'听雨',k:'talk',who:'shenmo',sc:'snow',need:1,d:'听松书院的沈先生，在山门里等一个答案。',
+   hook:'雨下了三天，山门没有开。',
+   story:'先生在窗下听雨，听完才开口。\n“读书不为做官，是为遇事时，心里还有别的声音。”\n他把一本旧书推给你。书页是空的。'},
+  {n:'渡口',k:'kill',sc:'ferry',need:3,turn:'ferryman',turnSc:'ferry',d:'桃溪渡的水里，有东西在夜里叫。',
+   hook:'老渡说，河认得他，他不认得河。',
+   story:'老渡把船撑到河心，停下。\n“水底下有人叫我。”他说。\n你什么也没听见。\n他把船撑回岸边，没再说话。'},
+  {n:'扫雪',k:'talk',who:'xingjiu',sc:'snow',need:1,d:'回寒山，替邢九扫一次剑冢的雪。',
+   hook:'雪盖住的名字，比露出来的多。',
+   story:'邢九扫开一座无名碑。\n碑上刻着你家长辈的名字。\n“名字刻上去，”他说，“人就不算白走。”'},
+  {n:'一纸',k:'talk',who:'yicheng',sc:'desert',need:1,d:'去黄沙驿，问问那纸“妖祸捐”是怎么回事。',
+   hook:'公文折了角，垫在桌脚下。',
+   story:'崔六把县里的公文折起来，垫了桌脚。\n“妖祸捐，”他说，“捐的不是妖。”\n东边的火，烧了七十年。'},
+  {n:'残经',k:'ghost',who:'ghost',turn:'monk',turnSc:'ruins',sc:'town',need:1,d:'钟九说，夜里有人在古寺读经。跟他走一趟夜路。',
+   hook:'灯快没油了。',
+   story:'无尘把残经投入火里。\n“该记住的，早记住了。”\n火光里，旧甲胄站了一瞬。'},
+  {n:'封妖',k:'seal',guide:'qinzhao',turn:'qinzhao',turnSc:'demon',sc:'demon',need:1,d:'火云涧的封印又薄了。去找秦照，替他把门关上。',
+   hook:'七十年，三代人。',
+   story:'秦照把封印重新钉上，手上全是血。\n“守不住的那天，”他说，“会有人来。”\n你问是谁。他没答。'},
+  {n:'归乡',k:'talk',who:'master',sc:'town',need:1,d:'回落霞镇。铜铃该有个去处。',
+   hook:'镇上的人说，你家长辈走时，也是这个天色。',
+   story:'陈守拙把铜铃挂回老槐树上。\n“你家长辈当年说，”他慢慢道，“等他回来取。”\n风一吹，铃响了。'},
+  {n:'长夜',k:'boss',sc:'town',need:1,d:'槐树下的铃声响了一夜。第二天，镇上少了三个人。',
+   hook:'有些东西，等了很多年。',
+   story:'天亮时，铃不响了。\n陈守拙坐在树下，像睡着了。\n你把剑收回鞘里，第一次觉得，收剑比出剑难。'}
 ];
 
+
 /* ================= 存档 ================= */
-const KEY='jz_quest_v1';
+const KEY='jz_world_v2';
 let S=null;
 function newGame(){
-  const g={sect:'jian',name:'云中客',lv:1,exp:0,gold:880,jade:80,
+  const g={sect:'jian',name:'沈知白',lv:1,exp:0,gold:600,jade:40,
     hp:0,mp:0,
     equip:{wep:null,hat:null,clo:null,belt:null,shoe:null,acc:null},
     gear:[],bag:{potion:3,mana:2,stone:4,wash:1,book:1,forge:3},
     pets:[],petOn:-1,
     skLv:[1,1,1,1],
     cult:0,mount:0,art:{kunlun:0,qiankun:0,taixu:0},
-    main:{idx:0,prog:0},
+    main:{idx:0,prog:0,ready:false},
     sectQ:{idx:0,prog:0,done:0},
     ghost:{win:0},
     seal:{day:'',list:[]},
@@ -501,7 +920,8 @@ function newGame(){
     arena:{pts:1000,wins:0,lose:0},
     guild:{contrib:0},
     daily:{day:'',c:{},claimed:[]},
-    scene:'city',
+    scene:'town',pos:{x:500,y:1060},mountOn:false,
+    party:[{n:'谢临',sect:'jian'},{n:'阿箬',sect:'yin'}],
     counts:{kill:0,sect:0,ghost:0,seal:0,dungeon:0,arena:0,catch:0,upgrade:0,talk:0,buy:0,wash:0}
   };
   rollSeal(g);
@@ -513,7 +933,9 @@ function resetDaily(g,force){
   if(force||g.daily.day!==today()){
     g.daily={day:today(),c:{},claimed:[]};
     g.seal.day=today();rollSeal(g);
-    g.counts.buy=0;
+    if(!g.counts)g.counts={};
+    ['sect','ghost','seal','dungeon','arena','catch','upgrade','talk','buy','wash','guild'].forEach(k=>g.counts[k]=0);
+    if(g.sectQ){g.sectQ.idx=0;g.sectQ.prog=0}
   }
 }
 function rollSeal(g){
@@ -585,17 +1007,8 @@ function modal(title,text,btns){
 
 /* ================= HUD ================= */
 function curScene(){return SCENES.find(s=>s.id===S.scene)||SCENES[0]}
-function setScene(id){
-  S.scene=id;save();
-  const sc=curScene();
-  const img=$('#sceneImg');
-  img.style.opacity='0';
-  setTimeout(()=>{img.style.backgroundImage='url('+sc.art+')';img.style.opacity='1'},180);
-  $('#scName').textContent=sc.n;
-  $('#scEn').textContent=sc.en;
-  renderHUD();
-  if(!$('#sheet').classList.contains('open'))renderWorld();
-}
+const sceneById=id=>SCENES.find(s=>s.id===id)||SCENES[0];
+function stageSize(){const el=$('#stage');return {w:el.clientWidth||390,h:el.clientHeight||844}}
 function renderHUD(){
   const st=stats();
   const s=SECTS[S.sect];
@@ -612,87 +1025,775 @@ function renderHUD(){
   $('#cGold').textContent=fmt(S.gold);
   $('#cJade').textContent=fmt(S.jade);
   $('#expFill').style.width=(S.exp/expNeed(S.lv)*100)+'%';
+  const mb=$('#mountBtn');
+  if(mb){
+    mb.classList.toggle('on',!!S.mountOn);
+    mb.innerHTML=S.mountOn?'<b>下</b>下马':'<b>骑</b>召唤';
+  }
 }
 function dailyPts(){
   let p=0;
   DAILY.forEach(d=>{if((S.counts[d.id]||0)>=d.need)p+=d.pt});
   return p;
 }
-function renderWorld(){
-  const sc=curScene();
-  // NPC
-  document.querySelectorAll('.npc').forEach(n=>n.remove());
-  const npcs=sceneNPCs(sc.id);
-  npcs.forEach((n,i)=>{
-    const el=document.createElement('div');
-    el.className='npc';
-    el.style.left=n.x+'%';el.style.top=n.y+'%';
-    el.innerHTML='<div class="dot">'+n.i+'</div><div class="nm">'+n.n+'</div>';
-    el.onclick=()=>talk(n);
-    $('#world').appendChild(el);
-  });
-  // 任务追踪
-  const q=currentQuest();
-  $('#questCard').innerHTML=
-    '<div class="qi">'+iconSVG(q.icon,18)+'</div>'+
-    '<div class="qb"><div class="qt">'+q.tag+'</div><div class="qn">'+q.name+'</div>'+
-      '<div class="qp"><i style="width:'+q.pct+'%"></i></div></div>'+
-    '<button class="go" id="qGo">'+q.btn+'</button>';
-  $('#qGo').onclick=()=>{ if(q.fn)q.fn(); else toast('尚未开启'); };
-  // 右侧浮标
-  const pts=dailyPts();
-  $('#rail').innerHTML=
-    '<button class="railBtn" data-act="daily">'+iconSVG('scroll',19)+'日程'+(pts>=30?'<b class="badge">!</b>':'')+'</button>'+
-    '<button class="railBtn" data-act="map">'+iconSVG('map',19)+'传送</button>'+
-    '<button class="railBtn" data-act="arena">'+iconSVG('flag',19)+'竞技</button>';
-  $('#rail').querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{
-    const a=b.dataset.act;
-    if(a==='map')openSheet('map');
-    else if(a==='daily')openSheet('daily');
-    else openSheet('arena');
-  });
+
+/* ================= 大世界引擎 ================= */
+const W={sc:null,px:500,py:1060,cam:{x:0,y:0},path:[],face:1,joy:{x:0,y:0,on:false},
+  keys:{},mobs:[],party:[],trail:[],trailT:0,near:null,sayEl:null,nearT:0,
+  paused:false,transit:false,last:0,ready:false,npcEls:{},mobEls:[],pl:null,miniT:0,hpT:0};
+
+function clampCam(x,y){
+  const {w:vw,h:vh}=stageSize();const sc=W.sc;
+  return {x:clamp(x,0,Math.max(0,sc.w-vw)),y:clamp(y,0,Math.max(0,sc.h-vh))};
 }
-function sceneNPCs(id){
-  const base=[];
-  if(id==='city'){
-    base.push({n:'掌门·清虚子',i:'清',x:30,y:34,dlg:['云海之上，仙城不夜。你既入我门下，当以斩妖除魔为念。','修行一途，急不得。先把师门二十环走完，根基稳了，往后才走得远。','去吧，山门外的青竹幽径，正有狼妖作乱。']});
-    base.push({n:'灵兽师·阿蛮',i:'兽',x:68,y:44,dlg:['妖兽亦有灵性，打至虚弱便可结契。','捕捉时它气血越低，越容易成功。别把它打死了。'],fn:()=>openSheet('pet')});
-    base.push({n:'坊市掌柜',i:'商',x:48,y:60,dlg:['客官里边请，丹药、兽诀、玄铁，样样都有。','最近玄铁紧俏，强化装备可要省着点用。'],fn:()=>openSheet('shop')});
-  }else{
-    const sc=SCENES.find(s=>s.id===id);
-    base.push({n:'守山人',i:'山',x:34,y:46,dlg:['此间'+sc.n+'，妖兽横行，道友小心。','据说深处的妖王，守着一件上古法宝。']});
-    base.push({n:'游方道人',i:'道',x:70,y:52,dlg:['我观你印堂发亮，今日宜出行，宜斩妖。','凡事莫急，气血不足时记得用金创药。']});
+function camTarget(){return clampCam(W.px-stageSize().w/2,W.py-stageSize().h/2)}
+function snapCamera(){
+  const t=camTarget();W.cam.x=t.x;W.cam.y=t.y;
+  $('#gw').style.transform='translate3d('+(-t.x)+'px,'+(-t.y)+'px,0)';
+  $('#far').style.transform='scale(1.1) translate3d('+(-t.x*.06)+'px,'+(-t.y*.06)+'px,0)';
+}
+function updateCamera(dt){
+  const t=camTarget(),k=Math.min(1,dt*7.5);
+  W.cam.x+=(t.x-W.cam.x)*k;W.cam.y+=(t.y-W.cam.y)*k;
+  $('#gw').style.transform='translate3d('+(-W.cam.x).toFixed(1)+'px,'+(-W.cam.y).toFixed(1)+'px,0)';
+  $('#far').style.transform='scale(1.1) translate3d('+(-W.cam.x*.06).toFixed(1)+'px,'+(-W.cam.y*.06).toFixed(1)+'px,0)';
+}
+
+function walkable(x,y){
+  const sc=W.sc;if(!sc)return false;
+  const b=sc.bounds;
+  if(x<b.x1||x>b.x2||y<b.y1||y>b.y2)return false;
+  for(const o of sc.obstacles||[]){
+    if(x>o.x-9&&x<o.x+o.w+9&&y>o.y-7&&y<o.y+o.h+7)return false;
   }
-  return base;
+  return true;
 }
-let dlgState=null;
-function talk(n){
-  if(S.counts.talk<1){S.counts.talk++;save()}
-  const lines=n.dlg.slice();
-  // 重复对话第二轮不同内容
-  if(n._t){lines.push('（'+n.n+'笑了笑）又见面了，你的修为又精进了一分。')}
-  n._t=true;
-  dlgState={lines,i:0,fn:n.fn};
-  showDlg(n.n);
+function tryMove(nx,ny){
+  let ok=false;
+  if(walkable(nx,W.py)){W.px=nx;ok=true}
+  if(walkable(W.px,ny)){W.py=ny;ok=true}
+  return ok;
+}
+
+/* ---- 场景装配 ---- */
+function setScene(id,pos,instant){
+  const sc=sceneById(id);
+  S.scene=sc.id;
+  S.pos=pos&&isFinite(pos.x)?{x:clamp(pos.x,sc.bounds.x1,sc.bounds.x2),y:clamp(pos.y,sc.bounds.y1,sc.bounds.y2)}:{x:sc.spawn.x,y:sc.spawn.y};
+  save();
+  W.sc=sc;W.px=S.pos.x;W.py=S.pos.y;W.path=[];W.near=null;W.trail=[];W.joy={x:0,y:0,on:false};
+  hideSay();closeDlg();
+  $('#gw').style.backgroundImage='url('+sc.art+')';
+  $('#far').style.backgroundImage='url('+sc.art+')';
+  $('#miniName').textContent=sc.n;
+  $('#miniLv').textContent='Lv.'+sc.lv;
+  $('#ents').innerHTML='';$('#props').innerHTML='';$('#fx').innerHTML='';
+  W.npcEls={};W.mobEls=[];W.sayEl=null;
+  renderProps(sc);renderNPCs(sc);renderPortals(sc);spawnMobs(sc);clearMobsNear(W.px,W.py,132);buildPlayer();buildParty();
+  snapCamera();setWeather(sc.weather||'fog');updateQuest();drawMini();renderHUD();
+  showSceneIntro(sc);chatSystem('【'+sc.n+'】'+sc.amb);
+  W.safeUntil=Date.now()+1500;W.lastPortal=Date.now();
+  W.ready=true;W.paused=false;
+}
+/* 落地时把贴脸的游荡怪挪开，免得刚站稳就被拖进战斗 */
+function clearMobsNear(x,y,r){
+  (W.mobs||[]).forEach(m=>{
+    if(Math.hypot(m.x-x,m.y-y)>=r)return;
+    for(let k=0;k<30;k++){
+      const a=Math.random()*Math.PI*2,d=r+16+Math.random()*70;
+      const nx=x+Math.cos(a)*d,ny=y+Math.sin(a)*d;
+      if(walkable(nx,ny)){m.x=nx;m.y=ny;m.home={x:nx,y:ny};m.tx=nx;m.ty=ny;if(m.el)setEnt(m.el,nx,ny);break}
+    }
+  });
+}
+function travelTo(id,tx,ty){
+  if(W.transit)return;
+  W.transit=true;
+  const f=$('#fade');f.classList.add('on');
+  setTimeout(()=>{
+    setScene(id,{x:tx,y:ty},true);
+    setTimeout(()=>{f.classList.remove('on');W.transit=false},140);
+  },420);
+}
+function renderWorld(){
+  if(!W.sc||W.sc.id!==S.scene){setScene(S.scene,S.pos,true);return}
+  W.paused=false;
+  updateQuest();drawMini();renderHUD();
+}
+function showSceneIntro(sc){
+  const el=$('#sceneIntro');
+  el.innerHTML='<div class="zh">'+sc.n+'</div><div class="en">'+sc.en+'</div><div class="ln"></div>'+
+    '<div class="ds">'+sc.d+'</div>'+(sc.q?'<div class="qte">「'+sc.q+'」</div>':'')+'<div class="amb">'+sc.amb+'</div>';
+  el.classList.add('on');
+  document.body.classList.add('introing');
+  clearTimeout(el._t);el._t=setTimeout(()=>{el.classList.remove('on');document.body.classList.remove('introing')},3800);
+}
+
+/* ---- 道具绘制 ---- */
+function propSVG(p){
+  const c=p.c||'#b8863f';
+  switch(p.t){
+    case 'lantern':return '<svg width="40" height="96" viewBox="0 0 40 96"><path d="M20 26v64" stroke="#3a2f24" stroke-width="3"/><path d="M20 28 Q34 28 34 26" stroke="#3a2f24" stroke-width="2" fill="none"/><ellipse cx="20" cy="20" rx="12" ry="14" fill="#c9524c" opacity=".92"/><ellipse cx="20" cy="20" rx="7" ry="14" fill="#f0a08a" opacity=".55"/><rect x="16" y="5" width="8" height="3" rx="1" fill="#d9b46c"/><path d="M20 34v7" stroke="#d9b46c" stroke-width="2"/><circle cx="20" cy="20" r="20" fill="#ffb080" opacity=".13"/></svg>';
+    case 'banner':return '<svg width="46" height="120" viewBox="0 0 46 120"><path d="M14 8v108" stroke="#4a3c2c" stroke-width="3"/><path d="M14 12h22l-4 12 4 12H14z" fill="'+c+'" opacity=".85"/><path d="M18 16h14" stroke="#f0e0bc" stroke-width="1.4" opacity=".7"/><circle cx="14" cy="8" r="3" fill="#d9b46c"/></svg>';
+    case 'stall':return '<svg width="120" height="86" viewBox="0 0 120 86"><path d="M10 30h100l-8-18H18z" fill="'+c+'" opacity=".85"/><path d="M10 30h100v5H10z" fill="#5a442e"/><path d="M18 35v44M102 35v44" stroke="#4a3826" stroke-width="3"/><rect x="26" y="48" width="68" height="6" rx="2" fill="#6b5238"/><rect x="34" y="58" width="12" height="12" rx="2" fill="#8a6a44"/><rect x="54" y="58" width="12" height="12" rx="2" fill="#a98a5c"/><rect x="74" y="58" width="12" height="12" rx="2" fill="#8a6a44"/></svg>';
+    case 'rock':return '<svg width="110" height="66" viewBox="0 0 110 66"><path d="M8 60 Q14 26 38 20 Q62 12 78 34 Q96 44 102 60Z" fill="#5d6068"/><path d="M26 58 Q34 36 48 30" stroke="#7a7e88" stroke-width="2" fill="none" opacity=".6"/><path d="M8 60h96" stroke="#1f2329" stroke-width="3" opacity=".5"/></svg>';
+    case 'bamboo':return '<svg width="90" height="150" viewBox="0 0 90 150"><path d="M30 148V18M52 148V34M70 148V44" stroke="#4e7f4a" stroke-width="4"/><path d="M30 60 L10 48M30 84 L8 76M52 70 L74 56M52 96 L76 88M70 70 L88 62" stroke="#5f9a58" stroke-width="3"/><path d="M30 44 L18 28M52 52 L40 36" stroke="#4e7f4a" stroke-width="2.5"/></svg>';
+    case 'pine':return '<svg width="96" height="140" viewBox="0 0 96 140"><path d="M48 138V60" stroke="#4a3a2a" stroke-width="6"/><path d="M48 8 L78 54H18Z" fill="#3d5c46"/><path d="M48 38 L84 84H12Z" fill="#466b52"/><path d="M48 66 L88 112H8Z" fill="#3a5a46"/><path d="M30 110h36" stroke="#e8eef0" stroke-width="3" opacity=".5"/></svg>';
+    case 'gate':return '<svg width="130" height="150" viewBox="0 0 130 150"><path d="M22 148V26M108 148V26" stroke="#5a4a38" stroke-width="7"/><path d="M4 22h122" stroke="#6b5238" stroke-width="8"/><path d="M12 38h106" stroke="#6b5238" stroke-width="5"/><path d="M22 26 Q65 6 108 26" stroke="#d9b46c" stroke-width="2" fill="none" opacity=".8"/></svg>';
+    case 'boat':return '<svg width="120" height="56" viewBox="0 0 120 56"><path d="M10 30 Q60 56 110 30 L102 38 Q60 52 18 38Z" fill="#4a3a2a"/><path d="M60 30V4" stroke="#5a4632" stroke-width="3"/><path d="M62 8 L94 26 L62 26Z" fill="#cbb78c" opacity=".8"/><path d="M4 44h112" stroke="#8fb8c4" stroke-width="2" opacity=".5"/></svg>';
+    case 'statue':return '<svg width="90" height="120" viewBox="0 0 90 120"><rect x="24" y="104" width="42" height="12" rx="3" fill="#4a4a50"/><path d="M34 104 Q32 58 45 40 Q58 58 56 104Z" fill="#6a6a72"/><circle cx="45" cy="32" r="13" fill="#72727a"/><path d="M45 18 Q45 6 52 4" stroke="#c9a15c" stroke-width="2" fill="none"/><circle cx="45" cy="36" r="20" fill="#ffd9a0" opacity=".1"/></svg>';
+    case 'incense':return '<svg width="60" height="100" viewBox="0 0 60 100"><path d="M18 96h24l-3-16H21z" fill="#5a4a38"/><path d="M30 80V60" stroke="#8a6a44" stroke-width="2"/><path d="M30 58 Q24 46 30 36 Q36 26 30 14" stroke="#c8c8cc" stroke-width="2" fill="none" opacity=".5"/><circle cx="30" cy="90" r="3" fill="#ff9a5a"/></svg>';
+    case 'grave':return '<svg width="76" height="70" viewBox="0 0 76 70"><path d="M22 66V26 Q38 8 54 26 V66Z" fill="#6a6c72"/><path d="M28 66V30 Q38 18 48 30 V66Z" fill="#7c7e86"/><path d="M32 38h12M38 32v16" stroke="#4a4c52" stroke-width="2" opacity=".7"/><path d="M14 66h48" stroke="#2a2c30" stroke-width="3" opacity=".6"/></svg>';
+    default:return '';
+  }
+}
+function renderProps(sc){
+  const box=$('#props');
+  (sc.props||[]).forEach(p=>{
+    const d=document.createElement('div');
+    d.className='prop';
+    d.style.left=p.x+'px';d.style.top=p.y+'px';d.style.zIndex=Math.round(p.y);
+    d.innerHTML=propSVG(p);
+    box.appendChild(d);
+  });
+}
+
+/* ---- 人物绘制 ---- */
+function figureSVG(o){
+  o=o||{};
+  const robe=o.robe||'#cfd6dc',trim=o.trim||'#5a6672',hair=o.hair||'#26262a',skin='#f0d6bc';
+  const w=o.w||52,h=Math.round(w*1.5);
+  const hairBack=o.female?'<path d="M18 26 Q16 8 32 8 Q48 8 46 26 L47 46 Q42 34 41 22 Q32 30 23 22 Q22 34 17 46Z" fill="'+hair+'"/>'
+    :'<path d="M18 25 Q17 9 32 9 Q47 9 46 25 Q43 14 32 16 Q21 14 18 25Z" fill="'+hair+'"/>';
+  let hat='';
+  if(o.hat==='straw')hat='<ellipse cx="32" cy="14" rx="23" ry="6.5" fill="#c9ac74"/><path d="M21 14 Q32 1 43 14Z" fill="#dcbf88"/><path d="M21 14h22" stroke="#8e7448" stroke-width="1.4"/>';
+  else if(o.hat==='official')hat='<path d="M23 9h18v7H23z" fill="#2b3038"/><path d="M16 15h32l-2 4H18z" fill="#2b3038"/><path d="M32 4v5" stroke="#c9a15c" stroke-width="2"/>';
+  else if(o.hat==='bun')hat='<circle cx="32" cy="7" r="5" fill="'+hair+'"/><path d="M27 9h10" stroke="#c9a15c" stroke-width="1.5"/>';
+  const beard=o.beard?'<path d="M26 30 Q32 47 38 30 Q32 37 26 30Z" fill="'+hair+'" opacity=".92"/>':'';
+  const eyes='<circle cx="27" cy="26" r="1.7" fill="#3a2b21"/><circle cx="37" cy="26" r="1.7" fill="#3a2b21"/>'+
+    '<path d="M24 22.6 Q27 21.2 30 22.6" stroke="'+hair+'" stroke-width="1.2" fill="none" opacity=".9"/>'+
+    '<path d="M34 22.6 Q37 21.2 40 22.6" stroke="'+hair+'" stroke-width="1.2" fill="none" opacity=".9"/>'+
+    '<path d="M31.6 29.4 Q32 30.4 32.4 29.4" stroke="#c99a80" stroke-width="1" fill="none"/>'+
+    '<path d="M29 32.4 Q32 34.2 35 32.4" stroke="#b98a78" stroke-width="1.2" fill="none" opacity=".85"/>';
+  let wp='';
+  if(o.weapon==='sword')wp='<path d="M47 18 L55 66" stroke="#cdd7e2" stroke-width="3.4"/><path d="M44 26 L52 20" stroke="#c9a15c" stroke-width="4"/><path d="M55 66l-1 5" stroke="#8a5a3a" stroke-width="3"/>';
+  else if(o.weapon==='staff')wp='<path d="M53 16 L53 76" stroke="#8a6a44" stroke-width="3"/><circle cx="53" cy="13" r="5" fill="#9ad4f0" opacity=".85"/><circle cx="53" cy="13" r="10" fill="#9ad4f0" opacity=".16"/>';
+  else if(o.weapon==='hammer')wp='<path d="M50 20 L50 70" stroke="#6b4a34" stroke-width="3.4"/><rect x="42" y="12" width="17" height="11" rx="2.5" fill="#8a9099"/><rect x="42" y="12" width="17" height="4" rx="2" fill="#b0b6be"/>';
+  if(o.mask)wp+='<path d="M21 17 Q32 12 43 17 L43 30 Q32 38 21 30Z" fill="#eef2f4" opacity=".95"/><path d="M26 22h4M34 22h4" stroke="#8fa0a8" stroke-width="1.4"/>';
+  const foxEars=o.fox?'<path d="M19 16 L15 2 L27 10Z" fill="#e8dde4"/><path d="M45 16 L49 2 L37 10Z" fill="#e8dde4"/><path d="M19 14 L17 6 L24 11Z" fill="#d3a9bb"/><path d="M45 14 L47 6 L40 11Z" fill="#d3a9bb"/>':'';
+  const wide=o.burly?3:0;
+  return '<svg class="fig" width="'+w+'" height="'+h+'" viewBox="0 0 64 96">'+
+    '<path d="M25 70 L24 89" stroke="#2b3038" stroke-width="7" stroke-linecap="round"/>'+
+    '<path d="M39 70 L40 89" stroke="#2b3038" stroke-width="7" stroke-linecap="round"/>'+
+    '<path d="M20 87h9M35 87h9" stroke="#191d24" stroke-width="5" stroke-linecap="round"/>'+
+    '<path d="M'+(18-wide)+' 40 Q32 33 '+(46+wide)+' 40 L'+(50+wide)+' 74 Q32 82 '+(14-wide)+' 74 Z" fill="'+robe+'"/>'+
+    '<path d="M'+(18-wide)+' 40 Q32 33 '+(46+wide)+' 40 L'+(47+wide)+' 51 Q32 47 '+(17-wide)+' 51 Z" fill="'+trim+'" opacity=".62"/>'+
+    '<rect x="'+(17-wide)+'" y="56" width="'+(30+wide*2)+'" height="5" rx="2" fill="'+trim+'"/>'+
+    '<path d="M19 42 Q10 54 12 68 L19 70 Q22 56 24 44Z" fill="'+robe+'" stroke="'+trim+'" stroke-width="1"/>'+
+    '<path d="M45 42 Q54 54 52 68 L45 70 Q42 56 40 44Z" fill="'+robe+'" stroke="'+trim+'" stroke-width="1"/>'+
+    '<circle cx="14" cy="70" r="3.4" fill="'+skin+'"/><circle cx="50" cy="70" r="3.4" fill="'+skin+'"/>'+
+    '<rect x="29" y="33" width="6" height="7" fill="'+skin+'"/>'+
+    hairBack+
+    '<circle cx="32" cy="25" r="12.5" fill="'+skin+'"/>'+
+    foxEars+hat+eyes+beard+wp+
+  '</svg>';
+}
+function mountSVG(){
+  return '<svg width="96" height="64" viewBox="0 0 96 64"><ellipse cx="48" cy="54" rx="30" ry="6" fill="#000" opacity=".3"/>'+
+    '<path d="M22 52 L22 34 Q30 24 48 26 Q66 24 72 36 L72 52" fill="#6b4a34"/>'+
+    '<path d="M70 34 Q78 24 82 18 L88 20 Q84 30 78 38Z" fill="#7a563c"/>'+
+    '<circle cx="84" cy="17" r="6" fill="#7a563c"/><path d="M80 12l2-5 3 5z" fill="#5a3e2a"/>'+
+    '<path d="M24 52l-4 8M38 54v8M58 54v8M70 52l4 8" stroke="#4a3222" stroke-width="4" stroke-linecap="round"/>'+
+    '<path d="M22 38 Q14 44 12 54" stroke="#4a3222" stroke-width="4" fill="none"/>'+
+    '<path d="M30 30h24l-3 9H33z" fill="#8a3f3a" opacity=".9"/><path d="M74 15l6-3" stroke="#d9b46c" stroke-width="2"/></svg>';
+}
+function entsBox(){return $('#ents')}
+function setEnt(el,x,y){
+  el.style.left=x.toFixed(1)+'px';el.style.top=y.toFixed(1)+'px';el.style.zIndex=Math.round(y);
+}
+function buildPlayer(){
+  if(W.pl){W.pl.remove();W.pl=null}
+  const s=SECTS[S.sect];
+  const robe={jian:'#b9cfdd',yin:'#c3dbc9',fa:'#cfc2e2',shou:'#dcc3a5'}[S.sect];
+  const trim={jian:'#4a6478',yin:'#48705c',fa:'#6a558c',shou:'#7a5636'}[S.sect];
+  const hair={jian:'#23262b',yin:'#2b2a26',fa:'#2a2630',shou:'#2e2720'}[S.sect];
+  const weapon={jian:'sword',yin:'none',fa:'staff',shou:'none'}[S.sect];
+  const el=document.createElement('div');
+  el.className='ent ply'+(S.mountOn?' mounted':'');
+  el.id='ply';
+  el.innerHTML='<div class="sh"></div><div class="ring"></div>'+
+    '<div class="mntfig">'+mountSVG()+'</div>'+
+    '<div class="figwrap">'+figureSVG({robe,trim,hair,weapon,w:62})+'</div>'+
+    '<div class="plate"><div class="nm">'+S.name+'</div></div>';
+  el.onclick=e=>{e.stopPropagation();openSheet('char')};
+  entsBox().appendChild(el);
+  W.pl=el;setEnt(el,W.px,W.py);
+}
+function npcFigure(n){
+  const look=n.look||{};
+  return figureSVG(Object.assign({w:48},look));
+}
+function renderNPCs(sc){
+  (sc.npcs||[]).forEach(n=>{
+    const el=document.createElement('div');
+    el.className='ent npc';el.dataset.npc=n.id;
+    el.innerHTML='<div class="ring"></div><div class="qmark">▾</div><div class="figwrap">'+npcFigure(n)+'</div>'+
+      '<div class="plate"><div class="nm">'+n.n+'</div><div class="tt">'+n.t+'</div></div>';
+    el.onclick=ev=>{ev.stopPropagation();talk(n)};
+    entsBox().appendChild(el);setEnt(el,n.x,n.y);
+    W.npcEls[n.id]=el;
+  });
+}
+function renderPortals(sc){
+  (sc.portals||[]).forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='ent portal';el.dataset.portal=i;
+    el.innerHTML='<div class="pgate"></div><div class="plate"><div class="nm">'+p.n+'</div></div>';
+    el.onclick=ev=>{ev.stopPropagation();travelTo(p.to,p.tx,p.ty)};
+    entsBox().appendChild(el);setEnt(el,p.x,p.y);
+  });
+}
+
+/* ---- 怪物 ---- */
+function spawnMobs(sc){
+  W.mobs=[];
+  const box=entsBox();
+  (sc.mobs||[]).forEach(g=>{
+    const [x1,y1,x2,y2]=g.zone;
+    for(let i=0;i<g.n;i++){
+      let x=x1+Math.random()*(x2-x1),y=y1+Math.random()*(y2-y1),tries=0;
+      const safe=[{x:sc.spawn.x,y:sc.spawn.y}].concat((sc.portals||[]).map(p=>({x:p.x,y:p.y})));
+      const far=()=>W.mobs.every(m=>Math.hypot(m.x-x,m.y-y)>64)&&safe.every(s=>Math.hypot(s.x-x,s.y-y)>105);
+      while((!walkable(x,y)||!far())&&tries++<48){
+        x=x1+Math.random()*(x2-x1);y=y1+Math.random()*(y2-y1);
+      }
+      const lv=Math.max(MOBS[g.key].lv,sc.lv);
+      const el=document.createElement('div');
+      el.className='ent mob';
+      const d=MOBS[g.key];
+      el.innerHTML='<div class="sh"></div><div class="qmark">▾</div><div class="msp" style="background-image:url('+d.art+');'+(d.tint?'filter:'+d.tint:'')+'"></div>'+
+        '<div class="plate"><div class="nm">'+d.n+'</div><div class="lv">Lv.'+lv+'</div></div>';
+      const m={key:g.key,lv,x,y,home:{x,y},tx:x,ty:y,wait:rand(.8,3),dead:false,el};
+      el.onclick=ev=>{ev.stopPropagation();startMobBattle(m)};
+      box.appendChild(el);setEnt(el,x,y);
+      W.mobs.push(m);
+    }
+  });
+}
+function startMobBattle(m){
+  if(!m||m.dead||B)return;
+  const d=MOBS[m.key];
+  W.paused=true;
+  startBattle({title:W.sc.n+' · 野外',sub:'遇到 '+d.n,scene:W.sc.id,waves:[[{key:m.key,lv:m.lv}]],
+    rw:{exp:Math.round(36+m.lv*15),gold:Math.round(42+m.lv*17),items:Math.random()<.34?{forge:1}:{}},
+    onWin:()=>{
+      S.counts.kill=(S.counts.kill||0)+1;
+      m.dead=true;if(m.el)m.el.classList.add('dead');
+      mainEvent('kill',m.key);
+      setTimeout(()=>{
+        if(W.sc&&W.sc.id===S.scene&&m.el){
+          let x=m.home.x+rand(-40,40),y=m.home.y+rand(-30,30);
+          if(!walkable(x,y)){x=m.home.x;y=m.home.y}
+          m.x=x;m.y=y;m.dead=false;m.wait=1;m.el.classList.remove('dead');setEnt(m.el,x,y);
+        }
+      },9000);
+    }});
+}
+
+/* ---- 队伍 ---- */
+function buildParty(){
+  W.party.forEach(p=>p.el&&p.el.remove());
+  W.party=[];W.trail=[];
+  for(let i=0;i<36;i++)W.trail.push({x:W.px,y:W.py});
+  (S.party||[]).forEach((p,i)=>{
+    const el=document.createElement('div');
+    el.className='ent allyEnt';
+    const robe=p.sect==='yin'?'#c3dbc9':'#b9cfdd',trim=p.sect==='yin'?'#48705c':'#4a6478',hair=p.sect==='yin'?'#2b2a26':'#23262b';
+    el.innerHTML='<div class="sh"></div><div class="figwrap">'+figureSVG({robe,trim,hair,w:50,weapon:p.sect==='yin'?'none':'sword',female:p.sect==='yin'?1:0})+'</div>';
+    el.onclick=ev=>{ev.stopPropagation();toast(p.n+'：跟上，别掉队。')};
+    entsBox().appendChild(el);setEnt(el,W.px-30-i*26,W.py+8+i*8);
+    W.party.push({x:W.px-30-i*26,y:W.py+8+i*8,el});
+  });
+  renderPartyHUD();
+}
+function renderPartyHUD(){
+  const box=$('#party');if(!box)return;
+  box.innerHTML=(S.party||[]).map(p=>{
+    const sec=SECTS[p.sect]||SECTS.jian;
+    return '<div class="pm" style="background-image:url('+sec.art+')"><span>'+p.n+'</span></div>';
+  }).join('');
+}
+function updateParty(dt){
+  W.trailT+=dt;
+  if(W.trailT>.08){
+    W.trailT=0;W.trail.push({x:W.px,y:W.py});
+    if(W.trail.length>120)W.trail.shift();
+  }
+  W.party.forEach((p,i)=>{
+    const want=48+i*40;
+    let acc=0,tx=null,ty=null;
+    for(let j=W.trail.length-1;j>0;j--){
+      const a=W.trail[j],b=W.trail[j-1];
+      const d=Math.hypot(a.x-b.x,a.y-b.y);
+      if(acc+d>=want){
+        const t=(want-acc)/(d||1);
+        tx=b.x+(a.x-b.x)*t;ty=b.y+(a.y-b.y)*t;break;
+      }
+      acc+=d;
+    }
+    if(tx==null){
+      if(i===0){tx=W.px-64;ty=W.py+16}
+      else{tx=W.px+64;ty=W.py+22}
+    }
+    p.x+=(tx-p.x)*Math.min(1,dt*8);
+    p.y+=(ty-p.y)*Math.min(1,dt*8);
+    setEnt(p.el,p.x,p.y);
+  });
+}
+
+/* ---- 场景寻路 ---- */
+function nearestFreeCell(g,c,r){
+  if(!g.blocked[r*g.cols+c])return [c,r];
+  for(let rad=1;rad<6;rad++){
+    for(let dr=-rad;dr<=rad;dr++)for(let dc=-rad;dc<=rad;dc++){
+      const nc=c+dc,nr=r+dr;
+      if(nc<0||nr<0||nc>=g.cols||nr>=g.rows)continue;
+      if(!g.blocked[nr*g.cols+nc])return [nc,nr];
+    }
+  }
+  return null;
+}
+function findPath(sx,sy,tx,ty){
+  const sc=W.sc,cs=32;
+  const cols=Math.ceil(sc.w/cs),rows=Math.ceil(sc.h/cs);
+  const blocked=new Uint8Array(cols*rows);
+  const b=sc.bounds;
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+    const x=c*cs+cs/2,y=r*cs+cs/2;
+    let blk=(x<b.x1||x>b.x2||y<b.y1||y>b.y2);
+    if(!blk)for(const o of sc.obstacles||[]){
+      if(x>o.x-10&&x<o.x+o.w+10&&y>o.y-8&&y<o.y+o.h+8){blk=true;break}
+    }
+    blocked[r*cols+c]=blk?1:0;
+  }
+  const g={cols,rows,blocked,cs};
+  let a=nearestFreeCell(g,clamp(Math.floor(sx/cs),0,cols-1),clamp(Math.floor(sy/cs),0,rows-1));
+  let z=nearestFreeCell(g,clamp(Math.floor(tx/cs),0,cols-1),clamp(Math.floor(ty/cs),0,rows-1));
+  if(!a||!z)return null;
+  const [ac,ar]=a,[zc,zr]=z;
+  const start=ar*cols+ac,goal=zr*cols+zc;
+  const open=[start],f={[start]:0},came={},gScore={[start]:0},closed={};
+  const H=(i)=>{const c=i%cols,r=(i-c)/cols;return Math.abs(c-zc)+Math.abs(r-zr)};
+  let guard=0;
+  while(open.length&&guard++<6000){
+    let bi=0;for(let i=1;i<open.length;i++)if((f[open[i]]||1e9)<(f[open[bi]]||1e9))bi=i;
+    const cur=open.splice(bi,1)[0];
+    if(cur===goal)break;
+    closed[cur]=1;
+    const c=cur%cols,r=(cur-c)/cols;
+    for(const [dc,dr] of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){
+      const nc=c+dc,nr=r+dr;
+      if(nc<0||nr<0||nc>=cols||nr>=rows)continue;
+      const ni=nr*cols+nc;
+      if(blocked[ni]||closed[ni])continue;
+      if(dc&&dr&&(blocked[r*cols+nc]||blocked[nr*cols+c]))continue;
+      const cost=(dc&&dr)?1.42:1;
+      const ng=(gScore[cur]||0)+cost;
+      if(ng<(gScore[ni]??1e9)){
+        gScore[ni]=ng;f[ni]=ng+H(ni);came[ni]=cur;
+        if(!open.includes(ni))open.push(ni);
+      }
+    }
+  }
+  if(!came[goal]&&goal!==start)return null;
+  const cells=[];let cur=goal;
+  while(cur!==start){cells.push(cur);cur=came[cur];if(cur==null)return null}
+  cells.push(start);cells.reverse();
+  const pts=cells.map(i=>{const c=i%cols,r=(i-c)/cols;return {x:c*cs+cs/2,y:r*cs+cs/2}});
+  pts.push({x:tx,y:ty});
+  const out=[{x:pts[0].x,y:pts[0].y}];
+  let i=0;
+  while(i<pts.length-1){
+    let far=i+1;
+    for(let j=pts.length-1;j>i;j--){
+      if(losClear(pts[i],pts[j])){far=j;break}
+    }
+    if(far<=i)far=i+1;
+    out.push(pts[far]);
+    i=far;
+  }
+  if(out.length)out[out.length-1]=pts[pts.length-1];
+  return out;
+}
+function losClear(a,b){
+  const d=Math.hypot(b.x-a.x,b.y-a.y),n=Math.ceil(d/10);
+  for(let i=1;i<n;i++){
+    const x=a.x+(b.x-a.x)*i/n,y=a.y+(b.y-a.y)*i/n;
+    if(!walkable(x,y))return false;
+  }
+  return true;
+}
+function moveToPoint(x,y){
+  const p=findPath(W.px,W.py,x,y);
+  if(p&&p.length)W.path=p;else W.path=[{x,y}];
+}
+
+/* ---- 交互 ---- */
+function distTo(e){return Math.hypot(W.px-e.x,W.py-e.y)}
+function showSay(n){
+  hideSay();
+  const el=document.createElement('div');
+  el.className='say';
+  el.dataset.npc=n.id;
+  el.innerHTML='<b>'+(n.n)+'</b>'+((n.auto||(n.dlg&&n.dlg[0])||'……'));
+  /* 气泡默认挂头顶；若会压到左上任务栏，就改挂脚下，别露半截 */
+  const vw=$('#stage').clientWidth||375;
+  let bx=n.x-85,by=n.y-124;
+  if(by-W.cam.y<270&&bx-W.cam.x<212)by=n.y+94;
+  bx=Math.min(Math.max(bx,W.cam.x+8),W.cam.x+vw-178);
+  by=Math.max(by,W.cam.y+64);
+  el.style.left=bx+'px';el.style.top=by+'px';el.style.width='170px';
+  el.onclick=ev=>{ev.stopPropagation();hideSay();talk(n)};
+  el.style.pointerEvents='auto';
+  $('#fx').appendChild(el);W.sayEl=el;n._sayT=Date.now();
+  const ne=W.npcEls[n.id];if(ne)ne.classList.add('speaking');
+  clearTimeout(el._t);el._t=setTimeout(()=>{el.remove();if(W.sayEl===el)W.sayEl=null;if(ne)ne.classList.remove('speaking')},5600);
+}
+function hideSay(){
+  if(W.sayEl){W.sayEl.remove();W.sayEl=null}
+  document.querySelectorAll('.ent.npc.speaking').forEach(e=>e.classList.remove('speaking'));
+}
+function updateNear(dt){
+  W.nearT-=dt;if(W.nearT>0)return;W.nearT=.26;
+  const sc=W.sc;let best=null,bd=72;
+  (sc.npcs||[]).forEach(n=>{
+    const d=Math.hypot(W.px-n.x,W.py-n.y);
+    const el=W.npcEls[n.id];if(el)el.classList.toggle('far',d>170);
+    if(d>130)n._autoMet=false;
+    if(d<bd){bd=d;best=n}
+  });
+  Object.keys(W.npcEls).forEach(id=>{
+    W.npcEls[id].classList.toggle('near',!!best&&best.id===id);
+  });
+  if(best!==W.near){
+    W.near=best;W.nearStay=0;
+    hideSay();
+  }
+  /* 走近站定片刻，自动开口（每个 NPC 每次靠近只自动一次，之后靠点） */
+  if(best&&!W.moving&&!dlgState&&!B&&!best._autoMet&&!document.querySelector('#sheet').classList.contains('open')){
+    W.nearStay=(W.nearStay||0)+dt;
+    if(W.nearStay>.85){best._autoMet=true;talk(best);return}
+  }else if(!best)W.nearStay=0;
+  if(best&&!W.moving&&!W.sayEl&&Date.now()-(best._sayT||0)>9000)showSay(best);
+}
+function checkPortals(){
+  if(W.transit||W.paused)return;
+  const now=Date.now();if(now-W.lastPortal<1600||now<(W.safeUntil||0))return;
+  for(const p of W.sc.portals||[]){
+    if(Math.hypot(W.px-p.x,W.py-p.y)<42){W.lastPortal=now;travelTo(p.to,p.tx,p.ty);return}
+  }
+}
+function checkMobTouch(){
+  if(W.paused||B||Date.now()<(W.safeUntil||0))return;
+  const now=Date.now();if(now-W.lastBattle<1400)return;
+  for(const m of W.mobs){
+    if(m.dead)continue;
+    if(Math.hypot(W.px-m.x,W.py-m.y)<27){W.lastBattle=now;startMobBattle(m);return}
+  }
+}
+
+/* ---- 输入 ---- */
+function bindInput(){
+  const stage=$('#stage');
+  let down=null;
+  stage.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.ent')||e.target.closest('#joy'))return;
+    down={x:e.clientX,y:e.clientY,t:Date.now()};
+  });
+  stage.addEventListener('pointerup',e=>{
+    if(!down)return;
+    const moved=Math.hypot(e.clientX-down.x,e.clientY-down.y);
+    const dt=Date.now()-down.t;down=null;
+    if(moved>12||dt>520||W.paused||!W.sc)return;
+    const r=stage.getBoundingClientRect();
+    const wx=e.clientX-r.left+W.cam.x,wy=e.clientY-r.top+W.cam.y;
+    if(!walkable(wx,wy)){toast('那边过不去');return}
+    moveToPoint(wx,wy);
+  });
+  const joy=$('#joy'),knob=$('#joyKnob');
+  let jid=null,center=null;
+  const start=e=>{
+    jid=e.pointerId;joy.setPointerCapture(jid);
+    const r=joy.getBoundingClientRect();center={x:r.left+r.width/2,y:r.top+r.height/2};
+    move(e);
+  };
+  const move=e=>{
+    if(jid==null||!center)return;
+    let dx=e.clientX-center.x,dy=e.clientY-center.y;
+    const max=36,len=Math.hypot(dx,dy);
+    if(len>max){dx=dx/len*max;dy=dy/len*max}
+    knob.style.transform='translate('+dx+'px,'+dy+'px)';
+    W.joy={x:dx/max,y:dy/max,on:true};
+    if(Math.hypot(dx,dy)>6)W.path=[];
+  };
+  const end=()=>{jid=null;center=null;knob.style.transform='translate(0,0)';W.joy={x:0,y:0,on:false}};
+  joy.addEventListener('pointerdown',start);
+  joy.addEventListener('pointermove',move);
+  joy.addEventListener('pointerup',end);
+  joy.addEventListener('pointercancel',end);
+  window.addEventListener('keydown',e=>{
+    W.keys[e.key.toLowerCase()]=true;
+    if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(e.key.toLowerCase()))e.preventDefault();
+    if(e.key.toLowerCase()==='m')toggleMount();
+  });
+  window.addEventListener('keyup',e=>{W.keys[e.key.toLowerCase()]=false});
+}
+
+/* ---- 主循环 ---- */
+function isPaused(){
+  return W.paused||W.transit||!W.sc||document.body.classList.contains('creating')||
+    $('#sheet').classList.contains('open')||$('#modal')&&!$('#modal').classList.contains('hidden')||
+    ($('#battle')&&!$('#battle').classList.contains('hidden'));
+}
+function worldTick(ts){
+  requestAnimationFrame(worldTick);
+  const dt=Math.min(.05,((ts-W.last)||16)/1000);W.last=ts;
+  if(!W.sc||!W.ready)return;
+  if(isPaused()){updateCamera(dt);return}
+  let vx=0,vy=0;
+  if(W.joy.on){vx=W.joy.x;vy=W.joy.y}
+  const k=W.keys;
+  if(k['a']||k['arrowleft'])vx=-1;
+  if(k['d']||k['arrowright'])vx=1;
+  if(k['w']||k['arrowup'])vy=-1;
+  if(k['s']||k['arrowdown'])vy=1;
+  const moving=Math.hypot(vx,vy)>.08;
+  W.moving=moving||W.path.length>0;
+  if(moving&&W.sayEl)hideSay();
+  const spd=(S.mountOn?228:152)*(1+Math.min(.35,S.mount*.02));
+  if(moving){
+    W.path=[];
+    const len=Math.hypot(vx,vy)||1;
+    tryMove(W.px+vx/len*spd*dt,W.py+vy/len*spd*dt);
+    W.face=vx>=0?1:-1;
+  }else if(W.path.length){
+    const t=W.path[0],dx=t.x-W.px,dy=t.y-W.py,d=Math.hypot(dx,dy);
+    if(d<7)W.path.shift();
+    else{
+      const step=Math.min(d,spd*dt);
+      if(!tryMove(W.px+dx/d*step,W.py+dy/d*step))W.path=[];
+      W.face=dx>=0?1:-1;
+    }
+  }
+  if(W.pl){
+    setEnt(W.pl,W.px,W.py);
+    W.pl.classList.toggle('walk',moving||W.path.length>0);
+    W.pl.querySelector('.figwrap').style.transform=W.face<0?'scaleX(-1)':'';
+    if(S.mountOn)W.pl.classList.add('mounted');else W.pl.classList.remove('mounted');
+  }
+  S.pos={x:W.px,y:W.py};
+  updateParty(dt);updateMobs(dt);updateCamera(dt);updateNear(dt);
+  checkPortals();checkMobTouch();
+  W.hpT+=dt;
+  if(W.hpT>3){W.hpT=0;save();const st=stats();
+    if(S.hp<st.hp){S.hp=Math.min(st.hp,S.hp+st.hp*.012)}
+    if(S.mp<st.mp){S.mp=Math.min(st.mp,S.mp+st.mp*.02)}
+    renderHUD();
+  }
+  W.miniT+=dt;
+  if(W.miniT>.22){W.miniT=0;drawMini()}
+}
+function updateMobs(dt){
+  const now=Date.now();
+  W.mobs.forEach(m=>{
+    if(m.dead)return;
+    if(m.wait>0){m.wait-=dt;return}
+    const d=Math.hypot(m.tx-m.x,m.ty-m.y);
+    if(d<6){
+      const [x1,y1,x2,y2]=m.zone||[m.home.x-70,m.home.y-40,m.home.x+70,m.home.y+40];
+      m.tx=clamp(m.home.x+rand(-70,70),x1,x2);
+      m.ty=clamp(m.home.y+rand(-50,50),y1,y2);
+      m.wait=rand(.6,2.6);
+      return;
+    }
+    const sp=26,step=Math.min(d,sp*dt);
+    const nx=m.x+(m.tx-m.x)/d*step,ny=m.y+(m.ty-m.y)/d*step;
+    if(walkable(nx,ny)){m.x=nx;m.y=ny}
+    else{m.tx=m.home.x;m.ty=m.home.y;m.wait=.4}
+    setEnt(m.el,m.x,m.y);
+  });
+}
+
+/* ---- 坐骑 ---- */
+function toggleMount(){
+  S.mountOn=!S.mountOn;
+  if(W.pl){
+    W.pl.classList.toggle('mounted',S.mountOn);
+    if(S.mountOn){
+      W.pl.querySelector('.mntfig').style.display='block';
+      toast('唤来一匹瘦马');
+    }else{
+      W.pl.querySelector('.mntfig').style.display='none';
+      toast('下马');
+    }
+  }
+  renderHUD();save();
+}
+
+/* ---- 小地图 ---- */
+const miniImgs={};
+function drawMini(){
+  const c=$('#miniC');if(!c||!W.sc)return;
+  const ctx=c.getContext('2d'),Wc=c.width,Hc=c.height;
+  ctx.clearRect(0,0,Wc,Hc);
+  const sc=W.sc,pad=8;
+  const s=Math.min((Wc-pad*2)/sc.w,(Hc-pad*2)/sc.h);
+  const ox=(Wc-sc.w*s)/2,oy=(Hc-sc.h*s)/2;
+  ctx.fillStyle='rgba(6,12,18,.9)';ctx.fillRect(0,0,Wc,Hc);
+  let im=miniImgs[sc.art];
+  if(!im){im=new Image();im.src=sc.art;miniImgs[sc.art]=im}
+  if(im.complete&&im.naturalWidth){
+    ctx.globalAlpha=.9;ctx.drawImage(im,ox,oy,sc.w*s,sc.h*s);ctx.globalAlpha=1;
+    ctx.fillStyle='rgba(5,10,15,.42)';ctx.fillRect(ox,oy,sc.w*s,sc.h*s);
+  }else{
+    ctx.fillStyle='rgba(70,90,96,.3)';ctx.fillRect(ox,oy,sc.w*s,sc.h*s);
+  }
+  ctx.strokeStyle='rgba(217,180,108,.25)';ctx.lineWidth=1;ctx.strokeRect(ox+sc.bounds.x1*s,oy+sc.bounds.y1*s,(sc.bounds.x2-sc.bounds.x1)*s,(sc.bounds.y2-sc.bounds.y1)*s);
+  (sc.portals||[]).forEach(p=>{
+    ctx.fillStyle='#7fe0d8';ctx.beginPath();ctx.arc(ox+p.x*s,oy+p.y*s,3,0,6.283);ctx.fill();
+  });
+  (sc.npcs||[]).forEach(n=>{
+    ctx.fillStyle='#e8c98a';ctx.beginPath();ctx.arc(ox+n.x*s,oy+n.y*s,2.6,0,6.283);ctx.fill();
+  });
+  W.mobs.forEach(m=>{
+    if(m.dead)return;
+    ctx.fillStyle='#d06a60';ctx.beginPath();ctx.arc(ox+m.x*s,oy+m.y*s,2,0,6.283);ctx.fill();
+  });
+  ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(ox+W.px*s,oy+W.py*s,4,0,6.283);ctx.fill();
+  ctx.strokeStyle='rgba(246,226,176,.8)';ctx.lineWidth=1.4;ctx.beginPath();ctx.arc(ox+W.px*s,oy+W.py*s,7,0,6.283);ctx.stroke();
+}
+
+
+/* ================= 主线 / 任务追踪 ================= */
+function currentQuest(){
+  const m=MAIN[S.main.idx];
+  if(!m)return {tag:'终章',name:'山高水长',desc:'剩下的路，自己走。',pct:100,m:null};
+  if(S.main.ready&&m.turn){
+    const sc=sceneById(m.turnSc||m.sc);
+    const npc=(sc.npcs||[]).find(n=>n.id===m.turn);
+    return {tag:'第'+(S.main.idx+1)+'章 · 差事已了',name:m.n,desc:'回去找'+(npc?npc.n:'人')+'。',pct:100,m,sc:sc.id,who:m.turn,ready:true};
+  }
+  const done=Math.min(m.need,S.main.prog||0);
+  return {tag:'第'+(S.main.idx+1)+'章',name:m.n,desc:m.d,pct:done/m.need*100,m,sc:m.sc,who:m.guide||m.who};
+}
+function questTarget(){
+  const q=currentQuest();if(!q.m)return null;
+  const sc=sceneById(q.sc);
+  if(q.who){const n=(sc.npcs||[]).find(x=>x.id===q.who);if(n)return n}
+  if(q.m.k==='kill'&&W.sc&&W.sc.id===sc.id){
+    let best=null,bd=1e9;
+    W.mobs.forEach(m=>{if(m.dead)return;const d=Math.hypot(m.x-W.px,m.y-W.py);if(d<bd){bd=d;best=m}});
+    if(best)return best;
+  }
+  return {x:sc.spawn.x,y:sc.spawn.y};
+}
+function updateQuest(){
+  const q=currentQuest();
+  $('#qTag').textContent=q.tag;
+  $('#qLoc').textContent=sceneById(q.sc||S.scene).n;
+  $('#qName').textContent=q.name;
+  $('#qDesc').textContent=q.desc;
+  $('#qBar').style.width=q.pct+'%';
+  Object.keys(W.npcEls).forEach(id=>{
+    const el=W.npcEls[id];
+    el.classList.toggle('q',S.scene===q.sc&&q.who===id);
+  });
+  const mt=questTarget();
+  (W.mobs||[]).forEach(m=>{if(m.el)m.el.classList.toggle('q',!!mt&&m===mt&&!m.dead)});
+}
+function goQuest(){
+  const q=currentQuest();
+  if(!q.m){openSheet('daily');return}
+  if(S.scene!==q.sc){
+    const sc=sceneById(q.sc);
+    const t=(sc.npcs||[]).find(n=>n.id===q.who)||sc.spawn;
+    travelTo(sc.id,t.x+42,t.y+42);
+    toast('往 '+sc.n+' 去');
+    return;
+  }
+  if(q.m.k==='boss'){startFinalBattle();return}
+  const t=questTarget();
+  if(t)moveToPoint(t.x+22,t.y+22);
+}
+function startFinalBattle(){
+  if(B)return;
+  startBattle({title:'长夜',sub:'槐树下的东西',scene:'town',waves:[[{key:'ghostking',lv:S.lv+5}]],
+    rw:{exp:1200+S.lv*60,gold:2600,jade:80},
+    onWin:()=>{mainEvent('boss','boss')}});
+}
+function mainEvent(type,val){
+  const m=MAIN[S.main.idx];if(!m)return;
+  if(type==='talk'&&S.main.ready&&m.turn===val){completeChapter();return}
+  if(m.k!==type)return;
+  if(m.who&&val!==m.who)return;
+  if(type==='kill'&&m.sc&&m.sc!==S.scene)return;
+  S.main.prog=(S.main.prog||0)+1;
+  if(S.main.prog>=m.need){
+    if(m.turn){
+      S.main.ready=true;save();updateQuest();
+      const sc=sceneById(m.turnSc||m.sc);
+      const npc=(sc.npcs||[]).find(n=>n.id===m.turn);
+      toast('差事了了。回去找'+(npc?npc.n:'人'));
+    }else completeChapter();
+  }else{updateQuest();save();toast('记下了 · '+S.main.prog+'/'+m.need);}
+}
+function completeChapter(){
+  const m=MAIN[S.main.idx];if(!m)return;
+  const ch=S.main.idx+1;
+  S.main.idx++;S.main.prog=0;S.main.ready=false;
+  const ex=180+ch*120,go=240+ch*160;
+  addExp(ex);S.gold+=go;if(ch%3===0)S.jade+=15;
+  save();renderHUD();updateQuest();
+  const nx=MAIN[S.main.idx];
+  setTimeout(()=>{
+    modal('第'+ch+'章 · '+m.n,m.story+'\n\n——\n'+(nx?('下一章 · '+nx.n+'\n'+nx.hook):'山高水长，路还长。'),
+      [{t:'继续走',gold:1}]);
+  },480);
+}
+
+/* ================= 对话 ================= */
+let dlgState=null,typing=false,typeTimer=null;
+function talk(npc){
+  if(W.paused||dlgState||!npc)return;
+  hideSay();
+  S.counts.talk=(S.counts.talk||0)+1;
+  const first=!npc._met;
+  const lines=(first?npc.dlg:(npc.dlg2||npc.dlg)).slice();
+  npc._met=true;
+  dlgState={lines,i:0,npc};
+  showDlg(npc.n);
 }
 function showDlg(who){
   let el=$('#dlg');
-  if(!el){el=document.createElement('div');el.id='dlg';el.className='dlg';$('#world').appendChild(el)}
-  const st=dlgState;
-  el.innerHTML='<div class="who">'+who+'</div><div class="txt" id="dlgTxt"></div><div class="next" id="dlgNext">轻触继续 ›</div>';
+  document.body.classList.add('dlging');
+  if(!el){el=document.createElement('div');el.id='dlg';el.className='dlg';$('#app').appendChild(el)}
   el.style.display='block';
-  typeText(st.lines[st.i]);
+  el.innerHTML='<div class="who">'+who+'</div><div class="txt" id="dlgTxt"></div><div class="next" id="dlgNext">轻触继续 ›</div>';
+  const st=dlgState;
+  typeText(st.lines[0]);
   el.onclick=()=>{
     if(typing){finishTyping();return}
     st.i++;
     if(st.i>=st.lines.length){
-      el.style.display='none';
-      if(st.fn)st.fn();
-      dlgState=null;
+      el.style.display='none';dlgState=null;
+      document.body.classList.remove('dlging');
+      save();
+      mainEvent('talk',st.npc.id);
+      if(st.npc.act)doNpcAct(st.npc);
     }else typeText(st.lines[st.i]);
   };
 }
-let typing=false,typeTimer=null;
+function closeDlg(){const el=$('#dlg');if(el)el.style.display='none';dlgState=null;document.body.classList.remove('dlging');clearInterval(typeTimer);typing=false}
 function typeText(t){
   const box=$('#dlgTxt');if(!box)return;
   box.textContent='';typing=true;let i=0;
@@ -700,117 +1801,189 @@ function typeText(t){
   typeTimer=setInterval(()=>{
     box.textContent=t.slice(0,++i);
     if(i>=t.length){clearInterval(typeTimer);typing=false}
-  },26);
+  },28);
 }
 function finishTyping(){
   if(!dlgState)return;
   clearInterval(typeTimer);typing=false;
-  $('#dlgTxt').textContent=dlgState.lines[dlgState.i];
+  const box=$('#dlgTxt');if(box)box.textContent=dlgState.lines[dlgState.i];
 }
 
-/* ================= 主线/任务追踪 ================= */
-function currentQuest(){
-  const m=MAIN[S.main.idx];
-  if(!m){
-    return {tag:'主线 · 已通',name:'仙途已至化境，可继续挑战秘境',pct:100,btn:'秘境',icon:'flag',
-      fn:()=>openSheet('fight')};
+/* ================= NPC 功能入口 ================= */
+function doNpcAct(npc){
+  const a=npc.act;
+  if(a==='sect')return openSheet('sect');
+  if(a==='forge'){shopTab='eq';return openSheet('shop')}
+  if(a==='shop')return openSheet('shop');
+  if(a==='daily')return openSheet('daily');
+  if(a==='dungeon')return openSheet('dungeon');
+  if(a==='mount')return openSheet('mount');
+  if(a==='guild')return openSheet('guild');
+  if(a==='arena')return openSheet('arena');
+  if(a==='pet')return openSheet('pet');
+  if(a==='seal')return openSheet('seal');
+  if(a==='ghost')return askGhost();
+  if(a==='duel'){
+    if(S.main.ready||!MAIN[S.main.idx]||MAIN[S.main.idx].k!=='duel')return;
+    return duelNpc(npc);
   }
-  const done=mainProg(m);
-  const pct=Math.min(100,done/m.need*100);
-  const fns={
-    kill:()=>{setScene('bamboo');startWild('bamboo')},
-    catch:()=>{setScene('bamboo');startWild('bamboo')},
-    sect:()=>openSheet('sect'),
-    ghost:()=>startGhost(),
-    seal:()=>openSheet('seal'),
-    seal3:()=>openSheet('seal'),
-    arena:()=>openSheet('arena'),
-    d1:()=>startDungeon('d1'),
-    d2:()=>startDungeon('d2'),
-    d3:()=>startDungeon('d3')
-  };
-  return {tag:'主线 · 第'+(S.main.idx+1)+'章',name:m.n+'　'+done+'/'+m.need,pct,btn:'前往',icon:'scroll',
-    fn:fns[m.k]||(()=>openSheet('daily'))};
 }
-function mainProg(m){
-  if(m.k==='kill')return Math.min(m.need,S.counts.kill||0);
-  if(m.k==='catch')return Math.min(m.need,S.counts.catch||0);
-  if(m.k==='sect')return Math.min(m.need,S.counts.sect||0);
-  if(m.k==='ghost')return Math.min(m.need,S.counts.ghost||0);
-  if(m.k==='seal')return Math.min(m.need,S.counts.seal||0);
-  if(m.k==='seal3')return Math.min(m.need,S.counts.seal||0);
-  if(m.k==='arena')return Math.min(m.need,S.counts.arena||0);
-  if(m.k==='d1'||m.k==='d2'||m.k==='d3')return Math.min(1,S.dun.clears[m.k]?1:0);
-  return 0;
+function askGhost(){
+  modal('夜巡抓鬼','钟九把一盏旧灯笼递过来。\n“走十轮。撑不住就说。”',[
+    {t:'跟他走',gold:1,fn:()=>startGhost()},
+    {t:'改日'}]);
 }
-function advanceMain(k){
-  const m=MAIN[S.main.idx];if(!m)return;
-  if(m.k!==k)return;
-  if(mainProg(m)>=m.need){
-    S.main.idx++;S.main.prog=0;
-    const rw={exp:120+S.main.idx*90,gold:200+S.main.idx*150};
-    addExp(rw.exp);S.gold+=rw.gold;
-    setTimeout(()=>modal('主线达成 · '+m.n,'修为 +'+rw.exp+'　银两 +'+rw.gold,'\n新的篇章已开启，下一目标：'+(MAIN[S.main.idx]?MAIN[S.main.idx].n:'仙途无尽'),[{t:'继续前行',gold:1}]),400);
-  }
+function duelNpc(npc){
+  startBattle({title:'山门验才 · '+npc.n,sub:'第三关',scene:S.scene,waves:[[arenaDef(npc.n,S.lv+2)]],
+    rw:{exp:120+S.lv*20,gold:160,jade:6},
+    onWin:()=>{mainEvent('duel',npc.id);toast('他把剑收回鞘里');},
+    onLose:()=>toast('他留了手。')});
 }
 
-/* ================= 底部导航 ================= */
-const ICONS={
-  sword:'<path d="M12 2.5l2.8 3.8V15L12 18.2 9.2 15V6.3z"/><path d="M6.8 15.2h10.4"/><path d="M12 18.2v3.3"/><path d="M9.6 21.5h4.8"/>',
-  bag:'<path d="M4 9h16l-1.4 11H5.4z"/><path d="M9 9V7a3 3 0 016 0v2"/>',
-  paw:'<circle cx="6.5" cy="8" r="1.8"/><circle cx="12" cy="6" r="1.8"/><circle cx="17.5" cy="8" r="1.8"/><path d="M12 10c3.6 0 6 2.6 6 5.2 0 1.8-1.4 2.8-3 2.8-1.2 0-2-.6-3-.6s-1.8.6-3 .6c-1.6 0-3-1-3-2.8C6 12.6 8.4 10 12 10z"/>',
-  shop:'<path d="M4 8h16l-1.5 4.5V20H5.5v-7.5z"/><path d="M3 8l2-4h14l2 4"/><path d="M9 12v3h6v-3"/>',
-  scroll:'<path d="M6 4h11a2 2 0 012 2v1H8a2 2 0 00-2 2z"/><path d="M6 4a2 2 0 00-2 2v13a1 1 0 001 1h12"/><path d="M8 11h7M8 15h5"/>',
-  map:'<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>',
-  flag:'<path d="M6 21V4"/><path d="M6 5h7l-1 3 1 3H6z"/><path d="M17 9v12"/>',
-  user:'<circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/>',
-  fight:'<path d="M4 20l7-7M20 20l-7-7"/><path d="M6 4l12 12M18 4L6 16"/>',
-  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l4 2"/>'
-};
-function iconSVG(k,size){
-  const p=ICONS[k]||ICONS.scroll;
-  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="width:'+(size||22)+'px;height:'+(size||22)+'px">'+p+'</svg>';
-}
-const DOCK=[
-  {id:'char',n:'修行',i:'user'},
-  {id:'bag',n:'背包',i:'bag'},
-  {id:'fight',n:'挑战',i:'sword',main:true},
-  {id:'pet',n:'灵兽',i:'paw'},
-  {id:'shop',n:'坊市',i:'shop'}
+/* ================= 世界频道 ================= */
+const CHAT_POOL=[
+ {ch:'sys',t:'【系统】暮鼓三声，落霞镇要落锁了。'},
+ {ch:'sys',t:'【系统】寒山今夜有雪，走山道的留意脚下。'},
+ {ch:'sys',t:'【系统】封妖司告示：火云涧封印松动，闲人勿近。'},
+ {ch:'sys',t:'【系统】漕河帮的货船过了桃溪渡，船头挂白灯。'},
+ {ch:'guild',t:'【帮派】柳三：漕河帮招人。夜里走货，胆子大的来。'},
+ {ch:'guild',t:'【帮派】赵五：黄沙驿那趟，还差两个人。'},
+ {ch:'guild',t:'【帮派】书院季生：读书人也收？会写字就行。'},
+ {ch:'world',t:'【世界】卖炭翁：寒山下的炭，今年贵了三文。'},
+ {ch:'world',t:'【世界】背剑少年：山门验才第三关，那个姓谢的真不让。'},
+ {ch:'world',t:'【世界】苏晚：桃溪渡的鱼今天不咬钩。'},
+ {ch:'world',t:'【世界】余七：谁在古寺那边看见灯了？'},
+ {ch:'world',t:'【世界】桃坞客：桃花开了。来看，别摘。'},
+ {ch:'world',t:'【世界】老秦：火云涧的石头烫脚，别穿薄底鞋。'},
+ {ch:'world',t:'【世界】江迟：收玄铁，价钱好说。'},
+ {ch:'world',t:'【世界】赶考书生：请问，去落霞镇走哪条路？'},
+ {ch:'world',t:'【世界】没名字的人：哪条都行。'},
+ {ch:'sys',t:'【系统】县衙贴出告示：妖祸捐，按人头算。'},
+ {ch:'sys',t:'【系统】夜里有雾，渡口停船。'},
+ {ch:'world',t:'【世界】阿水：船停了。要过河的，明早来。'},
+ {ch:'world',t:'【世界】书院季生：先生在窗下坐了一天，没说话。'},
+ {ch:'world',t:'【世界】顾照：剑冢的雪，扫不完的。'},
+ {ch:'guild',t:'【帮派】柳三：今晚不走货。有人要动手，都别出门。'},
+ {ch:'world',t:'【世界】陆青：山上的规矩，山下的活法，哪样都不容易。'},
+ {ch:'sys',t:'【系统】远处传来钟声。一声，两声，停了。'}
 ];
-function renderDock(){
-  const d=$('#dock');
-  d.innerHTML=DOCK.map(x=>x.main
-    ?'<button class="dkMain" data-tab="'+x.id+'"><span class="ring">'+iconSVG(x.i,30)+'</span><span>'+x.n+'</span></button>'
-    :'<button class="dk'+(S.tab===x.id?' on':'')+'" data-tab="'+x.id+'">'+iconSVG(x.i,23)+'<span>'+x.n+'</span></button>'
-  ).join('');
-  d.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>openSheet(b.dataset.tab));
+let chatMsgs=[],chatLast=-1,chatOpen=false,chatFilter='all';
+function initChat(){
+  chatMsgs=[];
+  pushChat('sys','【系统】你回到落霞镇。街口有人在卖热豆腐。');
+  pushChat('world','【世界】温三娘：酒温好了。人没来。');
+  pushChat('guild','【帮派】柳三：新来的？先学会闭嘴。');
+  for(let k=0;k<10;k++){const m=CHAT_POOL[(k*3+2)%CHAT_POOL.length];pushChat(m.ch,m.t)}
+  setInterval(()=>{
+    if(document.hidden)return;
+    let i=Math.floor(Math.random()*CHAT_POOL.length);
+    if(i===chatLast)i=(i+1)%CHAT_POOL.length;
+    chatLast=i;
+    const m=CHAT_POOL[i];
+    pushChat(m.ch,m.t);
+  },ri(8000,14000));
 }
+function pushChat(ch,txt){
+  chatMsgs.push({ch,txt});
+  if(chatMsgs.length>40)chatMsgs.shift();
+  renderChat();
+}
+function chatSystem(txt){pushChat('sys','【系统】'+txt)}
+function renderChat(){
+  const box=$('#chatBody');if(!box)return;
+  const list=chatMsgs.filter(m=>chatFilter==='all'||m.ch===chatFilter);
+  box.innerHTML=list.slice(-16).map(m=>
+    '<div class="ln '+(m.ch==='sys'?'sys':m.ch==='guild'?'guild':m.ch==='me'?'me':'')+'">'+m.txt+'</div>'
+  ).join('');
+  box.scrollTop=box.scrollHeight;
+}
+function toggleChat(force){
+  chatOpen=force===undefined?!chatOpen:force;
+  $('#chat').classList.toggle('open',chatOpen);
+  document.body.classList.toggle('chatOpen',chatOpen);
+  $('#chatTg').textContent=chatOpen?'收起':'展开';
+  if(chatOpen)renderChat();
+}
+
+/* ================= 天候 ================= */
+let weatherType='fog',weatherPts=[],weatherCtx=null,weatherCv=null;
+function setWeather(t){
+  weatherType=t||'fog';
+  weatherCv=$('#weather');if(!weatherCv)return;
+  const r=stageSize(),dpr=Math.min(2,window.devicePixelRatio||1);
+  weatherCv.width=r.w*dpr;weatherCv.height=r.h*dpr;
+  weatherCv.style.width=r.w+'px';weatherCv.style.height=r.h+'px';
+  weatherCtx=weatherCv.getContext('2d');weatherCtx.setTransform(dpr,0,0,dpr,0,0);
+  const cfg={snow:52,rain:64,leaf:22,petal:26,sand:52,ash:34,mist:14,fog:18}[weatherType]||18;
+  weatherPts=[];
+  for(let i=0;i<cfg;i++)weatherPts.push({
+    x:Math.random()*r.w,y:Math.random()*r.h,
+    r:rand(1,3),vx:weatherType==='sand'?rand(22,60):rand(-14,14),
+    vy:weatherType==='snow'?rand(12,34):weatherType==='rain'?rand(260,420):weatherType==='ash'?rand(-26,-10):rand(8,26),
+    a:rand(.2,.75),ph:rand(0,6.28),rot:rand(0,6.28)
+  });
+}
+function weatherLoop(){
+  requestAnimationFrame(weatherLoop);
+  if(!weatherCtx||document.hidden)return;
+  const r=stageSize(),ctx=weatherCtx;
+  ctx.clearRect(0,0,r.w,r.h);
+  const t=Date.now()/1000;
+  weatherPts.forEach(p=>{
+    p.x+=p.vx*.016+Math.sin(t+p.ph)*.3;p.y+=p.vy*.016;
+    if(p.y>r.h+10){p.y=-10;p.x=Math.random()*r.w}
+    if(p.y<-20){p.y=r.h+10;p.x=Math.random()*r.w}
+    if(p.x>r.w+16)p.x=-16;if(p.x<-16)p.x=r.w+16;
+    ctx.globalAlpha=p.a;
+    if(weatherType==='rain'){
+      ctx.strokeStyle='rgba(180,210,225,.75)';ctx.lineWidth=1.1;
+      ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(p.x-3,p.y+16);ctx.stroke();
+    }else if(weatherType==='sand'||weatherType==='ash'){
+      ctx.fillStyle=weatherType==='ash'?'rgba(230,150,110,.6)':'rgba(220,190,140,.55)';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*.8,0,6.283);ctx.fill();
+    }else if(weatherType==='leaf'||weatherType==='petal'){
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot+t*.6);
+      ctx.fillStyle=weatherType==='petal'?'rgba(240,180,200,.7)':'rgba(170,200,140,.6)';
+      ctx.beginPath();ctx.ellipse(0,0,p.r*1.5,p.r*.8,0,0,6.283);ctx.fill();ctx.restore();
+    }else if(weatherType==='mist'||weatherType==='fog'){
+      ctx.fillStyle='rgba(200,220,228,.05)';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*10,0,6.283);ctx.fill();
+    }else{
+      ctx.fillStyle='rgba(240,246,252,.85)';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r*.7,0,6.283);ctx.fill();
+    }
+  });
+  ctx.globalAlpha=1;
+}
+
 
 /* ================= 抽屉渲染 ================= */
 const SHEET_META={
   char:['修行','CULTIVATION'],bag:['行囊','INVENTORY'],pet:['灵兽','SPIRIT BEASTS'],
   shop:['坊市','MARKET'],daily:['日程','DAILY SCHEDULE'],fight:['挑战','CHALLENGE'],
-  sect:['师门二十环','SECT MISSIONS'],seal:['封妖除魔','SEAL DEMONS'],dungeon:['秘境副本','DUNGEONS'],
-  arena:['竞技场','ARENA'],map:['九州舆图','WORLD MAP'],guild:['帮派','GUILD']
+  sect:['师门差遣','SECT MISSIONS'],seal:['封妖','SEAL DEMONS'],dungeon:['秘境','DUNGEONS'],
+  arena:['擂台','ARENA'],map:['山河舆图','WORLD MAP'],guild:['漕河帮','GUILD'],
+  mount:['马厩','STABLE'],skill:['门派武学','SKILLS'],forge:['铁匠铺','FORGE']
 };
 function openSheet(tab){
-  if(tab==='guild')tab='fight';
   S.tab=tab;
   const m=SHEET_META[tab]||['面板',''];
   $('#shTitle').textContent=m[0];$('#shSub').textContent=m[1];
   $('#sheet').classList.add('open');
-  renderSheet();renderDock();
+  document.body.classList.add('sheeting');
+  renderSheet();
 }
-function closeSheet(){$('#sheet').classList.remove('open');S.tab=null;renderDock();renderWorld()}
+function closeSheet(){$('#sheet').classList.remove('open');document.body.classList.remove('sheeting');S.tab=null;renderWorld()}
 $('#shClose').onclick=closeSheet;
 function renderSheet(){
   const b=$('#shBody'),f=$('#shFoot');
   f.innerHTML='';f.style.display='none';
   const fn={char:renderChar,bag:renderBag,pet:renderPet,shop:renderShop,daily:renderDaily,
-    fight:renderFight,sect:renderSect,seal:renderSeal,dungeon:renderDungeon,arena:renderArena,map:renderMap}[S.tab];
+    fight:renderFight,sect:renderSect,seal:renderSeal,dungeon:renderDungeon,arena:renderArena,map:renderMap,
+    guild:renderGuild,mount:renderMount,skill:renderSkill}[S.tab];
   if(fn)fn(b,f);
 }
+
 function statBar(n,v,max,c){return '<div style="flex:1"><div class="mini" style="margin-bottom:3px">'+n+'</div><div class="pbar" style="height:4px"><i style="width:'+clamp(v/max*100,4,100)+'%;background:'+c+'"></i></div><div style="font-size:12px;color:#f0e4cc;margin-top:4px;font-weight:600">'+Math.round(v)+'</div></div>'}
 
 function renderChar(b){
@@ -824,7 +1997,7 @@ function renderChar(b){
       '<div style="font-size:10px;color:#c9bb9a;margin-top:4px;letter-spacing:1px">'+s.name+' · 第 '+S.lv+' 重境界</div>'+
       '<div style="font-size:9.5px;color:#8fa39a;margin-top:5px">'+s.desc+'</div>'+
     '</div>'+
-    '<div style="position:absolute;right:14px;top:14px;font-family:var(--serif);font-size:11px;letter-spacing:1px;color:#f6e2b0;border:1px solid var(--line);padding:3px 9px;border-radius:8px;background:rgba(0,0,0,.4)">战力 '+Math.round(st.atk*2+st.def*1.6+st.hp*.22+st.spd*3)+'</div>'+
+    '<div style="position:absolute;right:14px;top:14px;font-family:var(--serif);font-size:11px;letter-spacing:1px;color:#f6e2b0;border:1px solid var(--line);padding:3px 9px;border-radius:8px;background:rgba(0,0,0,.4)">斤两 '+Math.round(st.atk*2+st.def*1.6+st.hp*.22+st.spd*3)+'</div>'+
   '</div>'+
   '<div class="card pad" style="margin-bottom:12px"><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;text-align:center">'+
     [[st.atk,'攻击','#e08a7a'],[st.def,'防御','#7fc4d8'],[st.spd,'速度','#b8d88a'],[(st.crit*100).toFixed(1)+'%','暴击','#f0d49a']].map(x=>
@@ -832,6 +2005,12 @@ function renderChar(b){
       '<div style="height:2px;width:22px;margin:5px auto;border-radius:2px;background:'+x[2]+';opacity:.75"></div>'+
       '<div class="mini">'+x[1]+'</div></div>').join('')+
   '</div></div>'+
+  '<div class="h2">随身</div>'+
+  '<div class="grid3" style="grid-template-columns:repeat(3,1fr)">'+
+    '<button class="btn sm" data-nav="bag">行囊</button>'+
+    '<button class="btn sm" data-nav="skill">武学</button>'+
+    '<button class="btn sm" data-nav="mount">马厩</button>'+
+  '</div>'+
   '<div class="h2">装备 · 六合</div>'+
   '<div class="grid3">'+EQUIP_SLOTS.map(sl=>{
     const it=S.equip[sl.id];
@@ -846,11 +2025,12 @@ function renderChar(b){
   cultRow('法宝·乾坤袋','防御 +3 / 级',S.art.qiankun,'qiankun',30*(S.art.qiankun+1),'jade');
   b.querySelectorAll('[data-eq]').forEach(el=>el.onclick=()=>{
     const it=S.equip[el.dataset.eq];
-    if(!it)return modal('未装备','该部位尚未装备，可前往坊市购买或通过秘境掉落获取。');
+    if(!it)return modal('空着','这块还空着。\n去铁匠铺看看，或者下趟秘境。');
     modal(it.name+' +'+it.up,'品质：'+QUALITY[it.q].n+'\n攻击 +'+Math.round(it.b.atk)+'　防御 +'+Math.round(it.b.def)+'\n气血 +'+Math.round(it.b.hp)+'　暴击 +'+(it.b.crit*100).toFixed(1)+'%',
       [{t:'强化 ('+S.bag.stone+'石)',fn:()=>upgradeEquip(el.dataset.eq)},{t:'卸下',fn:()=>{S.gear.push(it);S.equip[el.dataset.eq]=null;save();renderSheet();renderHUD()}}]);
   });
   b.querySelectorAll('[data-up]').forEach(el=>el.onclick=()=>upgradeCult(el.dataset.up));
+  b.querySelectorAll('[data-nav]').forEach(el=>el.onclick=()=>openSheet(el.dataset.nav));
 }
 function cultRow(n,d,lv,key,cost,cur){
   return '<div class="row"><div class="ico">'+lv+'</div><div class="main"><div class="nm">'+n+' <span class="tag">'+(cur==='jade'?'仙玉':'银两')+' '+fmt(cost)+'</span></div><div class="ds">'+d+'</div></div>'+
@@ -864,7 +2044,7 @@ function upgradeCult(key){
   if(key==='qiankun'){cost=30*(S.art.qiankun+1);cur='jade'}
   if(cur==='jade'){if(S.jade<cost)return toast('仙玉不足');S.jade-=cost;S.art[key]++}
   else{if(S.gold<cost)return toast('银两不足');S.gold-=cost;if(key==='cult')S.cult++;else S.mount++}
-  addExp(30);save();renderSheet();renderHUD();toast('提升成功');
+  addExp(30);save();renderSheet();renderHUD();toast('长了一点');
 }
 function upgradeEquip(slot){
   const it=S.equip[slot];if(!it)return;
@@ -894,7 +2074,7 @@ function renderBag(b,f){
     '<div class="main"><div class="nm" style="color:'+QUALITY[it.q].c+'">'+it.name+' <span class="mini">+'+it.up+'</span></div>'+
     '<div class="ds">'+qualText(it)+'</div></div>'+
     '<div class="rt"><button class="btn sm gold" data-wear="'+i+'">穿戴</button><button class="btn sm dim" data-sell="'+i+'">分解</button></div></div>'
-  ).join(''):'<div class="empty">暂无装备，可前往坊市购买或挑战秘境</div>');
+  ).join(''):'<div class="empty">身上空着\n去铁匠铺看看，或下趟秘境</div>');
   b.querySelectorAll('[data-it]').forEach(el=>el.onclick=()=>{
     const k=el.dataset.it,it=ITEMS[k];
     if(it.use==='hp'){
@@ -915,7 +2095,7 @@ function renderBag(b,f){
   b.querySelectorAll('[data-sell]').forEach(el=>el.onclick=()=>{
     const i=+el.dataset.sell,it=S.gear[i];
     const g=Math.round(120*it.q*1.5+(it.up||0)*80);
-    S.gold+=g;S.gear.splice(i,1);save();renderSheet();renderHUD();toast('分解获得 '+g+' 银两');
+    S.gold+=g;S.gear.splice(i,1);save();renderSheet();renderHUD();toast('拆了，换 '+g+' 银两');
   });
 }
 function qualText(it){
@@ -942,16 +2122,16 @@ function renderPet(b){
       '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,18,.25),rgba(8,12,18,.95))"></div>'+
       '<div style="position:absolute;left:16px;right:16px;bottom:14px">'+
         '<div style="font-family:var(--serif);font-size:20px;letter-spacing:3px;color:#fbf2de">尚未结契</div>'+
-        '<div style="font-size:10px;color:#b9c2ba;margin-top:6px;line-height:1.8">战斗中将其气血压至 35% 以下，点击「捕捉」即可收服。<br>资质越高，出战时助阵越强。</div>'+
+        '<div style="font-size:10px;color:#b9c2ba;margin-top:6px;line-height:1.8">把它打到三成血以下，再按「捕捉」。\n资质好的，跟得久。</div>'+
       '</div>'+
     '</div>'+
-    '<button class="btn gold wide lg" id="toWild">前往青竹幽径捕捉</button>'+
+    '<button class="btn gold wide lg" id="toWild">去青竹涧找一只</button>'+
     '<div class="h2">可结契妖兽</div>'+
     Object.keys(MOBS).filter(k=>MOBS[k].pet).slice(0,4).map(k=>
       '<div class="row"><div class="ico" style="background:url('+MOBS[k].art+') center 35%/cover;color:transparent;'+(MOBS[k].tint?'filter:'+MOBS[k].tint:'')+'">·</div>'+
       '<div class="main"><div class="nm">'+MOBS[k].n+'</div><div class="ds">出没于 Lv.'+MOBS[k].lv+' 以上地界</div></div>'+
-      '<div class="rt"><span class="tag">可捕捉</span></div></div>').join('');
-    b.querySelector('#toWild').onclick=()=>{closeSheet();setScene('bamboo');startWild('bamboo')};
+      '<div class="rt"><span class="tag">可结契</span></div></div>').join('');
+    b.querySelector('#toWild').onclick=()=>{closeSheet();travelTo('bamboo',640,1000);toast('竹涧里有的是妖')};
     return;
   }
   const p=S.pets[S.petOn];
@@ -961,7 +2141,7 @@ function renderPet(b){
         '<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,10,15,.15),rgba(6,10,15,.92))"></div>'+
         '<div style="position:absolute;left:16px;bottom:12px">'+
           '<div style="font-family:var(--serif);font-size:22px;letter-spacing:3px;color:#fbf2de">'+p.name+'</div>'+
-          '<div style="font-size:10px;color:#c9bb9a;margin-top:3px">Lv.'+p.lv+'　资质 '+p.qual.toFixed(2)+'　战力 '+Math.round(p.lv*6*p.qual)+'</div>'+
+          '<div style="font-size:10px;color:#c9bb9a;margin-top:3px">Lv.'+p.lv+'　资质 '+p.qual.toFixed(2)+'　凶性 '+Math.round(p.lv*6*p.qual)+'</div>'+
         '</div>'+
         '<div style="position:absolute;right:12px;top:12px;font-size:9px;padding:3px 8px;border-radius:7px;background:rgba(0,0,0,.55);border:1px solid var(--line);color:#f6e2b0">出战中</div>'+
       '</div>'+
@@ -1019,7 +2199,7 @@ function renderShop(b){
       const it=ITEMS[k];
       return '<div class="row"><div class="ico">'+it.i+'</div><div class="main"><div class="nm">'+it.n+'</div><div class="ds">'+it.d+'</div></div>'+
       '<div class="rt"><span class="'+(it.jade?'tag p':'tag')+'">'+(it.jade?it.price+' 仙玉':fmt(it.price)+' 银两')+'</span>'+
-      '<button class="btn sm gold" data-buy="'+k+'">购买</button></div></div>'
+      '<button class="btn sm gold" data-buy="'+k+'">买下</button></div></div>'
     }).join('');
   }
   b.innerHTML='<div class="tabs">'+tabs.map(t=>'<button class="tab '+(shopTab===t[0]?'on':'')+'" data-st="'+t[0]+'">'+t[1]+'</button>').join('')+'</div>'+list;
@@ -1063,7 +2243,7 @@ function renderDaily(b){
   const chests=[{p:30,n:'小宝箱'},{p:60,n:'中宝箱'},{p:100,n:'大宝箱'}];
   b.innerHTML='<div class="card pad" style="margin-bottom:6px">'+
     '<div style="display:flex;align-items:baseline;gap:8px"><div style="font-family:var(--serif);font-size:34px;color:#f6e2b0;line-height:1">'+pts+'</div><div class="mini">/ 100 活跃度</div>'+
-    '<div style="margin-left:auto;font-size:9px;color:#8b9a95">每日 05:00 重置</div></div>'+
+    '<div style="margin-left:auto;font-size:9px;color:#8b9a95">天亮时重记</div></div>'+
     '<div class="pbar" style="height:7px;margin-top:10px"><i style="width:'+pts+'%"></i></div>'+
     '<div style="display:flex;gap:8px;margin-top:12px">'+chests.map((c,i)=>{
       const got=S.daily.claimed.includes(i);
@@ -1092,9 +2272,9 @@ function renderDaily(b){
     else if(k==='seal')openSheet('seal');
     else if(k==='dungeon')openSheet('dungeon');
     else if(k==='arena')openSheet('arena');
-    else if(k==='catch'){setScene('bamboo');startWild('bamboo')}
-    else if(k==='upgrade'){openSheet('char');toast('选择装备进行强化')}
-    else if(k==='talk'){setScene('city');toast('与城中 NPC 对话')}
+    else if(k==='catch'){travelTo('bamboo',640,1000);toast('去青竹涧，把妖打弱了再结契')}
+    else if(k==='upgrade'){shopTab='eq';openSheet('shop');toast('选一件，交给周铁山')}
+    else if(k==='talk'){travelTo('town',470,1050);toast('街上有的是人')}
     else if(k==='buy')openSheet('shop');
     else if(k==='wash')openSheet('pet');
   });
@@ -1103,15 +2283,15 @@ function renderDaily(b){
 /* ---------------- 挑战 ---------------- */
 function renderFight(b){
   const rows=[
-    {t:'师门二十环',d:'第 '+(S.sectQ.idx+1)+' / 20 环 · 经验与银两大宗',i:'门',fn:()=>{closeSheet();openSheet('sect')}},
-    {t:'抓鬼一条龙',d:'10 轮连战 · 宠物经验与兽诀',i:'鬼',fn:()=>{closeSheet();startGhost()},tag:'每日 '+Math.min(S.counts.ghost,1)+'/1'},
-    {t:'封妖除魔',d:'封印妖王 · 强化石与仙品装备',i:'妖',fn:()=>{closeSheet();openSheet('seal')},tag:'每日 '+Math.min(S.counts.seal,3)+'/3'},
-    {t:'秘境副本',d:'三重波次 · 装备与大量资源',i:'境',fn:()=>{closeSheet();openSheet('dungeon')}},
-    {t:'竞技场',d:'与其他修士切磋 · 排名奖励',i:'斗',fn:()=>{closeSheet();openSheet('arena')},tag:'排名 '+S.arena.pts},
-    {t:'帮派任务',d:'为帮派效力 · 获取贡献',i:'帮',fn:()=>{closeSheet();startGuild()},tag:'贡献 '+S.guild.contrib},
-    {t:'野外降妖',d:'当前场景随机遭遇妖兽',i:'野',fn:()=>{closeSheet();startWild(S.scene)}}
+    {t:'师门差遣',d:'第 '+(S.sectQ.idx+1)+' / 20 环。陈守拙记着账。',i:'门',fn:()=>{closeSheet();openSheet('sect')}},
+    {t:'夜巡抓鬼',d:'十轮夜路。钟九提灯在前。',i:'鬼',fn:()=>{closeSheet();startGhost()},tag:'今日 '+Math.min(S.counts.ghost,1)+'/1'},
+    {t:'封妖',d:'替封妖司关门。门后头的东西，不老。',i:'妖',fn:()=>{closeSheet();openSheet('seal')},tag:'今日 '+Math.min(S.counts.seal,3)+'/3'},
+    {t:'秘境',d:'守境人开的口子，只开三次。',i:'境',fn:()=>{closeSheet();openSheet('dungeon')}},
+    {t:'擂台',d:'霍七的台子。赢了有积分，输了有伤。',i:'斗',fn:()=>{closeSheet();openSheet('arena')},tag:'积分 '+S.arena.pts},
+    {t:'帮派差事',d:'漕河帮的货，夜里走。',i:'帮',fn:()=>{closeSheet();openSheet('guild')},tag:'贡献 '+S.guild.contrib},
+    {t:'野外',d:'走出镇子，遇上什么算什么。',i:'野',fn:()=>{closeSheet();toast('往东走，或者往南坐船')}}
   ];
-  b.innerHTML='<div class="h2">今日可做</div>'+rows.map((r,i)=>
+  b.innerHTML='<div class="h2">手上的事</div>'+rows.map((r,i)=>
     '<div class="row"><div class="ico">'+r.i+'</div><div class="main"><div class="nm">'+r.t+(r.tag?' <span class="tag">'+r.tag+'</span>':'')+'</div><div class="ds">'+r.d+'</div></div>'+
     '<div class="rt"><button class="btn sm gold" data-f="'+i+'">前往</button></div></div>').join('');
   b.querySelectorAll('[data-f]').forEach(el=>el.onclick=()=>rows[+el.dataset.f].fn());
@@ -1119,12 +2299,12 @@ function renderFight(b){
 
 /* ---------------- 师门 ---------------- */
 function sectTask(){
-  const pool=SCENES.filter(s=>!s.town&&s.lv<=Math.max(1,S.lv));
-  const sc=pool.length?pool[(S.sectQ.idx+S.lv)%pool.length]:SCENES[1];
-  const mp=sc.mobs.filter(k=>MOBS[k].lv<=S.lv+3);
-  const arr=mp.length?mp:sc.mobs;
-  const mob=arr[S.sectQ.idx%arr.length];
-  return {sc:sc.id,mob,need:2+(S.sectQ.idx%3),lv:S.lv+2};
+  const pool=SCENES.filter(s=>!s.town&&s.lv<=Math.max(2,S.lv+3));
+  const sc=pool.length?pool[(S.sectQ.idx+S.lv)%pool.length]:sceneById('bamboo');
+  const keys=[];
+  (sc.mobs||[]).forEach(g=>{if(MOBS[g.key].lv<=S.lv+6)keys.push(g.key)});
+  const mob=keys.length?keys[S.sectQ.idx%keys.length]:'wolf';
+  return {sc:sc.id,mob,need:2+(S.sectQ.idx%3),lv:Math.max(2,S.lv+2)};
 }
 function renderSect(b){
   const t=sectTask(),done=S.sectQ.idx>=20;
@@ -1138,49 +2318,60 @@ function renderSect(b){
     '<div style="font-family:var(--serif);font-size:19px;letter-spacing:2px;color:#fbf2de">'+(S.sectQ.idx+1)+' · 前往「'+SCENES.find(s=>s.id===t.sc).n+'」</div>'+
     '<div class="mini" style="margin-top:7px">讨伐 '+MOBS[t.mob].n+'　'+Math.min(S.sectQ.prog,t.need)+' / '+t.need+'</div>'+
     '<div class="pbar" style="margin-top:8px"><i style="width:'+Math.min(100,S.sectQ.prog/t.need*100)+'%"></i></div>'+
-    '<div class="mini" style="margin-top:10px;color:#8fa39a">奖励：修为 '+(120+S.sectQ.idx*30)+'　银两 '+(180+S.sectQ.idx*40)+'　师门贡献 +1</div>'+
+    '<div class="mini" style="margin-top:10px;color:#8fa39a">换来：修为 '+(120+S.sectQ.idx*30)+'　银两 '+(180+S.sectQ.idx*40)+'　师门记一笔</div>'+
   '</div>'+
   '<button class="btn gold wide lg" id="doSect">前往应战</button>')+
   '<div class="h2">师门说明</div>'+
-  '<div class="mini" style="line-height:2;padding:0 4px">每环需击败指定妖兽。二十环为一轮，每日可完成一轮，贡献可用于帮派与法宝淬炼。</div>';
+  '<div class="mini" style="line-height:2;padding:0 4px">每环需击败指定妖兽。二十环为一轮，走完一轮，陈守拙会在账本上记一笔。\n手上功夫，还得自己练。</div>'+
+  '<div class="grid3" style="grid-template-columns:repeat(3,1fr);margin-top:14px">'+
+    '<button class="btn sm" data-link="skill">武学</button>'+
+    '<button class="btn sm" data-link="char">修炼</button>'+
+    '<button class="btn sm" data-link="mount">马厩</button>'+
+  '</div>';
+  b.querySelectorAll('[data-link]').forEach(el=>el.onclick=()=>openSheet(el.dataset.link));
   const btn=b.querySelector('#doSect');
   if(btn)btn.onclick=()=>{
-    closeSheet();setScene(t.sc);
-    startBattle({title:'师门任务 · 第'+(S.sectQ.idx+1)+'环',sub:'讨伐 '+MOBS[t.mob].n,scene:t.sc,
-      waves:[Array(Math.min(2,t.need-S.sectQ.prog)).fill(0).map(()=>({key:t.mob,lv:t.lv}))],
-      onWin:()=>{
-        S.sectQ.prog++;
-        S.counts.sect=(S.counts.sect||0)+1;
-        if(S.sectQ.prog>=t.need){
-          const rx=120+S.sectQ.idx*30,rg=180+S.sectQ.idx*40;
-          addExp(rx);S.gold+=rg;S.guild.contrib++;S.sectQ.idx++;S.sectQ.prog=0;S.sectQ.done++;
-          toast('师门第 '+S.sectQ.idx+' 环完成');
-          if(S.sectQ.idx>=20)setTimeout(()=>modal('师门二十环 · 圆满','一日二十环，你已尽数走完。\n修为大涨，师门上下另眼相看。'),600);
-        }
-        advanceMain('sect');advanceMain('kill');
-      }});
+    closeSheet();
+    const sc=sceneById(t.sc);
+    travelTo(t.sc,sc.spawn.x,sc.spawn.y);
+    toast('往 '+sc.n+' 去');
+    setTimeout(()=>{
+      if(B)return;
+      startBattle({title:'师门差遣 · 第'+(S.sectQ.idx+1)+'环',sub:'讨伐 '+MOBS[t.mob].n,scene:t.sc,
+        waves:[Array(Math.min(2,t.need-S.sectQ.prog)).fill(0).map(()=>({key:t.mob,lv:t.lv}))],
+        onWin:()=>{
+          S.sectQ.prog++;
+          S.counts.sect=(S.counts.sect||0)+1;
+          if(S.sectQ.prog>=t.need){
+            const rx=120+S.sectQ.idx*30,rg=180+S.sectQ.idx*40;
+            addExp(rx);S.gold+=rg;S.guild.contrib++;S.sectQ.idx++;S.sectQ.prog=0;S.sectQ.done++;
+            toast('师门第 '+S.sectQ.idx+' 环，交了差');
+            if(S.sectQ.idx>=20)setTimeout(()=>modal('师门二十环 · 圆满','二十环走完，天也黑了。\n陈守拙把账本合上，说了一句：还行。'),600);
+          }
+        }});
+    },760);
   };
 }
 
 /* ---------------- 封妖 ---------------- */
 function renderSeal(b){
   rollSealIfNeeded();
-  b.innerHTML='<div class="mini" style="line-height:1.9;padding:0 2px 10px">每日可封印三只妖王，气血与攻击远超同阶。战胜可获得强化石、玄铁与仙玉。</div>'+
+  b.innerHTML='<div class="mini" style="line-height:1.9;padding:0 2px 10px">封妖司每日只开三扇门。门后的东西，比同阶妖兽硬得多。打赢了，门就关上一年。</div>'+
   S.seal.list.map((x,i)=>{
     const m=MOBS[x.mob];
     return '<div class="row"><div class="ico" style="background:url('+m.art+') center 35%/cover;color:transparent">·</div>'+
-    '<div class="main"><div class="nm">'+m.n+' <span class="tag r">Lv.'+x.lv+'</span></div><div class="ds">'+(x.done?'已封印':'妖气冲天，为祸一方')+'</div></div>'+
-    '<div class="rt"><button class="btn sm '+(x.done?'dim':'gold')+'" data-seal="'+i+'" '+(x.done?'disabled':'')+'>'+(x.done?'已封印':'封印')+'</button></div></div>'
+    '<div class="main"><div class="nm">'+m.n+' <span class="tag r">Lv.'+x.lv+'</span></div><div class="ds">'+(x.done?'门已关上':'门还开着。里面的东西在等。')+'</div></div>'+
+    '<div class="rt"><button class="btn sm '+(x.done?'dim':'gold')+'" data-seal="'+i+'" '+(x.done?'disabled':'')+'>'+(x.done?'已封':'封印')+'</button></div></div>'
   }).join('');
   b.querySelectorAll('[data-seal]').forEach(el=>el.onclick=()=>{
     const i=+el.dataset.seal,x=S.seal.list[i];
     closeSheet();
-    startBattle({title:'封妖 · '+MOBS[x.mob].n,sub:'妖王之战',scene:'demon',waves:[[{key:x.mob,lv:x.lv}]],
+    startBattle({title:'封妖 · '+MOBS[x.mob].n,sub:'门后',scene:'demon',waves:[[{key:x.mob,lv:x.lv}]],
       onWin:()=>{
         x.done=true;S.counts.seal=(S.counts.seal||0)+1;
         S.gold+=420;addExp(680);addItem('stone',2);addItem('forge',2);
         if(Math.random()<.35)addItem('wash',1);
-        toast('封印成功 · 奖励已入行囊');advanceMain('seal');advanceMain('seal3');
+        toast('门关上了');mainEvent('seal',x.mob);
       }});
   });
 }
@@ -1196,10 +2387,10 @@ function renderDungeon(b){
       '<div style="display:flex;gap:12px;align-items:center">'+
         '<div style="width:54px;height:54px;border-radius:14px;background:url('+d.art+') center 40%/cover;border:1px solid var(--line);flex:none"></div>'+
         '<div style="flex:1"><div style="font-family:var(--serif);font-size:16px;letter-spacing:2px;color:#fbf2de">'+d.n+'</div>'+
-        '<div class="mini" style="margin-top:4px">推荐 Lv.'+d.lv+' · 三重波次</div></div>'+
-        '<button class="btn sm '+(lock?'dim':'gold')+'" data-dun="'+d.id+'" '+(lock?'disabled':'')+'>'+(lock?'未解锁':'进入')+'</button>'+
+        '<div class="mini" style="margin-top:4px;line-height:1.7">'+d.d+'</div></div>'+
+        '<button class="btn sm '+(lock?'dim':'gold')+'" data-dun="'+d.id+'" '+(lock?'disabled':'')+'>'+(lock?'未通':'进去')+'</button>'+
       '</div>'+
-      '<div class="mini" style="margin-top:9px;color:#8fa39a">奖励：修为 '+d.rw.exp+'　银两 '+d.rw.gold+'　'+(S.dun.clears[d.id]?'<span style="color:#8fe0bd">已首通</span>':'首通额外仙玉')+'</div>'+
+      '<div class="mini" style="margin-top:9px;color:#8fa39a">带得出来：修为 '+d.rw.exp+'　银两 '+d.rw.gold+'　'+(S.dun.clears[d.id]?'<span style="color:#8fe0bd">已经走过一遍</span>':'第一回另有一份仙玉')+'</div>'+
     '</div>'
   }).join('');
   b.querySelectorAll('[data-dun]').forEach(el=>el.onclick=()=>{closeSheet();startDungeon(el.dataset.dun)});
@@ -1209,17 +2400,18 @@ function renderDungeon(b){
 function renderArena(b){
   b.innerHTML='<div class="card pad" style="margin-bottom:12px;display:flex;align-items:center;gap:14px">'+
     '<div style="font-family:var(--serif);font-size:32px;color:#f6e2b0">'+S.arena.pts+'</div>'+
-    '<div><div class="mini">竞技积分</div><div style="font-size:10px;color:#8fa39a;margin-top:3px">胜 '+S.arena.wins+'　负 '+S.arena.lose+'</div></div>'+
-    '<div style="margin-left:auto;font-size:9px;color:#8fa39a;text-align:right">今日 '+Math.min(S.counts.arena,5)+'/5<br>每日 5 场</div>'+
+    '<div><div class="mini">台上的分</div><div style="font-size:10px;color:#8fa39a;margin-top:3px">胜 '+S.arena.wins+'　负 '+S.arena.lose+'</div></div>'+
+    '<div style="margin-left:auto;font-size:9px;color:#8fa39a;text-align:right">今日 '+Math.min(S.counts.arena,5)+'/5<br>多了伤身</div>'+
   '</div>'+
-  '<div class="h2">挑战对手</div>'+
-  (S.counts.arena>=5?'<div class="empty">今日挑战次数已用尽\n明日再来，或提升修为后继续</div>':
+  '<div class="h2">台上的人</div>'+
+  (S.counts.arena>=5?'<div class="empty">今日五场已满\n霍七说：回去睡</div>':
   [0,1,2].map(i=>{
     const nm=ARENA_NAMES[(S.arena.pts+i*7+S.lv)%ARENA_NAMES.length];
     const lv=S.lv+ri(-1,2);
+    const notes=['听说他从不先出手','赢了也不笑','上个月才来过','手上有旧伤','没人知道他叫什么'];
     return '<div class="row"><div class="ico">'+nm.slice(0,1)+'</div><div class="main"><div class="nm">'+nm+' <span class="tag">Lv.'+lv+'</span></div>'+
-    '<div class="ds">积分 '+(S.arena.pts+i*23)+'　'+(i===0?'初入江湖':i===1?'小有名气':'一方高手')+'</div></div>'+
-    '<div class="rt"><button class="btn sm gold" data-ar="'+i+'">挑战</button></div></div>'
+    '<div class="ds">'+notes[i]+'</div></div>'+
+    '<div class="rt"><button class="btn sm gold" data-ar="'+i+'">上台</button></div></div>'
   }).join(''));
   b.querySelectorAll('[data-ar]').forEach(el=>el.onclick=()=>{
     const i=+el.dataset.ar;
@@ -1230,7 +2422,7 @@ function renderArena(b){
 
 /* ---------------- 舆图 ---------------- */
 function renderMap(b){
-  b.innerHTML='<div class="mini" style="padding:0 2px 10px">八处地界，各有妖兽与机缘。境界不足者慎入。</div>'+
+  b.innerHTML='<div class="mini" style="padding:0 2px 10px">八处地界。走得到的地方，脚会告诉你；走不到的，图上也没有。</div>'+
   '<div class="grid2">'+SCENES.map(s=>{
     const lock=S.lv<s.lv;
     return '<button class="scCard" style="background-image:url('+s.art+')" data-sc="'+s.id+'">'+
@@ -1241,9 +2433,72 @@ function renderMap(b){
   b.querySelectorAll('[data-sc]').forEach(el=>el.onclick=()=>{
     const s=SCENES.find(x=>x.id===el.dataset.sc);
     if(S.lv<s.lv)return toast('境界不足，需 Lv.'+s.lv);
-    closeSheet();setScene(s.id);toast('已抵达 '+s.n);
+    closeSheet();travelTo(s.id,s.spawn.x,s.spawn.y);toast('往 '+s.n+' 去');
   });
 }
+
+/* ---------------- 帮派 / 马厩 / 武学 ---------------- */
+function renderGuild(b){
+  const lv=Math.min(9,1+Math.floor(S.guild.contrib/12));
+  b.innerHTML='<div class="card pad" style="margin-bottom:12px">'+
+    '<div style="display:flex;align-items:center;gap:12px"><div class="ico" style="width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-family:var(--serif);font-size:20px;color:#f6e2b0;background:rgba(217,180,108,.12);border:1px solid var(--line)">漕</div>'+
+    '<div><div style="font-family:var(--serif);font-size:17px;letter-spacing:2px;color:#fbf2de">漕河帮 · 挂名</div>'+
+    '<div class="mini" style="margin-top:3px">帮众不问你从哪来，只问你敢不敢走夜路。</div></div></div>'+
+    '<div style="display:flex;gap:16px;margin-top:12px"><div><div class="mini">贡献</div><div style="font-family:var(--serif);font-size:21px;color:#f6e2b0">'+S.guild.contrib+'</div></div>'+
+    '<div><div class="mini">帮中位次</div><div style="font-family:var(--serif);font-size:21px;color:#f6e2b0">'+lv+' 等</div></div>'+
+    '<div style="margin-left:auto;text-align:right;font-size:9px;color:#8b9a95;line-height:1.8">今日差事<br>'+Math.min(S.counts.guild||0,3)+' / 3</div></div>'+
+  '</div>'+
+  '<div class="h2">今日差事</div>'+
+  (S.counts.guild>=3?'<div class="empty">今日的货走完了\n柳三说：回去睡吧</div>':
+  '<div class="row"><div class="ico">货</div><div class="main"><div class="nm">走一趟夜货</div><div class="ds">路不长，但有人不想让货到。</div></div>'+
+  '<div class="rt"><button class="btn sm gold" id="guildGo">接</button></div></div>')+
+  '<div class="h2">帮规</div><div class="mini" style="line-height:2;padding:0 4px">不抢同帮的货。不在码头动手。出了事，自己担。\n——柳三说，这三条记不住，就别挂名。</div>';
+  const g=b.querySelector('#guildGo');if(g)g.onclick=()=>{closeSheet();startGuild()};
+}
+function renderMount(b){
+  const spdMul=(1.5+S.mount*.03).toFixed(2);
+  b.innerHTML='<div class="card" style="padding:0;overflow:hidden;margin-bottom:12px">'+
+    '<div style="height:158px;background:linear-gradient(180deg,#18222b,#0a1016);position:relative;overflow:hidden">'+
+    '<div style="position:absolute;inset:0;background:radial-gradient(58% 52% at 50% 72%,rgba(217,180,108,.18),transparent 72%)"></div>'+
+    '<div style="position:absolute;left:50%;bottom:2px;transform:translateX(-50%);width:186px;opacity:.96">'+mountSVG()+'</div>'+
+    '<div style="position:absolute;left:16px;bottom:12px"><div style="font-family:var(--serif);font-size:21px;letter-spacing:3px;color:#fbf2de">瘦马</div>'+
+    '<div class="mini" style="margin-top:3px">马老六说：它不认路，认人。</div></div>'+
+    '<div style="position:absolute;right:12px;top:12px;font-size:9px;padding:3px 8px;border-radius:7px;background:rgba(0,0,0,.55);border:1px solid var(--line);color:#f6e2b0">'+(S.mountOn?'已召唤':'未召唤')+'</div></div>'+
+    '<div style="padding:12px 14px;display:flex;gap:14px">'+
+    '<div><div class="mini">脚力</div><div style="font-family:var(--serif);font-size:18px;color:#f6e2b0">'+spdMul+' 倍</div></div>'+
+    '<div><div class="mini">气血</div><div style="font-family:var(--serif);font-size:18px;color:#f6e2b0">+'+S.mount*22+'</div></div>'+
+    '<div style="margin-left:auto"><button class="btn sm '+(S.mountOn?'dim':'gold')+'" id="mountGo">'+(S.mountOn?'下马':'召唤')+'</button></div></div>'+
+  '</div>'+
+  '<div class="h2">喂养</div>'+
+  '<div class="row"><div class="ico">'+S.mount+'</div><div class="main"><div class="nm">草料与蹄铁 <span class="tag">'+fmt(600*(S.mount+1))+' 银两</span></div>'+
+  '<div class="ds">喂一次，它能多跑一程。脚力 +3%，气血 +22。</div></div>'+
+  '<div class="rt"><button class="btn sm gold" id="mountUp">喂养</button></div></div>'+
+  '<div class="mini" style="line-height:2;padding:6px 4px">马老六说，别在夜里喂它。\n——问他为什么，他不说。</div>';
+  const g=b.querySelector('#mountGo');if(g)g.onclick=()=>{toggleMount();renderSheet()};
+  const u=b.querySelector('#mountUp');if(u)u.onclick=()=>{
+    const cost=600*(S.mount+1);
+    if(S.gold<cost)return toast('银两不足');
+    S.gold-=cost;S.mount++;save();renderHUD();renderSheet();toast('马精神了些');
+  };
+}
+function renderSkill(b){
+  const sk=SECTS[S.sect].skills;
+  b.innerHTML='<div class="mini" style="padding:0 2px 10px">'+SECTS[S.sect].name+'的武学。练一遍，手熟一分。</div>'+
+  sk.map((k,i)=>{
+    const lv=S.skLv[i]||1,cost=260*lv*lv;
+    return '<div class="row"><div class="ico" style="font-family:var(--serif)">'+k.i+'</div>'+
+      '<div class="main"><div class="nm">'+k.n+' <span class="tag">Lv.'+lv+'</span><span class="mini" style="margin-left:4px">法力 '+k.mp+'</span></div>'+
+      '<div class="ds">'+k.d+'</div><div class="mini" style="margin-top:3px;color:#8fa39a">威力 '+(k.pw?Math.round(k.pw*100*lv):'—')+'%</div></div>'+
+      '<div class="rt"><button class="btn sm '+(lv>=9?'dim':'gold')+'" data-sk="'+i+'" '+(lv>=9?'disabled':'')+'>'+(lv>=9?'已满':'修炼<br>'+fmt(cost))+'</button></div></div>';
+  }).join('')+
+  '<div class="h2">心法</div><div class="mini" style="line-height:2;padding:0 4px">每重武学，威力加六分。练到第九重，师傅也没什么可教的了。</div>';
+  b.querySelectorAll('[data-sk]').forEach(el=>el.onclick=()=>{
+    const i=+el.dataset.sk,lv=S.skLv[i]||1,cost=260*lv*lv;
+    if(S.gold<cost)return toast('银两不足');
+    S.gold-=cost;S.skLv[i]=lv+1;save();renderHUD();renderSheet();toast(SECTS[S.sect].skills[i].n+' · 第 '+(lv+1)+' 重');
+  });
+}
+
 
 /* ================= 战斗引擎 ================= */
 let B=null;
@@ -1264,11 +2519,11 @@ function startBattle(cfg){
   if(S.mp<0||S.mp>st.mp)S.mp=st.mp;
   B={cfg,wave:0,enemies:[],p:{hp:Math.round(S.hp),mp:Math.round(S.mp),buffs:{},rage:40},busy:false,auto:false,target:0,over:false};
   B.cfg.scene=B.cfg.scene||S.scene;
+  W.paused=true;
   spawnWave();
   renderBattleShell();
   $('#battle').classList.remove('hidden');
   S.tab=null;$('#sheet').classList.remove('open');
-  renderDock();
   updateBars();
 }
 function spawnWave(){
@@ -1281,6 +2536,7 @@ function renderBattleShell(){
   const cfg=B.cfg;
   const s=SECTS[S.sect];
   const sc=SCENES.find(x=>x.id===cfg.scene)||curScene();
+  const canCatch=B.enemies.some(e=>MOBS[e.key]&&MOBS[e.key].pet)&&!B.enemies.some(e=>MOBS[e.key]&&MOBS[e.key].boss);
   const html=
   '<div id="btBg" style="background-image:url('+sc.art+')"></div>'+
   '<div class="btTint"></div>'+
@@ -1293,7 +2549,7 @@ function renderBattleShell(){
     '<div class="cmdTop"><span class="rageTxt">怒气</span><div class="rage"><i id="rageFill"></i></div><span class="rageTxt" id="waveTxt"></span></div>'+
     '<div class="skills" id="skills"></div>'+
     '<div class="btRow"><button class="btn sm" id="basicBtn">普通攻击</button>'+
-      '<button class="btn sm jade" id="catchBtn">捕捉</button>'+
+      (canCatch?'<button class="btn sm jade" id="catchBtn">捕捉</button>':'<button class="btn sm jade" id="restBtn">调息</button>')+
       '<button class="btn sm dim" id="itemBtn">用药</button></div>'+
   '</div>';
   $('#battle').innerHTML=html;
@@ -1303,10 +2559,17 @@ function renderBattleShell(){
   $('#autoBtn').onclick=()=>{B.auto=!B.auto;$('#autoBtn').classList.toggle('on',B.auto);if(B.auto)autoTick()};
   $('#quitBtn').onclick=()=>{
     if(B.over)return;
-    modal('退出战斗','中途退出将损失本次战斗的奖励。',[{t:'继续战斗',gold:1},{t:'确认退出',fn:()=>{B.over=true;$('#battle').classList.add('hidden');save();renderHUD()}}]);
+    modal('退出战斗','中途退出，这一趟就算白走。',[{t:'继续打',gold:1},{t:'走',fn:()=>{B&&(B.over=true);returnFromBattle()}}]);
   };
   $('#basicBtn').onclick=()=>playerAct(-1);
-  $('#catchBtn').onclick=()=>tryCatch();
+  const cb=$('#catchBtn');if(cb)cb.onclick=()=>tryCatch();
+  const rb=$('#restBtn');
+  if(rb)rb.onclick=()=>{
+    if(!B||B.busy||B.over)return;
+    B.p.mp=Math.min(stats().mp,B.p.mp+stats().mp*.22);
+    floatText('调息','#9ecfd8',14,'hero');updateBars();B.busy=true;
+    setTimeout(()=>{if(B&&!B.over){B.busy=false;enemyTurn()}},420);
+  };
   $('#itemBtn').onclick=()=>{
     if(!B||B.busy||B.over)return;
     if(!hasItem('potion'))return toast('没有金创药');
@@ -1334,7 +2597,12 @@ function renderEnemies(){
 }
 function renderField(){
   const s=SECTS[S.sect],p=activePet();
+  const allies=(S.party||[]).map(x=>{
+    const art=SECTS[x.sect]?SECTS[x.sect].art:SECTS.jian.art;
+    return '<div class="ally" style="background-image:url('+art+')"><span>'+x.n+'</span></div>';
+  }).join('');
   $('#field').innerHTML=
+  (allies?'<div class="allies" id="allies">'+allies+'</div>':'')+
   '<div class="hero" id="hero"><div class="spr" style="background-image:url('+s.art+')"></div>'+
     '<div class="hinfo"><div class="hname">'+S.name+'</div>'+
     '<div class="hbars"><div class="bar hp"><i id="bpHp"></i></div><div class="bar mp"><i id="bpMp"></i></div></div></div></div>'+
@@ -1502,13 +2770,13 @@ function enemyTurn(){
     if(!B||B.over||B!==bt)return;
     const list=B.enemies.filter(e=>!e.dead&&e.hp>0);
     if(idx>=list.length){
-      // 宠物追击
-      petAct(()=>{
+      // 宠物与队友追击
+      petAct(()=>allyAct(()=>{
         if(checkWin())return;
         B.busy=false;B.p.rage=Math.min(100,B.p.rage+8);
         updateBars();save();
         if(B.auto)autoTick();
-      });
+      }));
       return;
     }
     const e=list[idx];idx++;
@@ -1562,6 +2830,32 @@ function petAct(cb){
     cb();
   },300);
 }
+function allyAct(cb){
+  const list=S.party||[];
+  if(!list.length)return cb();
+  let i=0;
+  const step=()=>{
+    if(!B||B.over||i>=list.length)return cb();
+    const t=B.enemies.find(e=>!e.dead&&e.hp>0);
+    if(!t)return cb();
+    const el=$('#allies')&&$('#allies').children[i];
+    if(el){el.classList.add('atk');setTimeout(()=>el.classList.remove('atk'),320)}
+    const base=stats().atk*(0.18+Math.random()*0.1)+S.lv*1.2;
+    const dmg=Math.max(3,Math.round(base*(1+(B.wave*.06))));
+    t.hp=Math.max(0,t.hp-dmg);
+    floatText(dmg,'#dfe6d6',13,'enemy');
+    i++;updateBars();
+    setTimeout(step,240);
+  };
+  step();
+}
+function returnFromBattle(){
+  $('#battle').classList.add('hidden');
+  B=null;GC=null;
+  W.paused=false;
+  save();renderHUD();
+  if(W.sc){updateQuest();drawMini()}
+}
 function checkWin(){
   if(!B||B.over)return true;
   if(B.enemies.every(e=>e.dead||e.hp<=0)){
@@ -1608,11 +2902,12 @@ function winBattle(){
     '<h3>战斗胜利</h3><div class="line"></div>'+
     (lines.length?'<div class="rw">'+lines.map(l=>'<span>'+l+'</span>').join('')+'</div>':'<div class="mini">无掉落</div>')+
     '<div class="line"></div>'+
-    '<button class="btn gold wide" id="resBtn">'+(next?'继续挑战':'返回江湖')+'</button></div>';
+    '<button class="btn gold wide" id="resBtn">'+(next?'接着来':'回去')+'</button></div>';
   $('#battle').appendChild(box);
   box.querySelector('#resBtn').onclick=()=>{
-    box.remove();$('#battle').classList.add('hidden');
-    if(next){next()}else{renderWorld();setScene(S.scene)}
+    box.remove();
+    if(next){$('#battle').classList.add('hidden');next()}
+    else returnFromBattle();
   };
 }
 function loseBattle(){
@@ -1625,10 +2920,10 @@ function loseBattle(){
   box.className='result';
   box.innerHTML='<div class="box"><div style="font-size:9px;letter-spacing:5px;color:#c9584c">DEFEAT</div>'+
     '<h3 style="color:#f0cfc0">力有不逮</h3><div class="line"></div>'+
-    '<div class="mini">你被击退，损失了些许气力。\n提升修为、强化装备后再来。</div><div class="line"></div>'+
-    '<button class="btn wide" id="loseBtn">返回</button></div>';
+    '<div class="mini">你被击退。醒来时，天已经黑了一半。\n回镇上歇一歇，或者再走一趟。</div><div class="line"></div>'+
+    '<button class="btn wide" id="loseBtn">回去</button></div>';
   $('#battle').appendChild(box);
-  box.querySelector('#loseBtn').onclick=()=>{box.remove();$('#battle').classList.add('hidden');renderWorld()};
+  box.querySelector('#loseBtn').onclick=()=>{box.remove();returnFromBattle()};
 }
 function autoTick(){
   if(!B||!B.auto||B.busy||B.over)return;
@@ -1654,7 +2949,7 @@ function tryCatch(){
     const p={mob:e.key||'wolf',name:e.d.n,lv:Math.max(1,e.lv-1),qual:+(rand(.95,1.9)).toFixed(2),skills:[],exp:0};
     S.pets.push(p);if(S.petOn<0)S.petOn=S.pets.length-1;
     S.counts.catch=(S.counts.catch||0)+1;
-    advanceMain('catch');
+    mainEvent('catch',p.mob);
     B.over=true;
     save();renderHUD();
     const box=document.createElement('div');box.className='result';
@@ -1664,7 +2959,7 @@ function tryCatch(){
       '<div class="mini" style="margin-top:8px">已收入灵兽栏，可出战助你</div><div class="line"></div>'+
       '<button class="btn jade wide" id="capBtn">查看灵兽</button></div>';
     $('#battle').appendChild(box);
-    box.querySelector('#capBtn').onclick=()=>{box.remove();$('#battle').classList.add('hidden');S.tab=null;renderWorld();openSheet('pet')};
+    box.querySelector('#capBtn').onclick=()=>{box.remove();$('#battle').classList.add('hidden');B=null;W.paused=false;openSheet('pet')};
   }else{
     toast('捕捉失败，妖兽挣脱了');
     setTimeout(()=>{B.busy=false;enemyTurn()},400);
@@ -1673,28 +2968,32 @@ function tryCatch(){
 
 /* ================= 各玩法入口 ================= */
 function startWild(sceneId){
-  const sc=SCENES.find(s=>s.id===sceneId)||curScene();
-  if(sc.town){setScene('bamboo');return startWild('bamboo')}
-  const key=pick(sc.mobs);
+  const sc=sceneById(sceneId);
+  const keys=[];
+  (sc.mobs||[]).forEach(g=>keys.push(g.key));
+  if(!keys.length)return toast('这地方没有野物');
+  const key=pick(keys);
   const lv=Math.max(MOBS[key].lv,S.lv+ri(-1,1));
-  startBattle({title:'野外 · '+sc.n,sub:'遭遇 '+MOBS[key].n,scene:sc.id,waves:[[{key,lv}]],
+  startBattle({title:sc.n+' · 野外',sub:'遇到 '+MOBS[key].n,scene:sc.id,waves:[[{key,lv}]],
     rw:{exp:Math.round(40+lv*14),gold:Math.round(50+lv*16),
       items:Math.random()<.4?{forge:1}:{}},
     onWin:()=>{
       S.counts.kill=(S.counts.kill||0)+1;
-      advanceMain('kill');
+      mainEvent('kill',key);
     }});
 }
 let GC=null;
 function startGhost(){
-  if(S.counts.ghost>=1&&S.lv<10)return toast('今日抓鬼已完成');
+  const m=MAIN[S.main.idx];
+  const forQuest=!!(m&&m.k==='ghost'&&!S.main.ready);
+  if(S.counts.ghost>=1&&!forQuest)return toast('今日已经走过一趟了。钟九的灯，夜里再点。');
   GC={i:0,max:10,exp:0,gold:0};
   ghostRound();
 }
 function ghostRound(){
   const i=GC.i,lv=S.lv+Math.floor(i*.7);
   const key=(i%4===3)?'ghostking':'ghost';
-  startBattle({title:'抓鬼一条龙　'+(i+1)+'/10',sub:'钟馗遣将 · '+MOBS[key].n,scene:'ruins',
+  startBattle({title:'夜巡 · '+(i+1)+'/10',sub:'钟九提灯 · '+MOBS[key].n,scene:'ruins',
     waves:[[{key,lv}]],
     rw:{exp:Math.round(50+lv*18),gold:Math.round(60+lv*22)},
     onWin:()=>{
@@ -1703,56 +3002,57 @@ function ghostRound(){
       if(GC.i>=GC.max){
         S.counts.ghost=(S.counts.ghost||0)+1;
         S.gold+=800;addItem('book',1);addItem('wash',1);
-        toast('一条龙完成 · 额外奖励');
-        advanceMain('ghost');
+        toast('十轮走完 · 钟九把灯收了');
+        mainEvent('ghost','ghost');
       }
     },
     next:()=>{
-      if(GC.i>=GC.max){GC=null;renderWorld();return}
+      if(GC.i>=GC.max){returnFromBattle();return}
       setTimeout(ghostRound,260);
     }});
 }
 function startGuild(){
-  if(S.counts.guild>=3)return toast('今日帮派任务已完成');
+  if(S.counts.guild>=3)return toast('今日的货走完了');
   const lv=S.lv+2;
   const key=pick(['ghost','stone','wolfred','sea']);
-  startBattle({title:'帮派任务',sub:'为帮派讨伐 '+MOBS[key].n,scene:S.scene,waves:[[{key,lv}]],
+  startBattle({title:'帮派差事',sub:'为漕河帮压货 · '+MOBS[key].n,scene:S.scene,waves:[[{key,lv}]],
     rw:{exp:Math.round(80+lv*20),gold:Math.round(120+lv*26)},
-    onWin:()=>{S.counts.guild=(S.counts.guild||0)+1;S.guild.contrib+=3;toast('帮派贡献 +3')}});
+    onWin:()=>{S.counts.guild=(S.counts.guild||0)+1;S.guild.contrib+=3;toast('货到了 · 贡献 +3')}});
 }
 function startDungeon(id){
   const d=DUNGEONS.find(x=>x.id===id);
   if(!d||S.lv<d.lv)return toast('境界不足');
+  if((S.counts.dungeon||0)>=3)return toast('今日三道门都关了。守境人说：明日再来。');
   const first=!S.dun.clears[id];
   const waves=[
     [d.mobs[0],d.mobs[1]].map(k=>({key:k,lv:d.lv+1})),
     [d.boss,{key:d.mobs[0],lv:d.lv+2}],
     [{key:d.boss,lv:d.lv+5}]
   ];
-  startBattle({title:'秘境 · '+d.n,sub:'首通奖励'+(first?'待领取':'已领取'),scene:(SCENES.find(s=>s.art===d.art)||{id:'bamboo'}).id,
+  startBattle({title:'秘境 · '+d.n,sub:first?'这扇门第一次开':'门还认得你',scene:(SCENES.find(s=>s.art===d.art)||{id:'bamboo'}).id,
     waves,
     rw:{exp:d.rw.exp,gold:d.rw.gold,items:d.rw.items,jade:first?40:0},
     onWin:()=>{
       S.counts.dungeon=(S.counts.dungeon||0)+1;
       S.dun.clears[id]=1;
-      if(first)toast('首通达成 · 仙玉 +40');
-      advanceMain(id);
+      if(first)toast('首通 · 仙玉 +40');
+      mainEvent('dungeon',id);
     }});
 }
 function arenaDef(name,lv){
   const sec=SECTS[pick(Object.keys(SECTS))];
   const k=1+(lv-1)*.18;
   return {n:name,art:sec.art,lv,hp:Math.round(250*k),atk:Math.round(25*k),def:Math.round(12*k),spd:20,crit:.1,
-    skills:[{n:'起手式',pw:1.35,t:'atk'},{n:'绝学',pw:2.0,t:'atk'},{n:'调息',pw:0,t:'buff'}]};
+    skills:[{n:'起手式',pw:1.35,t:'atk'},{n:'压箱底',pw:2.0,t:'atk'},{n:'调息',pw:0,t:'buff'}]};
 }
 function startArena(name,lv){
-  if(S.counts.arena>=5)return toast('今日挑战次数已用尽');
+  if(S.counts.arena>=5)return toast('今日五场已经打完');
   const e=arenaDef(name,lv);
-  startBattle({title:'竞技 · '+name,sub:'积分 '+S.arena.pts,scene:'city',waves:[[e]],
+  startBattle({title:'擂台 · '+name,sub:'积分 '+S.arena.pts,scene:'town',waves:[[e]],
     rw:{exp:S.lv*22+80,gold:260,jade:8},
     onWin:()=>{
       S.counts.arena=(S.counts.arena||0)+1;S.arena.wins++;S.arena.pts+=24;
-      advanceMain('arena');toast('竞技胜利 · 积分 +24');
+      mainEvent('arena','arena');toast('赢了 · 积分 +24');
     },
     onLose:()=>{
       S.counts.arena=(S.counts.arena||0)+1;S.arena.lose++;
@@ -1760,62 +3060,31 @@ function startArena(name,lv){
     }});
 }
 
-/* ================= 浮尘粒子 ================= */
-function initDust(){
-  const c=$('#dust'),ctx=c.getContext('2d');
-  let w,h,pts=[];
-  const dpr=Math.min(2,window.devicePixelRatio||1);
-  function size(){
-    const r=c.getBoundingClientRect();w=r.width;h=r.height;
-    c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-  }
-  function make(){
-    pts=[];const n=Math.min(46,Math.round(w/9));
-    for(let i=0;i<n;i++)pts.push({x:Math.random()*w,y:Math.random()*h,r:rand(.7,2.1),vy:rand(-.16,-.44),vx:rand(-.18,.18),a:rand(.15,.6),p:rand(0,6.28)});
-  }
-  size();make();
-  window.addEventListener('resize',()=>{size();make()});
-  let t=0;
-  function loop(){
-    t+=.016;
-    ctx.clearRect(0,0,w,h);
-    pts.forEach(p=>{
-      p.y+=p.vy;p.x+=p.vx+Math.sin(t+p.p)*.14;
-      if(p.y<-6){p.y=h+6;p.x=Math.random()*w}
-      if(p.x<-6)p.x=w+6;if(p.x>w+6)p.x=-6;
-      const a=p.a*(.55+.45*Math.sin(t*1.5+p.p));
-      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
-      g.addColorStop(0,'rgba(255,232,178,'+a+')');
-      g.addColorStop(1,'rgba(255,232,178,0)');
-      ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,6.283);ctx.fill();
-      ctx.fillStyle='rgba(255,246,220,'+(a*.9)+')';ctx.beginPath();ctx.arc(p.x,p.y,p.r*.7,0,6.283);ctx.fill();
-    });
-    requestAnimationFrame(loop);
-  }
-  loop();
-}
-
 /* ================= 创角 ================= */
 function showCreate(){
   let sel=S.sect||'jian';
   const c=$('#create');
   const build=()=>{
-    c.innerHTML='<div class="ch"><div class="t">择一仙门</div><div class="s">CHOOSE YOUR PATH</div></div>'+
+    c.innerHTML='<div class="ch"><div class="t">初出山门</div><div class="s">落 霞 镇 · 山 雨 欲 来</div>'+
+      '<div style="font-size:10.5px;line-height:1.9;color:#a9b3ac;margin-top:10px;max-width:280px;margin-left:auto;margin-right:auto">镇子不大。山门在山上，日子在山下。<br>你袖里有一枚旧铜铃，铃口缺了一角。</div></div>'+
     '<div class="sectGrid">'+Object.keys(SECTS).map(k=>{
       const s=SECTS[k];
       return '<button class="sectCard '+(sel===k?'on':'')+'" data-s="'+k+'">'+
         '<div class="p" style="background-image:url('+s.art+')"></div>'+
         '<div class="info"><div class="nm">'+s.name+'</div><div class="ds">'+s.desc+'</div></div></button>'
     }).join('')+'</div>'+
-    '<div class="cf"><button class="btn gold wide lg" id="startBtn">踏 入 仙 途</button></div>';
+    '<div class="cf"><button class="btn gold wide lg" id="startBtn">下 山</button></div>';
     c.querySelectorAll('[data-s]').forEach(el=>el.onclick=()=>{sel=el.dataset.s;build()});
     c.querySelector('#startBtn').onclick=()=>{
-      S.sect=sel;S.name=pick(['云中客','无咎','青岚','拾光','临渊','拂衣']);
+      S.sect=sel;S.name=pick(['沈知白','陈岁','许照','林晚','周砚','赵迟']);
       const st=stats();S.hp=st.hp;S.mp=st.mp;save();
       c.classList.add('hidden');
       document.body.classList.remove('creating');
-      renderHUD();renderWorld();
-      toast('你已入 · '+SECTS[sel].name);
+      buildPlayer();buildParty();renderHUD();renderWorld();
+      toast('你从落霞镇走出来');
+      setTimeout(()=>{
+        modal('第一章 · 旧物','街尾有棵老槐树。树下坐着个下棋的老人。\n\n去和他说句话。',[{t:'过去',gold:1,fn:()=>{const n=sceneById('town').npcs.find(x=>x.id==='master');if(n)moveToPoint(n.x+24,n.y+26)}}]);
+      },600);
     };
   };
   build();
@@ -1837,16 +3106,53 @@ function boot(){
   if(!S.hp||S.hp>st0.hp)S.hp=st0.hp;
   if(!S.mp||S.mp>st0.mp)S.mp=st0.mp;
   if(!S.counts)S.counts={};
-  renderDock();renderHUD();setScene(S.scene||'city');renderWorld();initDust();setTimeout(preloadArt,300);
+  if(!S.main)S.main={idx:0,prog:0,ready:false};
+  if(S.main.ready==null)S.main.ready=false;
+  if(!S.party)S.party=[{n:'谢临',sect:'jian'},{n:'阿箬',sect:'yin'}];
+  if(S.pos==null)S.pos={x:500,y:1060};
+  if(S.scene==='city')S.scene='town';
+  if(S.scene==='sea')S.scene='ferry';
+  if(!SECTS[S.sect])S.sect='jian';
+  bindInput();
+  setScene(S.scene,S.pos,true);
+  initChat();
+  weatherLoop();
+  requestAnimationFrame(worldTick);
+  $('#mountBtn').onclick=toggleMount;
+  $('#chatBtn').onclick=()=>toggleChat();
+  $('#chatTg').onclick=e=>{e.stopPropagation();toggleChat()};
+  $('#chatTop').onclick=e=>{if(e.target.classList.contains('ch'))return;toggleChat()};
+  $('#chatTop').querySelectorAll('.ch').forEach(el=>{
+    el.onclick=ev=>{
+      ev.stopPropagation();
+      $('#chatTop').querySelectorAll('.ch').forEach(x=>x.classList.remove('on'));
+      el.classList.add('on');
+      const t=el.textContent;
+      chatFilter=t==='世界'?'world':t==='帮派'?'guild':'sys';
+      renderChat();
+      if(!chatOpen)toggleChat(true);
+    };
+  });
+  $('#qGo').onclick=goQuest;
+  $('#avatar').onclick=()=>openSheet('char');
+  $('#mini').onclick=()=>openSheet('map');
+  window.addEventListener('resize',()=>{
+    if(!W.sc)return;
+    setWeather(W.sc.weather||'fog');snapCamera();drawMini();
+  });
   setInterval(()=>{
     if(B&&!B.over)return;
     const st=stats();
-    if(S.hp<st.hp){S.hp=Math.min(st.hp,S.hp+st.hp*.02);renderHUD()}
-    if(S.mp<st.mp){S.mp=Math.min(st.mp,S.mp+st.mp*.03);renderHUD()}
+    if(S.hp<st.hp){S.hp=Math.min(st.hp,S.hp+st.hp*.012);renderHUD()}
+    if(S.mp<st.mp){S.mp=Math.min(st.mp,S.mp+st.mp*.02);renderHUD()}
   },5000);
   setInterval(save,15000);
+  setTimeout(preloadArt,300);
   if(fresh){
-    setTimeout(showCreate,120);
+    setTimeout(showCreate,140);
+  }else{
+    const q=MAIN[S.main.idx];
+    if(q)setTimeout(()=>{updateQuest();toast(q.hook,1)},900);
   }
 }
 window.addEventListener('DOMContentLoaded',boot);
