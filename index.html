@@ -1482,9 +1482,9 @@ function updateNear(dt){
   }
   /* 走近站定片刻，自动开口（每个 NPC 每次靠近只自动一次，之后靠点） */
   if(best&&!W.moving&&!dlgState&&!B&&!best._autoMet&&!document.querySelector('#sheet').classList.contains('open')){
-    W.nearStay=(W.nearStay||0)+dt;
-    if(W.nearStay>.85){best._autoMet=true;talk(best);return}
-  }else if(!best)W.nearStay=0;
+    if(!W.staySince)W.staySince=Date.now();
+    if(Date.now()-W.staySince>900){best._autoMet=true;W.staySince=0;talk(best);return}
+  }else W.staySince=0;
   if(best&&!W.moving&&!W.sayEl&&Date.now()-(best._sayT||0)>9000)showSay(best);
 }
 function checkPortals(){
@@ -2489,7 +2489,7 @@ function renderSkill(b){
     const lv=S.skLv[i]||1,cost=260*lv*lv;
     return '<div class="row"><div class="ico" style="font-family:var(--serif)">'+k.i+'</div>'+
       '<div class="main"><div class="nm">'+k.n+' <span class="tag">Lv.'+lv+'</span><span class="mini" style="margin-left:4px">法力 '+k.mp+'</span></div>'+
-      '<div class="ds">'+k.d+'</div><div class="mini" style="margin-top:3px;color:#8fa39a">威力 '+(k.pw?Math.round(k.pw*100*lv):'—')+'%</div></div>'+
+      '<div class="ds">'+k.d+'</div><div class="mini" style="margin-top:3px;color:#8fa39a">'+(k.pw?'威力 '+Math.round(k.pw*100*lv)+'%':'守势 · 不伤敌，回气')+'</div></div>'+
       '<div class="rt"><button class="btn sm '+(lv>=9?'dim':'gold')+'" data-sk="'+i+'" '+(lv>=9?'disabled':'')+'>'+(lv>=9?'已满':'修炼<br>'+fmt(cost))+'</button></div></div>';
   }).join('')+
   '<div class="h2">心法</div><div class="mini" style="line-height:2;padding:0 4px">每重武学，威力加六分。练到第九重，师傅也没什么可教的了。</div>';
